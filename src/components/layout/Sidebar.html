@@ -1,0 +1,52 @@
+<div class="sidebar">
+  <ul class="nav sidebar__nav">
+    <li v-bind:class="{ active: $router.currentRoute.name == 'Dashboard' }">
+      <router-link to="/"><i class="fa fa-2x fa-tachometer" aria-hidden="true"></i>&nbsp;&nbsp; Dashboard</router-link>
+      <ul v-bind:class="{ active: $router.currentRoute.name == 'Dashboard' }" class="sidebar__nav-submenu">
+        <li><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i> Dashboard Summary</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Redemption by State</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Redemption by County</li>
+        <li><i class="fa fa-2x fa-table" aria-hidden="true"></i> Redemption by Media Type</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Relevant Chart</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Relevant Chart</li>
+        <li><i class="fa fa-2x fa-table" aria-hidden="true"></i> Relevant Table</li>
+      </ul>
+    </li>
+    <li v-bind:class="{ active: $router.currentRoute.name == 'BilateralData' }">
+      <router-link to="/bilateral-data"><i class="fa fa-2x fa-area-chart" aria-hidden="true"></i>&nbsp;&nbsp; Bilateral Data</router-link>
+      <ul v-bind:class="{ active: $router.currentRoute.name == 'BilateralData' }" class="sidebar__nav-submenu">
+        <li><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i> Dashboard Summary</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Redemption by State</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Redemption by County</li>
+        <li><i class="fa fa-2x fa-table" aria-hidden="true"></i> Redemption by Media Type</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Relevant Chart</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Relevant Chart</li>
+        <li><i class="fa fa-2x fa-table" aria-hidden="true"></i> Relevant Table</li>
+      </ul>
+    </li>
+    <li v-bind:class="{ active: $router.currentRoute.name == 'PieCharts' }">
+      <router-link to="/pie-charts"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i>&nbsp;&nbsp; Pie Charts</router-link>
+      <ul v-bind:class="{ active: $router.currentRoute.name == 'PieCharts' }" class="sidebar__nav-submenu">
+        <li><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i> Dashboard Summary</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Redemption by State</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Redemption by County</li>
+        <li><i class="fa fa-2x fa-table" aria-hidden="true"></i> Redemption by Media Type</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Relevant Chart</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Relevant Chart</li>
+        <li><i class="fa fa-2x fa-table" aria-hidden="true"></i> Relevant Table</li>
+      </ul>
+    </li>
+    <li v-bind:class="{ active: $router.currentRoute.name == 'StateData' }">
+      <router-link to="/state-data"><i class="fa fa-2x fa-globe" aria-hidden="true"></i>&nbsp;&nbsp; State Data</router-link>
+      <ul v-bind:class="{ active: $router.currentRoute.name == 'StateData' }" class="sidebar__nav-submenu">
+        <li><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i> Dashboard Summary</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Redemption by State</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Redemption by County</li>
+        <li><i class="fa fa-2x fa-table" aria-hidden="true"></i> Redemption by Media Type</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Relevant Chart</li>
+        <li><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i> Relevant Chart</li>
+        <li><i class="fa fa-2x fa-table" aria-hidden="true"></i> Relevant Table</li>
+      </ul>
+    </li>
+  </ul>
+</div>

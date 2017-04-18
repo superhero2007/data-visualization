@@ -1,0 +1,47 @@
+#home {
+  flex: 1;
+  display: flex;
+}
+
+// Main content
+.main-content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.main {
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    flex-grow: 1;
+  }
+}
+
+.main .page-header {
+  margin-top: 0;
+  font-size: 1.6em;
+  border-bottom: 2px dashed #95a3a6;
+}
+
+// Placeholder dashboard ideas
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}

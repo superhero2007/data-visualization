@@ -1,0 +1,84 @@
+// Sidebar
+
+// Hide for mobile, show later
+.sidebar {
+  display: none;
+
+  @media (min-width: 768px) {
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; // Scrollable contents if viewport is shorter than content.
+    background-color: #86243e;
+    border-right: 1px solid #eee;
+    width: 240px;
+    min-width: 240px;
+  }
+}
+
+// Sidebar navigation
+.sidebar__nav {
+  margin-right: -21px; // 20px padding + 1px border
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+
+.sidebar__nav > li > a,
+.sidebar__nav > li > a:hover,
+.sidebar__nav > li > a:focus {
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: #fff;
+  background-color: #86243e;
+  text-transform: uppercase;
+}
+
+.sidebar__nav > .active > a,
+.sidebar__nav > .active > a:hover,
+.sidebar__nav > .active > a:focus {
+  color: #fff;
+  text-shadow: 2px 2px 5px #525e62;
+  background: #69797e; // For browsers that do not support gradients
+  background: linear-gradient(to right, #69797e, #9caaae); // Standard syntax
+}
+
+.sidebar__nav-submenu {
+  background-color: #333;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  max-height: 0;
+  visibility: hidden;
+  transition: max-height .5s cubic-bezier(0, 1.05, 0, 1), visibility .2s;
+
+  li {
+    padding: 0;
+    margin: 0;
+  }
+
+  &.active {
+    max-height: 500px;
+    visibility: visible;
+    padding: 15px;
+    transition: max-height .5s ease-in;
+
+    li {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      font-size: 14px;
+
+      .fa {
+        font-size: 14px;
+        padding-right: 5px;
+      }
+    }
+  }
+}
+
+.navbar-brand {
+  color: #2C2C2C !important;
+  font-weight: bold;
+}

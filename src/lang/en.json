@@ -1,0 +1,39 @@
+{
+   "login":{
+      "header":"Login",
+      "formTitle":"Sign In to your account"
+   },
+   "registration":{
+      "header":"Registration",
+      "formTitle":"Create a New Account"
+   },
+   "desktop":{
+      "headerTitle":"Dashboard",
+      "stateHeaderGraph":"Redemption by county",
+      "tableHeader": "Redemption % by Media Types",
+      "copyWriteNotice":"2016, NCH MARKETING SERVICES, INC. ALL RIGHTS RESERVED.",
+      "version": "version v0.001"
+   },
+   "bilateral":{
+       "headerTitle":"Bilateral Data",
+       "copyWriteNotice":"2016, NCH MARKETING SERVICES, INC. ALL RIGHTS RESERVED.",
+       "version": "version v0.001",
+       "nchLogoPath": "../../img/logo-nch-2x.png"
+   
+   },
+      "geo":{
+       "headerTitle":"Geo Data",
+       "copyWriteNotice":"2016, NCH MARKETING SERVICES, INC. ALL RIGHTS RESERVED.",
+       "version": "version v0.001",
+       "nchLogoPath": "../../img/logo-nch-2x.png"
+   
+   },
+      "piechart":{
+       "headerTitle":"Pie Charts",
+       "copyWriteNotice":"2016, NCH MARKETING SERVICES, INC. ALL RIGHTS RESERVED.",
+       "version": "version v0.001",
+       "nchLogoPath": "../../img/logo-nch-2x.png"
+   
+   }
+
+}
