@@ -16,6 +16,8 @@ Vue.config.productionTip = false
 
 var nch = require('./modules/config');
 window.nch = nch;
+var utils = require('./modules/utils');
+nch.utils = utils;
 
 /* eslint-disable no-new */
 new Vue({

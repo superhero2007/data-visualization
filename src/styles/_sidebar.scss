@@ -7,11 +7,11 @@
   @media (min-width: 768px) {
     z-index: 1000;
     display: block;
-    padding: 20px;
+    padding: 0 20px;
     overflow-x: hidden;
     overflow-y: auto; // Scrollable contents if viewport is shorter than content.
     background-color: #86243e;
-    border-right: 1px solid #eee;
+    // border-right: 1px solid #eee;
     width: 240px;
     min-width: 240px;
   }
@@ -25,7 +25,6 @@
 }
 
 .sidebar__nav > li > a,
-.sidebar__nav > li > a:hover,
 .sidebar__nav > li > a:focus {
   padding-right: 20px;
   padding-left: 20px;
@@ -33,7 +32,14 @@
   padding-bottom: 15px;
   color: #fff;
   background-color: #86243e;
+  transition: background-color 1000ms;
   text-transform: uppercase;
+  cursor:pointer;
+}
+
+.sidebar__nav > li > a:hover {
+  background-color: #a53150;
+  transition: background-color 500ms;
 }
 
 .sidebar__nav > .active > a,
@@ -57,6 +63,13 @@
   li {
     padding: 0;
     margin: 0;
+    color: #e1e3e5;
+
+    .fa {
+      color: #7c8c90;
+      font-size: 14px;
+      padding-right: 5px;
+    }
   }
 
   &.active {
@@ -69,13 +82,13 @@
       padding-top: 5px;
       padding-bottom: 5px;
       font-size: 14px;
-
-      .fa {
-        font-size: 14px;
-        padding-right: 5px;
-      }
     }
   }
+}
+.sidebar-link {
+  position: relative;
+  left: 1em;
+  top: -.25em;
 }
 
 .navbar-brand {

@@ -24,39 +24,64 @@ var services = {
   },
 
   getRedemptionsByState: function () {
-    http
-      .get('/static/api/redemption-data.json')
-      .end(function (error, response) {
 
-        if (response.status == 200) {
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/redemption-data.json')
+        .end(function (error, response) {
 
-          var stateMap = {};
+          if (response.status == 200) {
 
-          var redemptionData = JSON.parse(response.text);
-          var items = redemptionData['_items'];
+            var min = 10000;
+            var max = -1;
+            var stateMap = {};
+            var stateData = { min: 0, max: 0, states: stateMap };
+            var redemptionData = JSON.parse(response.text);
+            var items = redemptionData['_items'];
 
-          for( var i = 0; i < items.length; i++ ) {
-            var item = items[i];
-            var currentState = null;
+            for( var i = 0; i < items.length; i++ ) {
+              var item = items[i];
+              var currentState = null;
 
-            if( stateMap[ item['storestate'] ] ) {
-              currentState = stateMap[ item['storestate'] ]
+              var stateName = nch.utils.getStateName(item['storestate']);
+
+              if( stateName == null ) {
+                continue;
+              }
+
+              if( stateMap[ item['storestate'] ] ) {
+                currentState = stateMap[ item['storestate'] ]
+              }
+              else {
+                currentState = { name: item['storestate'], redempations: 0 }
+                stateMap[ item['storestate'] ] = currentState
+              }
+
+              currentState.redempations += item['totalcouponredemption']
+
+              if( currentState.redempations < min ) {
+                min = currentState.redempations
+              }
+
+              if( currentState.redempations > max ) {
+                max = currentState.redempations
+              }
             }
-            else {
-              currentState = { name: item['storestate'], redempations: 0 }
-              stateMap[ item['storestate'] ] = currentState
-            }
 
-            currentState.redempations += item['totalcouponredemption']
+            var states = Object.keys( stateMap );
+            console.log( "State count: " + states.length )
+            console.log( 'Min: ' + min + ", max: " + max );
+            stateData.min = min;
+            stateData.max = max;
+            resolve(stateData);
           }
+          else if (response.status == 401) {
+            console.log("user not authorized");
+            reject("user not authorized")
+          }
+        });
+    });
 
-          console.log("parsing by state complete");
-          console.log(stateMap)
-        }
-        else if (response.status == 401) {
-          console.log("user not authorized");
-        }
-      });
   },
 
   getBipartiteData: function() {
