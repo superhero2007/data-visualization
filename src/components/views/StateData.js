@@ -1,6 +1,8 @@
 import Navbar from '../layout/Navbar'
 import Sidebar from '../layout/Sidebar'
+import DashboardSummary from '../layout/DashboardSummary'
 import Geo from '../charts/Geo'
+import PageFooter from '../layout/PageFooter'
 
 export default {
   name: 'statedata',
@@ -8,7 +10,9 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    Geo
+    DashboardSummary,
+    Geo,
+    PageFooter
   },
   data () {
     return {

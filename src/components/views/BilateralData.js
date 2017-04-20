@@ -1,6 +1,8 @@
 import Navbar from '../layout/Navbar'
 import Sidebar from '../layout/Sidebar'
 import Bipartite from '../charts/Bipartite'
+import DashboardSummary from '../layout/DashboardSummary'
+import PageFooter from '../layout/PageFooter'
 
 export default {
   name: 'home',
@@ -8,7 +10,9 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    Bipartite
+    Bipartite,
+    DashboardSummary,
+    PageFooter
   },
   data () {
     return {

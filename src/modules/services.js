@@ -6,11 +6,16 @@ import * as http from 'superagent'
 require('../data/us.json');
 require('../data/usa.json');
 require('../data/us-states.json');
-require('../data/stateslived.tsv');
+
 require('../data/categories.json');
 require('../data/manufacturers.json');
 require('../data/redemption-data.json');
+require('../data/pie-chart.json');
+
 require('../data/unemployment.tsv');
+require('../data/stateslived.tsv');
+require('../data/pie-example.tsv');
+require('../data/bar-example.tsv');
 
 var services = {
   getStateMap: function ( filters, callback ) {
@@ -74,6 +79,62 @@ var services = {
             stateData.min = min;
             stateData.max = max;
             resolve(stateData);
+          }
+          else if (response.status == 401) {
+            console.log("user not authorized");
+            reject("user not authorized")
+          }
+        });
+    });
+
+  },
+
+  getRedemptionsByMedia: function () {
+
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/pie-chart.json')
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+
+            var min = 10000000;
+            var max = -1;
+            var mediaMap = {};
+            var responseData = { min: 0, max: 0, mediaData: mediaMap };
+            var redemptionData = JSON.parse(response.text);
+            var items = redemptionData['_items'];
+
+            for( var i = 0; i < items.length; i++ ) {
+              var item = items[i];
+              var currentData = null;
+
+              if( mediaMap[ item['medianame'] ] ) {
+                currentData = mediaMap[ item['medianame'] ]
+              }
+              else {
+                currentData = { name: item['medianame'], redempations: 0, redempationValue: 0 }
+                mediaMap[ item['medianame'] ] = currentData
+              }
+
+              currentData.redempations += item['totalcouponredemption']
+              currentData.redempationValue += item['totalcouponredemeedvalue']
+
+              if( currentData.redempations < min ) {
+                min = currentData.redempations
+              }
+
+              if( currentData.redempations > max ) {
+                max = currentData.redempations
+              }
+            }
+
+            var mediaTypes = Object.keys( mediaMap );
+            console.log( "Media count: " + mediaTypes.length )
+            console.log( 'Min: ' + min + ", max: " + max );
+            responseData.min = min;
+            responseData.max = max;
+            resolve(responseData);
           }
           else if (response.status == 401) {
             console.log("user not authorized");

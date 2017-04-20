@@ -12,9 +12,14 @@
   justify-content: space-between;
 }
 
-footer {
-  height: 40px;
+.page-footer {
   text-align: center;
+  background-color: #333;
+  padding: 1.2em 0 1em;
+  font-size: .85em;
+  color: #666;
+  font-family: 'proxima_novaregular';
+  text-transform: uppercase;
 }
 
 .main {
@@ -23,10 +28,11 @@ footer {
 
 @media (min-width: 768px) {
   .main {
-    padding-top: 0;
-    padding-right: 0;
-    padding-left: 0;
+    padding: 0;
     flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
   }
 }
 
@@ -35,6 +41,11 @@ footer {
   padding: 20px 0;
   font-size: 1.6em;
   border-bottom: 1px dashed #95a3a6;
+}
+
+.page-content {
+  padding-bottom: 40px;
+  flex-grow: 1;
 }
 
 // Placeholder dashboard ideas

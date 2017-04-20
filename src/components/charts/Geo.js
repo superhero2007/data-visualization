@@ -17,7 +17,7 @@ export default {
     }
   },
   mounted() {
-    services.getRedemptionsByState().then( this.render ).catch( (message) => { console.log('promise catch:' + message) });
+    services.getRedemptionsByState().then( this.render ).catch( (message) => { console.log('Geo promise catch:' + message) });
   },
   methods: {
 
