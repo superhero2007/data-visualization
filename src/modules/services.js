@@ -18,13 +18,36 @@ require('../data/pie-example.tsv');
 require('../data/bar-example.tsv');
 
 var services = {
-  getStateMap: function ( filters, callback ) {
+  loadCategories: function() {
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/categories.json')
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+            var categories = JSON.parse(response.text);
+            //nch.model.categories = categories['_items']
+            resolve(categories['_items']);
+          }
+          else if (response.status == 401) {
+            console.log("user not authorized");
+          }
+        });
+    });
+  },
+
+  loadManufacturers: function() {
     http
-      .get('/some-end point')
-      .query({ filter1: 'dim1', filter2: 'dim2' }) // query string
-      .end(function( err, res ) {
-        var data = {"data":123};
-        callback( data );
+      .get('/static/api/manufacturers.json')
+      .end(function (error, response) {
+
+        if (response.status == 200) {
+          var manufacturers = JSON.parse(response.text);
+          nch.model.manufacturers = manufacturers['_items']
+        }
+        else if (response.status == 401) {
+          console.log("user not authorized");
+        }
       });
   },
 

@@ -3,7 +3,8 @@ var nch = {
   services: {},
   views: {},
   model: {
-    title: 'NCH'
+    title: 'NCH',
+    categories: []
   }
 };
 
