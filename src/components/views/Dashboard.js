@@ -2,6 +2,7 @@ import Navbar from '../layout/Navbar'
 import Sidebar from '../layout/Sidebar'
 import DashboardSummary from '../layout/DashboardSummary'
 import Geo from '../charts/Geo'
+import MediaType from '../Tables/MediaType'
 import PageFooter from '../layout/PageFooter'
 
 export default {
@@ -11,6 +12,7 @@ export default {
     Navbar,
     Sidebar,
     Geo,
+    MediaType,
     DashboardSummary,
     PageFooter
   },

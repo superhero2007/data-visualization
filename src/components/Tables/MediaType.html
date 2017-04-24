@@ -1,0 +1,13 @@
+<table>
+  <thead>
+    <th>Category Name</th>
+    <th v-for="mediaName in mediaNames">{{mediaName}}</th>
+  </thead>
+  <tbody>
+  <tr v-for="category in data">
+    <td>{{category.categoryName}}</td>
+    <td v-for="media in mediaNames">{{category[media]}}</td>
+  </tr>
+  </tbody>
+</table>
+

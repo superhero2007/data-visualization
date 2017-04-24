@@ -253,6 +253,62 @@ var services = {
       ['Grand','WV',575,2],
       ['Elite','WV',368,3]
     ];
+  },
+
+  getRedemptionsByMediaType: function () {
+
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/pie-chart.json')
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+            const redemptionData = JSON.parse(response.text);
+            const items = redemptionData['_items'];
+
+            let mediaType = {
+              categories: [],
+              mediaNames: [],
+              data: {}
+            };
+
+            // Get the all categoryNames and mediaNames
+            items.forEach(function(item){
+              //Get the all categroyNames
+              const indCategory = mediaType.categories.indexOf(item.categoryname);
+              if(indCategory !== -1) mediaType.categories.splice(indCategory, 0);
+              else{
+                mediaType.categories.push(item.categoryname);
+                mediaType.data[item.categoryname] = {};
+              }
+
+              //Get the all categroyNames
+              const indMedia = mediaType.mediaNames.indexOf(item.medianame);
+              if(indMedia !== -1) mediaType.mediaNames.splice(indMedia, 0);
+              else mediaType.mediaNames.push(item.medianame);
+            })
+
+            // init the mediaType's data
+            mediaType.categories.forEach(function(category){
+              mediaType.data[category]['categoryName'] = category;
+              mediaType.mediaNames.forEach(function(medianame){
+                mediaType.data[category][medianame] = 0;
+              })
+            })
+
+            items.forEach(function(item){
+              mediaType.data[item.categoryname][item.medianame] += item.totalcouponredemeedvalue;
+            })
+
+            resolve(mediaType);
+          }
+          else if (response.status == 401) {
+            console.log("user not authorized");
+            reject("user not authorized")
+          }
+        });
+    });
+
   }
 };
 
