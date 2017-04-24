@@ -16,6 +16,20 @@
           </div>
         </div>
       </div>
+
+      <div class="page-content" v-if="categories">
+        <p class="page-header">
+          Redemption Percentage by Media Type
+          <select id="categoryOptions"  v-model="selected"  @change="onCategorySelected" class="category-select">
+            <option v-for="option in model.categories" :value="option.categoryname">
+              {{ option.categoryname }}
+            </option>
+          </select>
+        </p>
+      </div>
+
+
+
       <page-footer></page-footer>
     </div>
   </div>

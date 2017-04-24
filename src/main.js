@@ -19,6 +19,11 @@ window.nch = nch;
 var utils = require('./modules/utils');
 nch.utils = utils;
 
+//services.loadCategories();
+services.loadManufacturers();
+
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -28,3 +33,4 @@ new Vue({
 })
 
 console.log( nch.model.title + " app loaded." );
+console.log( nch.model );
