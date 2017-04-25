@@ -13,14 +13,14 @@ export default {
   },
   mounted() {
 
-    var color ={Elite:"#3366CC", Grand:"#DC3912",  Lite:"#FF9900", Medium:"#109618", Plus:"#990099", Small:"#0099C6"};
+    var color ={"FSI":"#3366CC", "Handout Electronic Checkout":"#DC3912",  "Military":"#FF9900", "Print At Home":"#109618", "Unknown":"#990099"};
     var svg = d3.select("#bipartiteGraph").attr("width", 960).attr("height", 800);
 
     svg.append("text").attr("x",250).attr("y",70)
-      .attr("class","header").text("Sales Attempt");
+      .attr("class","header").text("Total redemptions");
 
     svg.append("text").attr("x",750).attr("y",70)
-      .attr("class","header").text("Sales");
+      .attr("class","header").text("Total");
 
     var g =[svg.append("g").attr("transform","translate(150,100)")
       ,svg.append("g").attr("transform","translate(650,100)")];
@@ -74,7 +74,7 @@ export default {
         g[i].selectAll(".mainBars").append("text").attr("class","perc")
           .attr("x",d=>(d.part=="primary"? -100: 80))
           .attr("y",d=>+6)
-          .text(function(d){ return d3.format("0.0%")(d.percent)})
+          .text(function(d){ console.log(d); return (d.value)})
           .attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
       });
 
@@ -83,7 +83,7 @@ export default {
           bp[i].mouseover(d);
 
           g[i].selectAll(".mainBars").select(".perc")
-            .text(function(d){ return d3.format("0.0%")(d.percent)});
+            .text(function(d){ return (d.value)});
         });
       }
       function mouseout(d){
@@ -91,7 +91,7 @@ export default {
           bp[i].mouseout(d);
 
           g[i].selectAll(".mainBars").select(".perc")
-            .text(function(d){ return d3.format("0.0%")(d.percent)});
+            .text(function(d){ return (d.value)});
         });
       }
       d3.select(self.frameElement).style("height", "800px");
