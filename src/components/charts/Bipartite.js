@@ -14,7 +14,7 @@ export default {
   mounted() {
 
     var color ={"FSI":"#3366CC", "Handout Electronic Checkout":"#DC3912",  "Military":"#FF9900", "Print At Home":"#109618", "Unknown":"#990099"};
-    var svg = d3.select("#bipartiteGraph").attr("width", 960).attr("height", 800);
+    var svg = d3.select("#bipartiteGraph").attr("width", 960).attr("height", 880);
 
     svg.append("text").attr("x",250).attr("y",70)
       .attr("class","header").text("Total redemptions");
@@ -94,7 +94,7 @@ export default {
             .text(function(d){ return (d.value)});
         });
       }
-      d3.select(self.frameElement).style("height", "800px");
+      d3.select(self.frameElement).style("height", "880px");
 
     } ).catch( (message) => { console.log('Dashboard, loading categories promise catch:' + message) });
 
