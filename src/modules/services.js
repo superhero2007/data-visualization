@@ -1,6 +1,7 @@
 'use strict';
 
 import * as http from 'superagent'
+import * as d3 from 'd3';
 
 // local data
 require('../data/us.json');
@@ -297,7 +298,7 @@ var services = {
 
             // Get the all categoryNames and mediaNames
             items.forEach(function(item){
-              //Get the all categroyNames
+              //Get the all categoryNames
               const indCategory = mediaType.categories.indexOf(item.categoryname);
               if(indCategory !== -1) mediaType.categories.splice(indCategory, 0);
               else{
@@ -305,7 +306,7 @@ var services = {
                 mediaType.data[item.categoryname] = {};
               }
 
-              //Get the all categroyNames
+              //Get the all media name
               const indMedia = mediaType.mediaNames.indexOf(item.medianame);
               if(indMedia !== -1) mediaType.mediaNames.splice(indMedia, 0);
               else mediaType.mediaNames.push(item.medianame);

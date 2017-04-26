@@ -1,0 +1,15 @@
+<table>
+  <thead style="background-color: #4d92df; color: #ffffff">
+  <th>Category Name</th>
+  <th v-for="mediaName in mediaNames" style="height: 50px; width: 120px;padding-left: 10px">
+    <i class="fa fa-2x" v-bind:class="getIcon(mediaName)" aria-hidden="true"></i>
+  </th>
+  </thead>
+  <tbody>
+  <tr v-for="category in data">
+    <td>{{category.categoryName}}</td>
+    <td v-for="media in mediaNames" style="padding-left: 10px">{{formattedValue(category[media])}}</td>
+  </tr>
+  </tbody>
+</table>
+

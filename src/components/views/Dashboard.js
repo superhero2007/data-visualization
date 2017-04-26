@@ -2,7 +2,7 @@ import Navbar from '../layout/Navbar'
 import Sidebar from '../layout/Sidebar'
 import DashboardSummary from '../layout/DashboardSummary'
 import Geo from '../charts/Geo'
-import MediaType from '../Tables/MediaType'
+import DynamicTable from '../charts/DynamicTable'
 import PageFooter from '../layout/PageFooter'
 
 import services from 'src/modules/services';
@@ -14,7 +14,7 @@ export default {
     Navbar,
     Sidebar,
     Geo,
-    MediaType,
+    DynamicTable,
     DashboardSummary,
     PageFooter
   },
