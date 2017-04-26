@@ -27,16 +27,16 @@ export default {
         'Unknown': '#990099'
       }
 
-      var svg = d3.select('#bipartiteGraph').attr('width', 1300).attr('height', 920)
+      var svg = d3.select('#bipartiteGraph').attr('width', 1125).attr('height', 900)
 
-      svg.append('text').attr('x', 350).attr('y', 70)
+      svg.append('text').attr('x', 300).attr('y', 70)
         .attr('class', 'header').text('Total redemptions')
 
-      svg.append('text').attr('x', 1000).attr('y', 70)
+      svg.append('text').attr('x', 875).attr('y', 70)
         .attr('class', 'header').text('Total')
 
-      var g = [svg.append('g').attr('transform', 'translate(300,100)')
-        , svg.append('g').attr('transform', 'translate(900,100)')]
+      var g = [svg.append('g').attr('transform', 'translate(250,100)')
+        , svg.append('g').attr('transform', 'translate(800,100)')]
 
       var chartHeight = 750;
 
@@ -85,7 +85,13 @@ export default {
           .attr('x', d => (d.part == 'primary' ? -200 : 80))
           .attr('y', d => +6)
           .text(function (d) {
-            return  d3.format(",.2f")(d.value)
+
+            if( i == 1 ) {
+              return  d3.format(",.2f")(d.value)
+            } else {
+              return d.value
+            }
+
           })
           .attr('text-anchor', d => (d.part == 'primary' ? 'end' : 'start'))
       })
