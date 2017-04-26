@@ -27,16 +27,16 @@ export default {
         'Unknown': '#990099'
       }
 
-      var svg = d3.select('#bipartiteGraph').attr('width', 960).attr('height', 880)
+      var svg = d3.select('#bipartiteGraph').attr('width', 1300).attr('height', 920)
 
-      svg.append('text').attr('x', 250).attr('y', 70)
+      svg.append('text').attr('x', 350).attr('y', 70)
         .attr('class', 'header').text('Total redemptions')
 
-      svg.append('text').attr('x', 750).attr('y', 70)
+      svg.append('text').attr('x', 1000).attr('y', 70)
         .attr('class', 'header').text('Total')
 
-      var g = [svg.append('g').attr('transform', 'translate(150,100)')
-        , svg.append('g').attr('transform', 'translate(650,100)')]
+      var g = [svg.append('g').attr('transform', 'translate(300,100)')
+        , svg.append('g').attr('transform', 'translate(900,100)')]
 
       var chartHeight = 750;
 
@@ -82,11 +82,10 @@ export default {
           .attr('text-anchor', d => (d.part == 'primary' ? 'end' : 'start'))
 
         g[i].selectAll('.mainBars').append('text').attr('class', 'perc')
-          .attr('x', d => (d.part == 'primary' ? -100 : 80))
+          .attr('x', d => (d.part == 'primary' ? -200 : 80))
           .attr('y', d => +6)
           .text(function (d) {
-            console.log(d)
-            return (d.value)
+            return  d3.format(",.2f")(d.value)
           })
           .attr('text-anchor', d => (d.part == 'primary' ? 'end' : 'start'))
       })
@@ -96,7 +95,7 @@ export default {
           bp[i].mouseover(d)
 
           g[i].selectAll('.mainBars').select('.perc')
-            .text(function (d) { return (d.value)})
+            .text(function (d) { return d3.format(",.2f")(d.value)})
         })
       }
 
@@ -105,11 +104,11 @@ export default {
           bp[i].mouseout(d)
 
           g[i].selectAll('.mainBars').select('.perc')
-            .text(function (d) { return (d.value)})
+            .text(function (d) { return d3.format(",.2f")(d.value)})
         })
       }
 
-      d3.select(self.frameElement).style('height', '880px')
+      d3.select(self.frameElement).style('height', '920px')
 
     }
   }
