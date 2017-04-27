@@ -251,6 +251,42 @@ var services = {
           }
         });
     });
+  },
+  getPieData: function() {
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/pie-chart.json')
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+
+            var redemptionData = JSON.parse(response.text);
+            var items = redemptionData['_items'];
+            var responseData = [];
+
+            for( var i = 0; i < items.length; i++ ) {
+              
+              for( var j = 0; j < responseData.length; j++ ) {
+                if( responseData[j].categoryname == items[i].categoryname ) {
+                  responseData[j].totalcouponredemption += items[i].totalcouponredemption;
+                  break;
+                }
+              }
+              if( j == responseData.length && items[i].totalcouponredemption != 0 ) {
+                var item = { categoryname:items[i].categoryname, totalcouponredemption:items[i].totalcouponredemption };
+                responseData.push(item);
+              }
+
+            }
+
+            resolve(responseData);
+          }
+          else if (response.status == 401) {
+            console.log("user not authorized");
+            reject("user not authorized")
+          }
+        });
+    });
   }
 };
 
