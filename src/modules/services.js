@@ -252,7 +252,9 @@ var services = {
         });
     });
   },
+
   getPieData: function() {
+
     return new Promise((resolve, reject) => {
       http
         .get('/static/api/pie-chart.json')
@@ -272,6 +274,7 @@ var services = {
                   break;
                 }
               }
+              
               if( j == responseData.length && items[i].totalcouponredemption != 0 ) {
                 var item = { categoryname:items[i].categoryname, totalcouponredemption:items[i].totalcouponredemption };
                 responseData.push(item);
