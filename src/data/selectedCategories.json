@@ -1,0 +1,458 @@
+{
+  "_items": [{
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Air Fresheners & Candles",
+    "_etag": "900ce84f42b245a054221ad7a43490d985590538"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Automotive",
+    "_etag": "554073b3a7989cb043e19c51684c863fa36064e2"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Baby Food",
+    "_etag": "8c0951a3a14a933e1b6b20dccef19d10a1e3b057"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Baby Hygiene",
+    "_etag": "e575d610b4781553b9c7c0b881905e0b53507b97"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Baking Mixes/Ingredients/Supplies",
+    "_etag": "617ed4336bd2f6f3a8a4ae484cbcda50160abe0b"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Beer/Wine/Liquor/Cocktail Additives",
+    "_etag": "e115a21d2162d2ecb9e40f8491fb36379ef0d082"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Books & Magazines",
+    "_etag": "3072eeec2ee8f1836c7eb98c017bb48614ba5373"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Bread & Baked Goods - Shelf Stable",
+    "_etag": "794ab43a8a711d0a7f09f5528fb0f2a8c47b90c8"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Bread Products",
+    "_etag": "7403152b1fb684df9716f64b7d05cba5e8157617"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Breakfast Foods",
+    "_etag": "e75641c3ffe71b17cfae79077a3aa70eee2573ce"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Breakfast Foods - Shelf Stable",
+    "_etag": "308fb9cde72b418cb711682022284e50f56d61cb"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Butter & Margarine",
+    "_etag": "839fcb4c751e292ca26351e09ab38768065235e3"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Candy & Gum",
+    "_etag": "d261803723d638dc55e3df2e263e211921aec56b"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Charcoal, Logs & Accessories",
+    "_etag": "b70cf3702cfd57a01de39d5ab5994a9425274831"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Cheese",
+    "_etag": "c551d65ff45452789ff1bb756adcbf6dcaa17d7d"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Cheese - non refridgerated",
+    "_etag": "c77a882fc067d253972983277ca0d94c465329c8"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Chips/Pretzels/Popcorn",
+    "_etag": "76a5716f4ffc2839b489b1d59d8309e477e1df42"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Clothing & Undergarments",
+    "_etag": "eecbd6f72222db2a0af5770e0e449ac5b3d74c71"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Coffee & Tea",
+    "_etag": "d231033e99e421f60b2405b848e1efa7fa8d3ba8"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Coffee Creamers & Hot Chocolate Mix",
+    "_etag": "7c27c4f111fb77371fe39c72fc25dd938eba9567"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Condiments/Dips/Gravies/Sauces",
+    "_etag": "cdca661e6091a05dfc72bd894089136bac3f2e30"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Cosmetics",
+    "_etag": "08076cb961450d4f3785f595829200a82521ba19"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Crackers, Cookies & Snack Bars",
+    "_etag": "535310a748a1dd16f86816b806cf72a7498b99bf"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Cross-Category",
+    "_etag": "257c86c59a659fdb2c4f6483fedb3d6f34e69fe0"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Deodorant",
+    "_etag": "935a088a0a0c79779d6950655fb53a35deaae644"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Desserts",
+    "_etag": "e15d5afcd1a34dc8b46feb99da395b3b2e31b6f7"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Desserts & Whipped Cream Tub",
+    "_etag": "2d58a375806ef654f5599baabce18269d88536bb"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Dough Products",
+    "_etag": "c3d783265b1aba281f5141c29b9585576a901a4e"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Eggs",
+    "_etag": "20e13aeb80d43fb6e1eb196a2af9166055967648"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "First Aid",
+    "_etag": "bc0f2a0a4845f49d349ea3b13be8219ae306d10f"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Floral/ Gardening/Seasonal",
+    "_etag": "c5c4ba7d0b29fadc9dc1674c00339860cb888533"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Foil/Plastic Wrap & Bags/Plastic Containers",
+    "_etag": "da31cd8c3de03eb97121dde3b23b937c3540a49c"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Fragrances & Gift Sets",
+    "_etag": "6db859d8abcb2b7ab5e3dd5e912e841fed2bf649"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Fresh Produce",
+    "_etag": "413e6d7120260eb3fcab6fbe92bdfa28a18df9a7"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Fruit",
+    "_etag": "57eee79d694f6528e0c65de67f053bb736d46f10"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Fruit - Dried & Canned",
+    "_etag": "6ac876960a5bc55267ec1b983bcdcb7d43b53bc5"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Greeting Cards/Pre-Paid Gift Cards",
+    "_etag": "0542eb58adaf271503287abf7681751664055c13"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Grooming Accessories & Cosmetic Applicators",
+    "_etag": "5b3c8b111c35c2874f89de3276cead7787846fa7"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Hair Care",
+    "_etag": "ccf9b76a9fcf708ab389e0e08c2e07ca42ed4447"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Hand Cleanser, Bath Soap & Body Wash",
+    "_etag": "30bab0c7a9029b93ee9811ea02607a9698991757"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Health Aids & Remedies",
+    "_etag": "418e273aa1eb83d425a1319d6a65da0ab223e89e"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Heat & Eat - Canned or Packaged",
+    "_etag": "02e29df26347b4f0a0bfa19d6ff4841db12daa75"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Heat & Eat Prepared Foods",
+    "_etag": "67aa5c4c981d2e9a4584e777070160d884cb8476"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Household Cleaners & Supplies",
+    "_etag": "1aa032d64e6412b932c797b34af98f8ca0e51562"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Household Maintenance Products",
+    "_etag": "34a6ca988d96ad9b7ce6242bc8630519a20ad34a"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Ice  ",
+    "_etag": "b99d6cd2062b90b5d0d62256b5949d0fe94d95c3"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Ice Cream & Frozen Yogurt",
+    "_etag": "4d9dbf9c429097a56e983bf7a5da24b7b58cf9ca"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Jams, Jellies & Spreads - Shelf Stable",
+    "_etag": "42cb14d145e6f9bfc0caca8ed29f11bcc9a90e30"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Juice",
+    "_etag": "00adbbaa0fdd7d3d25499a019ff1ae3beedbf107"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Kitchen Items & Appliances",
+    "_etag": "ec7668fe7212fa1e8345c3a45d4d34159b7cbe4f"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Laundry Cleaners & Supplies",
+    "_etag": "b1b6352f2763043dceefb27bd049fa9fbb516b8b"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Light Bulbs & Batteries",
+    "_etag": "4cfc32efe9d167f814a5921785ec76114f272196"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Meal & Side Dish Mixes & Kits",
+    "_etag": "e6f35fe0165d06cefb1aaf220626cabbb744cdd5"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Meat & Seafood - Canned",
+    "_etag": "d69a3e59aa99d04a12497143afac6f78792952c8"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Meat/Poultry/Seafood",
+    "_etag": "27d330c5da280a6db0935612f4962933b0467a4d"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Medical Test Kits & Devices",
+    "_etag": "520a93d7dd478a1dd4be140637833c1fe0ebac7d"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Milk",
+    "_etag": "22bc7441d7c60e2a38e1b9cb8642d004bdfbb14e"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Nuts",
+    "_etag": "68520a66fa62ea0ec71f86f1db6a15f654810b5a"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Oral Hygiene",
+    "_etag": "5c4490324d76207e55697c3fe0262766fc8258b3"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Pasta",
+    "_etag": "6dd0eea14efce1be0d24620b1f5e7d480c5236ff"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Pesticides",
+    "_etag": "1c85b5b44602a14ef880f13264d6f0077e2ce995"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Pet Care",
+    "_etag": "76e3ca920f3cb4cea8e57b8cc875484cd173ed50"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Pet Food",
+    "_etag": "07eac74f80b0d9adf5602533637daa0bfea6538a"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Photo & Computer Supplies",
+    "_etag": "b4b87ebef089a4646d7221fc88b2702bd47b4971"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Pickles, Olives & Relishes",
+    "_etag": "dea4ef3f235caa3f1aeb5a021304e0789017e136"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Prescription Medications & Devices",
+    "_etag": "f586311d148063a4f9aeef7b6c09b499a7011195"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Pudding & Gelatin",
+    "_etag": "8600adec42a12b340312422cffa27be6a91a687d"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Ready to Eat Fruits & Salads",
+    "_etag": "1192ce80c1e79ba722a7143cce663434c1ae9972"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Salad Dressings - Shelf Stable",
+    "_etag": "1b46fa85e6fddc0f3422658ad7ba20a9b513f8f2"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Sanitary Protection & Feminine Hygiene",
+    "_etag": "b236bcc1b65073db5719b27b0ac5782b84c88c05"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "School & Office Supplies",
+    "_etag": "7949db0796f4840d4be39ad2c14eb73771b17237"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Shaving Supplies",
+    "_etag": "9cdf98f709859133fbb0c591e94ecf44fe05d1c5"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Shoe Care",
+    "_etag": "988e9810c751e44693c6cd2c601f56e70b77d835"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Skin Creams & Lotions/Facial Cleansers",
+    "_etag": "f655aa5b643bde7cc9aecc1ca31c461bd7e09556"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Soda & Water",
+    "_etag": "494f1704f4233006603c547e42d8dee91ef3c82c"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Sour Cream & Whipped Cream - Canned",
+    "_etag": "758ff4ce0a1e09ae60d86158ed9f26d9261d16a9"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Spices, Seasonings & Extracts",
+    "_etag": "57d47647822203f41058a723d57b68abb403f9e9"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Spreads/Dips/Dressings",
+    "_etag": "5620d928ec69090e10131c595c52597611829ead"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Sugar/Sweeteners/Syrups",
+    "_etag": "9a1f1998d47a5f0df18216629fdc0a8786cee929"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Tobacco & Accessories",
+    "_etag": "b3503c002f1b9a29884f7274629020644370f0fc"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Toilet Paper/Tissues/Papertowels",
+    "_etag": "adcb573f2a8b0d9a08eb16d9033f77818880a6de"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Toys",
+    "_etag": "b9184f2527b6746073838a56df0dc5665d2df26c"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Trash Bags",
+    "_etag": "358bfa5c9b044049ec80d4170cfe73a6c36f89ba"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Unknown",
+    "_etag": "5d4517ba41e0b272c03d0a14f710935861e5461b"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Vegetables",
+    "_etag": "add40e8549d7093a562bb93b938270701e1c8df7"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Vegetables - Canned & Dried",
+    "_etag": "6c2c37915603ac66a7349e5b21a1633d33d09805"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Vinegar & Oil ",
+    "_etag": "d861dada6f0d1bd784970b6c9759272bc6276cf8"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Yogurt",
+    "_etag": "46dafa4e7d660110318c0d827ac6405fbbc65ca1"
+  }, {
+    "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "categoryname": "Yogurt - Shakes & Drinks",
+    "_etag": "7e452ebc4b2f4e0319cdc4b887e82bc7b67f7842"
+  }],
+  "_links": {
+    "self": {
+      "href": "listcategoryname?max_results=0",
+      "title": "listcategoryname"
+    },
+    "parent": {
+      "href": "/",
+      "title": "home"
+    }
+  }
+}

@@ -22,7 +22,9 @@ nch.utils = utils;
 //services.loadCategories();
 services.loadManufacturers();
 
-
+// setup a few selected categories, just for testing
+nch.model.selectedCategories = ['Breakfast Foods', 'Crackers, Cookies  and  Snack Bars', 'Yogurt',
+  'Breakfast Foods - Shelf Stable'];
 
 /* eslint-disable no-new */
 new Vue({

@@ -7,15 +7,23 @@ export default {
   template: require('components/charts/Pie.html'),
   data () {
     return {
-      model: nch.model
+      model: nch.model,
+      pieData: []
     }
   },
+
+  // TODO: need to set up this component to automatically update when this.model.selectedCategories changes...
+  // I believe you can set up a watch event for this
+
   mounted() {
-    services.getPieData().then(this.render).catch((message) => { console.log('Pie promise catch:' + message) })
+    services.getPieData().then( (response) => {
+      this.pieData = response;
+      this.render();
+    }).catch((message) => { console.log('Pie promise catch:' + message) })
   },
   methods: {
 
-    render(jsonData) {
+    render() {
 
       var svg = d3.select('#pieChart').attr('width', 800),
         width = +svg.attr('width'),
@@ -49,6 +57,26 @@ export default {
         '#999900'
         ])
 
+      var i = 0, j = 0
+      var lineHeight = 16
+
+      var total = 0
+
+      var jsonData = []
+
+      for ( i = 0; i < this.pieData.length; i++) {
+
+        //console.log( "*" + this.pieData[i].categoryname + "*")
+
+        for ( j = 0; j < this.model.selectedCategories.length; j++) {
+          if( this.model.selectedCategories[j] == this.pieData[i].categoryname ){
+            jsonData.push( this.pieData[i] )
+          }
+        }
+      }
+
+      //jsonData = response;
+
       var pie = d3.pie()
         .sort(null)
         .value(function(d) { return d.totalcouponredemption })
@@ -61,11 +89,6 @@ export default {
           .data(pie(jsonData))
           .enter().append('g')
           .attr('class', 'arc')
-
-      var i = 0, j = 0
-      var lineHeight = 16
-
-      var total = 0
 
       for ( i = 0; i < jsonData.length; i++ ) {
         total += jsonData[i].totalcouponredemption
