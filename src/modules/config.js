@@ -5,7 +5,8 @@ var nch = {
   model: {
     title: 'NCH',
     categories: [],
-    selectedCategories: []
+    selectedCategories: [],
+    currentManufacturer: null
   }
 };
 
