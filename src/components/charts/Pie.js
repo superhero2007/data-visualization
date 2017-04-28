@@ -12,8 +12,13 @@ export default {
     }
   },
 
-  // TODO: need to set up this component to automatically update when this.model.selectedCategories changes...
-  // I believe you can set up a watch event for this
+  watch: {
+    model: {
+      handler:function(val, oldVal){
+        this.render();
+      },deep: true
+    }
+  },
 
   mounted() {
     services.getPieData().then( (response) => {
@@ -25,11 +30,11 @@ export default {
 
     render() {
 
-      var svg = d3.select('#pieChart').attr('width', 800),
+      var svg = d3.select('#pieChart').attr('width', 800).html(""),
         width = +svg.attr('width'),
         height = +svg.attr('height'),
-        radius = Math.min(width/2, height) / 2,
-        g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + height / 2 + ')')
+        radius = Math.min(width/2, height) / 2;
+      var g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + height / 2 + ')')
 
       var color = d3.scaleOrdinal([
         '#98abc5',
