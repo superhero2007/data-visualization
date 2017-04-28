@@ -4,7 +4,9 @@ var nch = {
   views: {},
   model: {
     title: 'NCH',
-    categories: []
+    categories: [],
+    selectedCategories: [],
+    currentManufacturer: null
   }
 };
 
