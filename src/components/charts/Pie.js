@@ -71,6 +71,7 @@ export default {
         for ( j = 0; j < this.model.selectedCategories.length; j++) {
           if( this.model.selectedCategories[j] == this.pieData[i].categoryname ){
             jsonData.push( this.pieData[i] )
+            break
           }
         }
       }

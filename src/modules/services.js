@@ -9,7 +9,6 @@ require('../data/usa.json')
 require('../data/us-states.json')
 
 require('../data/categories.json')
-require('../data/selectedCategories.json')
 require('../data/manufacturers.json')
 require('../data/redemption-data.json')
 require('../data/pie-chart.json')
@@ -288,23 +287,6 @@ var services = {
           else if (response.status == 401) {
             console.log('user not authorized')
             reject('user not authorized')
-          }
-        })
-    })
-  },
-
-  loadSelectedCategories: function() {
-    return new Promise((resolve, reject) => {
-      http
-        .get('/static/api/selectedCategories.json')
-        .end(function (error, response) {
-
-          if (response.status == 200) {
-            var selectedCategories = JSON.parse(response.text)
-            resolve(selectedCategories['_items'])
-          }
-          else if (response.status == 401) {
-            console.log('user not authorized')
           }
         })
     })
