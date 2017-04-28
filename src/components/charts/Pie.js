@@ -11,7 +11,7 @@ export default {
     }
   },
   mounted() {
-    services.getPieData().then(this.render).catch((message) => { console.log('Bipartite promise catch:' + message) })
+    services.getPieData().then(this.render).catch((message) => { console.log('Pie promise catch:' + message) })
   },
   methods: {
 
@@ -126,7 +126,7 @@ export default {
           return 20 + i * lineHeight
         })
         .text( function (d) {
-          return d3.format('.0%')(d.totalcouponredemption/total) 
+          return d3.format('.0%')(d.totalcouponredemption/total)
         })
 
       i = 1
