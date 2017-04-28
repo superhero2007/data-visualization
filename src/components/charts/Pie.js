@@ -11,11 +11,19 @@ export default {
     }
   },
   mounted() {
+    services.loadCategories().then( (categories) => {
+      this.model.categories = categories;
+    } ).catch( (message) => { console.log('Dashboard, loading categories promise catch:' + message) })
+
+    services.loadSelectedCategories().then( (selectedCategories) => {
+      this.model.selectedCategories = selectedCategories;
+    } ).catch( (message) => { console.log('Dashboard, loading selected categories promise catch:' + message) })
+
     services.getPieData().then(this.render).catch((message) => { console.log('Bipartite promise catch:' + message) })
   },
   methods: {
 
-    render(jsonData) {
+    render(jsonAllData) {
 
       var svg = d3.select('#pieChart').attr('width', 800),
         width = +svg.attr('width'),
@@ -49,6 +57,24 @@ export default {
         '#999900'
         ])
 
+      var i = 0, j = 0
+      var lineHeight = 16
+
+      var total = 0
+        
+      var jsonData = []
+
+      for ( i = 0; i < jsonAllData.length; i++) {
+        for ( j = 0; j < this.model.selectedCategories.length; j++) {
+          if( this.model.selectedCategories[j].categoryname == jsonAllData[i].categoryname )
+            break
+        }
+
+        if (j < this.model.selectedCategories.length) {
+          jsonData.push( jsonAllData[i] )
+        }
+      }
+
       var pie = d3.pie()
         .sort(null)
         .value(function(d) { return d.totalcouponredemption })
@@ -61,11 +87,6 @@ export default {
           .data(pie(jsonData))
           .enter().append('g')
           .attr('class', 'arc')
-
-      var i = 0, j = 0
-      var lineHeight = 16
-
-      var total = 0
 
       for ( i = 0; i < jsonData.length; i++ ) {
         total += jsonData[i].totalcouponredemption
