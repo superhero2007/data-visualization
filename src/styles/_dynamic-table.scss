@@ -1,0 +1,114 @@
+// Dynamic Table styles
+.no-padding {
+  padding-right:0;
+  padding-left:0;
+}
+
+.title{
+  color: #4d92df;
+}
+
+.dynamic-table select, .dynamic-table button{
+  float: left;
+  margin: 0 15px 0 0;
+}
+.page-header .fa-download{
+  font-size: 1.6em;
+}
+
+select{
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.filter,
+.filter:active,
+.filter:hover,
+.filter:focus,
+select,
+select:active,
+select:hover,
+select:focus{
+  outline: none !important;
+}
+
+.download{
+  cursor: pointer;
+}
+
+// category filter Modal Style
+.filter-category-modal {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity 3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  text-transform: uppercase;
+}
+
+.modal-body {
+  position: relative;
+  padding: 15px 40px;
+  height: 400px;
+  overflow: auto;
+}
+
+.modal-enter, .modal-leave {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+label{color: #4d92df; font-size: 12px; cursor: pointer;}
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+input[type=checkbox] + label:before { content: "\f0c8"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+input[type=checkbox]:checked + label:before { content: "\f14a"; } /* checked icon */
+
+.table-content{
+  padding: 0 40px;
+}

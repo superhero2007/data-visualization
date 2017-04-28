@@ -35,7 +35,6 @@ export default {
     services.loadCategories().then( (categories) => {
       this.model.categories = categories;
       console.log( "cats loaded" );
-      console.log(categories);
     } ).catch( (message) => { console.log('Dashboard, loading categories promise catch:' + message) });
   },
 

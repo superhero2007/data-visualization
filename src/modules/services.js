@@ -198,7 +198,7 @@ var services = {
     });
   },
 
-  getRedemptionsByMediaType: function () {
+  getRedemptionsByMediaType: function (categories) {
 
     return new Promise((resolve, reject) => {
       http
@@ -251,6 +251,19 @@ var services = {
           }
         });
     });
+  },
+
+  // Alphabetically function
+  alphabetical: function (a, b) {
+    var A = a.toLowerCase();
+    var B = b.toLowerCase();
+    if (A < B){
+      return -1;
+    }else if (A > B){
+      return  1;
+    }else{
+      return 0;
+    }
   }
 };
 
