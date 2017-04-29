@@ -151,7 +151,6 @@ var services = {
               var item = [items[i].medianame, items[i].storestate, items[i].totalcouponredemption, parseFloat(items[i].totalcouponredemeedvalue)]
               returnvalue.push(item)
             }
-            console.log('data', returnvalue)
 
             resolve(returnvalue)
           }
