@@ -43,9 +43,10 @@ export default {
               }
             }
             
-            if( j == responseData.length && items[i].totalcouponredemption != 0 ) {
+            if( k == responseData.length && items[i].totalcouponredemption != 0 ) {
               var item={
                 categoryname:items[i].categoryname,
+                medianame: items[i].medianame,
                 totalcouponredemption:items[i].totalcouponredemption
               }
               responseData.push(item)
