@@ -1,3 +1,5 @@
+import * as d3 from 'd3'
+
 import FilterModal from 'src/components/charts/FilterModal'
 import TableContent from 'src/components/charts/TableContent'
 import services from '../../modules/services';
@@ -22,18 +24,19 @@ export default {
     }
   },
   mounted() {
-    // services.getRedemptionsByMediaType().then( this.render ).catch( (message) => { console.log('DynamicTable promise catch:' + message) });
+    services.loadCombinedData();
   },
   methods: {
-    render (response) {
-      console.log(response);
+    renderTable (response) {
       this.tableData = response;
+      console.log(response);
     },
     hideModal: function() {
       this.isShow = false;
     },
     saveModal: function(lists) {
-      services.getRedemptionsByMediaType(lists).then( this.render ).catch( (message) => { console.log('DynamicTable promise catch:' + message) });
+      nch.model.selectedCategories = lists;
+      services.getTableData(lists).then( this.renderTable ).catch( (message) => { console.log('DynamicTable promise catch:' + message) });
       this.isShow = false;
     }
   }

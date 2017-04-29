@@ -4,14 +4,16 @@ export default {
   name: 'table-content',
   template: require('components/charts/TableContent.html'),
   props: {
-    data: {
-      type: Object,
-      default: {}
+    datas: {
+      type: Array,
+      default: []
     }
   },
   data () {
     return {
-
+      media: nch.model.allMedaiNames,
+      currentManufacturer: nch.model.currentManufacturer,
+      compareManufacturer: "Comparables"
     }
   },
   methods: {

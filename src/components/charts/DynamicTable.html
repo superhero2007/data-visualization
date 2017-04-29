@@ -1,5 +1,5 @@
 <div class="dynamic-table">
-  <div class="page-header row">
+  <div class="content-header row">
     <span class="title col-lg-6 no-padding">
       Redemption Percentage by Media Type
     </span>
@@ -21,7 +21,7 @@
   </div>
 
   <div class="table-content" v-if="Object.keys(tableData).length > 0">
-    <table-content :data="tableData"></table-content>
+    <table-content :datas="tableData"></table-content>
   </div>
 </div>
 

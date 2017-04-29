@@ -36,6 +36,8 @@ export default {
       this.model.categories = categories;
       console.log( "cats loaded" );
     } ).catch( (message) => { console.log('Dashboard, loading categories promise catch:' + message) });
+
+    services.loadCombinedData()
   },
 
   methods: {

@@ -53,6 +53,44 @@ var services = {
       })
   },
 
+  loadCombinedData: function() {
+    http
+      .get('/static/api/pie-chart.json')
+      .end(function (error, response) {
+        if (response.status == 200) {
+          let items = JSON.parse(response.text)['_items']
+
+          nch.model.combinedData = d3.values((d3.nest()
+              .key(function(d) { return d.categoryname; })
+              .key(function(d) { return d.medianame; })
+              .rollup(function(v) {return d3.mean(v, function(d) {return d.totalcouponredemption; }); })
+              .entries(items.filter(function(d) {return d.mfrname == nch.model.currentManufacturer }))
+          ).sort(function(a,b) {
+            if (a.key < b.key) return -1;
+            if (a.key > b.key) return 1;
+            return 0;
+          })).map(function(d) {
+            let object = {};
+            object.category = d.key
+            object.values = {};
+            d.values.map(function(v) {
+              object.values[v.key] = d3.format("(.2f")(v.value);
+            });
+            return object;
+          });
+
+          nch.model.allMedaiNames = d3.values((d3.nest()
+            .key(function(d) { return d.medianame; })
+            .entries(items))).map(function (d) {
+            return d.key
+          })
+        }
+        else if (response.status == 401) {
+          console.log('user not authorized')
+        }
+      })
+  },
+
   getRedemptionsByState: function () {
 
     return new Promise((resolve, reject) => {
@@ -198,52 +236,37 @@ var services = {
     })
   },
 
-  getRedemptionsByMediaType: function (categories) {
-
+  getTableData: function (filters) {
     return new Promise((resolve, reject) => {
       http
         .get('/static/api/pie-chart.json')
         .end(function (error, response) {
-
           if (response.status == 200) {
-            const redemptionData = JSON.parse(response.text)
-            const items = redemptionData['_items']
-
-            let mediaType = {
-              categories: [],
-              mediaNames: [],
-              data: {}
-            }
-
-            // Get the all categoryNames and mediaNames
-            items.forEach(function(item){
-              //Get the all categoryNames
-              const indCategory = mediaType.categories.indexOf(item.categoryname)
-              if(indCategory !== -1) mediaType.categories.splice(indCategory, 0)
-              else{
-                mediaType.categories.push(item.categoryname)
-                mediaType.data[item.categoryname] = {}
+            let items = JSON.parse(response.text)['_items']
+            let data = []
+            let temp = {}
+            filters.forEach(function (filter) {
+              temp.category = filter
+              let value = nch.model.combinedData.filter(function(d) { return d.category == filter })
+              if(value[0]){
+                temp.manufacturer = value[0].values
+              }else{
+                temp.manufacturer = null
               }
 
-              //Get the all media name
-              const indMedia = mediaType.mediaNames.indexOf(item.medianame)
-              if(indMedia !== -1) mediaType.mediaNames.splice(indMedia, 0)
-              else mediaType.mediaNames.push(item.medianame)
+              temp.comparables = {};
+              d3.values((d3.nest()
+                .key(function(d) { return d.medianame; })
+                .rollup(function(v) { return d3.mean(v, function(d) { return d.totalcouponredemption; }); })
+                .entries(items.filter(function(d) { return d.categoryname != filter })))
+              ).map(function(v) {
+                temp.comparables[v.key] = d3.format("(.2f")(v.value)
+              });
+
+              data.push(temp);
             })
 
-            // init the mediaType's data
-            mediaType.categories.forEach(function(category){
-              mediaType.data[category]['categoryName'] = category
-              mediaType.mediaNames.forEach(function(medianame){
-                mediaType.data[category][medianame] = 0
-              })
-            })
-
-            items.forEach(function(item){
-              mediaType.data[item.categoryname][item.medianame] += item.totalcouponredemeedvalue
-            })
-
-            resolve(mediaType)
+            resolve(data);
           }
           else if (response.status == 401) {
             console.log('user not authorized')
