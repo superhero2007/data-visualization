@@ -6,7 +6,9 @@ var nch = {
     title: 'NCH',
     categories: [],
     selectedCategories: [],
-    currentManufacturer: null
+    currentManufacturer: null,
+    selectedCategory: null,
+    selectedMedia: null
   }
 };
 

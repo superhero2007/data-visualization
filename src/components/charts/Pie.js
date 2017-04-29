@@ -15,25 +15,50 @@ export default {
   watch: {
     model: {
       handler:function(val, oldVal){
-        this.render();
+        this.render()
       },deep: true
     }
   },
 
   mounted() {
     services.getPieData().then( (response) => {
-      this.pieData = response;
-      this.render();
+      this.pieData = response
+      this.render()
     }).catch((message) => { console.log('Pie promise catch:' + message) })
   },
   methods: {
 
     render() {
+      var items = this.pieData
+      var responseData = []
 
-      var svg = d3.select('#pieChart').attr('width', 800).html(""),
+      for( var i = 0 ; i < items.length ; i++ ) {
+
+        for (var j = 0; j < this.model.selectedCategories.length; j++) {
+          if( (this.model.selectedCategories[j] == items[i].categoryname) && (this.model.selectedMedia == null || this.model.selectedMedia == items[i].medianame)){
+            for( var k = 0 ; k < responseData.length ; k++ ) {
+              if( (responseData[k].categoryname == items[i].categoryname) ) {
+                responseData[k].totalcouponredemption += items[i].totalcouponredemption
+                break
+              }
+            }
+            
+            if( j == responseData.length && items[i].totalcouponredemption != 0 ) {
+              var item={
+                categoryname:items[i].categoryname,
+                totalcouponredemption:items[i].totalcouponredemption
+              }
+              responseData.push(item)
+            }
+          }
+        }
+      }
+
+
+      var svg = d3.select('#pieChart').attr('width', 800).html(''),
         width = +svg.attr('width'),
         height = +svg.attr('height'),
-        radius = Math.min(width/2, height) / 2;
+        radius = Math.min(width/2, height) / 2
       var g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + height / 2 + ')')
 
       var color = d3.scaleOrdinal([
@@ -62,26 +87,8 @@ export default {
         '#999900'
         ])
 
-      var i = 0, j = 0
       var lineHeight = 16
-
       var total = 0
-
-      var jsonData = []
-
-      for ( i = 0; i < this.pieData.length; i++) {
-
-        //console.log( "*" + this.pieData[i].categoryname + "*")
-
-        for ( j = 0; j < this.model.selectedCategories.length; j++) {
-          if( this.model.selectedCategories[j] == this.pieData[i].categoryname ){
-            jsonData.push( this.pieData[i] )
-            break
-          }
-        }
-      }
-
-      //jsonData = response;
 
       var pie = d3.pie()
         .sort(null)
@@ -92,22 +99,36 @@ export default {
         .innerRadius(0)
 
       var arc = g.selectAll('.arc')
-          .data(pie(jsonData))
+          .data(pie(responseData))
           .enter().append('g')
           .attr('class', 'arc')
 
-      for ( i = 0; i < jsonData.length; i++ ) {
-        total += jsonData[i].totalcouponredemption
+      for ( i = 0; i < responseData.length; i++ ) {
+        total += responseData[i].totalcouponredemption
       }
 
       arc.append('path')
         .attr('d', path)
+        .attr('class', 'path')
         .attr('fill', function(d) { return color(d.data.categoryname) })
+
+      g.selectAll('.arc')
+        .on('mouseover', piemouseover)
+        .on('mouseout', piemouseout)
+
+      function piemouseover (d) {
+        nch.model.selectedCategory = d.data.categoryname
+        nch.model.selectedMedia = null
+      }
+
+      function piemouseout (d) {
+        nch.model.selectedCategory = null
+      }
 
       g = svg.append('g').attr('transform', 'translate(' + (width / 2 ) + ',' + 0 + ')')
 
       var list = g.selectAll('.list')
-          .data(jsonData)
+          .data(responseData)
           .enter().append('g')
           .attr('class', 'list')
 
@@ -149,7 +170,7 @@ export default {
       i = 0
 
       list.append('text')
-        .attr('x', 370)
+        .attr('x', 360)
         .attr('y', function (d) {
           i++
           return 20 + i * lineHeight

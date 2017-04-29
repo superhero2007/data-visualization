@@ -7,18 +7,76 @@ export default {
   template: require('components/charts/Bar.html'),
   data () {
     return {
-      model: nch.model
+      model: nch.model,
+      barData: {}
     }
   },
+
+  watch: {
+    model: {
+      handler:function(val, oldVal){
+        this.render()
+      },deep: true
+    }
+  },
+
   mounted() {
-    services.getRedemptionsByMedia().then( this.render ).catch( (message) => { console.log('Bar promise catch:' + message) })
+    services.getRedemptionsByMedia().then( (response) => {
+      this.barData = response
+      this.render()
+    }).catch( (message) => { console.log('Bar promise catch:' + message) })
   },
   methods: {
 
-    render( response ) {
+    render() {
+      var items = this.barData
+      var min = 10000000
+      var max = -1
+      var mediaMap = {}
+      var responseData = { min: 0, max: 0, mediaData: mediaMap }
 
-      var data = Object.keys(response.mediaData).map(function (d) { return response.mediaData[d] } )
-      var svg = d3.select('#barChart'),
+      for( var i = 0 ; i < items.length ; i++ ) {
+        var item = items[i]
+        var currentData = null
+
+        for( var j = 0 ; j < this.model.selectedCategories.length ; j ++ ) {
+          if( (item['categoryname'] == this.model.selectedCategories[j]) && (this.model.selectedCategory == null || this.model.selectedCategory == item['categoryname']))
+          {
+            break
+          }
+        }
+
+        if( j == this.model.selectedCategories.length)
+          continue
+
+        if( mediaMap[ item['medianame'] ] ) {
+          currentData = mediaMap[ item['medianame'] ]
+        }
+        else {
+          currentData = { name: item['medianame'], redempations: 0, redempationValue: 0 }
+          mediaMap[ item['medianame'] ] = currentData
+        }
+
+        //currentData.redempations += item['totalcouponredemption']
+        //currentData.redempationValue += item['totalcouponredemeedvalue']
+        currentData.redempations += item['totalcouponredemeedvalue']
+        currentData.redempationValue += item['totalcouponredemption']
+
+        if( currentData.redempations < min ) {
+          min = currentData.redempations
+        }
+
+        if( currentData.redempations > max ) {
+          max = currentData.redempations
+        }
+      }
+
+      var mediaTypes = Object.keys( mediaMap )
+      responseData.min = min
+      responseData.max = max
+      
+      var data = Object.keys(responseData.mediaData).map(function (d) { return responseData.mediaData[d] } )
+      var svg = d3.select('#barChart').html(''),
         margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = +svg.attr('width') - margin.left - margin.right,
         height = +svg.attr('height') - margin.top - margin.bottom
@@ -64,6 +122,8 @@ export default {
       //   .attr('text-anchor', 'end')
       //   .text('Frequency')
 
+     
+
       g.selectAll('.bar')
         .data(data)
         .enter().append('rect')
@@ -93,7 +153,18 @@ export default {
         .text(function (d) {
           return d3.format(',.0f')(d.redempationValue)
         })
+       g.selectAll('rect')
+          .on('mouseover', barmouseover)
+          .on('mouseout', barmouseout)
       //})
+      function barmouseover (d) {
+        nch.model.selectedMedia = d.name
+        nch.model.selectedCategory = null
+      }
+
+      function barmouseout (d) {
+        nch.model.selectedMedia = null
+      }
 
     }
 

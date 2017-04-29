@@ -122,44 +122,9 @@ var services = {
         .end(function (error, response) {
 
           if (response.status == 200) {
-
-            var min = 10000000
-            var max = -1
-            var mediaMap = {}
-            var responseData = { min: 0, max: 0, mediaData: mediaMap }
             var redemptionData = JSON.parse(response.text)
             var items = redemptionData['_items']
-
-            for( var i = 0 ; i < items.length ; i++ ) {
-              var item = items[i]
-              var currentData = null
-
-              if( mediaMap[ item['medianame'] ] ) {
-                currentData = mediaMap[ item['medianame'] ]
-              }
-              else {
-                currentData = { name: item['medianame'], redempations: 0, redempationValue: 0 }
-                mediaMap[ item['medianame'] ] = currentData
-              }
-
-              currentData.redempations += item['totalcouponredemption']
-              currentData.redempationValue += item['totalcouponredemeedvalue']
-
-              if( currentData.redempations < min ) {
-                min = currentData.redempations
-              }
-
-              if( currentData.redempations > max ) {
-                max = currentData.redempations
-              }
-            }
-
-            var mediaTypes = Object.keys( mediaMap )
-            console.log( 'Media count: ' + mediaTypes.length )
-            console.log( 'Min: ' + min + ', max: ' + max )
-            responseData.min = min
-            responseData.max = max
-            resolve(responseData)
+            resolve(items)
           }
           else if (response.status == 401) {
             console.log('user not authorized')
@@ -264,25 +229,7 @@ var services = {
 
             var redemptionData = JSON.parse(response.text)
             var items = redemptionData['_items']
-            var responseData = []
-
-            for( var i = 0 ; i < items.length ; i++ ) {
-              
-              for( var j = 0 ; j < responseData.length ; j++ ) {
-                if( responseData[j].categoryname == items[i].categoryname ) {
-                  responseData[j].totalcouponredemption += items[i].totalcouponredemption
-                  break
-                }
-              }
-              
-              if( j == responseData.length && items[i].totalcouponredemption != 0 ) {
-                var item = { categoryname:items[i].categoryname, totalcouponredemption:items[i].totalcouponredemption }
-                responseData.push(item)
-              }
-
-            }
-
-            resolve(responseData)
+            resolve(items)
           }
           else if (response.status == 401) {
             console.log('user not authorized')
