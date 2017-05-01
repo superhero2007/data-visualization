@@ -11,16 +11,15 @@ export default {
     FilterModal,
     TableContent
   },
-  // props: {
-  //   categories: {
-  //     type: Array,
-  //     default: []
-  //   }
-  // },
+  props: {
+    categories: {
+      type: Array,
+      default: []
+    }
+  },
   data () {
     return {
       isShow: false,
-      categories: nch.model.categories,
       tableData: {}
     }
   },

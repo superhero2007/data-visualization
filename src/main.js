@@ -3,9 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import router from './modules/router'
-// import d3 from 'd3';
-// window.d3 = d3;
-
 
 var d3 = require("d3");
 require("imports-loader?d3=d3!./vendor/viz.js");

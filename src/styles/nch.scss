@@ -1,10 +1,12 @@
 @import 'bootstrap';
 
-// Base structure
-@import 'base';
-
 // Site Fonts
 @import 'fonts';
+
+@import 'config';
+
+// Base structure
+@import 'base';
 
 // Top navigation
 @import 'navigation-top';
@@ -20,8 +22,4 @@
 
 // Geo styles
 @import 'geo';
-
-// Dynamic Table styles
-@import 'dynamic-table';
-
 @import 'font-awesome';

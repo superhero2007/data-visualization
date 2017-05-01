@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from '../components/views/Dashboard'
+import FaceValue from '../components/views/FaceValue'
+import ProductMoved from '../components/views/ProductMoved'
 import BilateralData from '../components/views/BilateralData'
 import PieCharts from '../components/views/PieCharts'
-import StateData from '../components/views/StateData'
+import Geographic from '../components/views/Geographic'
+
+import Home from '../Home'
 
 Vue.use(Router)
 
@@ -13,6 +17,16 @@ export default new Router({
       path: '/',
       name: 'Dashboard',
       component: Dashboard
+    },
+    {
+      path: '/face-value',
+      name: 'FaceValue',
+      component: FaceValue
+    },
+    {
+      path: '/product-moved',
+      name: 'ProductMoved',
+      component: ProductMoved
     },
     {
       path: '/bilateral-data',
@@ -25,9 +39,15 @@ export default new Router({
       component: PieCharts
     },
     {
-      path: '/state-data',
-      name: 'StateData',
-      component: StateData
+      path: '/geographic/:view',
+      name: 'Geographic',
+      component: Geographic,
+      props: true
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
     }
   ]
 })
