@@ -74,7 +74,7 @@ export default {
       var mediaTypes = Object.keys( mediaMap )
       responseData.min = min
       responseData.max = max
-      
+
       var data = Object.keys(responseData.mediaData).map(function (d) { return responseData.mediaData[d] } )
       var svg = d3.select('#barChart').html(''),
         margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -122,7 +122,7 @@ export default {
       //   .attr('text-anchor', 'end')
       //   .text('Frequency')
 
-     
+
 
       g.selectAll('.bar')
         .data(data)
@@ -139,7 +139,7 @@ export default {
           return (height - y(d.redempationValue)) * 0.9;
         })
 
-      
+
       g.selectAll('.barValue')
         .data(data)
         .enter().append('text')
@@ -155,28 +155,28 @@ export default {
           return d3.format(',.0f')(d.redempationValue)
         })
 
-        if( this.model.selectedMedia == null )
-        {
-          g.selectAll('.bar')
-            .attr('y', height)
-            .attr('height', 1)
-            .transition()
-            .duration(1000)
-            .attr('height', function(d){
-              return (height - y(d.redempationValue)) * 0.9;
-            })
-            .attr('y', function (d) {
-              return y(d.redempationValue) + (height - y(d.redempationValue)) * 0.1
-            })
-
-          g.selectAll('.barValue')
-            .attr('y', height)
-            .transition()
-            .duration(1000)
-            .attr('y', function (d) {
-              return y(d.redempationValue) + (height - y(d.redempationValue)) * 0.1-  5
-            })
-        }
+        // if( this.model.selectedMedia == null )
+        // {
+        //   g.selectAll('.bar')
+        //     .attr('y', height)
+        //     .attr('height', 1)
+        //     .transition()
+        //     .duration(1000)
+        //     .attr('height', function(d){
+        //       return (height - y(d.redempationValue)) * 0.9;
+        //     })
+        //     .attr('y', function (d) {
+        //       return y(d.redempationValue) + (height - y(d.redempationValue)) * 0.1
+        //     })
+        //
+        //   g.selectAll('.barValue')
+        //     .attr('y', height)
+        //     .transition()
+        //     .duration(1000)
+        //     .attr('y', function (d) {
+        //       return y(d.redempationValue) + (height - y(d.redempationValue)) * 0.1-  5
+        //     })
+        // }
 
        g.selectAll('rect')
           .on('mouseover', barmouseover)
