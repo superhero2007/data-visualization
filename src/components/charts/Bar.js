@@ -155,28 +155,28 @@ export default {
           return d3.format(',.0f')(d.redempationValue)
         })
 
-        // if( this.model.selectedMedia == null )
-        // {
-        //   g.selectAll('.bar')
-        //     .attr('y', height)
-        //     .attr('height', 1)
-        //     .transition()
-        //     .duration(1000)
-        //     .attr('height', function(d){
-        //       return (height - y(d.redempationValue)) * 0.9;
-        //     })
-        //     .attr('y', function (d) {
-        //       return y(d.redempationValue) + (height - y(d.redempationValue)) * 0.1
-        //     })
-        //
-        //   g.selectAll('.barValue')
-        //     .attr('y', height)
-        //     .transition()
-        //     .duration(1000)
-        //     .attr('y', function (d) {
-        //       return y(d.redempationValue) + (height - y(d.redempationValue)) * 0.1-  5
-        //     })
-        // }
+        if( this.model.selectedMedia == null )
+        {
+          g.selectAll('.bar')
+            .attr('y', height)
+            .attr('height', 1)
+            .transition()
+            .duration(1000)
+            .attr('height', function(d){
+              return (height - y(d.redempationValue)) * 0.9;
+            })
+            .attr('y', function (d) {
+              return y(d.redempationValue) + (height - y(d.redempationValue)) * 0.1
+            })
+
+          g.selectAll('.barValue')
+            .attr('y', height)
+            .transition()
+            .duration(1000)
+            .attr('y', function (d) {
+              return y(d.redempationValue) + (height - y(d.redempationValue)) * 0.1-  5
+            })
+        }
 
        g.selectAll('rect')
           .on('mouseover', barmouseover)
