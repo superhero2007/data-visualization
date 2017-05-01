@@ -1,15 +1,27 @@
-<table>
-  <thead style="background-color: #4d92df; color: #ffffff">
-  <th>Category Name</th>
-  <th v-for="mediaName in mediaNames" style="height: 50px; width: 120px;padding-left: 10px">
-    <i class="fa fa-2x" v-bind:class="getIcon(mediaName)" aria-hidden="true"></i>
-  </th>
-  </thead>
-  <tbody>
-  <tr v-for="category in data">
-    <td>{{category.categoryName}}</td>
-    <td v-for="media in mediaNames" style="padding-left: 10px">{{formattedValue(category[media])}}</td>
-  </tr>
-  </tbody>
-</table>
+<div class="dynamic-table">
+  <div class="content-header row">
+    <span class="title col-lg-6 no-padding">
+      Redemption Percentage by Media Type
+    </span>
+
+    <div class="col-lg-5">
+      <select class="">
+        <option value selected>Media Type</option>
+      </select>
+      <button type="button" class="filter btn btn-default" aria-label="Right Align" @click="isShow = true">
+        <i class="fa fa-sliders" aria-hidden="true"></i>
+        Categories
+      </button>
+      <filter-modal :show="isShow" :onClose="hideModal" :data="categories" :onSave="saveModal"></filter-modal>
+    </div>
+
+    <span class="download col-lg-1 no-padding">
+      <i class="fa fa-download fa-pull-right" aria-hidden="true"></i>
+    </span>
+  </div>
+
+  <div class="table-content" v-if="Object.keys(tableData).length > 0">
+    <table-content :datas="tableData"></table-content>
+  </div>
+</div>
 

@@ -1,0 +1,36 @@
+<div class="filter-category-modal" @click="onClose" v-show="show" transition="modal">
+  <div class="modal-wrapper">
+    <div class="modal-container row" @click.stop>
+      <div class="modal-header">
+        <slot name="header">
+          <h3>
+            <i class="fa fa-sliders" aria-hidden="true"></i>
+            Filter Media Type
+          </h3>
+        </slot>
+      </div>
+
+      <div class="modal-body">
+        <slot name="body">
+          <div class="row">
+            <div class="col-lg-6" v-for="(category, i) in data">
+              <input type="checkbox" v-model="comparisonvalue" :id="i" :value="category.categoryname" />
+              <label :for="i">{{category.categoryname}}</label>
+            </div>
+          </div>
+        </slot>
+      </div>
+
+      <div class="modal-footer">
+        <slot name="footer">
+          <div class="col-lg-6">
+            <button class="btn btn-default col-lg-12" @click="cancel()">Cancel</button>
+          </div>
+          <div class="col-lg-6">
+            <button class="btn btn-primary col-lg-12" @click="ok()">OK</button>
+          </div>
+        </slot>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div>
+  <p>General Mills vs Comparables</p>
+  <table class="col-lg-12 table-responsive" v-for="data in datas">
+    <thead class="thead">
+      <tr>
+        <th class="text-left">{{data.category}}</th>
+        <th v-for="node in media">
+          <i class="fa fa-2x" v-bind:class="getIcon(node)" aria-hidden="true"></i>
+        </th>
+        <th v-for="node in media">
+          <i class="fa fa-2x" v-bind:class="getIcon(node)" aria-hidden="true"></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="text-left">{{currentManufacturer}}</td>
+        <template v-if="data.manufacturer">
+          <td v-for="node in media" v-if="data.manufacturer[node]">{{data.manufacturer[node]}}</td>
+          <td v-for="node in media" v-else>-</td>
+        </template>
+        <template v-else="">
+          <td colspan="5">No Data</td>
+        </template>
+
+        <template v-if="data.manufacturer">
+          <td v-for="node in media" v-if="data.manufacturer[node]">{{data.manufacturer[node]}}</td>
+          <td v-for="node in media" v-else="data.manufacturer[node]">-</td>
+        </template>
+        <template v-else="">
+          <td colspan="5">No Data</td>
+        </template>
+      </tr>
+      <tr class="even">
+        <td class="text-left">{{compareManufacturer}}</td>
+        <td v-for="node in media">{{data.comparables[node]}}</td>
+        <td v-for="node in media">{{data.comparables[node]}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
