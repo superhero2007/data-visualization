@@ -18,8 +18,23 @@
       </div>
 
       <div class="page-content" v-if="categories">
-        <dynamic-table :categories="categories"></dynamic-table>
+        <!--<p class="page-header">-->
+          <!--Redemption Percentage by Media Type-->
+          <!--<select id="categoryOptions"  v-model="selected"  @change="onCategorySelected" class="category-select">-->
+            <!--<option v-for="option in model.categories" :value="option.categoryname">-->
+              <!--{{ option.categoryname }}-->
+            <!--</option>-->
+          <!--</select>-->
+        <!--</p>-->
+        <div class="row" style="margin-left: 0; margin-right: 0">
+          <div class="col-md-12">
+            <dynamic-table></dynamic-table>
+          </div>
+        </div>
       </div>
+
+
+
       <page-footer></page-footer>
     </div>
   </div>
