@@ -23,4 +23,7 @@
   <div class="table-content" v-if="Object.keys(tableData).length > 0">
     <table-content :datas="tableData"></table-content>
   </div>
+  <div class="table-content" v-else="">
+    <p>No Filter</p>
+  </div>
 </div>
