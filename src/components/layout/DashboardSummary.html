@@ -1,20 +1,31 @@
-<div class="summary row" id="dashboard_summary" style="margin-left: 0; margin-right: 0">
-    <div class="summary__block col-md-3">
-        <p class="summary__title"><i class="fa fa-calendar"></i> Time Period</p>
-        <select name="current_year_quarter" id="current-year-quarter">
-            <option value="">Current Year Quarter</option>
+<div class="summary" id="dashboard_summary">
+    <div class="summary__block">
+        <p class="summary__title">Time Period</p>
+        <select id="year-over-year">
+            <option value="">Year Over Year</option>
         </select>
     </div>
-    <div class="summary__block col-md-3">
-        <p class="summary__title"><i class="fa fa-line-chart"></i> Redemptions</p>
-        <p class="summary__value">12,348 <i class="fa fa-arrow-up"></i></p>
+    <div class="summary__block">
+        <p class="summary__title">Segment: Food</p>
+        <div class="input-group">
+            <!-- replace with toggle button -->
+            <label>Food <input type="radio" name="segment"></label>
+            <label>Other <input type="radio" name="segment"></label>
+        </div>
     </div>
-    <div class="summary__block col-md-3">
-        <p class="summary__title"><i class="fa fa-usd"></i> Redemption Value</p>
-        <p class="summary__value">$124,335.50 <i class="fa fa-arrow-down"></i></p>
+    <div class="summary__block">
+        <p class="summary__title">Sector</p>
+        <select id="sector">
+            <option value="">Beverages</option>
+        </select>
     </div>
-    <div class="summary__block col-md-3">
-        <p class="summary__title"><i class="fa fa-question-circle"></i> What Else??</p>
-        <p class="summary__value">?????</p>
+    <div class="summary__block">
+        <p class="summary__title">Category</p>
+        <select id="category">
+            <option value="">Soda &amp; Water</option>
+        </select>
+    </div>
+    <div class="summary__block">
+        <button>Filters</button>
     </div>
 </div>

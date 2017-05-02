@@ -5,11 +5,12 @@
     <div class="main">
       <dashboard-summary></dashboard-summary>
       <div class="page-content">
+        <view-header :headerTitle="headerTitle"></view-header>
         <div class="col-md-6">
-          <p>Stacked bar chart here.</p>
+          <stacked-bar></stacked-bar>
         </div>
         <div class="col-md-6">
-          <p>Pie chart here.</p>
+          <pie group-by-field="medianame"></pie>
         </div>
       </div>
       <page-footer></page-footer>

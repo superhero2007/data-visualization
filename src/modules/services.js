@@ -4,20 +4,12 @@ import * as http from 'superagent'
 import * as d3 from 'd3'
 
 // local data
-require('../data/us.json')
-require('../data/usa.json')
 require('../data/us-states.json')
-
 require('../data/categories.json')
 require('../data/manufacturers.json')
 require('../data/redemption-data.json')
 require('../data/pie-chart.json')
-require('../data/bipartite-example.json')
-
-require('../data/unemployment.tsv')
-require('../data/stateslived.tsv')
-require('../data/pie-example.tsv')
-require('../data/bar-example.tsv')
+require('../data/stacked-bar-example.tsv')
 
 var services = {
   loadCategories: function() {

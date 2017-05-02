@@ -2,6 +2,9 @@ import Navbar from '../layout/Navbar'
 import Sidebar from '../layout/Sidebar'
 import DashboardSummary from '../layout/DashboardSummary'
 import PageFooter from '../layout/PageFooter'
+import ViewHeader from '../layout/ViewHeader'
+import Pie from '../charts/Pie'
+import StackedBar from '../charts/StackedBar'
 
 export default {
   name: 'facevalue',
@@ -10,11 +13,15 @@ export default {
     Navbar,
     Sidebar,
     DashboardSummary,
-    PageFooter
+    PageFooter,
+    ViewHeader,
+    Pie,
+    StackedBar
   },
   data () {
     return {
-      model: nch.model
+      model: nch.model,
+      headerTitle: 'Face Value Range: General Mills, Inc. vs. Comparables'
     }
   }
 }

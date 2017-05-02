@@ -1,6 +1,6 @@
-<div class="filter-category-modal" @click="onClose" v-show="show" transition="modal">
+<div class="filter-category-modal" v-on:click="onClose" v-show="show" transition="modal">
   <div class="modal-wrapper">
-    <div class="modal-container row" @click.stop>
+    <div class="modal-container row" v-on:click.stop>
       <div class="modal-header">
         <slot name="header">
           <h3>
@@ -24,10 +24,10 @@
       <div class="modal-footer">
         <slot name="footer">
           <div class="col-lg-6">
-            <button class="btn btn-default col-lg-12" @click="cancel()">Cancel</button>
+            <button class="btn btn-default col-lg-12" v-on:click="cancel()">Cancel</button>
           </div>
           <div class="col-lg-6">
-            <button class="btn btn-primary col-lg-12" @click="ok()">OK</button>
+            <button class="btn btn-primary col-lg-12"v-on:click="ok()">OK</button>
           </div>
         </slot>
       </div>

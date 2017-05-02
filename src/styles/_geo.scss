@@ -121,36 +121,14 @@ div.tooltip {
   pointer-events: none;
 }
 
-
-
 .bar {
   fill: steelblue;
-  transition-property: fill;
-  transition-duration: 0.5s;
-  transition-timing-function: linear;
 }
 
-.bar:hover, .path:hover{
-  fill:brown;
-}
-
-.path {
-  transition-property: fill;
-  transition-duration: 0.5s;
-  transition-timing-function: linear;
+.bar:hover {
+  fill: brown;
 }
 
 .axis--x path {
   display: none;
 }
-
-@-webkit-keyframes example {
-    to {fill: brown;}
-}
-
-/* Standard syntax */
-@keyframes example {
-    to {fill: brown;}
-}
-
-

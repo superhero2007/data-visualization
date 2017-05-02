@@ -81,6 +81,99 @@ var utils = {
     }
 
     return null;
+  },
+
+  getCurrentWeek( date ) {
+    if (! ( date instanceof Date ) ){
+      date = new Date();
+    }
+    var nDay = ( date.getDay() + 6 ) % 7;
+    date.setDate(date.getDate() - nDay + 3);
+
+
+    var n1stThursday = date.valueOf();
+
+    date.setMonth( 0, 1 );
+
+    if ( date.getDay() !== 4 ) {
+      date.setMonth(0, 1 + (( 4 - date.getDay() ) + 7 ) % 7 );
+    }
+
+   return 1 + Math.ceil( ( n1stThursday - date ) / 604800000 );
+  },
+
+  getRollingWeeksRanges( date ) {
+    if (! ( date instanceof Date ) ){
+      date = new Date();
+    }
+    var endClosedWeek = this.getCurrentWeek( date ) - 1;
+    var endYear = date.getFullYear();
+    var startClosedWeek = endClosedWeek;
+    var startYear = date.getFullYear() - 1;
+
+    if( endClosedWeek == 52 ) {
+      endYear = date.getFullYear() - 1;
+    }
+
+    if( startClosedWeek == 52 ) {
+      startClosedWeek = 1;
+      endYear = date.getFullYear();
+    }
+
+    var ranges = {
+      "start": {
+        "week": startClosedWeek,
+        "year": startYear
+    },
+      "end": {
+        "week": endClosedWeek,
+        "year": endYear
+    } };
+
+    return ranges;
+
+  },
+
+  getCurrentQuarter() {
+    var quarter = Math.floor((date.getMonth() + 3) / 3);
+    return quarter;
+  },
+
+  getLastQuarter() {
+    var lastQ = this.getCurrentQuarter() -1;
+    var Qyear = date.getFullYear();
+    if(lastQ == 0 ){
+      lastQ = 1;
+      Qyear = date.getFullYear() - 1;
+    }
+     var quarter = { "quarter" : lastQ, "year" : Qyear };
+  },
+
+  getClosedQuarterRanges( date ) {
+    if (! ( date instanceof Date ) ){
+      date = new Date();
+    }
+    //TODO startQuarter:: will get this from service soon
+    var startQuarter = { "quarter" : 1, "year" : 2015 };
+    var endQuarter = this.getLastQuarter();
+    var quarterRanges = { "start" : startQuarter, "end" : endQuarter };
+  },
+
+  getClosedMonthsRanges( date ) {
+    if (! ( date instanceof Date ) ){
+      date = new Date();
+    }
+    //TODO startMonth:: will get this from service soon
+    var startMonth = { "month" : 1, "year" : 2015 };
+    var endMonth = date.getMonth() - 1;
+    var Myear = date.getFullYear();
+    if(endMonth == 0 ){
+      endMonth = 12;
+      Myear = date.getFullYear() - 1;
+    }
+    var endMonth = { "month" : endMonth, "year" : Myear };
+    var MonthRanges = { "start" : startMonth, "end" : endMonth };
+
   }
 }
 

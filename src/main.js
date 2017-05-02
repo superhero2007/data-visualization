@@ -22,6 +22,8 @@ services.loadManufacturers();
 // ****************************************
 // simple test data, will be removed
 // ****************************************
+nch.model.selectedCategories = ['Breakfast Foods', 'Crackers, Cookies  and  Snack Bars', 'Yogurt',
+  'Breakfast Foods - Shelf Stable'];
 nch.model.currentManufacturer = 'General Mills, Inc.'
 
 /* eslint-disable no-new */

@@ -7,7 +7,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="login-icon"><a href="#">Login <i class="fa fa-user" aria-hidden="true"></i></a></li>
+            <li class="login-icon" @click="toggleLogin">Login <i class="fa fa-user" aria-hidden="true"></i></li>
           </ul>
         </div>
       </div>
@@ -26,7 +26,7 @@
               <input type="text" placeholder="Username">
               <input type="password" placeholder="Password">
             </div>
-            <div class="form-home__message form__message">
+            <div class="form-home__message form__message" v-if="hasError">
               <i class="fa fa-warning"></i>
               <p>Sorry, we did not recognize that email address. Please check your entry and try again or call our customer support center.</p>
             </div>
@@ -110,5 +110,5 @@
       </footer>
     </div>
   </div>
-  <form-login></form-login>
+  <form-login @hideLoginModal="toggleLogin" v-show="showLoginModal"></form-login>
 </div>

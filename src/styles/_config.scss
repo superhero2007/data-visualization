@@ -62,3 +62,15 @@ $parallax-ios         : true !default;
   ;
   z-index: $distance * 1000;
 }
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+  }
+
+  &:after {
+    clear: both;
+  }
+}

@@ -4,6 +4,7 @@ import services from 'src/modules/services'
 
 export default {
   name: 'pie',
+  props: ['groupByField'],
   template: require('components/charts/Pie.html'),
   data () {
     return {
@@ -14,52 +15,40 @@ export default {
 
   watch: {
     model: {
-      handler:function(val, oldVal){
+      handler: function (val, oldVal) {
         this.render()
-      },deep: true
+      }, deep: true
     }
   },
 
   mounted() {
-    services.getPieData().then( (response) => {
+    console.log("Pie mounted: " + this.groupByField);
+    services.getPieData().then((response) => {
       this.pieData = response
       this.render()
-    }).catch((message) => { console.log('Pie promise catch:' + message) })
+    }).catch((message) => {
+      console.log('Pie promise catch:' + message)
+    })
   },
   methods: {
 
     render() {
-      var items = this.pieData
-      var responseData = []
+      var items = this.pieData;
 
-      for( var i = 0 ; i < items.length ; i++ ) {
+      var responseData = [];
 
-        for (var j = 0; j < this.model.selectedCategories.length; j++) {
-          if( (this.model.selectedCategories[j] == items[i].categoryname) && (this.model.selectedMedia == null || this.model.selectedMedia == items[i].medianame)){
-            for( var k = 0 ; k < responseData.length ; k++ ) {
-              if( (responseData[k].categoryname == items[i].categoryname) ) {
-                responseData[k].totalcouponredemption += items[i].totalcouponredemption
-                break
-              }
-            }
-            
-            if( k == responseData.length && items[i].totalcouponredemption != 0 ) {
-              var item={
-                categoryname:items[i].categoryname,
-                medianame: items[i].medianame,
-                totalcouponredemption:items[i].totalcouponredemption
-              }
-              responseData.push(item)
-            }
-          }
-        }
+      if (this.groupByField == 'categoryname') {
+        responseData = this.getDataForCategories(items);
+      }
+      else if (this.groupByField == 'medianame') {
+        responseData = this.getDataForMediaTypes(items);
       }
 
 
       var svg = d3.select('#pieChart').attr('width', 800).html(''),
         width = +svg.attr('width'),
         height = +svg.attr('height'),
-        radius = Math.min(width/2, height) / 2
+        radius = Math.min(width / 2, height) / 2
       var g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + height / 2 + ')')
 
       var color = d3.scaleOrdinal([
@@ -86,54 +75,60 @@ export default {
         '#961018',
         '#009999',
         '#999900'
-        ])
+      ])
 
       var lineHeight = 16
       var total = 0
 
       var pie = d3.pie()
         .sort(null)
-        .value(function(d) { return d.totalcouponredemption })
+        .value(function (d) {
+          return d.totalcouponredemption
+        })
 
       var path = d3.arc()
         .outerRadius(radius - 10)
         .innerRadius(0)
 
       var arc = g.selectAll('.arc')
-          .data(pie(responseData))
-          .enter().append('g')
-          .attr('class', 'arc')
+        .data(pie(responseData))
+        .enter().append('g')
+        .attr('class', 'arc')
 
-      for ( i = 0; i < responseData.length; i++ ) {
+      for (i = 0; i < responseData.length; i++) {
         total += responseData[i].totalcouponredemption
       }
 
+      var groupBy = this.groupByField
       arc.append('path')
         .attr('d', path)
         .attr('class', 'path')
-        .attr('fill', function(d) { return color(d.data.categoryname) })
+        .attr('fill', function (d) {
+          //return color(d.data.categoryname)
+          return color(d.data[groupBy])
+        })
 
       g.selectAll('.arc')
         .on('mouseover', piemouseover)
         .on('mouseout', piemouseout)
 
-      function piemouseover (d) {
+      function piemouseover(d) {
         nch.model.selectedCategory = d.data.categoryname
         nch.model.selectedMedia = null
       }
 
-      function piemouseout (d) {
+      function piemouseout(d) {
         nch.model.selectedCategory = null
       }
 
       g = svg.append('g').attr('transform', 'translate(' + (width / 2 ) + ',' + 0 + ')')
 
       var list = g.selectAll('.list')
-          .data(responseData)
-          .enter().append('g')
-          .attr('class', 'list')
+        .data(responseData)
+        .enter().append('g')
+        .attr('class', 'list')
 
-      i = 0
+      var i = 0
 
       list.append('rect')
         .attr('x', 5)
@@ -142,7 +137,11 @@ export default {
         })
         .attr('width', 12)
         .attr('height', 12)
-        .attr('fill', function(d) { return color(d.categoryname) })
+        .attr('fill', function (d) {
+          //return color(d.categoryname)
+          return color(d[groupBy])
+
+        })
 
       i = 0
 
@@ -152,8 +151,9 @@ export default {
           i++
           return 20 + i * lineHeight
         })
-        .text( function (d) {
-          return (d.categoryname)
+        .text(function (d) {
+          //return (d.categoryname)
+          return (d[groupBy])
         })
 
       i = 0
@@ -164,7 +164,7 @@ export default {
           i++
           return 20 + i * lineHeight
         })
-        .text( function (d) {
+        .text(function (d) {
           return d3.format(',.0f')(d.totalcouponredemption)
         })
 
@@ -176,21 +176,79 @@ export default {
           i++
           return 20 + i * lineHeight
         })
-        .text( function (d) {
-          return d3.format('.0%')(d.totalcouponredemption/total)
+        .text(function (d) {
+          return d3.format('.0%')(d.totalcouponredemption / total)
         })
 
       i = 1
       j = 1
 
-      g.append('line').attr('y1', 23).attr('y2', 23).attr('x1', 0).attr('x2', width/2).attr('stroke', 'grey')
+      g.append('line').attr('y1', 23).attr('y2', 23).attr('x1', 0).attr('x2', width / 2).attr('stroke', 'grey')
 
       list.append('line')
-        .attr('y1', function() { return 23 + i++ * lineHeight })
-        .attr('y2', function() { return 23 + j++ * lineHeight })
+        .attr('y1', function () {
+          return 23 + i++ * lineHeight
+        })
+        .attr('y2', function () {
+          return 23 + j++ * lineHeight
+        })
         .attr('x1', 0)
-        .attr('x2', width/2)
+        .attr('x2', width / 2)
         .attr('stroke', 'grey')
+    },
+
+    getDataForCategories(items) {
+      var responseData = []
+
+      for (var i = 0; i < items.length; i++) {
+
+        for (var j = 0; j < this.model.selectedCategories.length; j++) {
+          if ((this.model.selectedCategories[j] == items[i].categoryname) && (this.model.selectedMedia == null || this.model.selectedMedia == items[i].medianame)) {
+            for (var k = 0; k < responseData.length; k++) {
+              if ((responseData[k].categoryname == items[i].categoryname)) {
+                responseData[k].totalcouponredemption += items[i].totalcouponredemption
+                break
+              }
+            }
+
+            if (k == responseData.length && items[i].totalcouponredemption != 0) {
+              var item = {
+                categoryname: items[i].categoryname,
+                medianame: items[i].medianame,
+                totalcouponredemption: items[i].totalcouponredemption
+              }
+              responseData.push(item)
+            }
+          }
+        }
+      }
+
+      return responseData;
+    },
+
+    getDataForMediaTypes(items) {
+      var responseData = []
+
+      for (var i = 0; i < items.length; i++) {
+
+        for (var k = 0; k < responseData.length; k++) {
+          if ((responseData[k].medianame == items[i].medianame)) {
+            responseData[k].totalcouponredemption += items[i].totalcouponredemption
+            break
+          }
+        }
+
+        if (k == responseData.length && items[i].totalcouponredemption != 0) {
+          var item = {
+            medianame: items[i].medianame,
+            totalcouponredemption: items[i].totalcouponredemption
+          }
+          responseData.push(item)
+        }
+      }
+
+      return responseData;
     }
+
   }
 }
