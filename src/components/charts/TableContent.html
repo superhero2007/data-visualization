@@ -17,20 +17,20 @@
       <tr class="t-body">
         <td class="text-left categoryName">{{currentManufacturer}}</td>
         <td class="empty"></td>
-        <template v-if="data.manufacturer">
-          <td v-for="(node, i) in media" v-if="data.manufacturer[node]" v-bind:class="{border_left: i==0, border_right: i==4}">{{data.manufacturer[node]}}</td>
-          <td colspan="" class="border_left border_right" v-for="node in media" v-else>-</td>
+        <template v-for="(node, i) in media" v-if="data.manufacturer">
+          <td v-if="data.manufacturer[node]" v-bind:class="{border_left: i==0, border_right: i==4}">{{data.manufacturer[node]}}</td>
+          <td v-bind:class="{border_left: i==0, border_right: i==4}" v-else>-</td>
         </template>
-        <template v-else="">
-          <td class="border_left border_right" colspan="5">No Data</td>
+        <template v-if="data.manufacturer == null">
+          <td class="border_left border_right" :colspan="media.length">No Data</td>
         </template>
         <td class="empty"></td>
-        <template v-if="data.manufacturer">
-          <td v-for="(node, i) in media" v-if="data.manufacturer[node]" v-bind:class="{border_left: i==0, border_right: i==4}">{{data.manufacturer[node]}}</td>
-          <td v-for="(node, i) in media" v-else="data.manufacturer[node]" v-bind:class="{border_left: i==0, border_right: i==4}">-</td>
+        <template v-for="(node, i) in media" v-if="data.manufacturer">
+          <td v-if="data.manufacturer[node]" v-bind:class="{border_left: i==0, border_right: i==4}">{{data.manufacturer[node]}}</td>
+          <td v-bind:class="{border_left: i==0, border_right: i==4}" v-else>-</td>
         </template>
-        <template v-else="">
-          <td class="border_left border_right" colspan="5">No Data</td>
+        <template v-if="data.manufacturer == null">
+          <td class="border_left border_right" :colspan="media.length">No Data</td>
         </template>
       </tr>
       <tr class="even">
