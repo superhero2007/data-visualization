@@ -25,6 +25,7 @@ export default {
   },
   mounted() {
     services.loadCombinedData();
+    services.getTableData(['Yogurt', 'Eggs']).then( this.renderTable ).catch( (message) => { console.log('DynamicTable promise catch:' + message) });
   },
   methods: {
     renderTable (response) {

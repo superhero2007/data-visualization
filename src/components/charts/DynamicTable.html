@@ -1,11 +1,11 @@
 <div class="dynamic-table">
   <div class="content-header row">
-    <span class="title col-lg-6 no-padding">
+    <span class="title no-padding">
       Redemption Percentage by Media Type
     </span>
 
-    <div class="col-lg-5">
-      <select class="">
+    <div class="col-lg-6">
+      <select>
         <option value selected>Media Type</option>
       </select>
       <button type="button" class="filter btn btn-default" aria-label="Right Align" @click="isShow = true">
@@ -15,7 +15,7 @@
       <filter-modal :show="isShow" :onClose="hideModal" :data="categories" :onSave="saveModal"></filter-modal>
     </div>
 
-    <span class="download col-lg-1 no-padding">
+    <span class="download col-lg-1 no-padding right">
       <i class="fa fa-download fa-pull-right" aria-hidden="true"></i>
     </span>
   </div>
@@ -24,4 +24,3 @@
     <table-content :datas="tableData"></table-content>
   </div>
 </div>
-
