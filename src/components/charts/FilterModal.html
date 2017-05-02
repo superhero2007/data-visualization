@@ -18,7 +18,7 @@
       <div class="modal-body">
         <slot name="body">
           <div class="row">
-            <div class="col-lg-4" v-for="(category, i) in data">
+            <div class="col-lg-6" v-for="(category, i) in data">
               <input type="checkbox" v-model="comparisonvalue" :id="i" :value="category.categoryname" />
               <label :for="i">{{category.categoryname}}</label>
             </div>

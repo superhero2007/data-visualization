@@ -76,7 +76,7 @@ select:focus{
 }
 
 .modal-container {
-  width: 1200px;
+  width: 800px;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 2px;
@@ -102,7 +102,7 @@ select:focus{
 .modal-body {
   position: relative;
   padding: 15px 40px;
-  height: 600px;
+  height: 400px;
   overflow: auto;
 }
 
@@ -116,9 +116,8 @@ select:focus{
   transform: scale(1.1);
 }
 
-label{font-size: 12px; cursor: pointer;}
+label{color: #4d92df; font-size: 12px; cursor: pointer;}
 input[type=checkbox] { display:none; } /* to hide the checkbox itself */
-input[type=checkbox]:checked + label {color: #4d92df}
 input[type=checkbox] + label:before {font-family: FontAwesome; display: inline-block;}
 input[type=checkbox] + label:before { content: "\f0c8"; } /* unchecked icon */
 input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
