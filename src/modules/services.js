@@ -162,7 +162,6 @@ var services = {
           }
         })
     })
-
   },
 
   getBipartiteData: function() {
@@ -173,7 +172,7 @@ var services = {
 
           if (response.status == 200) {
 
-            var returnvalue=[]
+            var returnvsdfalue=[]
             var redemptionData = JSON.parse(response.text)
             var items = redemptionData['_items']
 
@@ -200,8 +199,8 @@ var services = {
           if (response.status == 200) {
             let items = JSON.parse(response.text)['_items']
             let data = []
-            let temp = {}
             filters.forEach(function (filter) {
+              let temp = {}
               temp.category = filter
               let value = nch.model.combinedData.filter(function(d) { return d.category == filter })
               if(value[0]){

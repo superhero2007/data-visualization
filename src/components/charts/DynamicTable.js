@@ -29,7 +29,6 @@ export default {
   methods: {
     renderTable (response) {
       this.tableData = response;
-      console.log(response);
     },
     hideModal: function() {
       this.isShow = false;
