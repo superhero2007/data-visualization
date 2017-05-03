@@ -52,13 +52,12 @@ export default {
       var g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + height / 2 + ')')
 
       var color = d3.scaleOrdinal([
-        '#98abc5',
-        '#8a89a6',
-        '#7b6888',
-        '#6b486b',
-        '#a05d56',
-        '#d0743c',
-        '#ff8c00',
+        '#d62024',
+        '#70ccdd',
+        '#f07a20',
+        '#2bb34b',
+        '#cc449a',
+        '#2a3088',
         '#3366CC',
         '#DC3912',
         '#109618',
@@ -74,10 +73,11 @@ export default {
         '#39DC12',
         '#961018',
         '#009999',
-        '#999900'
+        '#999900',
+        '#7b6888'
       ])
 
-      var lineHeight = 16
+      var lineHeight = 40
       var total = 0
 
       var pie = d3.pie()
@@ -90,6 +90,10 @@ export default {
         .outerRadius(radius - 10)
         .innerRadius(0)
 
+      var label = d3.arc()
+      .outerRadius(radius - 80)
+      .innerRadius(radius - 80);
+
       var arc = g.selectAll('.arc')
         .data(pie(responseData))
         .enter().append('g')
@@ -100,6 +104,7 @@ export default {
       }
 
       var groupBy = this.groupByField
+
       arc.append('path')
         .attr('d', path)
         .attr('class', 'path')
@@ -107,6 +112,19 @@ export default {
           //return color(d.data.categoryname)
           return color(d.data[groupBy])
         })
+
+
+      arc.append("text")
+        .attr("font-weight", "bold")
+        .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")" })
+        .text(function(d) { return d3.format('.0%')(d.data.totalcouponredemption / total) })
+        .attr("fill","white")
+
+      arc.append("circle")
+        .attr("r", radius-10)
+        .attr("fill", "transparent")
+        .attr("stroke", "white")
+        .attr("stroke-width", "3px")
 
       g.selectAll('.arc')
         .on('mouseover', piemouseover)
@@ -128,73 +146,78 @@ export default {
         .enter().append('g')
         .attr('class', 'list')
 
-      var i = 0
+      var i = 0, j
 
-      list.append('rect')
-        .attr('x', 5)
-        .attr('y', function (d) {
-          return 25 + i++ * lineHeight
+      g.append("g")
+        .append("text")
+        .attr("x", 200)
+        .attr("y", 20)
+        .attr("dy", "0.32em")
+        .attr("fill", "#000")
+        .attr("font-weight", "bold")
+        .attr("text-anchor", "middle")
+        .text("Media Type Legend")
+
+      list.append('circle')
+        .attr("r", 15)
+        .attr("cx", 40)
+        .attr("cy", function (d, i) {
+          return 65 + i * lineHeight
         })
-        .attr('width', 12)
-        .attr('height', 12)
+        .attr("stroke", "white")
+        .attr("stroke-width", "3px")
         .attr('fill', function (d) {
           //return color(d.categoryname)
           return color(d[groupBy])
 
         })
 
-      i = 0
-
       list.append('text')
-        .attr('x', 30)
-        .attr('y', function (d) {
-          i++
-          return 20 + i * lineHeight
+        .attr('x', 70)
+        .attr('y', function (d, i) {
+          return 70 + i * lineHeight
         })
+        .attr("font-weight", "bold")
         .text(function (d) {
           //return (d.categoryname)
           return (d[groupBy])
         })
 
-      i = 0
-
-      list.append('text')
-        .attr('x', 300)
-        .attr('y', function (d) {
-          i++
-          return 20 + i * lineHeight
+       list.append('text')
+        .attr('x', 330)
+        .attr('y', function (d, i) {
+          return 70 + i * lineHeight
         })
+        .attr("font-weight", "bold")
         .text(function (d) {
           return d3.format(',.0f')(d.totalcouponredemption)
         })
+        .attr("text-anchor", "end")
 
-      i = 0
-
+      
       list.append('text')
-        .attr('x', 360)
-        .attr('y', function (d) {
-          i++
-          return 20 + i * lineHeight
+        .attr('x', 390)
+        .attr('y', function (d, i) {
+          return 70 + i * lineHeight
         })
+        .attr("font-weight", "bold")
         .text(function (d) {
           return d3.format('.0%')(d.totalcouponredemption / total)
         })
+        .attr("text-anchor", "end")
 
-      i = 1
-      j = 1
-
-      g.append('line').attr('y1', 23).attr('y2', 23).attr('x1', 0).attr('x2', width / 2).attr('stroke', 'grey')
 
       list.append('line')
-        .attr('y1', function () {
-          return 23 + i++ * lineHeight
+        .attr('y1', function (d, i) {
+          return 85 + i * lineHeight
         })
-        .attr('y2', function () {
-          return 23 + j++ * lineHeight
+        .attr('y2', function (d, i) {
+          return 85 + i * lineHeight
         })
-        .attr('x1', 0)
+        .attr('x1', 70)
         .attr('x2', width / 2)
         .attr('stroke', 'grey')
+        .style("stroke-dasharray","5,5")
     },
 
     getDataForCategories(items) {
