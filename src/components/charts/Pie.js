@@ -90,7 +90,7 @@ export default {
         .innerRadius(0)
 
       var out = d3.arc()
-        .outerRadius(radius - 5)
+        .outerRadius(radius - 6)
         .innerRadius(0)
 
       var label = d3.arc()
@@ -222,7 +222,7 @@ export default {
         .attr('y2', function (d, i) {
           return 85 + i * lineHeight
         })
-        .attr('x1', 40)
+        .attr('x1', 20)
         .attr('x2', width / 2)
         .attr('stroke', 'grey')
         .style("stroke-dasharray","5,5")
