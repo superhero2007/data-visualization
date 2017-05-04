@@ -48,7 +48,7 @@ export default {
         width = +svg.attr('width'),
         height = +svg.attr('height'),
         radius = Math.min(width / 2, height) / 2.5
-      var g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + height / 2 + ')')
+      var g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + ( height / 2 - 30) + ')')
 
       var color = d3.scaleOrdinal([
         '#d62024',
