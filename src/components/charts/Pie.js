@@ -44,11 +44,10 @@ export default {
         responseData = this.getDataForMediaTypes(items);
       }
 
-
       var svg = d3.select('#pieChart').attr('width', 800).html(''),
         width = +svg.attr('width'),
         height = +svg.attr('height'),
-        radius = Math.min(width / 2, height) / 2
+        radius = Math.min(width / 2, height) / 2.5
       var g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + height / 2 + ')')
 
       var color = d3.scaleOrdinal([
@@ -90,6 +89,10 @@ export default {
         .outerRadius(radius - 10)
         .innerRadius(0)
 
+      var out = d3.arc()
+        .outerRadius(radius - 5)
+        .innerRadius(0)
+
       var label = d3.arc()
       .outerRadius(radius - 80)
       .innerRadius(radius - 80);
@@ -106,6 +109,11 @@ export default {
       var groupBy = this.groupByField
 
       arc.append('path')
+        .attr('d', out)
+        .attr('class', 'path')
+        .attr('fill', 'white')
+
+      arc.append('path')
         .attr('d', path)
         .attr('class', 'path')
         .attr('fill', function (d) {
@@ -120,11 +128,11 @@ export default {
         .text(function(d) { return d3.format('.0%')(d.data.totalcouponredemption / total) })
         .attr("fill","white")
 
-      arc.append("circle")
-        .attr("r", radius-10)
-        .attr("fill", "transparent")
-        .attr("stroke", "white")
-        .attr("stroke-width", "3px")
+      // arc.append("circle")
+      //   .attr("r", radius-10)
+      //   .attr("fill", "transparent")
+      //   .attr("stroke", "white")
+      //   .attr("stroke-width", "3px")
 
       g.selectAll('.arc')
         .on('mouseover', piemouseover)
@@ -160,9 +168,9 @@ export default {
 
       list.append('circle')
         .attr("r", 15)
-        .attr("cx", 40)
+        .attr("cx", 0)
         .attr("cy", function (d, i) {
-          return 65 + i * lineHeight
+          return 70 + i * lineHeight
         })
         .attr("stroke", "white")
         .attr("stroke-width", "3px")
@@ -173,7 +181,7 @@ export default {
         })
 
       list.append('text')
-        .attr('x', 70)
+        .attr('x', 20)
         .attr('y', function (d, i) {
           return 70 + i * lineHeight
         })
@@ -184,7 +192,7 @@ export default {
         })
 
        list.append('text')
-        .attr('x', 330)
+        .attr('x', 320)
         .attr('y', function (d, i) {
           return 70 + i * lineHeight
         })
@@ -196,7 +204,7 @@ export default {
 
       
       list.append('text')
-        .attr('x', 390)
+        .attr('x', 380)
         .attr('y', function (d, i) {
           return 70 + i * lineHeight
         })
@@ -214,7 +222,7 @@ export default {
         .attr('y2', function (d, i) {
           return 85 + i * lineHeight
         })
-        .attr('x1', 70)
+        .attr('x1', 40)
         .attr('x2', width / 2)
         .attr('stroke', 'grey')
         .style("stroke-dasharray","5,5")
