@@ -40,7 +40,7 @@ export default {
         var currentData = null
 
         for( var j = 0 ; j < this.model.selectedCategories.length ; j ++ ) {
-          if( (item['categoryname'] == this.model.selectedCategories[j]) && (this.model.selectedCategory == null || this.model.selectedCategory == item['categoryname']))
+          if( (item['categoryname'] == this.model.selectedCategories[j]) && (this.model.selectedCategory.value == '' || this.model.selectedCategory.value == item['categoryname']))
           {
             break
           }
@@ -136,7 +136,7 @@ export default {
         })
         .attr('width', x.bandwidth())
         .attr('height', function(d){
-          return (height - y(d.redempationValue)) * 0.9;
+          return (height - y(d.redempationValue)) * 0.9
         })
 
 
@@ -155,7 +155,7 @@ export default {
           return d3.format(',.0f')(d.redempationValue)
         })
 
-        if( this.model.selectedMedia == null )
+        if( this.model.selectedCategory.flag )
         {
           g.selectAll('.bar')
             .attr('y', height)
@@ -163,7 +163,7 @@ export default {
             .transition()
             .duration(1000)
             .attr('height', function(d){
-              return (height - y(d.redempationValue)) * 0.9;
+              return (height - y(d.redempationValue)) * 0.9
             })
             .attr('y', function (d) {
               return y(d.redempationValue) + (height - y(d.redempationValue)) * 0.1
@@ -183,12 +183,32 @@ export default {
           .on('mouseout', barmouseout)
       //})
       function barmouseover (d) {
-        nch.model.selectedMedia = d.name
-        nch.model.selectedCategory = null
+        if(nch.model.selectedMedia.value != d.name)
+        {
+          nch.model.selectedMedia = 
+          {
+            value: d.name,
+            flag: true
+          }
+          nch.model.selectedCategory =
+          {
+            value: '',
+            flag: false
+          }
+        }
       }
 
       function barmouseout (d) {
-        nch.model.selectedMedia = null
+        nch.model.selectedMedia = 
+        {
+          value: '',
+          flag: true
+        }
+        nch.model.selectedCategory =
+        {
+          value: '',
+          flag: false
+        }
       }
 
     }

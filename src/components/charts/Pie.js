@@ -22,7 +22,7 @@ export default {
   },
 
   mounted() {
-    console.log("Pie mounted: " + this.groupByField);
+    console.log('Pie mounted: ' + this.groupByField)
     services.getPieData().then((response) => {
       this.pieData = response
       this.render()
@@ -33,15 +33,15 @@ export default {
   methods: {
 
     render() {
-      var items = this.pieData;
+      var items = this.pieData
 
-      var responseData = [];
+      var responseData = []
 
       if (this.groupByField == 'categoryname') {
-        responseData = this.getDataForCategories(items);
+        responseData = this.getDataForCategories(items)
       }
       else if (this.groupByField == 'medianame') {
-        responseData = this.getDataForMediaTypes(items);
+        responseData = this.getDataForMediaTypes(items)
       }
 
       var svg = d3.select('#pieChart').attr('width', 800).html(''),
@@ -95,7 +95,7 @@ export default {
 
       var label = d3.arc()
       .outerRadius(radius - 80)
-      .innerRadius(radius - 80);
+      .innerRadius(radius - 80)
 
       var arc = g.selectAll('.arc')
         .data(pie(responseData))
@@ -122,29 +122,45 @@ export default {
         })
 
 
-      arc.append("text")
-        .attr("font-weight", "bold")
-        .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")" })
+      arc.append('text')
+        .attr('font-weight', 'bold')
+        .attr('transform', function(d) { return 'translate(' + label.centroid(d) + ')' })
         .text(function(d) { return d3.format('.0%')(d.data.totalcouponredemption / total) })
-        .attr("fill","white")
+        .attr('fill','white')
 
-      // arc.append("circle")
-      //   .attr("r", radius-10)
-      //   .attr("fill", "transparent")
-      //   .attr("stroke", "white")
-      //   .attr("stroke-width", "3px")
+      // arc.append('circle')
+      //   .attr('r', radius-10)
+      //   .attr('fill', 'transparent')
+      //   .attr('stroke', 'white')
+      //   .attr('stroke-width', '3px')
 
       g.selectAll('.arc')
         .on('mouseover', piemouseover)
         .on('mouseout', piemouseout)
 
       function piemouseover(d) {
-        nch.model.selectedCategory = d.data.categoryname
-        nch.model.selectedMedia = null
+        if(nch.model.selectedCategory.value != d.data.categoryname)
+        {
+          nch.model.selectedCategory = {
+            value: d.data.categoryname,
+            flag: true
+          }
+          nch.model.selectedMedia = {
+            value: '',
+            flag: false
+          }
+        }
       }
 
       function piemouseout(d) {
-        nch.model.selectedCategory = null
+        nch.model.selectedCategory = {
+          value: '',
+          flag: true
+        }
+        nch.model.selectedMedia = {
+          value: '',
+          flag: false
+        }
       }
 
       g = svg.append('g').attr('transform', 'translate(' + (width / 2 ) + ',' + 0 + ')')
@@ -156,24 +172,24 @@ export default {
 
       var i = 0, j
 
-      g.append("g")
-        .append("text")
-        .attr("x", 200)
-        .attr("y", 20)
-        .attr("dy", "0.32em")
-        .attr("fill", "#000")
-        .attr("font-weight", "bold")
-        .attr("text-anchor", "middle")
-        .text("Media Type Legend")
+      g.append('g')
+        .append('text')
+        .attr('x', 200)
+        .attr('y', 20)
+        .attr('dy', '0.32em')
+        .attr('fill', '#000')
+        .attr('font-weight', 'bold')
+        .attr('text-anchor', 'middle')
+        .text('Media Type Legend')
 
       list.append('circle')
-        .attr("r", 15)
-        .attr("cx", 0)
-        .attr("cy", function (d, i) {
+        .attr('r', 15)
+        .attr('cx', 0)
+        .attr('cy', function (d, i) {
           return 70 + i * lineHeight
         })
-        .attr("stroke", "white")
-        .attr("stroke-width", "3px")
+        .attr('stroke', 'white')
+        .attr('stroke-width', '3px')
         .attr('fill', function (d) {
           //return color(d.categoryname)
           return color(d[groupBy])
@@ -185,7 +201,7 @@ export default {
         .attr('y', function (d, i) {
           return 70 + i * lineHeight
         })
-        .attr("font-weight", "bold")
+        .attr('font-weight', 'bold')
         .text(function (d) {
           //return (d.categoryname)
           return (d[groupBy])
@@ -196,11 +212,11 @@ export default {
         .attr('y', function (d, i) {
           return 70 + i * lineHeight
         })
-        .attr("font-weight", "bold")
+        .attr('font-weight', 'bold')
         .text(function (d) {
           return d3.format(',.0f')(d.totalcouponredemption)
         })
-        .attr("text-anchor", "end")
+        .attr('text-anchor', 'end')
 
       
       list.append('text')
@@ -208,11 +224,11 @@ export default {
         .attr('y', function (d, i) {
           return 70 + i * lineHeight
         })
-        .attr("font-weight", "bold")
+        .attr('font-weight', 'bold')
         .text(function (d) {
           return d3.format('.0%')(d.totalcouponredemption / total)
         })
-        .attr("text-anchor", "end")
+        .attr('text-anchor', 'end')
 
 
       list.append('line')
@@ -225,7 +241,7 @@ export default {
         .attr('x1', 20)
         .attr('x2', width / 2)
         .attr('stroke', 'grey')
-        .style("stroke-dasharray","5,5")
+        .style('stroke-dasharray','5,5')
     },
 
     getDataForCategories(items) {
@@ -234,7 +250,7 @@ export default {
       for (var i = 0; i < items.length; i++) {
 
         for (var j = 0; j < this.model.selectedCategories.length; j++) {
-          if ((this.model.selectedCategories[j] == items[i].categoryname) && (this.model.selectedMedia == null || this.model.selectedMedia == items[i].medianame)) {
+          if ((this.model.selectedCategories[j] == items[i].categoryname) && (this.model.selectedMedia.value == '' || this.model.selectedMedia.value == items[i].medianame)) {
             for (var k = 0; k < responseData.length; k++) {
               if ((responseData[k].categoryname == items[i].categoryname)) {
                 responseData[k].totalcouponredemption += items[i].totalcouponredemption
@@ -254,7 +270,7 @@ export default {
         }
       }
 
-      return responseData;
+      return responseData
     },
 
     getDataForMediaTypes(items) {
@@ -278,7 +294,7 @@ export default {
         }
       }
 
-      return responseData;
+      return responseData
     }
 
   }

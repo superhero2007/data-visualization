@@ -7,8 +7,14 @@ var nch = {
     categories: [],
     selectedCategories: [],
     currentManufacturer: null,
-    selectedCategory: null,
-    selectedMedia: null
+    selectedCategory: {
+      value: "",
+      flag: false
+    },
+    selectedMedia: {
+      value: "",
+      flag: false
+    }
   }
 };
 
