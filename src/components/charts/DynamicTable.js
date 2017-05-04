@@ -23,22 +23,21 @@ export default {
       tableData: {}
     }
   },
-  mounted() {
-    services.loadCombinedData();
+  mounted () {
+    services.loadCombinedData()
+    services.getTableData(nch.model.selectedCategories).then( this.renderTable ).catch( (message) => { console.log('DynamicTable promise catch:' + message) })
   },
   methods: {
     renderTable (response) {
-      this.tableData = response;
+      this.tableData = response
     },
-    hideModal: function() {
-      this.isShow = false;
+    hideModal: function () {
+      this.isShow = false
     },
-    saveModal: function(lists) {
-      nch.model.selectedCategories = lists;
-      services.getTableData(lists).then( this.renderTable ).catch( (message) => { console.log('DynamicTable promise catch:' + message) });
-      this.isShow = false;
+    saveModal: function (lists) {
+      nch.model.selectedCategories = lists
+      services.getTableData(lists).then(this.renderTable).catch((message) => { console.log('DynamicTable promise catch:' + message) })
+      this.isShow = false
     }
   }
 }
-
-

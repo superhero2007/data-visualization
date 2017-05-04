@@ -16,17 +16,17 @@ export default {
   },
   data () {
     return {
-      comparisonvalue: []
+      comparisonvalue: nch.model.selectedCategories
     }
   },
   methods: {
     ok () {
-      let self = this;
-      this.onSave(self.comparisonvalue);
-      this.onClose();
+      let self = this
+      this.onSave(self.comparisonvalue)
+      this.onClose()
     },
     cancel () {
-      this.onClose();
+      this.onClose()
     }
   }
 }

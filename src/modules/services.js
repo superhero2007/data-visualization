@@ -45,39 +45,36 @@ var services = {
       })
   },
 
-  loadCombinedData: function() {
+  loadCombinedData: function () {
     http
       .get('/static/api/pie-chart.json')
       .end(function (error, response) {
-        if (response.status == 200) {
+        if (response.status === 200) {
           let items = JSON.parse(response.text)['_items']
 
           nch.model.combinedData = d3.values((d3.nest()
-              .key(function(d) { return d.categoryname; })
-              .key(function(d) { return d.medianame; })
-              .rollup(function(v) {return d3.mean(v, function(d) {return d.totalcouponredemption; }); })
-              .entries(items.filter(function(d) {return d.mfrname == nch.model.currentManufacturer }))
-          ).sort(function(a,b) {
-            if (a.key < b.key) return -1;
-            if (a.key > b.key) return 1;
-            return 0;
-          })).map(function(d) {
-            let object = {};
+              .key(function (d) { return d.categoryname })
+              .key(function (d) { return d.medianame })
+              .rollup(function (v) { return d3.mean(v, function (d) { return d.totalcouponredemption }) })
+              .entries(items.filter(function (d) { return d.mfrname === nch.model.currentManufacturer }))
+          ).sort(function (a, b) {
+            if (a.key < b.key) return -1
+            if (a.key > b.key) return 1
+            return 0
+          })).map(function (d) {
+            let object = {}
             object.category = d.key
-            object.values = {};
-            d.values.map(function(v) {
-              object.values[v.key] = d3.format("(.2f")(v.value);
-            });
-            return object;
-          });
+            object.values = {}
+            d.values.map(function (v) {
+              object.values[v.key] = d3.format('(.2f')(v.value)
+            })
+            return object
+          })
 
           nch.model.allMedaiNames = d3.values((d3.nest()
-            .key(function(d) { return d.medianame; })
-            .entries(items))).map(function (d) {
-            return d.key
-          })
-        }
-        else if (response.status == 401) {
+            .key(function (d) { return d.medianame })
+            .entries(items))).map(function (d) { return d.key })
+        } else if (response.status === 401) {
           console.log('user not authorized')
         }
       })
@@ -175,6 +172,7 @@ var services = {
             var returnvsdfalue=[]
             var redemptionData = JSON.parse(response.text)
             var items = redemptionData['_items']
+            var returnvalue = [];
 
             for( var i = 0 ; i < items.length ; i++ ) {
               var item = [items[i].medianame, items[i].storestate, items[i].totalcouponredemption, parseFloat(items[i].totalcouponredemeedvalue)]
@@ -195,35 +193,34 @@ var services = {
     return new Promise((resolve, reject) => {
       http
         .get('/static/api/pie-chart.json')
-        .end(function (error, response) {
-          if (response.status == 200) {
+        .end(function(error, response) {
+          if (response.status === 200) {
             let items = JSON.parse(response.text)['_items']
             let data = []
             filters.forEach(function (filter) {
               let temp = {}
               temp.category = filter
-              let value = nch.model.combinedData.filter(function(d) { return d.category == filter })
-              if(value[0]){
+              let value = nch.model.combinedData.filter(function (d) { return d.category === filter })
+              if (value[0]) {
                 temp.manufacturer = value[0].values
-              }else{
+              } else {
                 temp.manufacturer = null
               }
 
-              temp.comparables = {};
+              temp.comparables = {}
               d3.values((d3.nest()
-                .key(function(d) { return d.medianame; })
-                .rollup(function(v) { return d3.mean(v, function(d) { return d.totalcouponredemption; }); })
-                .entries(items.filter(function(d) { return d.categoryname != filter })))
-              ).map(function(v) {
-                temp.comparables[v.key] = d3.format("(.2f")(v.value)
-              });
+                .key(function (d) { return d.medianame })
+                .rollup(function (v) { return d3.mean(v, function (d) { return d.totalcouponredemption }) })
+                .entries(items.filter(function (d) { return d.categoryname !== filter })))
+              ).map(function (v) {
+                temp.comparables[v.key] = d3.format('(.2f')(v.value)
+              })
 
-              data.push(temp);
+              data.push(temp)
             })
 
-            resolve(data);
-          }
-          else if (response.status == 401) {
+            resolve(data)
+          } else if (response.status === 401) {
             console.log('user not authorized')
             reject('user not authorized')
           }
