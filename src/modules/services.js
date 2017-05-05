@@ -173,7 +173,7 @@ var services = {
 
           if (response.status == 200) {
 
-            var returnvsdfalue=[]
+            var returnvalue =[]
             var redemptionData = JSON.parse(response.text)
             var items = redemptionData['_items']
 
@@ -285,7 +285,7 @@ var services = {
             var redemptionData = JSON.parse(response.text)
             var items = redemptionData['_items']
             resolve(items)
-            
+
           }
           else if (response.status == 401) {
             console.log('user not authorized')
