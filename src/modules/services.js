@@ -9,6 +9,7 @@ require('../data/categories.json')
 require('../data/manufacturers.json')
 require('../data/redemption-data.json')
 require('../data/pie-chart.json')
+require('../data/stacked-bar-chart.json')
 require('../data/stacked-bar-example.tsv')
 
 var services = {
@@ -169,7 +170,7 @@ var services = {
 
           if (response.status == 200) {
 
-            var returnvsdfalue=[]
+            var returnvalue =[]
             var redemptionData = JSON.parse(response.text)
             var items = redemptionData['_items']
             var returnvalue = [];
@@ -260,6 +261,28 @@ var services = {
             // }
             //
             // resolve(responseData)
+          }
+          else if (response.status == 401) {
+            console.log('user not authorized')
+            reject('user not authorized')
+          }
+        });
+    });
+  },
+
+  getStackedBarChartData: function() {
+
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/stacked-bar-chart.json')
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+
+            var redemptionData = JSON.parse(response.text)
+            var items = redemptionData['_items']
+            resolve(items)
+
           }
           else if (response.status == 401) {
             console.log('user not authorized')
