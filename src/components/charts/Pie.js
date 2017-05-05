@@ -128,13 +128,18 @@ export default {
         .text(function(d) { return d3.format('.0%')(d.data.totalcouponredemption / total) })
         .attr('fill','white')
 
+      arc.append('path')
+        .attr('d', out)
+        .attr('class', 'out')
+        .attr('fill', 'transparent')
+
       // arc.append('circle')
       //   .attr('r', radius-10)
       //   .attr('fill', 'transparent')
       //   .attr('stroke', 'white')
       //   .attr('stroke-width', '3px')
 
-      g.selectAll('.arc')
+      g.selectAll('.out')
         .on('mouseover', piemouseover)
         .on('mouseout', piemouseout)
 
