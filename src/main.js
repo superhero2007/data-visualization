@@ -18,6 +18,7 @@ nch.utils = utils;
 
 //services.loadCategories();
 services.loadManufacturers();
+services.loadClassOfTrade();
 
 // ****************************************
 // simple test data, will be removed

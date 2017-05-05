@@ -22,9 +22,7 @@ export default {
   methods: {
 
     render( response ) {
-      console.log( "Geo.render" );
       var stateMap = response.states;
-      console.log(stateMap);
       var section = response.max/4;
       console.log("max: " + response.max);
       console.log("section: " + section);

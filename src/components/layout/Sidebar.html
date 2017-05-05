@@ -3,61 +3,61 @@
     <li v-bind:class="{ active: $router.currentRoute.name == 'Dashboard' }">
       <router-link to="/"><i class="fa fa-2x fa-tachometer" aria-hidden="true"></i><span class="sidebar-link">Dashboard</span></router-link>
       <ul v-bind:class="{ active: $router.currentRoute.name == 'Dashboard' }" class="sidebar__nav-submenu">
-        <li>
-          <a href="#"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i>Redemption by State</a>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i><span>Redemption by State</span></a>
         </li>
-        <li>
-          <a href="#"><i class="fa fa-2x fa-table" aria-hidden="true"></i>Redemption by Percentage</a>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-table" aria-hidden="true"></i><span>Redemption by Percentage</span></a>
         </li>
       </ul>
     </li>
     <li v-bind:class="{ active: $router.currentRoute.name == 'FaceValue' }">
       <router-link to="/face-value"><i class="fa fa-2x fa-dollar" aria-hidden="true"></i><span class="sidebar-link">Face Value</span></router-link>
       <ul v-bind:class="{ active: $router.currentRoute.name == 'FaceValue' }" class="sidebar__nav-submenu">
-        <li>
-          <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i>Face value range Mfr vs. Comparables</a>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Face value range Mfr vs. Comparables</span></a>
         </li>
-        <li>
-          <a href="#"><i class="fa fa-2x fa-balance-scale" aria-hidden="true"></i>Avg Face value per unit range Mfr vs. Comparables</a>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-balance-scale" aria-hidden="true"></i><span>Avg Face value per unit range Mfr vs. Comparables</span></a>
         </li>
       </ul>
     </li>
     <li v-bind:class="{ active: $router.currentRoute.name == 'ProductMoved' }">
       <router-link to="/product-moved"><i class="fa fa-2x fa-cubes" aria-hidden="true"></i><span class="sidebar-link">Product Moved</span></router-link>
       <ul v-bind:class="{ active: $router.currentRoute.name == 'ProductMoved' }" class="sidebar__nav-submenu">
-        <li>
-          <a href="#"><i class="fa fa-2x fa-calendar" aria-hidden="true"></i>YoY Product Moved Indexed to Category</a>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-calendar" aria-hidden="true"></i><span>YoY Product Moved Indexed to Category</span></a>
         </li>
       </ul>
     </li>
     <li v-bind:class="{ active: $router.currentRoute.name == 'Geographic' }">
       <router-link to="/geographic/bipartite"><i class="fa fa-2x fa-globe" aria-hidden="true"></i><span class="sidebar-link">Geographic</span></router-link>
       <ul v-bind:class="{ active: $router.currentRoute.name == 'Geographic' }" class="sidebar__nav-submenu">
-        <li>
-          <router-link to="/geographic/bipartite"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i>Redemption Count by State</router-link>
+        <li class="sidebar__nav-submenu-item">
+          <router-link to="/geographic/bipartite"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Redemption Count by State</span></router-link>
         </li>
-        <li>
-          <router-link to="/geographic/state"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i>Avg Coupons Redeemed per Store by State Mfr vs. All Others</router-link>
+        <li class="sidebar__nav-submenu-item">
+          <router-link to="/geographic/state"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i><span>Avg Coupons Redeemed per Store by State Mfr vs. All Others</span></router-link>
         </li>
-        <li>
-          <a href="#"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i>Avg Coupons Redeemed per Store by Market Mfr vs. All Others</a>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i><span>Avg Coupons Redeemed per Store by Market Mfr vs. All Others</span></a>
         </li>
       </ul>
     </li>
-    <li v-bind:class="{ active: $router.currentRoute.name == 'PieCharts' }">
-      <router-link to="/pie-charts"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i><span class="sidebar-link">Pie Charts</span></router-link>
-      <ul v-bind:class="{ active: $router.currentRoute.name == 'PieCharts' }" class="sidebar__nav-submenu">
-        <li>
-          <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i>Dashboard Summary</a>
+    <li v-bind:class="{ active: $router.currentRoute.name == 'Media' }">
+      <router-link to="/media"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i><span class="sidebar-link">Media</span></router-link>
+      <ul v-bind:class="{ active: $router.currentRoute.name == 'Media' }" class="sidebar__nav-submenu">
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Dashboard Summary</span></a>
         </li>
-        <li>
-          <a href="#"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i>Redemption by State</a>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i><span>Redemption by State</span></a>
         </li>
-        <li>
-          <a href="#"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i>Redemption by County</a>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i><span>Redemption by County</span></a>
         </li>
-        <li>
-          <a href="#"><i class="fa fa-2x fa-table" aria-hidden="true"></i>Redemption by Media Type</a>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-table" aria-hidden="true"></i><span>Redemption by Media Type</span></a>
         </li>
       </ul>
     </li>

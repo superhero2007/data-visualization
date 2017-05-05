@@ -4,7 +4,7 @@ import Dashboard from '../components/views/Dashboard'
 import FaceValue from '../components/views/FaceValue'
 import ProductMoved from '../components/views/ProductMoved'
 import BilateralData from '../components/views/BilateralData'
-import PieCharts from '../components/views/PieCharts'
+import Media from '../components/views/Media'
 import Geographic from '../components/views/Geographic'
 
 import Home from '../Home'
@@ -34,9 +34,9 @@ export default new Router({
       component: BilateralData
     },
     {
-      path: '/pie-charts',
-      name: 'PieCharts',
-      component: PieCharts
+      path: '/media',
+      name: 'Media',
+      component: Media
     },
     {
       path: '/geographic/:view',

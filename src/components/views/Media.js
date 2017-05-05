@@ -7,7 +7,7 @@ import PageFooter from '../layout/PageFooter'
 
 export default {
   name: 'piecharts',
-  template: require('components/views/PieCharts.html'),
+  template: require('components/views/Media.html'),
   components: {
     Navbar,
     Sidebar,

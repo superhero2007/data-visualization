@@ -1,0 +1,17 @@
+{
+  "_items": [
+    { "classoftrade": "CLEARING HOUSE" },
+    { "classoftrade": "LARGE SUPERMARKET"},
+    { "classoftrade": "MISCELLANEOUS CLASS"},
+    { "classoftrade": "ECOMMERCE"},
+    { "classoftrade": "VARIETY/DISCOUNT"},
+    { "classoftrade": "PET SPLY/VET/KENNEL"},
+    { "classoftrade": "MASS MERCHANDISER"},
+    { "classoftrade": "CONVENIENCE STORE"},
+    { "classoftrade": "LARGE DRUG/PHARM"},
+    {"classoftrade": "VIDEO/ELECTRONICS"},
+    { "classoftrade": "HEALTH & BEAUTY"},
+    { "classoftrade": "DEPARTMENT STORE"},
+    { "classoftrade": "MILITARY"}
+  ]
+}

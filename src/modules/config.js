@@ -14,7 +14,8 @@ var nch = {
     selectedMedia: {
       value: "",
       flag: false
-    }
+    },
+    classOfTradeValues: []
   }
 };
 

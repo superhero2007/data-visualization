@@ -28,6 +28,11 @@
   margin-left: -20px;
 }
 
+.sidebar__nav > li > a > .fa {
+  width: 40px;
+  text-align: center;
+}
+
 .sidebar__nav > li > a,
 .sidebar__nav > li > a:focus {
   padding-right: 20px;
@@ -67,39 +72,66 @@
   transition: max-height .5s cubic-bezier(0, 1.05, 0, 1), visibility .2s;
   border-right: 9px solid $blue;
 
-  li {
-    padding: 0;
-    margin: 0;
-
-    .fa {
-      color: #7c8c90;
-      font-size: 14px;
-      padding-right: 10px;
-    }
-
-    a {
-      color: #8edbff;
-
-      &:hover .fa,
-      &:active .fa {
-        color: #8edbff;
-      }
-    }
-  }
-
   &.active {
     max-height: 500px;
     visibility: visible;
     padding: 15px;
     transition: max-height .5s ease-in;
 
-    li {
+    .sidebar__nav-submenu-item {
       padding-top: 5px;
       padding-bottom: 5px;
       font-size: 14px;
     }
   }
 }
+
+.sidebar__nav-submenu-item {
+  padding: 0;
+  margin: 0;
+
+  a {
+    @include clearfix;
+    display: flex;
+    justify-content: flex-start;
+    flex: 1;
+
+    > span {
+      color: #fff;
+      transition: color .3s;
+      display: block;
+    }
+
+    > .fa {
+      color: #7c8c90;
+      font-size: 14px;
+      margin-right: 10px;
+      padding-top: 2px;
+      // width: 25px;
+      max-width: 16px;
+      min-width: 16px;
+      text-align: center;
+      transition: color .3s;
+      display: block;
+    }
+
+    &:hover,
+    &:active,
+    &:visited,
+    &:focus {
+      text-decoration: none;
+    }
+
+    &:hover,
+    &:active {
+      .fa,
+      span {
+        color: #8edbff;
+      }
+    }
+  }
+}
+
 .sidebar-link {
   position: relative;
   left: 1em;
@@ -107,6 +139,6 @@
 }
 
 .navbar-brand {
-  color: #2C2C2C !important;
+  color: #2c2c2c !important;
   font-weight: bold;
 }

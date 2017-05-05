@@ -53,8 +53,8 @@ $parallax-ios         : true !default;
 }
 
 @mixin parallax(
-  $distance    : 0,
-  $perspective : $parallax-perspective
+  $distance: 0,
+  $perspective: $parallax-perspective
   ) {
   transform:
     translateZ($distance * $perspective * 1px)
