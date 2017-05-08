@@ -22,7 +22,8 @@
     "superagent": "3.3.2",
     "topojson": "3.0.0",
     "vue": "^2.2.2",
-    "vue-router": "^2.3.0"
+    "vue-router": "^2.3.0",
+    "vue-select": "github:sagalbot/vue-select"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

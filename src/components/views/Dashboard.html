@@ -5,6 +5,7 @@
     <sidebar></sidebar>
     <div class="main">
       <dashboard-summary></dashboard-summary>
+      <v-select v-model="model.selectedCategories" multiple :options="categorynames"></v-select>
       <div class="page-content">
         <p class="page-header">Redemption by state</p>
         <div class="row" style="margin-left: 0; margin-right: 0">
