@@ -107,64 +107,97 @@ export default {
       }
 
       var groupBy = this.groupByField
+      console.log(groupBy, this.model.selectedMedia.value,this.model.selectedCategory.value)
+      if(groupBy == 'medianame' && this.model.selectedMedia.value != '')
+      {
+        arc.append('circle')
+          .attr('r', function (d) {
+            if(d.data.medianame == nch.model.selectedMedia.value)
+              return radius-10
+            else
+              return 0
+          })
+          .attr('fill', function (d) {
+              return color(d.data[groupBy])
+          })
+          .attr('stroke', 'white')
+          .attr('stroke-width', '3px')
+        arc.append('text')
+          .attr('font-size', '20')
+          .attr('transform', function(d) { return 'translate(0, -20)' })
+          .text(this.model.selectedMedia.value)
+          .attr('fill','white')
+          .attr('text-anchor', 'middle')
 
-      arc.append('path')
-        .attr('d', out)
-        .attr('class', 'path')
-        .attr('fill', 'white')
+        arc.append('text')
+          .attr('font-weight', 'bold')
+          .attr('font-size', '40')
+          .attr('transform', function(d) { return 'translate(0, 15)' })
+          .text('100%')
+          .attr('fill','white')
+          .attr('text-anchor', 'middle')
+      }
+      else
+      {
+        arc.append('path')
+          .attr('d', out)
+          .attr('class', 'path')
+          .attr('fill', 'white')
 
-      arc.append('path')
-        .attr('d', path)
-        .attr('class', 'path')
-        .attr('fill', function (d) {
-          //return color(d.data.categoryname)
-          return color(d.data[groupBy])
-        })
+        arc.append('path')
+          .attr('d', path)
+          .attr('class', 'path')
+          .attr('fill', function (d) {
+            //return color(d.data.categoryname)
+            return color(d.data[groupBy])
+          })
 
 
-      arc.append('text')
-        .attr('font-weight', 'bold')
-        .attr('transform', function(d) { return 'translate(' + label.centroid(d) + ')' })
-        .text(function(d) { return d3.format('.0%')(d.data.totalcouponredemption / total) })
-        .attr('fill','white')
+        arc.append('text')
+          .attr('font-weight', 'bold')
+          .attr('transform', function(d) { return 'translate(' + label.centroid(d) + ')' })
+          .text(function(d) { return d3.format('.0%')(d.data.totalcouponredemption / total) })
+          .attr('fill','white')
 
-      arc.append('path')
-        .attr('d', out)
-        .attr('class', 'out')
-        .attr('fill', 'transparent')
+        arc.append('path')
+          .attr('d', out)
+          .attr('class', 'out')
+          .attr('fill', 'transparent')
+      
 
-      // arc.append('circle')
-      //   .attr('r', radius-10)
-      //   .attr('fill', 'transparent')
-      //   .attr('stroke', 'white')
-      //   .attr('stroke-width', '3px')
+        // arc.append('circle')
+        //   .attr('r', radius-10)
+        //   .attr('fill', 'transparent')
+        //   .attr('stroke', 'white')
+        //   .attr('stroke-width', '3px')
 
-      g.selectAll('.out')
-        .on('mouseover', piemouseover)
-        .on('mouseout', piemouseout)
+        g.selectAll('.out')
+          .on('mouseover', piemouseover)
+          .on('mouseout', piemouseout)
 
-      function piemouseover(d) {
-        if(nch.model.selectedCategory.value != d.data.categoryname)
-        {
+        function piemouseover(d) {
+          if(nch.model.selectedCategory.value != d.data.categoryname)
+          {
+            nch.model.selectedCategory = {
+              value: d.data.categoryname,
+              flag: true
+            }
+            nch.model.selectedMedia = {
+              value: '',
+              flag: false
+            }
+          }
+        }
+
+        function piemouseout(d) {
           nch.model.selectedCategory = {
-            value: d.data.categoryname,
+            value: '',
             flag: true
           }
           nch.model.selectedMedia = {
             value: '',
             flag: false
           }
-        }
-      }
-
-      function piemouseout(d) {
-        nch.model.selectedCategory = {
-          value: '',
-          flag: true
-        }
-        nch.model.selectedMedia = {
-          value: '',
-          flag: false
         }
       }
 
@@ -187,20 +220,7 @@ export default {
         .attr('text-anchor', 'middle')
         .text('Media Type Legend')
 
-      list.append('circle')
-        .attr('r', 15)
-        .attr('cx', 0)
-        .attr('cy', function (d, i) {
-          return 70 + i * lineHeight
-        })
-        .attr('stroke', 'white')
-        .attr('stroke-width', '3px')
-        .attr('fill', function (d) {
-          //return color(d.categoryname)
-          return color(d[groupBy])
-
-        })
-
+      
       list.append('text')
         .attr('x', 20)
         .attr('y', function (d, i) {
@@ -247,6 +267,88 @@ export default {
         .attr('x2', width / 2)
         .attr('stroke', 'grey')
         .style('stroke-dasharray','5,5')
+
+      list.append('rect')
+        .attr('rx', 10)
+        .attr('ry', 10)
+        .attr('y', function (d, i) {
+          return 55 + i * lineHeight
+        })
+        .attr('height', function (d, i) {
+          return lineHeight - 10
+        })
+        .attr('x', 0)
+        .attr('width', width / 2)
+        .attr('fill', function (d) {
+          //return color(d.categoryname)
+          return color(d[groupBy])
+        })
+        .attr('fill-opacity', function (d) {
+          if(groupBy == 'medianame' && nch.model.selectedMedia.value == d.medianame)
+            return 0.2
+          else
+            return 0
+        })
+
+      list.append('circle')
+        .attr('r', 15)
+        .attr('cx', 0)
+        .attr('cy', function (d, i) {
+          return 70 + i * lineHeight
+        })
+        .attr('stroke', 'white')
+        .attr('stroke-width', '3px')
+        .attr('fill', function (d) {
+          //return color(d.categoryname)
+          return color(d[groupBy])
+        })
+
+
+      g.selectAll('.list')
+        .on('mouseover', listmouseover)
+        .on('mouseout', listmouseout)
+
+      function listmouseover(d) {
+        if(typeof(d.categoryname)=='undefined')
+        {
+          if(nch.model.selectedMedia.value != d.medianame)
+          {
+            nch.model.selectedMedia = {
+              value: d.medianame,
+              flag: true
+            }
+            nch.model.selectedCategory = {
+              value: '',
+              flag: false
+            }
+          }
+        }
+        else
+        {
+          if(nch.model.selectedCategory.value != d.categoryname)
+          {
+            nch.model.selectedCategory = {
+              value: d.categoryname,
+              flag: true
+            }
+            nch.model.selectedMedia = {
+              value: '',
+              flag: false
+            }
+          }
+        }
+      }
+
+      function listmouseout(d) {
+        if(typeof(d.categoryname)=='undefined')
+        {
+          nch.model.selectedMedia.value = ''
+        }
+        else
+        {
+          nch.model.selectedCategory.value = ''
+        }
+      }
     },
 
     getDataForCategories(items) {
