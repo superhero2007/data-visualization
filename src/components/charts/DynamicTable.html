@@ -8,11 +8,6 @@
       <select>
         <option value selected>Media Type</option>
       </select>
-      <button type="button" class="filter btn btn-default" aria-label="Right Align" @click="isShow = true">
-        <i class="fa fa-sliders" aria-hidden="true"></i>
-        Categories
-      </button>
-      <filter-modal :show="isShow" :onClose="hideModal" :data="categories" :onSave="saveModal"></filter-modal>
     </div>
 
     <span class="download col-lg-1 no-padding right">

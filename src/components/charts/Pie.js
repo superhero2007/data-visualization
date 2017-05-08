@@ -15,7 +15,7 @@ export default {
 
   watch: {
     model: {
-      handler: function (val, oldVal) {
+      handler: function (newValue, oldValue) {
         this.render()
       }, deep: true
     }
@@ -218,7 +218,7 @@ export default {
         })
         .attr('text-anchor', 'end')
 
-      
+
       list.append('text')
         .attr('x', 380)
         .attr('y', function (d, i) {
