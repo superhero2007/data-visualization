@@ -7,7 +7,7 @@ export default {
       required: true,
       twoWay: false
     },
-    data: {
+    categories: {
       type: Array,
       default: []
     },

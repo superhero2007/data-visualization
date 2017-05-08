@@ -217,12 +217,12 @@ var services = {
         .get('/static/api/pie-chart.json')
         .end(function (error, response) {
           if (response.status == 200) {
-            let items = JSON.parse(response.text)['_items']
-            let data = []
+            var items = JSON.parse(response.text)['_items']
+            var data = []
             filters.forEach(function (filter) {
-              let temp = {}
+              var temp = {}
               temp.category = filter
-              let value = nch.model.combinedData.filter(function(d) { return d.category == filter })
+              var value = nch.model.combinedData.filter(function(d) { return d.category == filter })
               if(value[0]){
                 temp.manufacturer = value[0].values
               }else{
