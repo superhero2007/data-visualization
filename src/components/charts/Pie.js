@@ -107,7 +107,6 @@ export default {
       }
 
       var groupBy = this.groupByField
-      console.log(groupBy, this.model.selectedMedia.value,this.model.selectedCategory.value)
       if(groupBy == 'medianame' && this.model.selectedMedia.value != '')
       {
         arc.append('circle')
