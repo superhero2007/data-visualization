@@ -7,7 +7,7 @@
             <span class="header-icon">
               <i class="fa fa-sliders" aria-hidden="true"></i>
             </span>
-            Filter Media Type
+            Filter Category
             <span class="close-icon" @click="onClose">
               <i class="fa fa-close"></i>
             </span>
@@ -18,7 +18,7 @@
       <div class="modal-body">
         <slot name="body">
           <div class="row">
-            <div class="col-lg-6" v-for="(category, i) in data">
+            <div class="col-lg-6" v-for="(category, i) in categories">
               <input type="checkbox" v-model="comparisonvalue" :id="i" :value="category.categoryname" />
               <label :for="i">{{category.categoryname}}</label>
             </div>
