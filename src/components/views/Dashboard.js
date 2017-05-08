@@ -42,6 +42,11 @@ export default {
   },
   mounted() {
     console.log( "Dashboard mounted" );
+
+    var element = document.getElementsByClassName("close")
+    for (var i = 0; i < element.length; i++) {
+      element[i].innerHTML = '<span class="fa-stack">  <i class="fa fa-circle fa-stack-2x"></i>    <i class="fa fa-times fa-stack-1x fa-inverse"></i>   </span>'
+    }
     // console.log( this.model.categories );
     services.loadCategories().then( (categories) => {
       this.model.categories = categories;
