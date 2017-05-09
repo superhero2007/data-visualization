@@ -5,14 +5,15 @@
     <sidebar></sidebar>
     <div class="main">
       <dashboard-summary></dashboard-summary>
+      <v-select v-model="model.selectedCategories" multiple :options="categorynames"></v-select>
       <div class="page-content">
         <p class="page-header">Redemption by state</p>
         <div class="row" style="margin-left: 0; margin-right: 0">
           <div class="col-md-6">
-            <geo title="General Mills, Inc." geoId="singleCoGeo" graphWidth="460" graphHeight="210"></geo>
+            <geo title="General Mills, Inc." geo-id="singleCoGeo" graph-width="460" graph-height="210"></geo>
           </div>
           <div class="col-md-6">
-            <geo title="All Manufacturers" geoId="allGeo" graphWidth="460" graphHeight="210"></geo>
+            <geo title="All Manufacturers" geo-id="allGeo" graph-width="460" graph-height="210"></geo>
           </div>
         </div>
       </div>

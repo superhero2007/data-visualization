@@ -7,6 +7,8 @@ import PageFooter from '../layout/PageFooter'
 
 import services from 'src/modules/services';
 
+import vSelect from "vue-select"
+
 export default {
   name: 'home',
   template: require('components/views/Dashboard.html'),
@@ -16,7 +18,8 @@ export default {
     Geo,
     DynamicTable,
     DashboardSummary,
-    PageFooter
+    PageFooter,
+    vSelect
   },
   data () {
     return {
@@ -26,7 +29,15 @@ export default {
   },
   computed: {
     categories() {
-      return this.model.categories;
+      return this.model.categories
+    },
+    categorynames() {
+      let names = []
+      for(let i = 0; i< this.model.categories.length; i++)
+      {
+        names.push(this.model.categories[i].categoryname)
+      }
+      return names
     }
   },
   mounted() {

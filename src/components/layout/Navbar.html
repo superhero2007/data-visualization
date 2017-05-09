@@ -12,10 +12,18 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li class="navbar-icons"><a href="#"><span class="navbar-welcome">Welcome John</span><i class="fa fa-user" aria-hidden="true"></i></a></li>
-        <li class="navbar-icons navbar-vertical-divider"><a href="#"><i class="fa fa-bell-o" aria-hidden="true"></i></a></li>
-        <li class="navbar-icons navbar-icons-grey"><a href="#"><i class="fa fa-question-circle"></i></a></li>
-        <li class="navbar-icons navbar-icons-grey"><a href="#"><i class="fa fa-gear"></i></a></li>
+        <li class="navbar-icons">
+          <a href="#"><span class="navbar-welcome">Welcome John</span><i class="fa fa-user" aria-hidden="true"></i></a>
+        </li>
+        <li class="navbar-icons navbar-vertical-divider">
+          <a href="#"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+        </li>
+        <li class="navbar-icons navbar-icons-grey">
+          <router-link to="/help"><i class="fa fa-question-circle"></i></router-link>
+        </li>
+        <li class="navbar-icons navbar-icons-grey">
+          <router-link to="/settings"><i class="fa fa-gear"></i></router-link>
+        </li>
       </ul>
     </div>
   </div>

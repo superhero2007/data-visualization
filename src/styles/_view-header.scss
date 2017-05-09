@@ -1,6 +1,6 @@
 .view-header {
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, .3);
 }
 
@@ -15,7 +15,15 @@
 .view-header__title {
   font-size: 22px;
   color: $blue;
-  padding: 20px 20px 10px;
+  padding: 15px 50px;
+  font-weight: bold;
+
+  .fa {
+    margin-right: 10px;
+    font-size: 30px;
+    position: relative;
+    top: 3px;
+  }
 }
 
 .view-header__nav {
