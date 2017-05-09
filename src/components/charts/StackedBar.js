@@ -36,7 +36,7 @@ export default {
       var data = []
       for (var i = 0; i < this.stackedData.length; i++) {
         for (var j = 0; j < data.length; j++) {
-          if((data[j].mfrname == this.stackedData[i].mfrname) && (this.model.selectedMedia.value == "" || this.model.selectedMedia.value == this.stackedData[i].medianame))
+          if((data[j].mfrname == this.stackedData[i].mfrname) && (this.model.selectedMedia.value == '' || this.model.selectedMedia.value == this.stackedData[i].medianame))
           {
             
             if(this.stackedData[i].price < 0.4)
@@ -47,10 +47,10 @@ export default {
               data[j]['$0.76 - $1.00'] += this.stackedData[i].totalcouponredemption
             else
               data[j]['$1.00 +'] += this.stackedData[i].totalcouponredemption
-            break;
+            break
           }
         }
-        if((j == data.length) && (this.model.selectedMedia.value == "" || this.model.selectedMedia.value == this.stackedData[i].medianame))
+        if((j == data.length) && (this.model.selectedMedia.value == '' || this.model.selectedMedia.value == this.stackedData[i].medianame))
         {
           var newItem = {
             'mfrname' : this.stackedData[i].mfrname,
@@ -176,7 +176,7 @@ export default {
           if((d[1]-d[0])/d.data.total > 0.005)
             return d3.format('.0%')((d[1]-d[0])/d.data.total) 
           else
-            return ""
+            return ''
         })
         .attr('fill','black')
 
