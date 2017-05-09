@@ -88,8 +88,6 @@ export default {
       var z = d3.scaleOrdinal()
         .range(['#927DB2', '#AAC66C', '#CE6660', '#5B90C6'])
 
-      var data = this.stackedData
-      console.log(data)
 
       var keys = Object.keys(data[0]).slice(1)
 
