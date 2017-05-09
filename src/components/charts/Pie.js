@@ -271,12 +271,12 @@ export default {
         .attr('rx', 10)
         .attr('ry', 10)
         .attr('y', function (d, i) {
-          return 55 + i * lineHeight
+          return 45 + i * lineHeight
         })
         .attr('height', function (d, i) {
-          return lineHeight - 10
+          return lineHeight 
         })
-        .attr('x', 0)
+        .attr('x', -10)
         .attr('width', width / 2)
         .attr('fill', function (d) {
           //return color(d.categoryname)
@@ -288,12 +288,13 @@ export default {
           else
             return 0
         })
+        .attr('class', 'listRect')
 
       list.append('circle')
         .attr('r', 15)
         .attr('cx', 0)
         .attr('cy', function (d, i) {
-          return 70 + i * lineHeight
+          return 65 + i * lineHeight
         })
         .attr('stroke', 'white')
         .attr('stroke-width', '3px')
@@ -303,7 +304,7 @@ export default {
         })
 
 
-      g.selectAll('.list')
+      g.selectAll('.listRect')
         .on('mouseover', listmouseover)
         .on('mouseout', listmouseout)
 
