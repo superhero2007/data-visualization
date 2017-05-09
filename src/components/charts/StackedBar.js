@@ -12,6 +12,14 @@ export default {
     }
   },
 
+  watch: {
+    model: {
+      handler:function(val, oldVal){
+        this.render()
+      },deep: true
+    }
+  },
+
   mounted() {
     console.log('Stacked Bar mounted: ')
     services.getStackedBarChartData().then((response) => {
@@ -25,7 +33,45 @@ export default {
 
     render() {
 
-      var svg = d3.select('#stackedBarChart').attr('width', 600),
+      var data = []
+      for (var i = 0; i < this.stackedData.length; i++) {
+        for (var j = 0; j < data.length; j++) {
+          if((data[j].mfrname == this.stackedData[i].mfrname) && (this.model.selectedMedia.value == "" || this.model.selectedMedia.value == this.stackedData[i].medianame))
+          {
+            
+            if(this.stackedData[i].price < 0.4)
+              data[j]['< $0.40'] += this.stackedData[i].totalcouponredemption
+            else if(this.stackedData[i].price <= 0.75)
+              data[j]['$0.40 - $0.75'] += this.stackedData[i].totalcouponredemption
+            else if(this.stackedData[i].price <= 1)
+              data[j]['$0.76 - $1.00'] += this.stackedData[i].totalcouponredemption
+            else
+              data[j]['$1.00 +'] += this.stackedData[i].totalcouponredemption
+            break;
+          }
+        }
+        if((j == data.length) && (this.model.selectedMedia.value == "" || this.model.selectedMedia.value == this.stackedData[i].medianame))
+        {
+          var newItem = {
+            'mfrname' : this.stackedData[i].mfrname,
+            '< $0.40' : 0,
+            '$0.40 - $0.75' : 0,
+            '$0.76 - $1.00' : 0,
+            '$1.00 +' : 0
+          }
+          if(this.stackedData[i].price < 0.4)
+            newItem['< $0.40'] += this.stackedData[i].totalcouponredemption
+          else if(this.stackedData[i].price <= 0.75)
+            newItem['$0.40 - $0.75'] += this.stackedData[i].totalcouponredemption
+          else if(this.stackedData[i].price <= 1)
+            newItem['$0.76 - $1.00'] += this.stackedData[i].totalcouponredemption
+          else
+            newItem['$1.00 +'] += this.stackedData[i].totalcouponredemption
+          data.push(newItem)
+        }
+      }
+
+      var svg = d3.select('#stackedBarChart').attr('width', 600).html(''),
         margin = {top: 20, right: 20, bottom: 30, left: 20},
         width = +svg.attr('width') - margin.left - margin.right,
         height = +svg.attr('height') - margin.top - margin.bottom,
@@ -40,25 +86,25 @@ export default {
         .rangeRound([0, height - 80])
 
       var z = d3.scaleOrdinal()
-        .range(['#927DB2', '#AAC66C', '#CE6660', '#5B90C6'])
-
-    
-      var data = this.stackedData
-      console.log(data)
+        .range(['#927DB2', '#AAC66C', '#CE6660', '#5B90C6'])      
 
       var keys = Object.keys(data[0]).slice(1)
 
       for (var i = 0; i < data.length; i++) {
         var t = 0
         for (var j in data[i]) {
-          if(j != 'Manufacturer')
+          if(j != 'mfrname')
             t += data[i][j]
         }
-        data[i].total = t
+        for (var j in data[i]) {
+          if(j != 'mfrname')
+            data[i][j]= data[i][j]/t*100
+        }
+        data[i].total = 100
       }
 
       data.sort(function(a, b) { return b.total - a.total })
-      x.domain(data.map(function(d) { return d.Manufacturer }))
+      x.domain(data.map(function(d) { return d.mfrname }))
       y.domain([0, d3.max(data, function(d) { return d.total })]).nice()
       z.domain(keys)
 
@@ -106,13 +152,12 @@ export default {
         .data(function(d) { return d })
         .enter().append('rect')
         .attr('x', function(d, i) { 
-          return x(d.data.Manufacturer) + i * 50 })
-        .attr('y', function(d) { 
-          return y( d[0]) })
-        .attr('height', function(d) { return y(d[1]) - y(d[0]) })
+          return x(d.data.mfrname) + i * 50 })
+        .attr('y', function(d) { return y(d[0]) })
+        .attr('height', function(d) { return y(d[1]- d[0]) })
         .attr('width', x.bandwidth())
         .attr('stroke', 'white')
-        .attr('stroke-width', '3px')
+        .attr('stroke-width', '2px')
         .style('filter', 'url(#drop-shadow)')
 
       g.selectAll('.oneRect')
@@ -121,12 +166,18 @@ export default {
         .data(function(d) { return d })
         .enter().append('text')
         .attr('x', function (d, i) {
-          return x.bandwidth()/2 + x(d.data.Manufacturer) + i * 50
+          return x.bandwidth()/2 + x(d.data.mfrname) + i * 50
         })
         .style('text-anchor', 'middle')
         .style('font-weight', 'bold')
-        .attr('y', function(d) { return (y(d[0]) + y(d[1]))/2 })
-        .text(function(d) { return d3.format('.0%')((d[1]-d[0])/d.data.total) })
+        .attr('y', function(d) { 
+          return (y(d[0]) + y(d[1]))/2 })
+        .text(function(d) { 
+          if((d[1]-d[0])/d.data.total > 0.005)
+            return d3.format('.0%')((d[1]-d[0])/d.data.total) 
+          else
+            return ""
+        })
         .attr('fill','black')
 
       g.append('g')
@@ -134,12 +185,12 @@ export default {
         .data(data)
         .enter().append('text')
         .attr('x', function (d, i) {
-          return x.bandwidth()/2 + x(d.Manufacturer) + i * 50
+          return x.bandwidth()/2 + x(d.mfrname) + i * 50
         })
         .attr('font-weight', 'bold')
         .style('text-anchor', 'middle')
         .attr('y', height - 40)
-        .text(function(d) { return d.Manufacturer })
+        .text(function(d) { return d.mfrname })
 
       // g.append('g')
       //   .attr('class', 'axis')
