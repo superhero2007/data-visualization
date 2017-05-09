@@ -112,10 +112,7 @@ export default {
       {
         arc.append('circle')
           .attr('r', function (d) {
-            if(d.data.medianame == nch.model.selectedMedia.value)
-              return radius-10
-            else
-              return 0
+            return ((d.data.medianame == nch.model.selectedMedia.value)?(radius - 10):(0))
           })
           .attr('fill', function (d) {
               return color(d.data[groupBy])
@@ -218,7 +215,7 @@ export default {
         .attr('fill', '#000')
         .attr('font-weight', 'bold')
         .attr('text-anchor', 'middle')
-        .text('Media Type Legend')
+        .text((groupBy == 'medianame')?('Media Type Legend'):('Category Type Legend'))
 
 
       list.append('text')
@@ -284,10 +281,7 @@ export default {
           return color(d[groupBy])
         })
         .attr('fill-opacity', function (d) {
-          if(groupBy == 'medianame' && nch.model.selectedMedia.value == d.medianame)
-            return 0.2
-          else
-            return 0
+          return ((groupBy == 'medianame' && nch.model.selectedMedia.value == d.medianame)?(0.2):(0))
         })
         .attr('class', 'listRect')
 
