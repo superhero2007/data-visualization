@@ -4,7 +4,7 @@ import services from 'src/modules/services'
 
 export default {
   name: 'pie',
-  props: ['groupByField'],
+  props: ['groupByField', 'labelField'],
   template: require('components/charts/Pie.html'),
   data () {
     return {
@@ -215,7 +215,7 @@ export default {
         .attr('fill', '#000')
         .attr('font-weight', 'bold')
         .attr('text-anchor', 'middle')
-        .text((groupBy == 'medianame')?('Media Type Legend'):('Category Type Legend'))
+        .text(this.labelField + ' Legend');
 
 
       list.append('text')
@@ -272,7 +272,7 @@ export default {
           return 45 + i * lineHeight
         })
         .attr('height', function (d, i) {
-          return lineHeight 
+          return lineHeight
         })
         .attr('x', -10)
         .attr('width', width / 2)
