@@ -102,7 +102,7 @@ export default {
         }
         for (var j in data[i]) {
           if(j != 'mfrname')
-            data[i][j]= data[i][j]/t*100
+            data[i][j]= data[i][j] / t * 100
         }
         data[i].total = 100
       }
