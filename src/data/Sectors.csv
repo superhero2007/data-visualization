@@ -1,0 +1,14 @@
+sectorcode,sectorname
+1,Beverages
+2,Dry Grocery
+8,Food
+10,Food & Non-Food
+3,Frozen Foods
+5,Household Goods & General Merchandise
+9,Non-Food
+6,OTC & Rx Medications
+7,Personal Care & Hygiene
+4,Refrigerated Foods
+99,UNKNOWN
+999999999,UNKNOWN
+99,Unknown
