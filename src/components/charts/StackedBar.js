@@ -38,7 +38,7 @@ export default {
         for (var j = 0; j < data.length; j++) {
           if((data[j].mfrname == this.stackedData[i].mfrname) && (this.model.selectedMedia.value == '' || this.model.selectedMedia.value == this.stackedData[i].medianame))
           {
-            
+
             if(this.stackedData[i].price < 0.4)
               data[j]['< $0.40'] += this.stackedData[i].totalcouponredemption
             else if(this.stackedData[i].price <= 0.75)
@@ -86,13 +86,17 @@ export default {
         .rangeRound([0, height - 80])
 
       var z = d3.scaleOrdinal()
-        .range(['#927DB2', '#AAC66C', '#CE6660', '#5B90C6'])      
+        .range(['#927DB2', '#AAC66C', '#CE6660', '#5B90C6'])
+
+      var data = this.stackedData
+      console.log(data)
 
       var keys = Object.keys(data[0]).slice(1)
 
       for (var i = 0; i < data.length; i++) {
         var t = 0
         for (var j in data[i]) {
+
           if(j != 'mfrname')
             t += data[i][j]
         }
@@ -151,7 +155,7 @@ export default {
         .selectAll('rect')
         .data(function(d) { return d })
         .enter().append('rect')
-        .attr('x', function(d, i) { 
+        .attr('x', function(d, i) {
           return x(d.data.mfrname) + i * 50 })
         .attr('y', function(d) { return y(d[0]) })
         .attr('height', function(d) { return y(d[1]- d[0]) })
@@ -170,14 +174,15 @@ export default {
         })
         .style('text-anchor', 'middle')
         .style('font-weight', 'bold')
-        .attr('y', function(d) { 
+        .attr('y', function(d) {
           return (y(d[0]) + y(d[1]))/2 })
-        .text(function(d) { 
+        .text(function(d) {
           if((d[1]-d[0])/d.data.total > 0.005)
-            return d3.format('.0%')((d[1]-d[0])/d.data.total) 
+            return d3.format('.0%')((d[1]-d[0])/d.data.total)
           else
             return ''
         })
+
         .attr('fill','black')
 
       g.append('g')
@@ -228,8 +233,8 @@ export default {
         .selectAll('g')
         .data(keys.slice())
         .enter().append('g')
-        .attr('transform', function(d, i) { 
-          return 'translate(20,' + (40 * i + 20) + ')' 
+        .attr('transform', function(d, i) {
+          return 'translate(20,' + (40 * i + 20) + ')'
         })
 
       legend.append('circle')

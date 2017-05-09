@@ -295,21 +295,26 @@
 
 .home-footer {
   background-color: #333;
-  padding: 40px 0;
+  padding: 40px 0 50px;
   width: 100%;
 }
 
 .home-footer__nav-holder {
   text-align: center;
-  margin-top: 10px;
-  padding: 70px 25px 70px 0;
-  border-right: 1px dashed $white;
+  margin: 10px auto 0;
+  padding: 20px 0;
+  // border-right: 1px dashed $white;
   font-size: 14px;
   text-transform: uppercase;
+  width: 100%;
+  position: relative;
 }
 
 .home-footer__nav {
-  padding-bottom: 40px;
+  padding: 40px 0;
+  // padding-bottom: 40px;
+  max-width: 500px;
+  margin: 10px auto 0;
 
   ul {
     padding: 0;
@@ -335,6 +340,10 @@
   background-color: $white;
   border-radius: 0 5px 5px 0;
   padding: 20px 80px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-height: 100%;
 }
 
 .home-footer__form {

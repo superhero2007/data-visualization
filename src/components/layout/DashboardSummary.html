@@ -33,5 +33,5 @@
   <div class="summary__block">
     <button class="summary__button" @click="showCategoriesModal = true"><i class="fa fa-sliders" aria-hidden="true"></i> Filters</button>
   </div>
-  <filter-modal :show="showCategoriesModal" :onClose="hideModal" :categories="model.categories" :onSave="saveModal"></filter-modal>
+  <filter-modal :show="showCategoriesModal" :on-close="hideModal" :categories="model.categories" :on-save="saveModal"></filter-modal>
 </div>

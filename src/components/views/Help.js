@@ -1,26 +1,25 @@
 import Navbar from '../layout/Navbar'
 import Sidebar from '../layout/Sidebar'
-import DashboardSummary from '../layout/DashboardSummary'
 import PageFooter from '../layout/PageFooter'
 import ViewHeader from '../layout/ViewHeader'
-import Pie from '../charts/Pie'
-import StackedBar from '../charts/StackedBar'
 
 export default {
-  name: 'facevalue',
-  template: require('components/views/FaceValue.html'),
+  name: 'help',
+  template: require('components/views/Help.html'),
   components: {
     Navbar,
     Sidebar,
-    DashboardSummary,
     PageFooter,
-    ViewHeader,
-    Pie,
-    StackedBar
+    ViewHeader
   },
   data () {
     return {
       model: nch.model
     }
-  }
+  },
+  computed: {},
+  mounted() {
+    console.log( "Help mounted" );
+  },
+  methods: {}
 }

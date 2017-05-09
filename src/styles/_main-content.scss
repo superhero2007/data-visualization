@@ -68,3 +68,59 @@
   display: inline-block;
   border-radius: 50%;
 }
+
+// .content {
+//   padding: 0 20px;
+// }
+
+// .content__holder {
+//   padding: 0 40px;
+// }
+
+.content__block {
+  padding: 0 40px 20px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.content__heading {
+  font-size: 24px;
+  color: $blue;
+  font-weight: bold;
+}
+
+.settings {
+  padding: 0 50px;
+}
+
+.settings__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    text-decoration: underline;
+    padding: 5px 0;
+    cursor: pointer;
+    font-weight: bold;
+
+    &:hover {
+      color: $blue;
+      text-decoration: none;
+      transition: color .3s;
+
+      .fa {
+        opacity: 1;
+      }
+    }
+
+    .fa {
+      opacity: 0;
+      margin-right: 5px;
+      color: $blue;
+      transition: opacity .3s;
+    }
+  }
+}

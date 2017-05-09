@@ -107,6 +107,7 @@ export default {
       }
 
       var groupBy = this.groupByField
+
       if(groupBy == 'medianame' && this.model.selectedMedia.value != '')
       {
         arc.append('circle')
@@ -162,7 +163,7 @@ export default {
           .attr('d', out)
           .attr('class', 'out')
           .attr('fill', 'transparent')
-      
+
 
         // arc.append('circle')
         //   .attr('r', radius-10)
@@ -219,7 +220,7 @@ export default {
         .attr('text-anchor', 'middle')
         .text('Media Type Legend')
 
-      
+
       list.append('text')
         .attr('x', 20)
         .attr('y', function (d, i) {

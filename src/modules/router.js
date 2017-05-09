@@ -6,6 +6,9 @@ import ProductMoved from '../components/views/ProductMoved'
 import BilateralData from '../components/views/BilateralData'
 import Media from '../components/views/Media'
 import Geographic from '../components/views/Geographic'
+import Help from '../components/views/Help'
+import Settings from '../components/views/Settings'
+import ClassOfTrade from '../components/views/ClassOfTrade'
 
 import Home from '../Home'
 
@@ -45,9 +48,24 @@ export default new Router({
       props: true
     },
     {
+      path: '/class-of-trade',
+      name: 'ClassOfTrade',
+      component: ClassOfTrade
+    },
+    {
       path: '/home',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/help',
+      name: 'Help',
+      component: Help
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      component: Settings
     }
   ]
 })
