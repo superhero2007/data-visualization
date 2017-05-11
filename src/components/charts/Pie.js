@@ -197,7 +197,6 @@ export default {
           .on('mouseout', piemouseout)
 
         function piemouseover(d) {
-          console.log(d)
           if(nch.model.selectedCategory.value != d.data.categoryname)
           {
             nch.model.selectedCategory = {
@@ -234,19 +233,50 @@ export default {
 
       g.append('g')
         .append('text')
-        .attr('x', 200)
-        .attr('y', 20)
+        .attr('x', ((groupBy == 'productmoved')?(100):(200)))
+        .attr('y', ((groupBy == 'productmoved')?(20):(40)))
         .attr('dy', '0.32em')
         .attr('fill', '#000')
         .attr('font-weight', 'bold')
         .attr('text-anchor', 'middle')
-        .text(this.labelField + ' Legend');
+        .text(this.labelField + ' Legend')
 
+      if(groupBy == 'productmoved')
+      {
+        var subtitle= g.append('g')
+        subtitle.append('text')
+        .attr('x', 40)
+        .attr('y', 50)
+        .attr('dy', '0.32em')
+        .attr('fill', '#000')
+        .attr('font-weight', 'bold')
+        .attr('text-anchor', 'middle')
+        .text('OFFER')
+        .attr('fill','#498fe1')
+
+        subtitle.append('text')
+        .attr('x', 220)
+        .attr('y', 50)
+        .attr('dy', '0.32em')
+        .attr('fill', '#000')
+        .attr('font-weight', 'bold')
+        .attr('text-anchor', 'end')
+        .text('REDEMPTION')
+        .attr('fill','#498fe1')
+
+        subtitle.append('line')
+        .attr('y1', 65)
+        .attr('y2', 65)
+        .attr('x1', 20)
+        .attr('x2', 220)
+        .attr('stroke', 'grey')
+        .style('stroke-dasharray','5,5')
+      }
 
       list.append('text')
         .attr('x', 20)
         .attr('y', function (d, i) {
-          return 70 + i * lineHeight
+          return 90 + i * lineHeight
         })
         .attr('font-weight', 'bold')
         .text(function (d) {
@@ -254,22 +284,22 @@ export default {
           return (d[groupBy])
         })
 
-       list.append('text')
+      list.append('text')
         .attr('x', 320)
         .attr('y', function (d, i) {
-          return 70 + i * lineHeight
+          return 90 + i * lineHeight
         })
         .attr('font-weight', 'bold')
         .text(function (d) {
-          return d3.format(',.0f')(d.totalcouponredemption)
+          return ((groupBy == 'productmoved')?(''):(d3.format(',.0f')(d.totalcouponredemption)))
         })
         .attr('text-anchor', 'end')
 
 
       list.append('text')
-        .attr('x', 380)
+        .attr('x', ((groupBy == 'productmoved')?(210):(380)))
         .attr('y', function (d, i) {
-          return 70 + i * lineHeight
+          return 90 + i * lineHeight
         })
         .attr('font-weight', 'bold')
         .text(function (d) {
@@ -280,13 +310,13 @@ export default {
 
       list.append('line')
         .attr('y1', function (d, i) {
-          return 85 + i * lineHeight
+          return 105 + i * lineHeight
         })
         .attr('y2', function (d, i) {
-          return 85 + i * lineHeight
+          return 105 + i * lineHeight
         })
         .attr('x1', 20)
-        .attr('x2', width / 2)
+        .attr('x2', ((groupBy == 'productmoved')?(220):(width / 2)))
         .attr('stroke', 'grey')
         .style('stroke-dasharray','5,5')
 
@@ -294,7 +324,7 @@ export default {
         .attr('rx', 10)
         .attr('ry', 10)
         .attr('y', function (d, i) {
-          return 45 + i * lineHeight
+          return 65 + i * lineHeight
         })
         .attr('height', function (d, i) {
           return lineHeight
@@ -306,7 +336,12 @@ export default {
           return color(d[groupBy])
         })
         .attr('fill-opacity', function (d) {
-          return ((groupBy == 'medianame' && nch.model.selectedMedia.value == d.medianame)?(0.2):(0))
+          return (
+              ((groupBy == 'medianame' && nch.model.selectedMedia.value == d.medianame)
+                ||(groupBy == 'productmoved' && nch.model.selectedProductMoved.value == d.productmoved))
+              ?(0.2)
+              :(0)
+            )
         })
         .attr('class', 'listRect')
 
@@ -314,7 +349,7 @@ export default {
         .attr('r', 15)
         .attr('cx', 0)
         .attr('cy', function (d, i) {
-          return 65 + i * lineHeight
+          return 85 + i * lineHeight
         })
         .attr('stroke', 'white')
         .attr('stroke-width', '3px')
@@ -329,7 +364,17 @@ export default {
         .on('mouseout', listmouseout)
 
       function listmouseover(d) {
-        if(typeof(d.categoryname)=='undefined')
+        if(typeof(d.productmoved)!='undefined')
+        {
+          if(nch.model.selectedProductMoved.value != d.productmoved)
+          {
+            nch.model.selectedProductMoved = {
+              value: d.productmoved,
+              flag: true
+            }
+          }
+        }
+        else if(typeof(d.categoryname)=='undefined')
         {
           if(nch.model.selectedMedia.value != d.medianame)
           {
@@ -360,7 +405,11 @@ export default {
       }
 
       function listmouseout(d) {
-        if(typeof(d.categoryname)=='undefined')
+        if(typeof(d.productmoved)!='undefined')
+        {
+          nch.model.selectedProductMoved.value =''
+        }
+        else if(typeof(d.categoryname)=='undefined')
         {
           nch.model.selectedMedia.value = ''
         }
