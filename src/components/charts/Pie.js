@@ -23,12 +23,24 @@ export default {
 
   mounted() {
     console.log('Pie mounted: ' + this.groupByField)
-    services.getPieData().then((response) => {
-      this.pieData = response
-      this.render()
-    }).catch((message) => {
-      console.log('Pie promise catch:' + message)
-    })
+    if(this.groupByField != 'productmoved')
+    {
+      services.getPieData().then((response) => {
+        this.pieData = response
+        this.render()
+      }).catch((message) => {
+        console.log('Pie promise catch:' + message)
+      })
+    }
+    else
+    {
+      services.getProductMovedPieData().then((response) => {
+        this.pieData = response
+        this.render()
+      }).catch((message) => {
+        console.log('Pie promise catch:' + message)
+      })
+    }
   },
   methods: {
 
@@ -42,6 +54,9 @@ export default {
       }
       else if (this.groupByField == 'medianame') {
         responseData = this.getDataForMediaTypes(items)
+      }
+      else if (this.groupByField == 'productmoved') {
+        responseData = this.getDataForProductMoved(items)
       }
 
       var svg = d3.select('#pieChart').attr('width', 800).html(''),
@@ -108,11 +123,16 @@ export default {
 
       var groupBy = this.groupByField
 
-      if(groupBy == 'medianame' && this.model.selectedMedia.value != '')
+      if((groupBy == 'medianame' && this.model.selectedMedia.value != '') || (groupBy == 'productmoved' && this.model.selectedProductMoved.value != ''))
       {
         arc.append('circle')
           .attr('r', function (d) {
-            return ((d.data.medianame == nch.model.selectedMedia.value)?(radius - 10):(0))
+            return (
+              (((groupBy == 'medianame') && (d.data.medianame == nch.model.selectedMedia.value))
+                || ((groupBy == 'productmoved') && (d.data.productmoved == nch.model.selectedProductMoved.value)))
+              ?(radius - 10)
+              :(0)
+            )
           })
           .attr('fill', function (d) {
               return color(d.data[groupBy])
@@ -122,7 +142,11 @@ export default {
         arc.append('text')
           .attr('font-size', '20')
           .attr('transform', function(d) { return 'translate(0, -20)' })
-          .text(this.model.selectedMedia.value)
+          .text(
+              ((groupBy == 'medianame')
+              ?(this.model.selectedMedia.value)
+              :(this.model.selectedProductMoved.value))
+            )
           .attr('fill','white')
           .attr('text-anchor', 'middle')
 
@@ -173,6 +197,7 @@ export default {
           .on('mouseout', piemouseout)
 
         function piemouseover(d) {
+          console.log(d)
           if(nch.model.selectedCategory.value != d.data.categoryname)
           {
             nch.model.selectedCategory = {
@@ -390,6 +415,30 @@ export default {
         if (k == responseData.length && items[i].totalcouponredemption != 0) {
           var item = {
             medianame: items[i].medianame,
+            totalcouponredemption: items[i].totalcouponredemption
+          }
+          responseData.push(item)
+        }
+      }
+
+      return responseData
+    },
+
+    getDataForProductMoved(items) {
+      var responseData = []
+
+      for (var i = 0; i < items.length; i++) {
+
+        for (var k = 0; k < responseData.length; k++) {
+          if ((responseData[k].productmoved == items[i].productmoved)) {
+            responseData[k].totalcouponredemption += items[i].totalcouponredemption
+            break
+          }
+        }
+
+        if (k == responseData.length && items[i].totalcouponredemption != 0) {
+          var item = {
+            productmoved: items[i].productmoved,
             totalcouponredemption: items[i].totalcouponredemption
           }
           responseData.push(item)

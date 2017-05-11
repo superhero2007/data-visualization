@@ -15,6 +15,10 @@ var nch = {
       value: "",
       flag: false
     },
+    selectedProductMoved: {
+      value: "",
+      flag: false
+    },
     classOfTradeValues: []
   }
 };
