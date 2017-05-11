@@ -1,16 +1,22 @@
-<div id="home">
+<div id='home'>
   <navbar></navbar>
-  <div class="main-content">
+  <div class='main-content'>
     <sidebar></sidebar>
-    <div class="main">
+    <div class='main'>
       <dashboard-summary></dashboard-summary>
-      <div class="page-content gradient-background">
-        <view-header>Face Value Range: General Mills, Inc. vs. Comparables</view-header>
-        <div class="col-md-6">
+      <div class='page-content gradient-background'>
+        <view-header>
+          <span>
+            Face Value Range: General Mills, Inc. vs. Comparables
+          </span>
+          <download pdf-enabled="true" csv-enabled="true" png-enabled="true"></download>
+        </view-header>
+
+        <div class='col-md-6'>
           <stacked-bar></stacked-bar>
         </div>
-        <div class="col-md-6">
-          <pie group-by-field="medianame" label-field="Media Type"></pie>
+        <div class='col-md-6'>
+          <pie group-by-field='medianame' label-field='Media Type'></pie>
         </div>
       </div>
       <page-footer></page-footer>

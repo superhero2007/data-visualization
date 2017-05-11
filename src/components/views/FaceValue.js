@@ -3,6 +3,7 @@ import Sidebar from '../layout/Sidebar'
 import DashboardSummary from '../layout/DashboardSummary'
 import PageFooter from '../layout/PageFooter'
 import ViewHeader from '../layout/ViewHeader'
+import Download from '../layout/Download'
 import Pie from '../charts/Pie'
 import StackedBar from '../charts/StackedBar'
 
@@ -15,12 +16,14 @@ export default {
     DashboardSummary,
     PageFooter,
     ViewHeader,
+    Download,
     Pie,
     StackedBar
   },
   data () {
     return {
-      model: nch.model
+      model: nch.model,
+      showDownloadOptions: false
     }
   }
 }

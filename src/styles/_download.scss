@@ -1,0 +1,42 @@
+.download {
+  margin-bottom: -60px;
+}
+.download-component {
+  background: #498fe1;
+  color: white;
+  width: 140px;
+  height: 70px;
+  border-radius: 5px;
+  text-align: center;
+  padding:0 10px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.download-component::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 85%;
+    margin-left: -10px;
+    border-width: 15px 10px;
+    border-style: solid;
+    border-color: transparent transparent #498fe1 transparent;
+}
+
+.downloadButton {
+  margin-left: 105px;
+}
+
+.download-component .iconContainer {
+  font-size: 14px !important;
+  padding: 10px 5px;
+  width: 33%;
+  float: left;
+}
+
+.download-component i {
+  font-size: 22px !important;
+  margin: 5px 0px 8px 0px !important;
+}

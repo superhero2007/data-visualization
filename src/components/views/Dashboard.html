@@ -7,7 +7,15 @@
       <dashboard-summary></dashboard-summary>
       <v-select v-model="model.selectedCategories" multiple :options="categorynames"></v-select>
       <div class="page-content">
-        <p class="page-header">Redemption by state</p>
+        <view-header>
+          <span>
+            Redemption by state
+          </span>
+          <download pdf-enabled="true" png-enabled="true"></download>
+        </view-header>
+
+
+
         <div class="row" style="margin-left: 0; margin-right: 0">
           <div class="col-md-6">
             <geo title="General Mills, Inc." geo-id="singleCoGeo" graph-width="460" graph-height="210"></geo>
