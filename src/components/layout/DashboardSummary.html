@@ -18,12 +18,6 @@
       <option value="beverages">Beverages</option>
     </select>
   </div>
-  <div class="summary__block" v-if="currentView != 'ClassOfTrade'">
-    <p class="summary__title">Category</p>
-    <select class="summary__select" id="category">
-      <option v-for="cat in model.categories" :value="cat">{{cat.categoryname}}</option>
-    </select>
-  </div>
   <div class="summary__block" v-if="currentView == 'ClassOfTrade'">
     <p class="summary__title">Class of Trade</p>
     <select class="summary__select" id="classOfTrade">

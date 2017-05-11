@@ -3,7 +3,8 @@ export default {
   template: require('components/layout/Sidebar.html'),
   data () {
     return {
-      model: nch.model
+      model: nch.model,
+      sidebarItems: {}
     }
   },
   mounted() {

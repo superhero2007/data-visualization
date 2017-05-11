@@ -4,36 +4,24 @@
       "formTitle":"Sign In to your account"
    },
    "registration":{
-      "header":"Registration",
-      "formTitle":"Create a New Account"
+      "header":"Registration"
    },
    "desktop":{
-      "headerTitle":"Dashboard",
-      "stateHeaderGraph":"Redemption by county",
-      "tableHeader": "Redemption % by Media Types",
-      "copyWriteNotice":"2016, NCH MARKETING SERVICES, INC. ALL RIGHTS RESERVED.",
-      "version": "version v0.001"
+      "headerTitle":"Dashboard"
    },
    "bilateral":{
-       "headerTitle":"Bilateral Data",
-       "copyWriteNotice":"2016, NCH MARKETING SERVICES, INC. ALL RIGHTS RESERVED.",
-       "version": "version v0.001",
-       "nchLogoPath": "../../img/logo-nch-2x.png"
+       "headerTitle":"Bilateral Data"
    
    },
       "geo":{
-       "headerTitle":"Geo Data",
-       "copyWriteNotice":"2016, NCH MARKETING SERVICES, INC. ALL RIGHTS RESERVED.",
-       "version": "version v0.001",
-       "nchLogoPath": "../../img/logo-nch-2x.png"
+       "headerTitle":"Geo Data"
    
    },
       "piechart":{
-       "headerTitle":"Pie Charts",
+       "headerTitle":"Pie Charts"
+   },
+   "footer":{
        "copyWriteNotice":"2016, NCH MARKETING SERVICES, INC. ALL RIGHTS RESERVED.",
-       "version": "version v0.001",
-       "nchLogoPath": "../../img/logo-nch-2x.png"
-   
+       "version": "version v1.0.$JENKINS_BUILD_NUMBER"
    }
-
 }

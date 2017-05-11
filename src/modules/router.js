@@ -9,6 +9,10 @@ import Geographic from '../components/views/Geographic'
 import Help from '../components/views/Help'
 import Settings from '../components/views/Settings'
 import ClassOfTrade from '../components/views/ClassOfTrade'
+import Paperless from '../components/views/Paperless'
+import RedemptionTrends from '../components/views/RedemptionTrends'
+import Privacy from '../components/views/Privacy'
+import Terms from '../components/views/Terms'
 
 import Home from '../Home'
 
@@ -66,6 +70,26 @@ export default new Router({
       path: '/settings',
       name: 'Settings',
       component: Settings
-    }
+    },
+    {
+      path: '/paperless',
+      name: 'Paperless',
+      component: Paperless
+    },
+    {
+      path: '/redemption-trends',
+      name: 'RedemptionTrends',
+      component: RedemptionTrends
+    },
+    {
+        path: '/privacy',
+        name: 'Privacy',
+        component: Privacy
+    },
+    {
+        path: '/terms',
+        name: 'Terms',
+        component: Terms
+     }
   ]
 })

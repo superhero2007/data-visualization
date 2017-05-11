@@ -1,8 +1,8 @@
 <div class="sidebar">
-  <ul class="nav sidebar__nav">
-    <li v-bind:class="{ active: $router.currentRoute.name == 'Dashboard' }">
+  <ul class="sidebar__nav">
+    <li :class="{ active: $router.currentRoute.name == 'Dashboard' }" class="sidebar__nav-item">
       <router-link to="/"><i class="fa fa-2x fa-tachometer" aria-hidden="true"></i><span class="sidebar-link">Dashboard</span></router-link>
-      <ul v-bind:class="{ active: $router.currentRoute.name == 'Dashboard' }" class="sidebar__nav-submenu">
+      <ul :class="{ active: $router.currentRoute.name == 'Dashboard' }" class="sidebar__nav-submenu">
         <li class="sidebar__nav-submenu-item">
           <a href="#"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i><span>Redemption by State</span></a>
         </li>
@@ -11,9 +11,9 @@
         </li>
       </ul>
     </li>
-    <li v-bind:class="{ active: $router.currentRoute.name == 'FaceValue' }">
+    <li :class="{ active: $router.currentRoute.name == 'FaceValue' }" class="sidebar__nav-item">
       <router-link to="/face-value"><i class="fa fa-2x fa-dollar" aria-hidden="true"></i><span class="sidebar-link">Face Value</span></router-link>
-      <ul v-bind:class="{ active: $router.currentRoute.name == 'FaceValue' }" class="sidebar__nav-submenu">
+      <ul :class="{ active: $router.currentRoute.name == 'FaceValue' }" class="sidebar__nav-submenu">
         <li class="sidebar__nav-submenu-item">
           <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Face value range Mfr vs. Comparables</span></a>
         </li>
@@ -22,17 +22,17 @@
         </li>
       </ul>
     </li>
-    <li v-bind:class="{ active: $router.currentRoute.name == 'ProductMoved' }">
+    <li :class="{ active: $router.currentRoute.name == 'ProductMoved' }" class="sidebar__nav-item">
       <router-link to="/product-moved"><i class="fa fa-2x fa-cubes" aria-hidden="true"></i><span class="sidebar-link">Product Moved</span></router-link>
-      <ul v-bind:class="{ active: $router.currentRoute.name == 'ProductMoved' }" class="sidebar__nav-submenu">
+      <ul :class="{ active: $router.currentRoute.name == 'ProductMoved' }" class="sidebar__nav-submenu">
         <li class="sidebar__nav-submenu-item">
           <a href="#"><i class="fa fa-2x fa-calendar" aria-hidden="true"></i><span>YoY Product Moved Indexed to Category</span></a>
         </li>
       </ul>
     </li>
-    <li v-bind:class="{ active: $router.currentRoute.name == 'Geographic' }">
+    <li :class="{ active: $router.currentRoute.name == 'Geographic' }" class="sidebar__nav-item">
       <router-link to="/geographic/bipartite"><i class="fa fa-2x fa-globe" aria-hidden="true"></i><span class="sidebar-link">Geographic</span></router-link>
-      <ul v-bind:class="{ active: $router.currentRoute.name == 'Geographic' }" class="sidebar__nav-submenu">
+      <ul :class="{ active: $router.currentRoute.name == 'Geographic' }" class="sidebar__nav-submenu">
         <li class="sidebar__nav-submenu-item">
           <router-link to="/geographic/bipartite"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Redemption Count by State</span></router-link>
         </li>
@@ -44,9 +44,9 @@
         </li>
       </ul>
     </li>
-    <li v-bind:class="{ active: $router.currentRoute.name == 'Media' }">
+    <li :class="{ active: $router.currentRoute.name == 'Media' }" class="sidebar__nav-item">
       <router-link to="/media"><i class="fa fa-2x fa-pie-chart" aria-hidden="true"></i><span class="sidebar-link">Media</span></router-link>
-      <ul v-bind:class="{ active: $router.currentRoute.name == 'Media' }" class="sidebar__nav-submenu">
+      <ul :class="{ active: $router.currentRoute.name == 'Media' }" class="sidebar__nav-submenu">
         <li class="sidebar__nav-submenu-item">
           <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Dashboard Summary</span></a>
         </li>
@@ -61,15 +61,47 @@
         </li>
       </ul>
     </li>
-    <li v-bind:class="{ active: $router.currentRoute.name == 'ClassOfTrade' }">
+    <li :class="{ active: $router.currentRoute.name == 'ClassOfTrade' }" class="sidebar__nav-item">
       <router-link to="/class-of-trade"><i class="fa fa-2x fa-building" aria-hidden="true"></i><span class="sidebar-link">Class of Trade</span></router-link>
-      <ul v-bind:class="{ active: $router.currentRoute.name == 'ClassOfTrade' }" class="sidebar__nav-submenu">
+      <ul :class="{ active: $router.currentRoute.name == 'ClassOfTrade' }" class="sidebar__nav-submenu">
         <li class="sidebar__nav-submenu-item">
           <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Media share Mfr vs. Category</span></a>
+        </li>
+        <li class="sidebar__nav-submenu-item">
           <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Media share Mfr vs. Sector</span></a>
+        </li>
+        <li class="sidebar__nav-submenu-item">
           <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Media share Mfr vs. Segment</span></a>
         </li>
       </ul>
+    </li>
+    <li :class="{ active: $router.currentRoute.name == 'Paperless' }" class="sidebar__nav-item">
+      <router-link to="/paperless"><i class="fa fa-2x fa-building" aria-hidden="true"></i><span class="sidebar-link">Paperless</span></router-link>
+<!--       <ul :class="{ active: $router.currentRoute.name == 'Paperless' }" class="sidebar__nav-submenu">
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Item</span></a>
+        </li>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Item</span></a>
+        </li>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Item</span></a>
+        </li>
+      </ul> -->
+    </li>
+    <li :class="{ active: $router.currentRoute.name == 'RedemptionTrends' }" class="sidebar__nav-item">
+      <router-link to="/redemption-trends"><i class="fa fa-2x fa-building" aria-hidden="true"></i><span class="sidebar-link">Redemption Trends</span></router-link>
+<!--       <ul :class="{ active: $router.currentRoute.name == 'RedemptionTrends' }" class="sidebar__nav-submenu">
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Item</span></a>
+        </li>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Item</span></a>
+        </li>
+        <li class="sidebar__nav-submenu-item">
+          <a href="#"><i class="fa fa-2x fa-bullseye" aria-hidden="true"></i><span>Item</span></a>
+        </li>
+      </ul> -->
     </li>
   </ul>
 </div>
