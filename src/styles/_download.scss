@@ -1,38 +1,37 @@
 .download {
-  margin-bottom: -60px;
+  margin-bottom: -120px;
 }
 .download-component {
+  z-index: 1;
   background: #498fe1;
   color: white;
-  width: 140px;
-  height: 70px;
+  height: 65px;
   border-radius: 5px;
   text-align: center;
   padding:0 10px;
-  margin-top: 15px;
-  margin-bottom: 30px;
+  margin-top: 50px;
+  margin-right: -40px;
   position: relative;
+  box-shadow: 1px 1px 1px 0px black;
+  float: left;
 }
 
 .download-component::after {
     content: " ";
     position: absolute;
     bottom: 100%;  /* At the top of the tooltip */
-    left: 85%;
+    right: 15px;
     margin-left: -10px;
     border-width: 15px 10px;
     border-style: solid;
     border-color: transparent transparent #498fe1 transparent;
 }
 
-.downloadButton {
-  margin-left: 105px;
-}
 
 .download-component .iconContainer {
   font-size: 14px !important;
-  padding: 10px 5px;
-  width: 33%;
+  padding: 5px;
+  width: 40px;
   float: left;
 }
 

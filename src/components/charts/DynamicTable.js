@@ -3,13 +3,15 @@ import * as d3 from 'd3'
 import FilterModal from 'src/components/charts/FilterModal'
 import TableContent from 'src/components/charts/TableContent'
 import services from '../../modules/services';
+import Download from '../layout/Download'
 
 export default {
   name: 'dynamic-table',
   template: require('components/charts/DynamicTable.html'),
   components: {
     FilterModal,
-    TableContent
+    TableContent,
+    Download
   },
   props: {
     categories: {
@@ -21,7 +23,8 @@ export default {
     return {
       isShow: false,
       tableData: {},
-      model: nch.model
+      model: nch.model,
+      showDownloadOptions: false
     }
   },
   watch: {

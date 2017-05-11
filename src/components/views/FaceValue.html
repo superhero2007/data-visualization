@@ -9,13 +9,7 @@
           <span>
             Face Value Range: General Mills, Inc. vs. Comparables
           </span>
-          <span class='download' >
-            <span class='downloadButton'>
-              <i class='fa fa-download fa-6' aria-hidden='true' v-on:click='showDownloadOptions = !showDownloadOptions'>
-              </i>
-            </span>
-            <download v-if='showDownloadOptions' firstChart='stackedBarChart' secondChart='pieChart'></download>
-          </span>
+          <download pdf-enabled="true" csv-enabled="true" png-enabled="true"></download>
         </view-header>
 
         <div class='col-md-6'>

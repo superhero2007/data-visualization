@@ -4,6 +4,8 @@ import Pie from '../charts/Pie'
 import Bar from '../charts/Bar'
 import DashboardSummary from '../layout/DashboardSummary'
 import PageFooter from '../layout/PageFooter'
+import Download from '../layout/Download'
+import ViewHeader from '../layout/ViewHeader'
 
 export default {
   name: 'piecharts',
@@ -14,7 +16,9 @@ export default {
     Pie,
     Bar,
     DashboardSummary,
-    PageFooter
+    PageFooter,
+    Download,
+    ViewHeader
   },
   data () {
     return {

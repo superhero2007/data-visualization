@@ -1,6 +1,8 @@
 import Navbar from '../layout/Navbar'
 import Sidebar from '../layout/Sidebar'
 import DashboardSummary from '../layout/DashboardSummary'
+import Download from '../layout/Download'
+import ViewHeader from '../layout/ViewHeader'
 import PageFooter from '../layout/PageFooter'
 import Pie from '../charts/Pie'
 import StackedBar from '../charts/StackedBar'
@@ -14,7 +16,10 @@ export default {
     DashboardSummary,
     PageFooter,
     Pie,
-    StackedBar
+    StackedBar,
+    ViewHeader,
+    PageFooter,
+    Download
   },
   data () {
     return {
