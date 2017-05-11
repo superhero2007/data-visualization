@@ -5,13 +5,26 @@
     <div class="main">
       <dashboard-summary></dashboard-summary>
 
-      <div class="page-content" v-if="view == 'bipartite'">
-        <h1 class="page-header">Bilateral Data</h1>
+      <div class='page-content gradient-background'  v-if="view == 'bipartite'">
+        <view-header>
+          <span>
+            <i class="fa fa-globe"></i>Geography: Redemption Count by State
+          </span>
+          <download pdf-enabled="true" csv-enabled="true" png-enabled="true"></download>
+        </view-header>
+
         <bipartite></bipartite>
       </div>
 
       <div class="page-content" v-if="view == 'state'">
-        <h1 class="page-header">State Data</h1>
+
+        <view-header>
+          <span>
+            <i class="fa fa-globe"></i>Geographic: Avg Coupons Redeemed per Store by State Mfr vs. All Others
+          </span>
+          <download pdf-enabled="true" csv-enabled="true" png-enabled="true"></download>
+        </view-header>
+
         <div class="col-md-12">
           <geo title="All Manufacturers" geoId="allGeo" graphWidth="960" graphHeight="510"></geo>
         </div>

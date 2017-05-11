@@ -4,6 +4,8 @@ import DashboardSummary from '../layout/DashboardSummary'
 import Geo from '../charts/Geo'
 import DynamicTable from '../charts/DynamicTable'
 import PageFooter from '../layout/PageFooter'
+import Download from '../layout/Download'
+import ViewHeader from '../layout/ViewHeader'
 
 import services from 'src/modules/services';
 
@@ -18,13 +20,16 @@ export default {
     Geo,
     DynamicTable,
     DashboardSummary,
+    Download,
+    ViewHeader,
     PageFooter,
     vSelect
   },
   data () {
     return {
       selected: 'Air Fresheners & Candles',
-      model: nch.model
+      model: nch.model,
+      showDownloadOptions: false
     }
   },
   computed: {

@@ -1,6 +1,8 @@
 import Navbar from '../layout/Navbar'
 import Sidebar from '../layout/Sidebar'
 import DashboardSummary from '../layout/DashboardSummary'
+import Download from '../layout/Download'
+import ViewHeader from '../layout/ViewHeader'
 import PageFooter from '../layout/PageFooter'
 
 export default {
@@ -10,7 +12,9 @@ export default {
     Navbar,
     Sidebar,
     DashboardSummary,
-    PageFooter
+    ViewHeader,
+    PageFooter,
+    Download
   },
   data () {
     return {

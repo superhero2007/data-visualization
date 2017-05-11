@@ -4,6 +4,8 @@ import DashboardSummary from '../layout/DashboardSummary'
 import Geo from '../charts/Geo'
 import Bipartite from '../charts/Bipartite'
 import PageFooter from '../layout/PageFooter'
+import Download from '../layout/Download'
+import ViewHeader from '../layout/ViewHeader'
 
 export default {
   name: 'geographic',
@@ -15,7 +17,9 @@ export default {
     DashboardSummary,
     Geo,
     Bipartite,
-    PageFooter
+    PageFooter,
+    Download,
+    ViewHeader
   },
   data () {
     return {
