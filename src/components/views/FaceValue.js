@@ -23,7 +23,7 @@ export default {
   data () {
     return {
       model: nch.model,
-      show: false
+      showDownloadOptions: false
     }
   }
 }

@@ -11,13 +11,13 @@
           </span>
           <span class='download' >
             <span class='downloadButton'>
-              <i class='fa fa-download fa-6' aria-hidden='true' v-on:click='show = !show'>
+              <i class='fa fa-download fa-6' aria-hidden='true' v-on:click='showDownloadOptions = !showDownloadOptions'>
               </i>
             </span>
-            <download v-if='show' firstChart='stackedBarChart' secondChart='pieChart'></download>
+            <download v-if='showDownloadOptions' firstChart='stackedBarChart' secondChart='pieChart'></download>
           </span>
         </view-header>
-        
+
         <div class='col-md-6'>
           <stacked-bar></stacked-bar>
         </div>

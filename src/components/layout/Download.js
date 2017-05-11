@@ -1,5 +1,4 @@
-import {saveSvgAsPng, svgAsPngUri } from 'save-svg-as-png'
-// import {createPdf} from 'pdfmake'
+import {saveSvgAsPng} from 'save-svg-as-png'
 
 export default {
   name: 'download',
@@ -11,34 +10,15 @@ export default {
     }
   },
   methods: {
-  	csvClick: function(firstChart, secondChart)
-  	{
-  		console.log('csvClick')
+  	csvClick: function()	{
+  		console.log('TODO: implement CSV download')
   	},
-  	pngClick: function(firstChart, secondChart)
-  	{
-  		saveSvgAsPng(document.getElementById(firstChart), firstChart + '.png')
-  		saveSvgAsPng(document.getElementById(secondChart), secondChart + '.png')
+  	pngClick: function()	{
+  		saveSvgAsPng(document.getElementById(this.firstChart), this.firstChart + '.png')
+  		saveSvgAsPng(document.getElementById(this.secondChart), this.secondChart + '.png')
   	},
-  	pdfClick: function(firstChart, secondChart)
-  	{
-  		var buffer = document.getElementById(firstChart)
-  		svgAsPngUri(buffer,{}, function(uri){
-  			console.log(uri)
-  			//var pdfmake = require("pdfmake")
-  			var docDefinition = {
-	  			content: [
-	  				{
-	  					image: uri
-	  				}
-  				],
-  				images: {
-  					mySuperImage:uri
-  				}
-  			}
-  			//pdfmake.createPdf(docDefinition).download()
-  		})
-  		console.log('pdf')
+  	pdfClick: function()	{
+      console.log('TODO: implement PDF download')
   	}
   }
 }
