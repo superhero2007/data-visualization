@@ -15,7 +15,7 @@ export default {
 
   watch: {
     model: {
-      handler:function(val, oldVal){
+      handler:function(val, oldVal) {
         this.render()
       },deep: true
     }
@@ -23,8 +23,7 @@ export default {
 
   mounted() {
     console.log('Stacked Bar mounted: ')
-    if(this.groupByField == 'facevalue')
-    {
+    if(this.groupByField == 'facevalue') {
       services.getStackedBarChartData().then((response) => {
         this.stackedData = response
         this.render()
@@ -32,8 +31,7 @@ export default {
         console.log('Stacked Bar promise catch:' + message)
       })
     }
-    else if(this.groupByField == 'productmoved')
-    {
+    else if(this.groupByField == 'productmoved') {
       services.getProductMovedPieData().then((response) => {
         this.stackedData = response
         this.render()
@@ -65,6 +63,30 @@ export default {
         height = +svg.attr('height') - margin.top - margin.bottom,
         g = svg.append('g').attr('transform', 'translate(' + 200 + ',' + margin.top + ')')
 
+      var keys 
+      if(groupBy == 'facevalue') {
+        keys= ['$1.00 +', '$0.76 - $1.00', '$0.40 - $0.75', '< $0.40']
+      }
+      else if(groupBy == 'productmoved') {
+        keys = Object.keys(responseData[0]).slice(1)
+      }
+
+      for (var i = 0; i < responseData.length; i++) {
+        var t = 0
+        for (var j in responseData[i]) {
+          if(j != 'mfrname')
+            t += responseData[i][j]
+        }
+        if(groupBy == 'facevalue') {
+          for (var j in responseData[i]) {
+            if(j != 'mfrname')
+              responseData[i][j] = responseData[i][j] / t * 100
+          }
+          t = 100
+        }
+        responseData[i].total = t
+      }
+
       var x = d3.scaleBand()
         .rangeRound([0, width - 400])
         .paddingInner(0.05)
@@ -76,65 +98,27 @@ export default {
       var z = d3.scaleOrdinal()
         .range(['#5B90C6', '#CE6660', '#AAC66C', '#927DB2'])
 
-      var keys 
-      if(groupBy == 'facevalue') {
-        keys= ['$1.00 +', '$0.76 - $1.00', '$0.40 - $0.75', '< $0.40']
-      }
-      else if(groupBy == 'productmoved') {
-        keys = Object.keys(responseData[0]).slice(1)
-      }
-
-      var length = keys.length
-
-      for (var i = 0; i < responseData.length; i++) {
-        var t = 0
-        for (var j in responseData[i]) {
-
-          if(j != 'mfrname')
-            t += responseData[i][j]
-        }
-        if(groupBy == 'facevalue') {
-          for (var j in responseData[i]) {
-            if(j != 'mfrname')
-              responseData[i][j]= responseData[i][j] / t * 100
-          }
-          t = 100
-        }
-        responseData[i].total = t
-      }
-
       responseData.sort(function(a, b) { return b.total - a.total })
       x.domain(responseData.map(function(d) { return d.mfrname }))
       y.domain([d3.max(responseData, function(d) { return d.total }),0]).nice()
       z.domain(keys)
 
-      // filters go in defs element
       var defs = svg.append('defs')
-
-      // create filter with id #drop-shadow
-      // height=130% so that the shadow is not clipped
       var filter = defs.append('filter')
           .attr('id', 'drop-shadow')
           .attr('height', '130%')
 
-      // SourceAlpha refers to opacity of graphic that this filter will be applied to
-      // convolve that with a Gaussian with standard deviation 3 and store result
-      // in blur
       filter.append('feGaussianBlur')
           .attr('in', 'SourceAlpha')
           .attr('stdDeviation', 2)
           .attr('result', 'blur')
 
-      // translate output of Gaussian blur to the right and downwards with 2px
-      // store result in offsetBlur
       filter.append('feOffset')
           .attr('in', 'blur')
           .attr('dx', 1)
           .attr('dy', 0)
           .attr('result', 'offsetBlur')
 
-      // overlay original SourceGraphic over translated blurred opacity by using
-      // feMerge filter. Order of specifying inputs is important!
       var feMerge = filter.append('feMerge')
 
       feMerge.append('feMergeNode')
@@ -142,153 +126,17 @@ export default {
       feMerge.append('feMergeNode')
           .attr('in', 'SourceGraphic')
 
-      if(groupBy == 'productmoved') {
-        var axisData = y.ticks()
+      this.renderBar(g, height, x, y, z, responseData, keys)
 
-        g.append('g')
-          .selectAll('g')
-          .data(axisData)
-          .enter().append('line')
-          .attr('y1', function (d) { return y(d) })
-          .attr('y2', function (d) { return y(d) })
-          .attr('x1', 70)
-          .attr('x2', 470 )
-          .attr('stroke', 'grey')
-          .style('stroke-dasharray','5, 5')
-
-        g.append('g')
-          .selectAll('g')
-          .data(axisData)
-          .enter().append('text')
-          .attr('y', function (d) { return y(d) + 5 })
-          .attr('x', 50)
-          .text(function(d) { return d })
-          .style('text-anchor', 'end')
-          .attr('fill', 'grey')
-      }
-
-      g.append('g')
-        .selectAll('g')
-        .data(d3.stack().keys(keys)(responseData))
-        .enter().append('g')
-        .attr('class','oneRect')
-        .attr('fill', function(d) { return z(d.key) })
-        .selectAll('rect')
-        .data(function(d) { return d })
-        .enter().append('rect')
-        .attr('x', function(d, i) { return x(d.data.mfrname) + i * 50 + 120 })
-        .attr('y', function(d) {
-          return y(d[1]) 
-        })
-        .attr('height', function(d) { 
-          return  (((height - 80 - (y(d[1]- d[0])) > 3)?(height - 83 - (y(d[1]- d[0]))):(0)) )
-        })
-        .attr('width', x.bandwidth())
-        .attr('stroke', 'white')
-        .attr('stroke-width', '2')
-        .style('filter', 'url(#drop-shadow)')
-
-      g.append('g')
-        .selectAll('g')
-        .data(d3.stack().keys(keys)(responseData))
-        .enter().append('g')
-        .selectAll('g')
-        .data(function(d) { return d })
-        .enter().append('text')
-        .attr('x', function (d, i) { return x.bandwidth()/2 + x(d.data.mfrname) + i * 50 + 120 })
-        .style('text-anchor', 'middle')
-        .style('font-weight', 'bold')
-        .attr('y', function(d) {
-          return y(d[1]/2 + d[0]/2) 
-        })
-        .text(function(d) {
-          if((d[1]-d[0])/d.data.total > 0.005)
-            return ((groupBy == 'productmoved')?(d[1]-d[0]):(d3.format('.0%')((d[1]-d[0])/d.data.total)))
-          else
-            return ''
-        })
-        .attr('fill','black')      
-
-      g.append('g')
-        .selectAll('text')
-        .data(responseData)
-        .enter().append('text')
-        .attr('x', function (d, i) { return x.bandwidth()/2 + x(d.mfrname) + i * 50 + 120 })
-        .attr('font-weight', 'bold')
-        .style('text-anchor', 'middle')
-        .attr('y', height - 40)
-        .text(function(d) { return d.mfrname })
-
-
-      // g.append('g')
-      //   .attr('class', 'axis')
-      //   .attr('transform', 'translate(0,' + height + ')')
-      //   .call(d3.axisBottom(x))
-
-      // g.append('g')
-      //   .attr('class', 'axis')
-      //   .call(d3.axisLeft(y).ticks(null, 's'))
-      //   .append('text')
-      //   .attr('x', 2)
-      //   .attr('y', y(y.ticks().pop()) + 0.5)
-      //   .attr('dy', '0.32em')
-      //   .attr('fill', '#000')
-      //   .attr('font-weight', 'bold')
-      //   .attr('text-anchor', 'start')
-      //   .text('Face Value Ranges')
       g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-
-      g.append('g')
-        .append('text')
-        .attr('x', 10)
-        .attr('y', 0)
-        .attr('dy', '0.32em')
-        .attr('fill', '#000')
-        .attr('font-weight', 'bold')
-        .attr('text-anchor', 'start')
-        .text(this.labelField)
-
-      var legend = g.append('g')
-        .attr('font-family', 'sans-serif')
-        .attr('font-size', 14)
-        .attr('font-weight', 'bold')
-        .attr('text-anchor', 'start')
-        .selectAll('g')
-        .data(keys.slice())
-        .enter().append('g')
-        .attr('transform', function(d, i) {
-          return 'translate(20,' + ( 40 * (length - i) - 20) + ')'
-        })
-
-      legend.append('circle')
-        .attr('r', 15)
-        .attr('cx', 0)
-        .attr('cy', 20)
-        .attr('fill', z)
-        .attr('stroke', 'white')
-        .attr('stroke-width', '3px')
-
-      legend.append('text')
-        .attr('x', 25)
-        .attr('y', 20)
-        .attr('dy', '0.32em')
-        .text(function(d) { return d })
-
-      legend.append('line')
-        .attr('y1', 35)
-        .attr('y2', 35)
-        .attr('x1', 25)
-        .attr('x2', 125)
-        .attr('stroke', 'grey')
-        .style('stroke-dasharray','5,5')
+      this.renderLegend(g, keys, z)
     },
+
     getDataForMediaTypes(items, selectedMedia) {
       var responseData = []
       for (var i = 0; i < items.length; i++) {
         for (var j = 0; j < responseData.length; j++) {
-          if((responseData[j].mfrname == items[i].mfrname) && (selectedMedia == '' || selectedMedia == items[i].medianame))
-          {
-
+          if((responseData[j].mfrname == items[i].mfrname) && (selectedMedia == '' || selectedMedia == items[i].medianame)) {
             if(items[i].price < 0.4)
               responseData[j]['< $0.40'] += items[i].totalcouponredemption
             else if(items[i].price <= 0.75)
@@ -300,8 +148,7 @@ export default {
             break
           }
         }
-        if((j == responseData.length) && (selectedMedia == '' || selectedMedia == items[i].medianame))
-        {
+        if((j == responseData.length) && (selectedMedia == '' || selectedMedia == items[i].medianame)) {
           var newItem = {
             'mfrname' : items[i].mfrname,
             '< $0.40' : 0,
@@ -346,6 +193,158 @@ export default {
       }
 
       return responseData
+    },
+
+    renderLegend(g, keys, z) {
+      var length = keys.length
+
+      g.append('g')
+        .append('text')
+        .attr('x', 10)
+        .attr('y', 0)
+        .attr('dy', '0.32em')
+        .attr('fill', '#000')
+        .attr('font-weight', 'bold')
+        .attr('text-anchor', 'start')
+        .text(this.labelField)
+
+      var legend = g.append('g')
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', 14)
+        .attr('font-weight', 'bold')
+        .attr('text-anchor', 'start')
+        .selectAll('g')
+        .data(keys.slice())
+        .enter().append('g')
+        .attr('transform', function(d, i) {
+          return 'translate(20,' + ( 40 * (length - i) - 20) + ')'
+        })
+
+      legend.append('circle')
+        .attr('r', 15)
+        .attr('cx', 0)
+        .attr('cy', 20)
+        .attr('fill', z)
+        .attr('stroke', 'white')
+        .attr('stroke-width', '3px')
+
+      legend.append('text')
+        .attr('x', 25)
+        .attr('y', 20)
+        .attr('dy', '0.32em')
+        .text(function(d) {
+          return d
+        })
+
+      legend.append('line')
+        .attr('y1', 35)
+        .attr('y2', 35)
+        .attr('x1', 25)
+        .attr('x2', 125)
+        .attr('stroke', 'grey')
+        .style('stroke-dasharray','5, 5')
+    },
+
+    renderBar(g, height, x, y, z, responseData, keys) {
+      var groupBy = this.groupByField
+      if(groupBy == 'productmoved') {
+        var axisData = y.ticks()
+
+        g.append('g')
+          .selectAll('g')
+          .data(axisData)
+          .enter().append('line')
+          .attr('y1', function (d) {
+            return y(d)
+          })
+          .attr('y2', function (d) {
+            return y(d)
+          })
+          .attr('x1', 70)
+          .attr('x2', 470 )
+          .attr('stroke', 'grey')
+          .style('stroke-dasharray','5, 5')
+
+        g.append('g')
+          .selectAll('g')
+          .data(axisData)
+          .enter().append('text')
+          .attr('y', function (d) {
+            return y(d) + 5
+          })
+          .attr('x', 50)
+          .text(function(d) {
+            return d
+          })
+          .style('text-anchor', 'end')
+          .attr('fill', 'grey')
+      }
+
+      g.append('g')
+        .selectAll('g')
+        .data(d3.stack().keys(keys)(responseData))
+        .enter().append('g')
+        .attr('class','oneRect')
+        .attr('fill', function(d) {
+          return z(d.key)
+        })
+        .selectAll('rect')
+        .data(function(d) {
+          return d
+        })
+        .enter().append('rect')
+        .attr('x', function(d, i) {
+          return x(d.data.mfrname) + i * 50 + 120
+        })
+        .attr('y', function(d) {
+          return y(d[1])
+        })
+        .attr('height', function(d) {
+          return  (((height - 80 - (y(d[1]- d[0])) > 3)?(height - 83 - (y(d[1]- d[0]))):(0)) )
+        })
+        .attr('width', x.bandwidth())
+        .attr('stroke', 'white')
+        .attr('stroke-width', '2')
+        .style('filter', 'url(#drop-shadow)')
+
+      g.append('g')
+        .selectAll('g')
+        .data(d3.stack().keys(keys)(responseData))
+        .enter().append('g')
+        .selectAll('g')
+        .data(function(d) {
+          return d
+        })
+        .enter().append('text')
+        .attr('x', function (d, i) {
+          return x.bandwidth()/2 + x(d.data.mfrname) + i * 50 + 120
+        })
+        .style('text-anchor', 'middle')
+        .style('font-weight', 'bold')
+        .attr('y', function(d) {
+          return y(d[1]/2 + d[0]/2)
+        })
+        .text(function(d) {
+          if((d[1]-d[0])/d.data.total > 0.005)
+            return ((groupBy == 'productmoved')?(d[1]-d[0]):(d3.format('.0%')((d[1]-d[0])/d.data.total)))
+          else
+            return ''
+        })
+        .attr('fill', 'black')
+
+      g.append('g')
+        .selectAll('text')
+        .data(responseData)
+        .enter().append('text')
+        .attr('x', function (d, i) {
+          return x.bandwidth()/2 + x(d.mfrname) + i * 50 + 120
+        })
+        .attr('font-weight', 'bold')
+        .style('text-anchor', 'middle')
+        .attr('y', height - 40)
+        .text(function(d) {
+          return d.mfrname
+        })
     }
   }
 }

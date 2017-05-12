@@ -438,11 +438,11 @@ export default {
 
       arc.append('text')
         .attr('font-weight', 'bold')
-        .attr('transform', function(d) { 
-          return 'translate(' + label.centroid(d) + ')' 
+        .attr('transform', function(d) {
+          return 'translate(' + label.centroid(d) + ')'
         })
-        .text(function(d) { 
-          return d3.format('.0%')(d.data.totalcouponredemption / total) 
+        .text(function(d) {
+          return d3.format('.0%')(d.data.totalcouponredemption / total)
         })
         .attr('fill','white')
 
