@@ -5,7 +5,7 @@ import services from '../../modules/services';
 
 export default {
   name: 'geo',
-  props: ['title', 'geoId', 'graphWidth', 'graphHeight'],
+  props: ['title', 'geoId', 'graphWidth', 'graphHeight', 'manufacturer'],
   template: require('components/charts/Geo.html'),
   data () {
     return {
@@ -17,7 +17,7 @@ export default {
     }
   },
   mounted() {
-    services.getRedemptionsByState().then( this.render ).catch( (message) => { console.log('Geo promise catch:' + message) });
+    services.getRedemptionsByState( this.title ).then( this.render ).catch( (message) => { console.log('Geo promise catch:' + message) });
   },
   methods: {
 
@@ -38,7 +38,9 @@ export default {
 
       var path = d3.geoPath().projection(projection);
       var svg = d3.select("#" + this.geoId);
-      var color = d3.scaleLinear().range(["rgb(213,222,217)","rgb(69,173,168)","rgb(84,36,55)","rgb(217,91,67)"]);
+      var colorValues = ["#dae1f3", "#708fa4", "#2e5492", "#0c2244"];
+      //var color = d3.scaleLinear().range(["rgb(213,222,217)","rgb(69,173,168)","rgb(84,36,55)","rgb(217,91,67)"]);
+      var color = d3.scaleLinear().range( colorValues );
 
 
       var states = Object.keys( stateMap );
@@ -95,7 +97,8 @@ export default {
               return color(value);
             } else {
               //If value is undefined…
-              return "rgb(213,222,217)";
+              //return "rgb(213,222,217)";
+              return "#d4d4d4"; // default
             }
           })
           .on("mouseover", function(d) {

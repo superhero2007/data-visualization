@@ -1,0 +1,111 @@
+{
+  "_items": [{
+    "id": "dashboard",
+    "name": "Dashboard",
+    "route": "/",
+    "icon": "fa-tachometer",
+    "label": "Dashboard"
+  },
+  {
+    "id": "fave-value",
+    "name": "FaceValue",
+    "route": "/face-value",
+    "icon": "fa-dollar",
+    "label": "Face Value",
+    "links": [
+      {
+        "label": "Face value range Mfr vs. Comparables",
+        "icon": "fa-bullseye",
+        "route": "#"
+      },
+      {
+        "label": "Face value range Mfr vs. Comparables",
+        "icon": "fa-balance-scale",
+        "route": "#"
+      }
+    ]
+  },
+  {
+    "id": "product-moved",
+    "name": "ProductMoved",
+    "route": "/product-moved",
+    "icon": "fa-cubes",
+    "label": "Product Moved",
+    "links": [
+      {
+        "label": "YoY Product Moved Indexed to Category",
+        "icon": "fa-calendar",
+        "route": "#"
+      }
+    ]
+  },
+  {
+    "id": "geographic",
+    "name": "Geographic",
+    "route": "/geographic/bipartite",
+    "icon": "fa-globe",
+    "label": "Geography",
+    "links": [
+      {
+        "label": "Redemption Count by State",
+        "icon": "fa-bullseye",
+        "route": "/geographic/bipartite"
+      },
+      {
+        "label": "Avg Coupons Redeemed per Store by State Mfr vs. All Others",
+        "icon": "fa-pie-chart",
+        "route": "/geographic/state"
+      },
+      {
+        "label": "Avg Coupons Redeemed per Store by Market Mfr vs. All Others",
+        "icon": "fa-pie-chart",
+        "route": "#"
+      }
+    ]
+  },
+  {
+    "id": "media",
+    "name": "Media",
+    "route": "/media",
+    "icon": "fa-pie-chart",
+    "label": "Media"
+  },
+  {
+    "id": "class-of-trade",
+    "name": "ClassOfTrade",
+    "route": "/class-of-trade",
+    "icon": "fa-building",
+    "label": "Class of Trade",
+    "links": [
+      {
+        "label": "Media share Mfr vs. Category",
+        "icon": "fa-bullseye",
+        "route": "#"
+      },
+      {
+        "label": "Media share Mfr vs. Sector",
+        "icon": "fa-bullseye",
+        "route": "#"
+      },
+      {
+        "label": "Media share Mfr vs. Segment",
+        "icon": "fa-bullseye",
+        "route": "#"
+      }
+    ]
+  },
+  {
+    "id": "paperless",
+    "name": "Paperless",
+    "route": "/paperless",
+    "icon": "fa-building",
+    "label": "Paperless"
+  },
+  {
+    "id": "redemption-trends",
+    "name": "RedemptionTrends",
+    "route": "/redemption-trends",
+    "icon": "fa-building",
+    "label": "Redemption Trends"
+  }]
+}

@@ -9,12 +9,24 @@ export default {
   data () {
     return {
       model: nch.model,
-      showCategoriesModal: false
+      showCategoriesModal: false,
+      segment: false,
+      segmentNames: [
+        'Other',
+        'Food'
+      ]
     }
   },
   computed: {
     currentView() {
       return this.$router.currentRoute.name;
+    },
+    segmentName() {
+      if (this.segment) {
+        return this.segmentNames[0]
+      }
+
+      return this.segmentNames[1]
     }
   },
   mounted() {

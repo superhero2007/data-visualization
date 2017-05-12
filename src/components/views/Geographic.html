@@ -25,9 +25,15 @@
           <download pdf-enabled="true" csv-enabled="true" png-enabled="true"></download>
         </view-header>
 
-        <div class="col-md-12">
-          <geo title="All Manufacturers" geoId="allGeo" graphWidth="960" graphHeight="510"></geo>
+        <div class="row" style="margin-left: 0; margin-right: 0">
+          <div class="col-md-6">
+            <geo :title="model.currentManufacturer" geo-id="geographicSingleManufacturer" graph-width="460" graph-height="210"></geo>
+          </div>
+          <div class="col-md-6">
+            <geo title="Comparables" geo-id="geographicComparables" graph-width="460" graph-height="210"></geo>
+          </div>
         </div>
+
       </div>
       <page-footer></page-footer>
     </div>

@@ -6,10 +6,10 @@
     </select>
   </div>
   <div class="summary__block">
-    <p class="summary__title">Segment: Food</p>
+    <p class="summary__title">Segment: {{segmentName}}</p>
     <label class="switch">
-      <input type="checkbox" class="switch__input">
-      <span class="switch__label" data-on="Food" data-off="Other"></span>
+      <input type="checkbox" v-model="segment" value="true" class="switch__input">
+      <span class="switch__label"></span>
     </label>
   </div>
   <div class="summary__block">
@@ -24,8 +24,9 @@
       <option v-for="classOfTrade in model.classOfTradeValues" :value="classOfTrade">{{classOfTrade.classoftrade}}</option>
     </select>
   </div>
-  <div class="summary__block">
-    <button class="summary__button" @click="showCategoriesModal = true"><i class="fa fa-sliders" aria-hidden="true"></i> Filters</button>
+  <div class="summary__block summary__block-button" v-if="currentView != 'ClassOfTrade'">
+    <p class="summary__title">Category</p>
+    <button class="summary__button" @click="showCategoriesModal = true"><i class="fa fa-sliders" aria-hidden="true"></i> Category Filter</button>
   </div>
   <filter-modal :show="showCategoriesModal" :on-close="hideModal" :categories="model.categories" :on-save="saveModal"></filter-modal>
 </div>

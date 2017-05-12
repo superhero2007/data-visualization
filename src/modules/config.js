@@ -15,7 +15,8 @@ var nch = {
       value: "",
       flag: false
     },
-    classOfTradeValues: []
+    classOfTradeValues: [],
+    sidebarItems: []
   }
 };
 

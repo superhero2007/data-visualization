@@ -12,6 +12,7 @@ require('../data/redemption-data.json')
 require('../data/pie-chart.json')
 require('../data/stacked-bar-chart.json')
 require('../data/stacked-bar-example.tsv')
+require('../data/sidebar-items.json')
 
 var services = {
   loadCategories: function() {
@@ -24,6 +25,23 @@ var services = {
             var categories = JSON.parse(response.text)
             //nch.model.categories = categories['_items']
             resolve(categories['_items'])
+          }
+          else if (response.status == 401) {
+            console.log('user not authorized')
+          }
+        })
+    })
+  },
+
+  loadSidebarItems: function() {
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/sidebar-items.json')
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+            var sidebarItems = JSON.parse(response.text)
+            resolve(sidebarItems['_items'])
           }
           else if (response.status == 401) {
             console.log('user not authorized')
@@ -103,11 +121,12 @@ var services = {
       })
   },
 
-  getRedemptionsByState: function () {
+  getRedemptionsByState: function ( manufacturer ) {
 
     return new Promise((resolve, reject) => {
       http
-        .get('/static/api/redemption-data.json')
+        .get('/static/api/pie-chart.json')
+        //.get('/static/api/redemption-data.json')
         .end(function (error, response) {
 
           if (response.status == 200) {
@@ -126,6 +145,10 @@ var services = {
               var stateName = nch.utils.getStateName(item['storestate'])
 
               if( stateName == null ) {
+                continue
+              }
+
+              if( manufacturer != 'Comparables' && manufacturer != item['mfrname'] ) {
                 continue
               }
 

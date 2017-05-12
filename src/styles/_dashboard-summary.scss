@@ -3,21 +3,25 @@
   padding: 15px 20px;
   box-shadow: inset 1px 4px 15px -6px rgba(0,0,0,1);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .summary__select {
-  width: 100%;
+  width: 250px;
   height: 35px;
   padding: 0 10px;
   border: 1px solid #eee;
 }
 
 .summary__block {
-    flex-grow: 1;
+    // flex-grow: 0;
     padding: 0 10px;
     // position: relative;
 }
+
+// .summary__block-button {
+//   flex-grow: 0;
+// }
 
 .summary__title {
     font-family: 'proxima_novaregular';
@@ -35,13 +39,16 @@
 .summary__button {
     -webkit-appearance: none;
     border-radius: 5px;
-    background-color: #fff;
-    color: $grey;
+    background-color: $blue;
+    color: $white;
     box-shadow: none;
-    border: 1px solid #eee;
+    border: 2px solid #eee;
     height: 35px;
-    min-width: 100px;
-    margin-top: 25px;
+    min-width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    // margin-top: 25px;
 
     .fa {
         position: relative;
@@ -55,11 +62,11 @@
   position: relative;
   display: block;
   vertical-align: top;
-  width: 100%;
+  width: 150px;
   height: 35px;
   padding: 3px;
   margin: 5px 0;
-  background-color: $light-grey;
+  background-color: $white;
   border-radius: 5px;
   // cursor: pointer;
 }
@@ -87,7 +94,6 @@
   transition: opacity .15s ease-out, background .15s ease-out;
   text-align: center;
   font-size: 18px;
-  border: 2px solid $light-grey;
 
   &:before,
   &:after {
@@ -107,6 +113,8 @@
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     color: $grey;
+    border-radius: 5px;
+    border: 2px solid $white;
   }
 
   &:before {
@@ -114,20 +122,23 @@
     left: 0;
     color: $white;
     background-color: $blue;
+    border-right-width: 1px;
   }
 
   &:after {
     // replace with more relavant icon
     content: '\f2cd';
     color: $grey;
+    background-color: $light-grey;
     // opacity: 0;
     left: 50%;
+    border-left-width: 1px;
   }
 }
 
 .switch__input:checked + .switch__label {
   &:before {
-    background-color: transparent;
+    background-color: $light-grey;
     color: $grey;
   }
 

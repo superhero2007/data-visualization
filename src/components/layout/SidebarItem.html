@@ -1,0 +1,14 @@
+<li :class="{ active: $router.currentRoute.name == item.name }" class="sidebar__nav-item" :id="item.id">
+  <router-link :to="item.route">
+    <i :class="'fa fa-2x ' + item.icon" aria-hidden="true"></i>
+    <span class="sidebar-link">{{item.label}}</span>
+  </router-link>
+  <ul v-if="item.links" :class="{ active: $router.currentRoute.name == item.name }" class="sidebar__nav-submenu">
+    <li v-for="sub in item.links" class="sidebar__nav-submenu-item">
+      <router-link :to="sub.route">
+        <i :class="'fa fa-2x ' + sub.icon" aria-hidden="true"></i>
+        <span>{{sub.label}}</span>
+      </router-link>
+    </li>
+  </ul>
+</li>
