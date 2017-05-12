@@ -61,7 +61,7 @@ export default {
         margin = {top: 20, right: 20, bottom: 30, left: 20},
         width = +svg.attr('width') - margin.left - margin.right,
         height = +svg.attr('height') - margin.top - margin.bottom,
-        g = svg.append('g').attr('transform', 'translate(' + 200 + ',' + margin.top + ')')
+        g = svg.append('g').attr('transform', 'translate(' + 180 + ',' + margin.top + ')')
 
       var keys 
       if(groupBy == 'facevalue') {
@@ -260,8 +260,8 @@ export default {
           .attr('y2', function (d) {
             return y(d)
           })
-          .attr('x1', 70)
-          .attr('x2', 470 )
+          .attr('x1', 60)
+          .attr('x2', 420 )
           .attr('stroke', 'grey')
           .style('stroke-dasharray','5, 5')
 
@@ -294,7 +294,7 @@ export default {
         })
         .enter().append('rect')
         .attr('x', function(d, i) {
-          return x(d.data.mfrname) + i * 50 + 120
+          return x(d.data.mfrname) + i * 30 + 90
         })
         .attr('y', function(d) {
           return y(d[1])
@@ -317,7 +317,7 @@ export default {
         })
         .enter().append('text')
         .attr('x', function (d, i) {
-          return x.bandwidth()/2 + x(d.data.mfrname) + i * 50 + 120
+          return x.bandwidth()/2 + x(d.data.mfrname) + i * 30 + 90
         })
         .style('text-anchor', 'middle')
         .style('font-weight', 'bold')
@@ -337,7 +337,7 @@ export default {
         .data(responseData)
         .enter().append('text')
         .attr('x', function (d, i) {
-          return x.bandwidth()/2 + x(d.mfrname) + i * 50 + 120
+          return x.bandwidth()/2 + x(d.mfrname) + i * 30 + 90
         })
         .attr('font-weight', 'bold')
         .style('text-anchor', 'middle')
