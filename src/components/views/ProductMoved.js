@@ -4,6 +4,8 @@ import DashboardSummary from '../layout/DashboardSummary'
 import Download from '../layout/Download'
 import ViewHeader from '../layout/ViewHeader'
 import PageFooter from '../layout/PageFooter'
+import Pie from '../charts/Pie'
+import StackedBar from '../charts/StackedBar'
 
 export default {
   name: 'productmoved',
@@ -12,6 +14,9 @@ export default {
     Navbar,
     Sidebar,
     DashboardSummary,
+    PageFooter,
+    Pie,
+    StackedBar,
     ViewHeader,
     PageFooter,
     Download

@@ -3,7 +3,7 @@
 }
 .download-component {
   z-index: 1;
-  background: #498fe1;
+  background: rgba(72,143,225,0.9);
   color: white;
   height: 65px;
   border-radius: 5px;
@@ -24,7 +24,7 @@
     margin-left: -10px;
     border-width: 15px 10px;
     border-style: solid;
-    border-color: transparent transparent #498fe1 transparent;
+    border-color: transparent transparent rgba(72,143,225,0.9) transparent;
 }
 
 

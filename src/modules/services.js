@@ -13,6 +13,7 @@ require('../data/pie-chart.json')
 require('../data/stacked-bar-chart.json')
 require('../data/stacked-bar-example.tsv')
 require('../data/sidebar-items.json')
+require('../data/product-moved-pie.json')
 
 var services = {
   loadCategories: function() {
@@ -306,6 +307,27 @@ var services = {
             // }
             //
             // resolve(responseData)
+          }
+          else if (response.status == 401) {
+            console.log('user not authorized')
+            reject('user not authorized')
+          }
+        });
+    });
+  },
+
+  getProductMovedPieData: function() {
+
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/product-moved-pie.json')
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+
+            var redemptionData = JSON.parse(response.text)
+            var items = redemptionData['_items']
+            resolve(items)
           }
           else if (response.status == 401) {
             console.log('user not authorized')
