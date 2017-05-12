@@ -330,7 +330,7 @@ export default {
           return lineHeight
         })
         .attr('x', -10)
-        .attr('width', width / 2)
+        .attr('width', ((groupBy == 'productmoved')?(230):(width / 2)))
         .attr('fill', function (d) {
           //return color(d.categoryname)
           return color(d[groupBy])
