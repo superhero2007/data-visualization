@@ -21,14 +21,11 @@ export default {
     services.getTimePeriodData().then( (response) => {
       this.timeperiodData = response
       console.log(this.timeperiodData)
-    }).catch( (message) => { console.log('Bar promise catch:' + message) })
+    }).catch( (message) => { console.log('TimePeriod promise catch:' + message) })
   },
   methods: {
     onAwayClick: function() {
   	  this.showTimePeriodOptions = false
-    },
-    onScroll: function(e, position){
-      this.position = position;
     }
   }
 }
