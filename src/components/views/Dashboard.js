@@ -7,9 +7,9 @@ import PageFooter from '../layout/PageFooter'
 import Download from '../layout/Download'
 import ViewHeader from '../layout/ViewHeader'
 
-import services from 'src/modules/services';
+import services from 'src/modules/services'
 
-import vSelect from "vue-select"
+import vSelect from 'vue-select'
 
 export default {
   name: 'home',
@@ -46,23 +46,26 @@ export default {
     }
   },
   mounted() {
-    console.log( "Dashboard mounted" );
+    console.log( 'Dashboard mounted' )
 
-    var element = document.getElementsByClassName("close")
-    for (var i = 0; i < element.length; i++) {
-      element[i].innerHTML = '<span class="fa-stack">  <i class="fa fa-circle fa-stack-2x"></i>    <i class="fa fa-times fa-stack-1x fa-inverse"></i>   </span>'
-    }
-    // console.log( this.model.categories );
+    this.consoleCallback()
+    // console.log( this.model.categories )
     services.loadCategories().then( (categories) => {
-      this.model.categories = categories;
-      // console.log( "cats loaded" );
-      // console.log(categories);
-    } ).catch( (message) => { console.log('Dashboard, loading categories promise catch:' + message) });
+      this.model.categories = categories
+      // console.log( 'cats loaded' )
+      // console.log(categories)
+    } ).catch( (message) => { console.log('Dashboard, loading categories promise catch:' + message) })
   },
 
   methods: {
     onCategorySelected: function (event) {
-      console.log( "category selected: " + this.selected );
+      console.log( 'category selected: ' + this.selected )
+    },
+    consoleCallback: function(val) {
+      var element = document.getElementsByClassName('close')
+      for (var i = 0; i < element.length; i++) {
+        element[i].innerHTML = "<span class='fa-stack'>  <i class='fa fa-circle fa-stack-2x'></i>    <i class='fa fa-times fa-stack-1x fa-inverse'></i>   </span>"
+      }
     }
   }
 }

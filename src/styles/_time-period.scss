@@ -1,0 +1,82 @@
+.timerperiodContent {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.timeperiodButton {
+  -webkit-appearance: none;
+  border-radius: 5px;
+  background-color: $blue;
+  color: $white;
+  box-shadow: none;
+  border: 2px solid #eee;
+  height: 35px;
+  min-width: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px !important;
+  padding: 4px 8px;
+  height: 36px;
+  display: inline-block;
+}
+
+.timeperiod-component {
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.9);
+  color: #69797d;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 2px;
+  position: relative;
+  box-shadow: 1px 1px 1px 0px black;
+  position: absolute;
+  height: 250px;
+  width: 340px;
+}
+
+.timeperiod-header {
+  font-size: 14px;
+}
+
+.timeperiod-subheader {
+  font-size: 10px;
+}
+
+.timeperiod-content {
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.timeperiod-button-container-subitem {
+  margin: 0px 5px;
+  margin-bottom: 10px;
+  width: 30%;
+  text-align: center;
+  padding: 5px 0px;
+  color: white;
+  background: $blue;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.timeperiod-button-container-item {
+  display: block;
+}
+
+.timeperiod-item {
+  width: 40px;
+  text-align: center;
+  display: inline-block;
+}
+
+/*The Wrapper*/
+.my-scrollbar{
+  width: 35%;
+  min-width: 300px;
+  max-height: 450px;
+}
+ 
+/*The Content*/
+.scroll-me{
+  min-width: 750px;
+}
