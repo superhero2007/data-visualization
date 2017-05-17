@@ -44,6 +44,16 @@
       "values": [
         {
           "year": 2017,
+          "month": "July",
+          "weeks": [1, 2]
+        },
+        {
+          "year": 2017,
+          "month": "June",
+          "weeks": [1, 2]
+        },
+        {
+          "year": 2017,
           "month": "May",
           "weeks": [1, 2]
         },
@@ -60,6 +70,11 @@
         {
           "year": 2017,
           "month": "February",
+          "weeks": [1, 2, 3, 4, 5]
+        },
+        {
+          "year": 2017,
+          "month": "Janauary",
           "weeks": [1, 2, 3, 4, 5]
         }
       ]
