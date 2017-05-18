@@ -1,9 +1,12 @@
 <div class="summary" id="dashboard_summary">
   <div class="summary__block">
     <p class="summary__title">Time Period</p>
-    <select class="summary__select" id="year-over-year">
-      <option value="">Year Over Year</option>
+    <select class="summary__select" id="year-over-year" v-model="timeperiodData">
+      <option value="0">Year over Year</option>
+      <option value="1">Quarter over Quarter</option>
+      <option value="2">Week over Week</option>
     </select>
+    <time-period :timeperiod-value = timeperiodData></time-period>
   </div>
   <div class="summary__block">
     <p class="summary__title">Segment: {{segmentName}}</p>

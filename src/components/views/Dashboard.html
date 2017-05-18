@@ -5,7 +5,7 @@
     <sidebar></sidebar>
     <div class="main">
       <dashboard-summary></dashboard-summary>
-      <v-select v-model="model.selectedCategories" multiple :options="categorynames"></v-select>
+      <v-select v-model="model.selectedCategories" multiple :options="categorynames" :on-change="consoleCallback"></v-select>
       <div class="page-content">
         <view-header>
           <span>

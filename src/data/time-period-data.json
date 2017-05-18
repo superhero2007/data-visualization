@@ -1,0 +1,83 @@
+{
+  "_items": [
+    {
+      "id": "year",
+      "label": "Year over Year",
+      "values": [
+        {
+          "year": 2014
+        },
+        {
+          "year": 2015
+        },
+        {
+          "year": 2016
+        }
+      ]
+    },
+    {
+      "id": "quarter",
+      "label": "Quarter over Quarter",
+      "values": [
+        {
+          "year": 2014,
+          "quarters": [0,2,3,4]
+        },
+        {
+          "year": 2015,
+          "quarters": [1,2,3,4]
+        },
+        {
+          "year": 2016,
+          "quarters": [1,2,3,4]
+        },
+        {
+          "year": 2017,
+          "quarters": [1]
+        }
+
+      ]
+    },
+    {
+      "id": "week",
+      "label": "Week over Week",
+      "values": [
+        {
+          "year": 2017,
+          "month": "July",
+          "weeks": [1, 2]
+        },
+        {
+          "year": 2017,
+          "month": "June",
+          "weeks": [1, 2]
+        },
+        {
+          "year": 2017,
+          "month": "May",
+          "weeks": [1, 2]
+        },
+        {
+          "year": 2017,
+          "month": "April",
+          "weeks": [1, 2, 3, 4]
+        },
+        {
+          "year": 2017,
+          "month": "March",
+          "weeks": [1, 2, 3, 4]
+        },
+        {
+          "year": 2017,
+          "month": "February",
+          "weeks": [1, 2, 3, 4, 5]
+        },
+        {
+          "year": 2017,
+          "month": "Janauary",
+          "weeks": [1, 2, 3, 4, 5]
+        }
+      ]
+    }
+  ]
+}
