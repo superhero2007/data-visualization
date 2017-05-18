@@ -11,6 +11,10 @@ export default class LocalDataService {
     services.loadPeriod1Gm().then( (response) => {
       this.period1GmData = response
       console.log("Period 1 GM data loaded, total records: " + this.period1GmData.length )
+      console.log(this.period1GmData[0])
+      console.log(this.period1GmData[100])
+      console.log(this.period1GmData[1000])
+      console.log('---------------------------------')
       //console.log(this.period1GmData)
     }).catch( (message) => { console.log('LocalDataService, loadPeriod1Gm promise catch:' + message) })
 

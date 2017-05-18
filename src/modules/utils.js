@@ -193,7 +193,7 @@ var utils = {
         result.push(obj);
       }
 
-      return JSON.stringify(result); //JSON
+      return result;
   }
 }
 
