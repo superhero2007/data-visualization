@@ -22,7 +22,7 @@ module.exports = {
     filename: '[name].js',
   },
   resolve: {
-    extensions: ['', '.js', '.vue','.css', '.json', '.tsv'],
+    extensions: ['', '.js', '.vue','.css', '.json', '.tsv', '.csv'],
     fallback: [path.join(__dirname, '../node_modules')],
     alias: {
       'vue': 'vue/dist/vue',
@@ -70,6 +70,10 @@ module.exports = {
       },
       {
         test: /\.tsv/,
+        loader: "file-loader?name=static/api/[name].[ext]"
+      },
+      {
+        test: /\.csv/,
         loader: "file-loader?name=static/api/[name].[ext]"
       },
       { test: /\.css$/,
