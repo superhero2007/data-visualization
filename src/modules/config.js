@@ -1,8 +1,6 @@
 var nch = {
   events: {},
-  services: {
-    dataService: null
-  },
+  services: {},
   views: {},
   model: {
     title: 'NCH',
