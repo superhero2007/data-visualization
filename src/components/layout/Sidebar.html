@@ -1,5 +1,5 @@
 <div class="sidebar">
   <ul class="sidebar__nav">
-    <sidebar-item v-for="item in model.sidebarItems" :item="item"></sidebar-item>
+    <sidebar-item :key="item" v-for="item in model.sidebarItems" :item="item"></sidebar-item>
   </ul>
 </div>

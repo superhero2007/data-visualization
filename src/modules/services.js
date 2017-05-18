@@ -14,6 +14,8 @@ require('../data/stacked-bar-chart.json')
 require('../data/stacked-bar-example.tsv')
 require('../data/sidebar-items.json')
 require('../data/product-moved-pie.json')
+require('../data/time-period-data.json')
+require('../data/help.json')
 
 var services = {
   loadCategories: function() {
@@ -43,6 +45,23 @@ var services = {
           if (response.status == 200) {
             var sidebarItems = JSON.parse(response.text)
             resolve(sidebarItems['_items'])
+          }
+          else if (response.status == 401) {
+            console.log('user not authorized')
+          }
+        })
+    })
+  },
+
+  loadHelpItems: function() {
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/help.json')
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+            var helpItems = JSON.parse(response.text)
+            resolve(helpItems['sections'])
           }
           else if (response.status == 401) {
             console.log('user not authorized')
@@ -350,6 +369,27 @@ var services = {
             var items = redemptionData['_items']
             resolve(items)
 
+          }
+          else if (response.status == 401) {
+            console.log('user not authorized')
+            reject('user not authorized')
+          }
+        });
+    });
+  },
+
+  getTimePeriodData: function() {
+
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/time-period-data.json')
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+
+            var redemptionData = JSON.parse(response.text)
+            var items = redemptionData['_items']
+            resolve(items)
           }
           else if (response.status == 401) {
             console.log('user not authorized')

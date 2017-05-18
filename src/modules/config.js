@@ -17,6 +17,7 @@ var nch = {
     },
     classOfTradeValues: [],
     sidebarItems: [],
+    helpItems: [],
     selectedProductMoved: {
       value: "",
       flag: false

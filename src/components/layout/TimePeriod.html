@@ -1,0 +1,53 @@
+<div class='timerperiodContent' v-on-clickaway="onAwayClick">
+
+  <span class ="timeperiodButton">
+    <i class='fa fa-calendar' aria-hidden='true' v-on:click='showTimePeriodOptions = !showTimePeriodOptions'>
+    </i>
+  </span>
+
+  <div class='timeperiod-component' v-if='showTimePeriodOptions'>
+
+    <div class='timeperiod-header'>
+      TIME PERIOD:
+      {{timeperiodData[timeperiodValue]['label']}}
+    </div>
+
+    <div class='timeperiod-content' @scroll='handleScroll'>
+      <div class='timeperiod-subheader'>
+        Time periods reflect only those that have already closed.
+      </div>
+
+      <div v-for="item in timeperiodData[timeperiodValue]['values']" class="timeperiod-button-container-subitem" v-if="timeperiodValue == 0" v-on:click='itemClick(item)' v-bind:class="[item.flag ? '' : 'timeperiod-button-container-subitem-disable']">
+          {{ item.year }}
+      </div>
+
+      <div v-for="item in timeperiodData[timeperiodValue]['values']" class='timeperiod-button-container-item' v-if="timeperiodValue == 1">
+        <span class="timeperiod-item"> 
+          {{ item.year }}
+        </span>
+        <div v-for="subitem in item.item" v-on:click='itemClick(subitem)' class="timeperiod-button-container-subitem" v-bind:class="[subitem.flag ? '' : 'timeperiod-button-container-subitem-disable']" v-bind:style="{ width: '55px', visibility: ((subitem.value == '0')?('hidden'):('visible'))}">
+          Q{{ subitem.value }}
+        </div>
+      </div>
+
+      <div v-for="item in timeperiodData[timeperiodValue]['values']" class='timeperiod-button-container-item' v-if="timeperiodValue == 2">
+        <span class="timeperiod-item"> 
+          {{ item.month.substring(0, 3) }}
+        </span>
+        <div v-for="subitem in item.item" v-on:click='itemClick(subitem)' class="timeperiod-button-container-subitem" v-bind:class="[subitem.flag ? '' : 'timeperiod-button-container-subitem-disable']" v-bind:style="{ width: '40px', visibility: ((subitem.value == '0')?('hidden'):('visible'))}">
+          wk{{ subitem.value }}
+        </div>
+      </div>
+    </div>
+
+    <div v-if="timeperiodValue > 0 && timeperiodData[timeperiodValue]['values'].length > 4">
+      <div class="timeperiod-scroll-button" v-bind:class="[scrollValue== 0 ? 'timeperiod-button-container-subitem-disable': '']" v-on:click='itemUp()'>
+        <i class="fa fa-caret-up" aria-hidden="true"></i>
+      </div>
+      <div class="timeperiod-scroll-button" v-bind:class="[scrollValue==timeperiodData[timeperiodValue]['values'].length - 4 ? 'timeperiod-button-container-subitem-disable': '']" v-on:click='itemDown()'>
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+      </div>
+    </div>
+
+  </div>
+</div>

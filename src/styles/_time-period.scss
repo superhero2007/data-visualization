@@ -1,0 +1,113 @@
+.timerperiodContent {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.timeperiodButton {
+  -webkit-appearance: none;
+  border-radius: 5px;
+  background-color: $blue;
+  color: $white;
+  box-shadow: none;
+  border: 2px solid #eee;
+  height: 35px;
+  min-width: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px !important;
+  padding: 4px 8px;
+  height: 36px;
+  display: inline-block;
+}
+
+.timeperiod-component {
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.9);
+  color: #69797d;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 2px;
+  position: relative;
+  box-shadow: 1px 1px 1px 0px black;
+  position: absolute;
+  height: 250px;
+  width: 340px;
+}
+
+.timeperiod-header {
+  font-size: 14px;
+}
+
+.timeperiod-subheader {
+  font-size: 10px;
+  margin-bottom: 14px;
+}
+
+.timeperiod-content {
+  font-size: 15px;
+  height: 180px;
+  overflow-y: auto;
+}
+
+.timeperiod-content::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 6px;
+  background-color: #F5F5F5;
+}
+
+.timeperiod-content::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F5F5F5;
+}
+
+.timeperiod-content::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: darkgrey;
+}
+
+.timeperiod-button-container-subitem {
+  margin: 0px 5px;
+  width: 30%;
+  text-align: center;
+  padding: 5px 0px;
+  color: white;
+  border: 1px solid $blue;
+  background: $blue;
+  margin-bottom: 5px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.timeperiod-button-container-item {
+  display: block;
+}
+
+.timeperiod-item {
+  width: 40px;
+  text-align: center;
+  display: inline-block;
+}
+
+.timeperiod-scroll-button {
+  color: white;
+  border: 1px solid $blue;
+  background: $blue; 
+  width: 49%;
+  margin: 5px 0;
+  height: 25px;
+  border-radius: 5px;
+  text-align: center;
+  display: inline-block;
+  font-size: 25px;
+}
+
+.timeperiod-scroll-button i{
+  vertical-align: top;
+}
+
+.timeperiod-button-container-subitem-disable {
+  color: $grey;
+  background: darkgrey;
+  border: 1px solid $grey;
+}
