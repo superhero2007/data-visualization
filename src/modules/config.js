@@ -1,6 +1,8 @@
 var nch = {
   events: {},
-  services: {},
+  services: {
+    dataService: null
+  },
   views: {},
   model: {
     title: 'NCH',
@@ -15,13 +17,13 @@ var nch = {
       value: "",
       flag: false
     },
-    classOfTradeValues: [],
     sidebarItems: [],
-    helpItems: [],
     selectedProductMoved: {
       value: "",
       flag: false
-    }
+    },
+    classOfTrades: [],
+    sectors: []
   }
 };
 

@@ -14,10 +14,51 @@ require('../data/stacked-bar-chart.json')
 require('../data/stacked-bar-example.tsv')
 require('../data/sidebar-items.json')
 require('../data/product-moved-pie.json')
+require('../data/class-of-trades.json')
+require('../data/sectors.json')
 require('../data/time-period-data.json')
 require('../data/help.json')
 
+require('../data/redemption-data-all-2016-q1.csv')
+require('../data/redemption-data-all-2016-q2.csv')
+require('../data/redemption-data-gm-2016-q1.csv')
+require('../data/redemption-data-gm-2016-q2.csv')
+
 var services = {
+  loadPeriod1All: function() {
+    var dataUrl = '/static/api/redemption-data-all-2016-q1.csv'
+    return this.loadPeriodData( dataUrl );
+  },
+  loadPeriod2All: function() {
+    var dataUrl = '/static/api/redemption-data-all-2016-q2.csv'
+    return this.loadPeriodData( dataUrl );
+  },
+  loadPeriod1Gm: function() {
+    var dataUrl = '/static/api/redemption-data-gm-2016-q1.csv'
+    return this.loadPeriodData( dataUrl );
+  },
+  loadPeriod2Gm: function() {
+    var dataUrl = '/static/api/redemption-data-gm-2016-q2.csv'
+    return this.loadPeriodData( dataUrl );
+  },
+
+  loadPeriodData: function( dataUrl ) {
+    return new Promise((resolve, reject) => {
+      http
+        .get(dataUrl)
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+            var csvData = response.text
+            var json = nch.utils.csv2json(csvData)
+            resolve(json)
+          }
+          else if (response.status == 401) {
+            console.log('user not authorized')
+          }
+        })
+    })
+  },
   loadCategories: function() {
     return new Promise((resolve, reject) => {
       http
@@ -70,24 +111,6 @@ var services = {
     })
   },
 
-  loadClassOfTrade: function() {
-    return new Promise((resolve, reject) => {
-      http
-        .get('/static/api/class-of-trade-values.json')
-        .end(function (error, response) {
-
-          if (response.status == 200) {
-            var classOfTradeValues = JSON.parse(response.text)
-            nch.model.classOfTradeValues = classOfTradeValues['_items']
-            resolve(classOfTradeValues['_items'])
-          }
-          else if (response.status == 401) {
-            console.log('user not authorized')
-          }
-        })
-    })
-  },
-
   loadManufacturers: function() {
     http
       .get('/static/api/manufacturers.json')
@@ -96,6 +119,36 @@ var services = {
         if (response.status == 200) {
           var manufacturers = JSON.parse(response.text)
           nch.model.manufacturers = manufacturers['_items']
+        }
+        else if (response.status == 401) {
+          console.log('user not authorized')
+        }
+      })
+  },
+
+  loadClassOfTrades: function() {
+    http
+      .get('/static/api/class-of-trades.json')
+      .end(function (error, response) {
+
+        if (response.status == 200) {
+          var classoftrades = JSON.parse(response.text)
+          nch.model.classOfTrades = classoftrades['_items']
+        }
+        else if (response.status == 401) {
+          console.log('user not authorized')
+        }
+      })
+  },
+
+  loadSectors: function() {
+    http
+      .get('/static/api/sectors.json')
+      .end(function (error, response) {
+
+        if (response.status == 200) {
+          var sectors = JSON.parse(response.text)
+          nch.model.sectors = sectors['_items']
         }
         else if (response.status == 401) {
           console.log('user not authorized')

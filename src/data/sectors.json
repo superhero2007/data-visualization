@@ -1,0 +1,48 @@
+{
+  "_items": [
+    {
+    	"sectorcode": 1,
+    	"sectorname": "Beverages"
+    },
+    {
+    	"sectorcode": 2,
+      "sectorname": "Dry Grocery"
+    },
+    {
+    	"sectorcode": 8,
+      "sectorname": "Food"
+    },
+    {
+    	"sectorcode": 10,
+      "sectorname": "Food & Non-Food"
+    },
+    {
+    	"sectorcode": 3,
+      "sectorname": "Frozen Foods"
+    },
+    {
+    	"sectorcode": 5,
+      "sectorname": "Household Goods & General Merchandise"
+    },
+    {
+    	"sectorcode": 9,
+      "sectorname": "Non-Food"
+    },
+    {
+    	"sectorcode": 6,
+      "sectorname": "OTC & Rx Medications"
+    },
+    {
+    	"sectorcode": 7,
+      "sectorname": "Personal Care & Hygiene"
+    },
+    {
+    	"sectorcode": 4,
+      "sectorname": "Refrigerated Foods"
+    },
+    {
+    	"sectorcode": 99,
+      "sectorname": "Unknown"
+    }
+  ]
+}

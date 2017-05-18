@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './modules/router'
 
+import ServiceFactory from './components/services/ServiceFactory'
+
 var d3 = require("d3");
 require("imports-loader?d3=d3!./vendor/viz.js");
 
@@ -16,9 +18,14 @@ window.nch = nch;
 var utils = require('./modules/utils');
 nch.utils = utils;
 
+var serviceFactory = new ServiceFactory();
+nch.services.dataService = serviceFactory.getDataService();
+console.log( "Data service loaded: " + nch.services.dataService.getType() );
+
 //services.loadCategories();
 services.loadManufacturers();
-services.loadClassOfTrade();
+services.loadClassOfTrades();
+services.loadSectors();
 
 // ****************************************
 // simple test data, will be removed
