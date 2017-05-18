@@ -2,7 +2,7 @@
   "_items": [
     {
       "id": "year",
-      "label": "Year over Year",
+      "label": "Year over year",
       "values": [
         {
           "year": 2014
@@ -17,11 +17,11 @@
     },
     {
       "id": "quarter",
-      "label": "Quarter over Quarter",
+      "label": "Quarter over quarter",
       "values": [
         {
           "year": 2014,
-          "quarters": [0,2,3,4]
+          "quarters": [1,2,3,4]
         },
         {
           "year": 2015,
@@ -40,18 +40,8 @@
     },
     {
       "id": "week",
-      "label": "Week over Week",
+      "label": "Week by week",
       "values": [
-        {
-          "year": 2017,
-          "month": "July",
-          "weeks": [1, 2]
-        },
-        {
-          "year": 2017,
-          "month": "June",
-          "weeks": [1, 2]
-        },
         {
           "year": 2017,
           "month": "May",
@@ -70,12 +60,7 @@
         {
           "year": 2017,
           "month": "February",
-          "weeks": [1, 2, 3, 4, 5]
-        },
-        {
-          "year": 2017,
-          "month": "Janauary",
-          "weeks": [1, 2, 3, 4, 5]
+          "weeks": [1, 2, 3, 4]
         }
       ]
     }

@@ -6,6 +6,7 @@ import ViewHeader from '../layout/ViewHeader'
 import Download from '../layout/Download'
 import Pie from '../charts/Pie'
 import StackedBar from '../charts/StackedBar'
+import Loader from '../layout/Loader'
 
 export default {
   name: 'facevalue',
@@ -18,12 +19,14 @@ export default {
     ViewHeader,
     Download,
     Pie,
-    StackedBar
+    StackedBar,
+    Loader
   },
   data () {
     return {
       model: nch.model,
-      showDownloadOptions: false
+      showDownloadOptions: false,
+      isLoading: false
     }
   }
 }

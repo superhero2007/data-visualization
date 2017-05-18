@@ -1,36 +1,48 @@
-<div @click="hideLogin" class="blackout">
-  <div @click.stop class="modal-form">
-    <div class="modal-form__header">
-      <h2 class="modal-form__title"><i class="fa fa-key"></i> Login</h2>
-    </div>
-    <div class="modal-form__body">
-      <form action="" class="modal-form__login" id="client-login-form">
-        <div class="modal-form__input">
-          <div class="modal-form__input-group">
-            <label for="username">Username</label>
-            <input id="username" type="text" placeholder="Username">
-          </div>
-          <div class="modal-form__input-group">
-            <label for="password">Password</label>
-            <input id="password" type="password" placeholder="Password">
+<div @click.stop class="modal-form" id="modal-login">
+  <div class="modal-form__header">
+    <h2 class="modal-form__title"><i class="fa fa-key"></i> Login</h2>
+    <button id="modal-login-close" class="modal-form__close" @click="hideLoginModal">
+      <i class="fa fa-close"></i>
+    </button>
+  </div>
+  <div class="modal-form__body">
+    <form action="" class="modal-form__login" id="modal-form-login">
+      <div class="modal-form__input">
+        <div class="modal-form__input-group">
+          <label for="username">Username</label>
+          <input name="username" id="username" type="text" placeholder="Username">
+        </div>
+        <div class="modal-form__input-group">
+          <label for="password">Password</label>
+          <input name="password" id="password" type="password" placeholder="Password">
+          <p class="modal-form__forgot-password">
+            <a href="#">Forgot username or password?</a>
+          </p>
+        </div>
+      </div>
+      <div class="modal-form__input">
+        <div class="modal-form__input-group" v-show="hasError">
+          <div class="modal-form__message">
+            <i class="fa fa-warning"></i>
+            <p>{{errorMessage}}</p>
           </div>
         </div>
-        <div class="modal-form__input">
-          <div class="modal-form__input-group">
-            <div class="modal-form__message form__message" v-if="hasError">
-              <i class="fa fa-warning"></i>
-              <p>Sorry, we did not recognize that email address. Please check your entry and try again or call our customer support center.</p>
-            </div>
-          </div>
-          <div class="modal-form__input-group">
-            <div class="modal-form__captcha"></div>
-            <p class="modal-form__forgot-password"><a href="#">Forgot username or password?</a></p>
+        <div class="modal-form__input-group">
+          <div class="modal-form__captcha">
+            <!-- replace with working captcha -->
+            <img src="../../assets/recaptcha.png" alt="recaptcha placeholder">
           </div>
         </div>
-        <div class="modal-form__input">
-          <button type="submit">Login</button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="modal-form__input modal-form__input-terms" style="text-align: center">
+        <label for="terms">
+          <input type="checkbox" value="true" name="terms" id="terms">
+          I have read ther terms and conditions of use for this site.
+        </label>
+      </div>
+      <div class="modal-form__input">
+        <button id="modal-form-login-submit" type="submit">Login</button>
+      </div>
+    </form>
   </div>
 </div>

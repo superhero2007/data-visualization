@@ -1,110 +1,32 @@
-<div>
-  <div id="landing">
-    <nav class="navbar navbar-home">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <img class="navbar-logo" src="assets/crunch-logo.png" alt="CRUNCH" />
+<div id="landing">
+  <nav class="navbar navbar-home">
+    <img class="navbar-logo" src="assets/crunch-logo.png" alt="CRUNCH" />
+  </nav>
+  <div class="home-content__wrapper">
+    <div class="client-login">
+      <h3 class="client-login__title">Client Login</h3>
+      <p class="client-login__description">Visualization of your data is just one click away. Get ready to crunch that data into meaningful intelligence.</p>
+      <form action="" class="client-login__form form-home" id="form-login">
+        <div class="form-home__input">
+          <input type="text" placeholder="Username">
+          <input type="password" placeholder="Password">
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="login-icon" @click="toggleLogin">Login <i class="fa fa-user" aria-hidden="true"></i></li>
-          </ul>
+        <div class="form-home__input">
+          <button type="submit">Login</button>
         </div>
-      </div>
-    </nav>
-    <div class="parallax-wrapper">
-      <div class="parallax">
-        <img src="assets/chart-graphic.jpg">
-      </div>
-      <div class="col-md-12 home-content__wrapper">
-        <h1 class="home-content__hero-title">NCH Marketing Services, Inc.</h1>
-        <div class="client-login">
-          <h3 class="client-login__title">Client Login</h3>
-          <p class="client-login__description">Visualization of your data is just one click away. Get ready to crunch that data into meaningful intelligence.</p>
-          <form action="" class="client-login__form form-home" id="client-login-form">
-            <div class="form-home__input">
-              <input type="text" placeholder="Username">
-              <input type="password" placeholder="Password">
-            </div>
-            <div class="form-home__message form__message" v-if="hasError">
-              <i class="fa fa-warning"></i>
-              <p>Sorry, we did not recognize that email address. Please check your entry and try again or call our customer support center.</p>
-            </div>
-            <div class="form-home__input">
-              <button type="submit">Login</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="home-content">
-      <div class="home-content__offerings row">
-        <div class="col-md-7">
-          <div class="home-content__offerings-intro">
-            <h2 class="home-content__offerings-title">Ready to Crunch Numbers?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores nam nobis aliquid libero similique aliquam, sequi non et nemo atque error corporis, molestias ducimus animi ut ipsam laborum velit vitae accusantium tenetur officia, magnam explicabo iure veritatis odit. Dolorem dolorum sequi repellat, veritatis soluta quis, alias consequatur itaque quibusdam error nisi, quaerat quam minima. Fuga nostrum, commodi aliquid tempore sint, dolor illo beatae ab repellat alias quisquam nemo necessitatibus earum neque sit reiciendis deleniti, est obcaecati doloremque omnis modi molestiae ullam ipsum qui. Ea quae quia ad, eligendi nihil harum magnam perferendis culpa fugiat delectus nemo eveniet, quam facilis alias!</p>
-          </div>
-          <div class="home-content__offerings-content">
-            <h3 class="home-content__offerings-subtitle"><i class="fa fa-bar-chart"></i> Portal Offerings</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae delectus iusto accusamus quod neque, doloribus maiores corporis, reiciendis animi, aperiam quidem. Facere fugit dolor recusandae!</p>
-            <ol class="home-content__offerings-list">
-              <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil, unde.</li>
-              <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, natus.</li>
-              <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, possimus!</li>
-              <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, harum.</li>
-              <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, aperiam.</li>
-              <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, error!</li>
-              <li>Many more..</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-      <div class="home-content__visualize">
-        <h2 class="home-content__visualize-title"><i class="fa fa-pie-chart"></i> Visualize</h2>
-        <div class="row">
-          <div class="col-md-4 home-content__visualize-box">
-            <figure class="home-content__visualize-img">
-              <img src="" alt="">
-            </figure>
-            <p>Visualize your data over time.</p>
-          </div>
-          <div class="col-md-4 home-content__visualize-box">
-            <figure class="home-content__visualize-img">
-              <img src="" alt="">
-            </figure>
-            <p>Geographic data visualiztions.</p>
-          </div>
-          <div class="col-md-4 home-content__visualize-box">
-            <figure class="home-content__visualize-img">
-              <img src="" alt="">
-            </figure>
-            <p>Export data into xls, csv, or other tabular formats.</p>
-          </div>
-        </div>
-      </div>
-      <footer class="home-footer">
-        <div class="home-footer__nav-holder">
-          <img src="assets/logo-nch.png" alt="NCH A Valassis Company" class="home-footer__logo">
-          <nav class="home-footer__nav">
-            <ul>
-              <li><a href="#/privacy">Privacy Policy</a></li>
-              <li><a href="#/terms">Terms of Use</a></li>
-            </ul>
-          </nav>
-          <p>&copy; 2017, NCH Marketing Services, Inc. All Rights Reserved.</p>
-        </div>
-<!--           <div class="col-md-5 home-footer__form">
-          <h3 class="home-footer__form-title">Email Newsletter</h3>
-          <p>Subscribe to our newsletter to keep up-to-date on the latest innovations and features.</p>
-          <form class="form-home" id="email-newsletter-form" action="">
-            <div class="form-home__input">
-              <input type="email" placeholder="Your e-mail" id="newsletter-email" name="email">
-              <button type="submit">Subscribe</button>
-            </div>
-          </form>
-        </div> -->
-      </footer>
+      </form>
     </div>
   </div>
-  <form-login @hideLoginModal="toggleLogin" v-show="showLoginModal"></form-login>
+  <footer class="home-footer">
+    <p>&copy; 2017, NCH Marketing Services, Inc. All Rights Reserved.</p>
+    <nav class="home-footer__nav">
+      <ul>
+        <li><a href="#/privacy">Privacy Policy</a></li>
+        <li><a href="#/terms">Terms of Use</a></li>
+      </ul>
+    </nav>
+  </footer>
+  <div class="blackout" @click="hideLoginModal" v-show="showLoginModal()">
+    <form-login :has-error="hasError" :error-message="errorMessage" :hide-login-modal="hideLoginModal"></form-login>
+  </div>
 </div>

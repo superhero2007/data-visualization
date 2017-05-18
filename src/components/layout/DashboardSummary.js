@@ -1,12 +1,10 @@
 import FilterModal from 'src/components/charts/FilterModal'
-import TimePeriod from '../layout/TimePeriod'
 
 export default {
   name: 'dashboard-summary',
   template: require('components/layout/DashboardSummary.html'),
   components: {
-    FilterModal,
-    TimePeriod
+    FilterModal
   },
   data () {
     return {
@@ -16,8 +14,7 @@ export default {
       segmentNames: [
         'Other',
         'Food'
-      ],
-      timeperiodData: 0
+      ]
     }
   },
   computed: {

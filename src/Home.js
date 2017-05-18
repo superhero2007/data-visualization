@@ -8,8 +8,8 @@ export default {
   template: require('./Home.html'),
   data () {
     return {
-      showLoginModal: false,
-      hasError: false
+      hasError: false,
+      errorMessage: 'Sorry, we did not recognize that email address. Please check your entry and try again or call our customer support center.'
     }
   },
   mounted () {
@@ -19,8 +19,11 @@ export default {
     FormLogin
   },
   methods: {
-    toggleLogin() {
-        this.showLoginModal = this.showLoginModal ? false : true;
+    showLoginModal: function() {
+      return this.hasError ? true : false
+    },
+    hideLoginModal: function() {
+      this.hasError = false
     }
   }
 }

@@ -1,12 +1,9 @@
 <div class="summary" id="dashboard_summary">
   <div class="summary__block">
     <p class="summary__title">Time Period</p>
-    <select class="summary__select" id="year-over-year" v-model="timeperiodData">
-      <option value="0">Year over Year</option>
-      <option value="1">Quarter over Quarter</option>
-      <option value="2">Week over Week</option>
+    <select class="summary__select" id="year-over-year">
+      <option value="">Year Over Year</option>
     </select>
-    <time-period :timeperiod-value = timeperiodData></time-period>
   </div>
   <div class="summary__block">
     <p class="summary__title">Segment: {{segmentName}}</p>
@@ -18,7 +15,7 @@
   <div class="summary__block">
     <p class="summary__title">Sector</p>
     <select class="summary__select" id="sector">
-      <option v-for="sector in model.sectors" :value="sectorcode">{{sector.sectorname}}</option>
+      <option value="beverages">Beverages</option>
     </select>
   </div>
   <div class="summary__block" v-if="currentView == 'ClassOfTrade'">

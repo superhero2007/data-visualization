@@ -6,6 +6,7 @@ import ViewHeader from '../layout/ViewHeader'
 import PageFooter from '../layout/PageFooter'
 import Pie from '../charts/Pie'
 import StackedBar from '../charts/StackedBar'
+import Loader from '../layout/Loader'
 
 export default {
   name: 'productmoved',
@@ -19,11 +20,13 @@ export default {
     StackedBar,
     ViewHeader,
     PageFooter,
-    Download
+    Download,
+    Loader
   },
   data () {
     return {
-      model: nch.model
+      model: nch.model,
+      isLoading: false
     }
   }
 }

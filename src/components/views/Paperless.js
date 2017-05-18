@@ -3,6 +3,7 @@ import Sidebar from '../layout/Sidebar'
 import DashboardSummary from '../layout/DashboardSummary'
 import PageFooter from '../layout/PageFooter'
 import ViewHeader from '../layout/ViewHeader'
+import Loader from '../layout/Loader'
 
 export default {
   name: 'Paperless',
@@ -12,11 +13,13 @@ export default {
     Sidebar,
     DashboardSummary,
     PageFooter,
-    ViewHeader
+    ViewHeader,
+    Loader
   },
   data () {
     return {
-      model: nch.model
+      model: nch.model,
+      isLoading: false
     }
   }
 }

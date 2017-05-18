@@ -1,0 +1,702 @@
+[
+  {
+    "segmentcode": 1,
+    "sectorcode": 1,
+    "sectorname": "Beverages",
+    "categorycode": 1,
+    "categoryname": "Beer/Wine/Liquor/Cocktail Additives"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 1,
+    "sectorname": "Beverages",
+    "categorycode": 2,
+    "categoryname": "Coffee & Tea"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 1,
+    "sectorname": "Beverages",
+    "categorycode": 3,
+    "categoryname": "Coffee Creamers & Hot Chocolate Mix"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 1,
+    "sectorname": "Beverages",
+    "categorycode": 4,
+    "categoryname": "Juice"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 1,
+    "sectorname": "Beverages",
+    "categorycode": 5,
+    "categoryname": "Milk"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 1,
+    "sectorname": "Beverages",
+    "categorycode": 6,
+    "categoryname": "Soda & Water"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 1,
+    "sectorname": "Beverages",
+    "categorycode": 7,
+    "categoryname": "Yogurt - Shakes & Drinks"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 1,
+    "sectorname": "Beverages",
+    "categorycode": 98,
+    "categoryname": "Cross-Category"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 1,
+    "categoryname": "Baby Food"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 2,
+    "categoryname": "Baking Mixes/Ingredients/Supplies"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 3,
+    "categoryname": "Bread & Baked Goods - Shelf Stable"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 4,
+    "categoryname": "Breakfast Foods - Shelf Stable"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 5,
+    "categoryname": "Candy & Gum"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 6,
+    "categoryname": "Cheese - non refridgerated"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 7,
+    "categoryname": "Chips/Pretzels/Popcorn"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 8,
+    "categoryname": "Condiments/Dips/Gravies/Sauces"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 9,
+    "categoryname": "Crackers, Cookies & Snack Bars"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 10,
+    "categoryname": "Fruit - Dried & Canned"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 11,
+    "categoryname": "Heat & Eat - Canned or Packaged"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 12,
+    "categoryname": "Jams, Jellies & Spreads - Shelf Stable"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 13,
+    "categoryname": "Meal & Side Dish Mixes & Kits"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 14,
+    "categoryname": "Meat & Seafood - Canned"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 15,
+    "categoryname": "Nuts"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 16,
+    "categoryname": "Pasta"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 17,
+    "categoryname": "Pet Food"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 18,
+    "categoryname": "Pickles, Olives & Relishes"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 19,
+    "categoryname": "Pudding & Gelatin"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 20,
+    "categoryname": "Salad Dressings - Shelf Stable"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 21,
+    "categoryname": "Spices, Seasonings & Extracts"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 22,
+    "categoryname": "Sugar/Sweeteners/Syrups"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 23,
+    "categoryname": "Vegetables - Canned & Dried"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 24,
+    "categoryname": "Vinegar & Oil"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 2,
+    "sectorname": "Dry Grocery",
+    "categorycode": 98,
+    "categoryname": "Cross-Category"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 3,
+    "sectorname": "Frozen Foods",
+    "categorycode": 1,
+    "categoryname": "Bread Products"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 3,
+    "sectorname": "Frozen Foods",
+    "categorycode": 2,
+    "categoryname": "Breakfast Foods"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 3,
+    "sectorname": "Frozen Foods",
+    "categorycode": 3,
+    "categoryname": "Desserts & Whipped Cream Tub"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 3,
+    "sectorname": "Frozen Foods",
+    "categorycode": 4,
+    "categoryname": "Fruit"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 3,
+    "sectorname": "Frozen Foods",
+    "categorycode": 5,
+    "categoryname": "Heat & Eat Prepared Foods"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 3,
+    "sectorname": "Frozen Foods",
+    "categorycode": 6,
+    "categoryname": "Ice"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 3,
+    "sectorname": "Frozen Foods",
+    "categorycode": 7,
+    "categoryname": "Ice Cream & Frozen Yogurt"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 3,
+    "sectorname": "Frozen Foods",
+    "categorycode": 8,
+    "categoryname": "Meat/Poultry/Seafood"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 3,
+    "sectorname": "Frozen Foods",
+    "categorycode": 9,
+    "categoryname": "Vegetables"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 3,
+    "sectorname": "Frozen Foods",
+    "categorycode": 98,
+    "categoryname": "Cross-Category"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 1,
+    "categoryname": "Butter & Margarine"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 2,
+    "categoryname": "Cheese"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 3,
+    "categoryname": "Desserts"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 4,
+    "categoryname": "Dough Products"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 5,
+    "categoryname": "Eggs"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 6,
+    "categoryname": "Fresh Produce"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 7,
+    "categoryname": "Heat & Eat Prepared Foods"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 8,
+    "categoryname": "Meal & Side Dish Mixes & Kits"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 9,
+    "categoryname": "Meat/Poultry/Seafood"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 10,
+    "categoryname": "Ready to Eat Fruits & Salads"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 11,
+    "categoryname": "Sour Cream & Whipped Cream - Canned"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 12,
+    "categoryname": "Spreads/Dips/Dressings"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 13,
+    "categoryname": "Yogurt"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 4,
+    "sectorname": "Refrigerated Foods",
+    "categorycode": 98,
+    "categoryname": "Cross-Category"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 1,
+    "categoryname": "Air Fresheners & Candles"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 2,
+    "categoryname": "Automotive"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 3,
+    "categoryname": "Books & Magazines"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 4,
+    "categoryname": "Charcoal, Logs & Accessories"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 5,
+    "categoryname": "Clothing & Undergarments"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 6,
+    "categoryname": "Floral/ Gardening/Seasonal"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 7,
+    "categoryname": "Foil/Plastic Wrap & Bags/Plastic Containers"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 8,
+    "categoryname": "Greeting Cards/Pre-Paid Gift Cards"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 9,
+    "categoryname": "Household Cleaners & Supplies"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 10,
+    "categoryname": "Household Maintenance Products"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 11,
+    "categoryname": "Kitchen Items & Appliances"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 12,
+    "categoryname": "Laundry Cleaners & Supplies"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 13,
+    "categoryname": "Light Bulbs & Batteries"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 14,
+    "categoryname": "Pesticides"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 15,
+    "categoryname": "Pet Care"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 16,
+    "categoryname": "Photo & Computer Supplies"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 17,
+    "categoryname": "School & Office Supplies"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 18,
+    "categoryname": "Shoe Care"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 19,
+    "categoryname": "Tobacco & Accessories"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 20,
+    "categoryname": "Toilet Paper/Tissues/Papertowels"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 21,
+    "categoryname": "Toys"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 22,
+    "categoryname": "Trash Bags"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 5,
+    "sectorname": "Household Goods & General Merchandise",
+    "categorycode": 98,
+    "categoryname": "Cross-Category"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 6,
+    "sectorname": "OTC & Rx Medications",
+    "categorycode": 1,
+    "categoryname": "Health Aids & Remedies"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 6,
+    "sectorname": "OTC & Rx Medications",
+    "categorycode": 2,
+    "categoryname": "First Aid"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 6,
+    "sectorname": "OTC & Rx Medications",
+    "categorycode": 3,
+    "categoryname": "Medical Test Kits & Devices"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 6,
+    "sectorname": "OTC & Rx Medications",
+    "categorycode": 4,
+    "categoryname": "Prescription Medications & Devices"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 6,
+    "sectorname": "OTC & Rx Medications",
+    "categorycode": 98,
+    "categoryname": "Cross-Category"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 1,
+    "categoryname": "Baby Hygiene"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 2,
+    "categoryname": "Cosmetics"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 3,
+    "categoryname": "Deodorant"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 4,
+    "categoryname": "Fragrances & Gift Sets"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 5,
+    "categoryname": "Grooming Accessories & Cosmetic Applicators"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 6,
+    "categoryname": "Hair Care"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 7,
+    "categoryname": "Hand Cleanser, Bath Soap & Body Wash"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 8,
+    "categoryname": "Oral Hygiene"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 9,
+    "categoryname": "Sanitary Protection & Feminine Hygiene"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 10,
+    "categoryname": "Shaving Supplies"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 11,
+    "categoryname": "Skin Creams & Lotions/Facial Cleansers"
+  },
+  {
+    "segmentcode": 2,
+    "sectorcode": 7,
+    "sectorname": "Personal Care & Hygiene",
+    "categorycode": 98,
+    "categoryname": "Cross-Category"
+  },
+  {
+    "segmentcode": 1,
+    "sectorcode": 8,
+    "sectorname": "Food",
+    "categorycode": 98,
+    "categoryname": "Cross-Category"
+  },
+  {
+    "segmentcode": 3,
+    "sectorcode": 9,
+    "sectorname": "Non-Food",
+    "categorycode": 98,
+    "categoryname": "Cross-Category"
+  },
+  {
+    "segmentcode": 4,
+    "sectorcode": 10,
+    "sectorname": "Food & Non-Food",
+    "categorycode": 98,
+    "categoryname": "Cross-Category"
+  }
+]

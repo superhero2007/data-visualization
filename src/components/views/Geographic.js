@@ -6,6 +6,7 @@ import Bipartite from '../charts/Bipartite'
 import PageFooter from '../layout/PageFooter'
 import Download from '../layout/Download'
 import ViewHeader from '../layout/ViewHeader'
+import Loader from '../layout/Loader'
 
 export default {
   name: 'geographic',
@@ -19,11 +20,13 @@ export default {
     Bipartite,
     PageFooter,
     Download,
-    ViewHeader
+    ViewHeader,
+    Loader
   },
   data () {
     return {
-      model: nch.model
+      model: nch.model,
+      isLoading: false
     }
   },
   mounted() {

@@ -3,6 +3,7 @@ import Sidebar from '../layout/Sidebar'
 import Bipartite from '../charts/Bipartite'
 import DashboardSummary from '../layout/DashboardSummary'
 import PageFooter from '../layout/PageFooter'
+import Loader from '../layout/Loader'
 
 export default {
   name: 'home',
@@ -12,11 +13,13 @@ export default {
     Sidebar,
     Bipartite,
     DashboardSummary,
-    PageFooter
+    PageFooter,
+    Loader
   },
   data () {
     return {
-      model: nch.model
+      model: nch.model,
+      isLoading: false
     }
   }
 }

@@ -20,9 +20,7 @@ var nch = {
     selectedProductMoved: {
       value: "",
       flag: false
-    },
-    classOfTrades: [],
-    sectors: []
+    }
   }
 };
 

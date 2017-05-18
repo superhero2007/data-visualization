@@ -4,6 +4,8 @@ import DashboardSummary from '../layout/DashboardSummary'
 import PageFooter from '../layout/PageFooter'
 import ViewHeader from '../layout/ViewHeader'
 import Download from '../layout/Download'
+import Loader from '../layout/Loader'
+
 import { mixin as clickaway } from 'vue-clickaway';
 
 export default {
@@ -16,12 +18,14 @@ export default {
     DashboardSummary,
     PageFooter,
     ViewHeader,
-    Download
+    Download,
+    Loader
   },
   data () {
     return {
       model: nch.model,
-      showDownloadOptions: false
+      showDownloadOptions: false,
+      isLoading: false
     }
   },
   methods: {

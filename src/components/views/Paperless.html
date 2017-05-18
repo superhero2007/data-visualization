@@ -3,6 +3,7 @@
   <div class="main-content">
     <sidebar></sidebar>
     <div class="main">
+      <loader v-show="isLoading"></loader>
       <dashboard-summary></dashboard-summary>
       <div class="page-content gradient-background">
         <view-header><i class="fa fa-pie-chart"></i>Paperless</view-header>
