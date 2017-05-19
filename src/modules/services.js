@@ -16,6 +16,7 @@ require('../data/sidebar-items.json')
 require('../data/product-moved-pie.json')
 require('../data/class-of-trades.json')
 require('../data/sectors.json')
+require('../data/sectorCategory.json')
 require('../data/time-period-data.json')
 require('../data/help.json')
 
@@ -141,14 +142,31 @@ var services = {
       })
   },
 
-  loadSectors: function() {
-    http
-      .get('/static/api/sectors.json')
-      .end(function (error, response) {
+  loadSectors: function () {
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/sectors.json')
+        .end(function (error, response) {
+          if (response.status == 200) {
+            var sectors = JSON.parse(response.text)
+            nch.model.sectors = sectors['_items']
+            resolve(sectors['_items'])
+          }
+          else if (response.status == 401) {
+            console.log('user not authorized')
+            reject('user not authorized')
+          }
+        })
+    })
+  },
 
+  loadSectorCategories: function() {
+    http
+      .get('/static/api/sectorCategory.json')
+      .end(function (error, response) {
         if (response.status == 200) {
-          var sectors = JSON.parse(response.text)
-          nch.model.sectors = sectors['_items']
+          var sectorCategory = JSON.parse(response.text)
+          nch.model.allSectorCategory = sectorCategory
         }
         else if (response.status == 401) {
           console.log('user not authorized')

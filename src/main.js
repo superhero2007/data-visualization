@@ -26,6 +26,7 @@ console.log( "Data service loaded: " + nch.services.dataService.getType() );
 services.loadManufacturers();
 services.loadClassOfTrades();
 services.loadSectors();
+services.loadSectorCategories()
 
 // ****************************************
 // simple test data, will be removed

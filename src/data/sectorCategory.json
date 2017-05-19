@@ -601,12 +601,6 @@
   },
   {
     "sectorcode": 99,
-    "sectorname": "UNKNOWN",
-    "categorycode": 98,
-    "categoryname": "UNKNOWN"
-  },
-  {
-    "sectorcode": 99,
     "sectorname": "Unknown",
     "categorycode": 98,
     "categoryname": "UNKNOWN"
@@ -614,12 +608,6 @@
   {
     "sectorcode": 99,
     "sectorname": "UNKNOWN",
-    "categorycode": 99,
-    "categoryname": "Unknown"
-  },
-  {
-    "sectorcode": 99,
-    "sectorname": "Unknown",
     "categorycode": 99,
     "categoryname": "Unknown"
   },
