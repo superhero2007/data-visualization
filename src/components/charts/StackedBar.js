@@ -39,6 +39,10 @@ export default {
         console.log('Stacked Bar promise catch:' + message)
       })
     }
+
+    var faceValueData = nch.services.dataService.getFaceValueData();
+    console.log("Face value data");
+    console.log(faceValueData);
   },
   methods: {
 
@@ -63,7 +67,7 @@ export default {
         height = +svg.attr('height') - margin.top - margin.bottom,
         g = svg.append('g').attr('transform', 'translate(' + 180 + ',' + margin.top + ')')
 
-      var keys 
+      var keys
       if(groupBy == 'facevalue') {
         keys= ['$1.00 +', '$0.76 - $1.00', '$0.40 - $0.75', '< $0.40']
       }
