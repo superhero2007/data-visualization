@@ -7,7 +7,7 @@ export default {
       // version: nch.version
     }
   },
-  mounted() {
-    console.log ('current route: ' + this.$router.currentRoute.name );
+  mounted () {
+    console.log('current route: ' + this.$router.currentRoute.name)
   }
 }

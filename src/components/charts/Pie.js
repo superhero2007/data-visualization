@@ -1,5 +1,4 @@
 import * as d3 from 'd3'
-
 import services from 'src/modules/services'
 
 export default {
@@ -12,26 +11,24 @@ export default {
       pieData: []
     }
   },
-
   watch: {
     model: {
       handler: function (newValue, oldValue) {
         this.render()
-      }, deep: true
+      },
+      deep: true
     }
   },
-
-  mounted() {
+  mounted () {
     console.log('Pie mounted: ' + this.groupByField)
-    if(this.groupByField != 'productmoved') {
+    if (this.groupByField !== 'productmoved') {
       services.getPieData().then((response) => {
         this.pieData = response
         this.render()
       }).catch((message) => {
         console.log('Pie promise catch:' + message)
       })
-    }
-    else {
+    } else {
       services.getProductMovedPieData().then((response) => {
         this.pieData = response
         this.render()
@@ -41,29 +38,24 @@ export default {
     }
   },
   methods: {
+    render () {
+      const items = this.pieData
+      let responseData = []
 
-    render() {
-      var items = this.pieData
-
-      var responseData = []
-
-      if (this.groupByField == 'categoryname') {
+      if (this.groupByField === 'categoryname') {
         responseData = this.getDataForCategories(items)
-      }
-      else if (this.groupByField == 'medianame') {
+      } else if (this.groupByField === 'medianame') {
         responseData = this.getDataForMediaTypes(items)
-      }
-      else if (this.groupByField == 'productmoved') {
+      } else if (this.groupByField === 'productmoved') {
         responseData = this.getDataForProductMoved(items)
       }
 
-      var svg = d3.select('#pieChart').attr('width', 800).html(''),
-        width = +svg.attr('width'),
-        height = +svg.attr('height'),
-        radius = Math.min(width / 2, height) / 2.5
-      var g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + ( height / 2 - 30) + ')')
-
-      var color = d3.scaleOrdinal([
+      const svg = d3.select('#pieChart').attr('width', 800).html('')
+      const width = +svg.attr('width')
+      const height = +svg.attr('height')
+      const radius = Math.min(width / 2, height) / 2.5
+      let g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + (height / 2 - 30) + ')')
+      const color = d3.scaleOrdinal([
         '#d62024',
         '#70ccdd',
         '#f07a20',
@@ -89,28 +81,27 @@ export default {
         '#7b6888'
       ])
 
-      var total = 0
-      for (var i = 0; i < responseData.length; i++) {
+      let total = 0
+      for (let i = 0; i < responseData.length; i++) {
         total += responseData[i].totalcouponredemption
       }
 
-      var pie = d3.pie()
+      const pie = d3.pie()
         .sort(null)
         .value(function (d) {
           return d.totalcouponredemption
         })
 
-      var arc = g.selectAll('.arc')
+      const arc = g.selectAll('.arc')
         .data(pie(responseData))
         .enter().append('g')
         .attr('class', 'arc')
 
-      var groupBy = this.groupByField
+      const groupBy = this.groupByField
 
-      if((groupBy == 'medianame' && this.model.selectedMedia.value != '') || (groupBy == 'productmoved' && this.model.selectedProductMoved.value != '')) {
+      if ((groupBy === 'medianame' && this.model.selectedMedia.value !== '') || (groupBy === 'productmoved' && this.model.selectedProductMoved.value !== '')) {
         this.renderSelectedMedia(arc, radius, color)
-      }
-      else {
+      } else {
         this.renderMediaTypes(arc, radius, color, total)
       }
 
@@ -118,22 +109,20 @@ export default {
       this.renderLegend(g, responseData, total, color)
     },
 
-    getDataForCategories(items) {
-      var responseData = []
-
-      for (var i = 0; i < items.length; i++) {
-
-        for (var j = 0; j < this.model.selectedCategories.length; j++) {
-          if ((this.model.selectedCategories[j] == items[i].categoryname) && (this.model.selectedMedia.value == '' || this.model.selectedMedia.value == items[i].medianame)) {
-            for (var k = 0; k < responseData.length; k++) {
-              if ((responseData[k].categoryname == items[i].categoryname)) {
+    getDataForCategories (items) {
+      const responseData = []
+      for (let i = 0; i < items.length; i++) {
+        for (let j = 0; j < this.model.selectedCategories.length; j++) {
+          if ((this.model.selectedCategories[j] === items[i].categoryname) && (this.model.selectedMedia.value === '' || this.model.selectedMedia.value === items[i].medianame)) {
+            for (let k = 0; k < responseData.length; k++) {
+              if ((responseData[k].categoryname === items[i].categoryname)) {
                 responseData[k].totalcouponredemption += items[i].totalcouponredemption
                 break
               }
             }
 
-            if (k == responseData.length && items[i].totalcouponredemption != 0) {
-              var item = {
+            if (k === responseData.length && items[i].totalcouponredemption !== 0) {
+              const item = {
                 categoryname: items[i].categoryname,
                 medianame: items[i].medianame,
                 totalcouponredemption: items[i].totalcouponredemption
@@ -147,20 +136,19 @@ export default {
       return responseData
     },
 
-    getDataForMediaTypes(items) {
-      var responseData = []
+    getDataForMediaTypes (items) {
+      const responseData = []
 
-      for (var i = 0; i < items.length; i++) {
-
-        for (var k = 0; k < responseData.length; k++) {
-          if ((responseData[k].medianame == items[i].medianame)) {
+      for (let i = 0; i < items.length; i++) {
+        for (let k = 0; k < responseData.length; k++) {
+          if ((responseData[k].medianame === items[i].medianame)) {
             responseData[k].totalcouponredemption += items[i].totalcouponredemption
             break
           }
         }
 
-        if (k == responseData.length && items[i].totalcouponredemption != 0) {
-          var item = {
+        if (k === responseData.length && items[i].totalcouponredemption !== 0) {
+          const item = {
             medianame: items[i].medianame,
             totalcouponredemption: items[i].totalcouponredemption
           }
@@ -171,20 +159,19 @@ export default {
       return responseData
     },
 
-    getDataForProductMoved(items) {
-      var responseData = []
+    getDataForProductMoved (items) {
+      const responseData = []
 
-      for (var i = 0; i < items.length; i++) {
-
-        for (var k = 0; k < responseData.length; k++) {
-          if ((responseData[k].productmoved == items[i].productmoved)) {
+      for (let i = 0; i < items.length; i++) {
+        for (let k = 0; k < responseData.length; k++) {
+          if ((responseData[k].productmoved === items[i].productmoved)) {
             responseData[k].totalcouponredemption += items[i].totalcouponredemption
             break
           }
         }
 
-        if (k == responseData.length && items[i].totalcouponredemption != 0) {
-          var item = {
+        if (k === responseData.length && items[i].totalcouponredemption !== 0) {
+          const item = {
             productmoved: items[i].productmoved,
             totalcouponredemption: items[i].totalcouponredemption
           }
@@ -195,62 +182,57 @@ export default {
       return responseData
     },
 
-    renderSelectedMedia(arc, radius, color) {
-      var groupBy = this.groupByField
+    renderSelectedMedia (arc, radius, color) {
+      let groupBy = this.groupByField
       arc.append('circle')
         .attr('r', function (d) {
           return (
-            (((groupBy == 'medianame') && (d.data.medianame == nch.model.selectedMedia.value))
-              || ((groupBy == 'productmoved') && (d.data.productmoved == nch.model.selectedProductMoved.value)))
-            ?(radius - 10)
-            :(0)
+            (((groupBy === 'medianame') && (d.data.medianame === nch.model.selectedMedia.value)) || ((groupBy === 'productmoved') && (d.data.productmoved === nch.model.selectedProductMoved.value)))
+              ? (radius - 10)
+              : (0)
           )
         })
-        .attr('fill', function (d) {
-            return color(d.data[groupBy])
-        })
+        .attr('fill', function (d) { return color(d.data[groupBy]) })
         .attr('stroke', 'white')
         .attr('stroke-width', '3px')
       arc.append('text')
         .attr('font-size', '20')
         .attr('transform', 'translate(0, -20)')
-        .text(
-            ((groupBy == 'medianame')
-            ?(this.model.selectedMedia.value)
-            :(this.model.selectedProductMoved.value))
+        .text(((groupBy === 'medianame')
+            ? (this.model.selectedMedia.value)
+            : (this.model.selectedProductMoved.value))
           )
-        .attr('fill','white')
+        .attr('fill', 'white')
         .attr('text-anchor', 'middle')
-
       arc.append('text')
         .attr('font-weight', 'bold')
         .attr('font-size', '40')
         .attr('transform', 'translate(0, 15)')
         .text('100%')
-        .attr('fill','white')
+        .attr('fill', 'white')
         .attr('text-anchor', 'middle')
     },
 
-    renderLegend(g, responseData, total, color) {
-      var lineHeight = 40
-    	var groupBy = this.groupByField
-      var list = g.selectAll('.list')
+    renderLegend (g, responseData, total, color) {
+      const lineHeight = 40
+      const groupBy = this.groupByField
+      const list = g.selectAll('.list')
         .data(responseData)
         .enter().append('g')
         .attr('class', 'list')
 
       g.append('g')
         .append('text')
-        .attr('x', ((groupBy == 'productmoved')?(100):(200)))
-        .attr('y', ((groupBy == 'productmoved')?(20):(40)))
+        .attr('x', ((groupBy === 'productmoved') ? (100) : (200)))
+        .attr('y', ((groupBy === 'productmoved') ? (20) : (40)))
         .attr('dy', '0.32em')
         .attr('fill', '#000')
         .attr('font-weight', 'bold')
         .attr('text-anchor', 'middle')
         .text(this.labelField + ' Legend')
 
-      if(groupBy == 'productmoved') {
-        var subtitle= g.append('g')
+      if (groupBy === 'productmoved') {
+        const subtitle = g.append('g')
         subtitle.append('text')
         .attr('x', 40)
         .attr('y', 50)
@@ -259,7 +241,7 @@ export default {
         .attr('font-weight', 'bold')
         .attr('text-anchor', 'middle')
         .text('OFFER')
-        .attr('fill','#498fe1')
+        .attr('fill', '#498fe1')
 
         subtitle.append('text')
         .attr('x', 220)
@@ -269,7 +251,7 @@ export default {
         .attr('font-weight', 'bold')
         .attr('text-anchor', 'end')
         .text('REDEMPTION')
-        .attr('fill','#498fe1')
+        .attr('fill', '#498fe1')
 
         subtitle.append('line')
         .attr('y1', 65)
@@ -277,7 +259,7 @@ export default {
         .attr('x1', 20)
         .attr('x2', 220)
         .attr('stroke', 'grey')
-        .style('stroke-dasharray','5,5')
+        .style('stroke-dasharray', '5,5')
       }
 
       list.append('text')
@@ -297,12 +279,12 @@ export default {
         })
         .attr('font-weight', 'bold')
         .text(function (d) {
-          return ((groupBy == 'productmoved')?(''):(d3.format(',.0f')(d.totalcouponredemption)))
+          return ((groupBy === 'productmoved')?(''):(d3.format(',.0f')(d.totalcouponredemption)))
         })
         .attr('text-anchor', 'end')
 
       list.append('text')
-        .attr('x', ((groupBy == 'productmoved')?(210):(380)))
+        .attr('x', ((groupBy === 'productmoved')?(210):(380)))
         .attr('y', function (d, i) {
           return 90 + i * lineHeight
         })
@@ -320,9 +302,9 @@ export default {
           return 105 + i * lineHeight
         })
         .attr('x1', 20)
-        .attr('x2', ((groupBy == 'productmoved')?(220):(400)))
+        .attr('x2', ((groupBy === 'productmoved') ? (220) : (400)))
         .attr('stroke', 'grey')
-        .style('stroke-dasharray','5,5')
+        .style('stroke-dasharray', '5,5')
 
       list.append('rect')
         .attr('rx', 10)
@@ -332,17 +314,16 @@ export default {
         })
         .attr('height', lineHeight)
         .attr('x', -10)
-        .attr('width', ((groupBy == 'productmoved')?(230):(410)))
+        .attr('width', ((groupBy === 'productmoved') ? (230) : (410)))
         .attr('fill', function (d) {
           return color(d[groupBy])
         })
         .attr('fill-opacity', function (d) {
           return (
-              ((groupBy == 'medianame' && nch.model.selectedMedia.value == d.medianame)
-                ||(groupBy == 'productmoved' && nch.model.selectedProductMoved.value == d.productmoved))
-              ?(0.2)
-              :(0)
-            )
+              ((groupBy === 'medianame' && nch.model.selectedMedia.value === d.medianame) || (groupBy === 'productmoved' && nch.model.selectedProductMoved.value === d.productmoved))
+                ? (0.2)
+                : (0)
+          )
         })
         .attr('class', 'listRect')
 
@@ -362,17 +343,16 @@ export default {
         .on('mouseover', listmouseover)
         .on('mouseout', listmouseout)
 
-      function listmouseover(d) {
-        if(typeof(d.productmoved)!='undefined') {
-          if(nch.model.selectedProductMoved.value != d.productmoved) {
+      function listmouseover (d) {
+        if (typeof (d.productmoved) !== 'undefined') {
+          if (nch.model.selectedProductMoved.value !== d.productmoved) {
             nch.model.selectedProductMoved = {
               value: d.productmoved,
               flag: true
             }
           }
-        }
-        else if(typeof(d.categoryname)=='undefined') {
-          if(nch.model.selectedMedia.value != d.medianame) {
+        } else if (typeof (d.categoryname) === 'undefined') {
+          if (nch.model.selectedMedia.value !== d.medianame) {
             nch.model.selectedMedia = {
               value: d.medianame,
               flag: true
@@ -382,9 +362,8 @@ export default {
               flag: false
             }
           }
-        }
-        else {
-          if(nch.model.selectedCategory.value != d.categoryname) {
+        } else {
+          if (nch.model.selectedCategory.value !== d.categoryname) {
             nch.model.selectedCategory = {
               value: d.categoryname,
               flag: true
@@ -397,34 +376,27 @@ export default {
         }
       }
 
-      function listmouseout(d) {
-        if(typeof(d.productmoved)!='undefined') {
-          nch.model.selectedProductMoved.value =''
-        }
-        else if(typeof(d.categoryname)=='undefined') {
+      function listmouseout (d) {
+        if (typeof (d.productmoved) !== 'undefined') {
+          nch.model.selectedProductMoved.value = ''
+        } else if (typeof (d.categoryname) === 'undefined') {
           nch.model.selectedMedia.value = ''
-        }
-        else {
+        } else {
           nch.model.selectedCategory.value = ''
         }
       }
     },
 
-    renderMediaTypes(arc, radius, color, total) {
-    	var groupBy = this.groupByField
-      var path = d3.arc()
+    renderMediaTypes (arc, radius, color, total) {
+      const groupBy = this.groupByField
+      const path = d3.arc()
         .outerRadius(radius - 10)
         .innerRadius(0)
-
-      var out = d3.arc()
+      const out = d3.arc()
         .outerRadius(radius - 6)
         .innerRadius(0)
-
-      var label = d3.arc()
-      	.outerRadius(radius - 80)
-      	.innerRadius(radius - 80)
-
-    	arc.append('path')
+      const label = d3.arc().outerRadius(radius - 80).innerRadius(radius - 80)
+      arc.append('path')
         .attr('d', out)
         .attr('class', 'path')
         .attr('fill', 'white')
@@ -438,13 +410,13 @@ export default {
 
       arc.append('text')
         .attr('font-weight', 'bold')
-        .attr('transform', function(d) {
+        .attr('transform', function (d) {
           return 'translate(' + label.centroid(d) + ')'
         })
-        .text(function(d) {
+        .text(function (d) {
           return d3.format('.0%')(d.data.totalcouponredemption / total)
         })
-        .attr('fill','white')
+        .attr('fill', 'white')
 
       arc.append('path')
         .attr('d', out)
@@ -455,8 +427,8 @@ export default {
         .on('mouseover', piemouseover)
         .on('mouseout', piemouseout)
 
-      function piemouseover(d) {
-        if(nch.model.selectedCategory.value != d.data.categoryname) {
+      function piemouseover (d) {
+        if (nch.model.selectedCategory.value !== d.data.categoryname) {
           nch.model.selectedCategory = {
             value: d.data.categoryname,
             flag: true

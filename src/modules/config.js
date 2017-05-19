@@ -1,4 +1,4 @@
-var nch = {
+let nch = {
   events: {},
   services: {
     dataService: null
@@ -10,21 +10,21 @@ var nch = {
     selectedCategories: [],
     currentManufacturer: null,
     selectedCategory: {
-      value: "",
+      value: '',
       flag: false
     },
     selectedMedia: {
-      value: "",
+      value: '',
       flag: false
     },
     sidebarItems: [],
     selectedProductMoved: {
-      value: "",
+      value: '',
       flag: false
     },
     classOfTrades: [],
     sectors: []
   }
-};
+}
 
-module.exports = nch;
+module.exports = nch

@@ -29,7 +29,7 @@ export default {
       isLoading: false
     }
   },
-  mounted() {
-    console.log( "Geographic view: " + this.view );
+  mounted () {
+    console.log('Geographic view: ' + this.view)
   }
 }

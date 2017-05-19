@@ -15,7 +15,6 @@ export default {
     Navbar,
     Sidebar,
     DashboardSummary,
-    PageFooter,
     Pie,
     StackedBar,
     ViewHeader,

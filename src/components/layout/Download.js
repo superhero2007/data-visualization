@@ -1,10 +1,9 @@
-//import {saveSvgAsPng} from 'save-svg-as-png'
-import { mixin as clickaway } from 'vue-clickaway';
+import { mixin as clickaway } from 'vue-clickaway'
 
 export default {
   name: 'download',
   mixins: [ clickaway ],
-  //props: ['firstChart', 'secondChart'],
+  // props: ['firstChart', 'secondChart'],
   props: {
     pngEnabled: {
       type: String,
@@ -17,7 +16,7 @@ export default {
     csvEnabled: {
       type: String,
       default: 'false'
-    },
+    }
   },
   template: require('components/layout/Download.html'),
   data () {
@@ -27,19 +26,19 @@ export default {
     }
   },
   methods: {
-  	csvClick: function()	{
-  		console.log('TODO: implement CSV download')
-  	},
-  	pngClick: function()	{
-  		//saveSvgAsPng(document.getElementById(this.firstChart), this.firstChart + '.png')
-  		//saveSvgAsPng(document.getElementById(this.secondChart), this.secondChart + '.png')
+    csvClick: function () {
+      console.log('TODO: implement CSV download')
+    },
+    pngClick: function () {
+      // saveSvgAsPng(document.getElementById(this.firstChart), this.firstChart + '.png')
+      // saveSvgAsPng(document.getElementById(this.secondChart), this.secondChart + '.png')
       console.log('TODO: implement PNG download')
-  	},
-  	pdfClick: function()	{
+    },
+    pdfClick: function () {
       console.log('TODO: implement PDF download')
-  	},
+    },
     onAwayClick: function() {
-  	  this.showDownloadOptions = false;
+      this.showDownloadOptions = false;
     }
   }
 }

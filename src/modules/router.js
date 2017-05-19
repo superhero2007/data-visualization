@@ -82,14 +82,14 @@ export default new Router({
       component: RedemptionTrends
     },
     {
-        path: '/privacy',
-        name: 'Privacy',
-        component: Privacy
+      path: '/privacy',
+      name: 'Privacy',
+      component: Privacy
     },
     {
-        path: '/terms',
-        name: 'Terms',
-        component: Terms
-     }
+      path: '/terms',
+      name: 'Terms',
+      component: Terms
+    }
   ]
 })

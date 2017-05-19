@@ -29,8 +29,8 @@ export default {
     }
   },
   methods: {
-    away: function() {
-      this.showDownloadOptions = false;
-    },
-  },
+    away: function () {
+      this.showDownloadOptions = false
+    }
+  }
 }

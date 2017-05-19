@@ -1,6 +1,5 @@
-var utils = {
-
-  stateList() {
+const utils = {
+  stateList () {
     return [
       ['Arizona', 'AZ'],
       ['Alabama', 'AL'],
@@ -53,148 +52,145 @@ var utils = {
       ['Washington', 'WA'],
       ['West Virginia', 'WV'],
       ['Wisconsin', 'WI'],
-      ['Wyoming', 'WY'],
-    ];
+      ['Wyoming', 'WY']
+    ]
   },
 
-  getStateAbbrev(stateName){
-    var states = this.stateList();
+  getStateAbbrev (stateName) {
+    const states = this.stateList()
     stateName = stateName.replace(/\w\S*/g, function (txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-    for (var i = 0; i < states.length; i++) {
-      if (states[i][0] == stateName) {
-        return (states[i][1]);
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    })
+    for (let i = 0; i < states.length; i++) {
+      if (states[i][0] === stateName) {
+        return (states[i][1])
       }
     }
 
-    return null;
+    return null
   },
 
-  getStateName(stateAbbrev){
-    var states = this.stateList();
-    stateAbbrev = stateAbbrev.toUpperCase();
-    for (var i = 0; i < states.length; i++) {
-      if (states[i][1] == stateAbbrev) {
-        return (states[i][0]);
+  getStateName (stateAbbrev) {
+    const states = this.stateList()
+    stateAbbrev = stateAbbrev.toUpperCase()
+    for (let i = 0; i < states.length; i++) {
+      if (states[i][1] === stateAbbrev) {
+        return (states[i][0])
       }
     }
 
-    return null;
+    return null
   },
 
-  getCurrentWeek( date ) {
-    if (! ( date instanceof Date ) ){
-      date = new Date();
+  getCurrentWeek (date) {
+    if (!(date instanceof Date)) {
+      date = new Date()
     }
-    var nDay = ( date.getDay() + 6 ) % 7;
-    date.setDate(date.getDate() - nDay + 3);
+    const nDay = (date.getDay() + 6) % 7
+    date.setDate(date.getDate() - nDay + 3)
 
+    const n1stThursday = date.valueOf()
 
-    var n1stThursday = date.valueOf();
+    date.setMonth(0, 1)
 
-    date.setMonth( 0, 1 );
-
-    if ( date.getDay() !== 4 ) {
-      date.setMonth(0, 1 + (( 4 - date.getDay() ) + 7 ) % 7 );
+    if (date.getDay() !== 4) {
+      date.setMonth(0, 1 + ((4 - date.getDay()) + 7) % 7)
     }
 
-   return 1 + Math.ceil( ( n1stThursday - date ) / 604800000 );
+    return 1 + Math.ceil((n1stThursday - date) / 604800000)
   },
 
-  getRollingWeeksRanges( date ) {
-    if (! ( date instanceof Date ) ){
-      date = new Date();
+  getRollingWeeksRanges (date) {
+    if (!(date instanceof Date)) {
+      date = new Date()
     }
-    var endClosedWeek = this.getCurrentWeek( date ) - 1;
-    var endYear = date.getFullYear();
-    var startClosedWeek = endClosedWeek;
-    var startYear = date.getFullYear() - 1;
+    const endClosedWeek = this.getCurrentWeek(date) - 1
+    let endYear = date.getFullYear()
+    let startClosedWeek = endClosedWeek
+    let startYear = date.getFullYear() - 1
 
-    if( endClosedWeek == 52 ) {
-      endYear = date.getFullYear() - 1;
-    }
-
-    if( startClosedWeek == 52 ) {
-      startClosedWeek = 1;
-      endYear = date.getFullYear();
+    if (endClosedWeek === 52) {
+      endYear = date.getFullYear() - 1
     }
 
-    var ranges = {
-      "start": {
-        "week": startClosedWeek,
-        "year": startYear
-    },
-      "end": {
-        "week": endClosedWeek,
-        "year": endYear
-    } };
+    if (startClosedWeek === 52) {
+      startClosedWeek = 1
+      endYear = date.getFullYear()
+    }
 
-    return ranges;
-
+    const ranges = {
+      'start': {
+        'week': startClosedWeek,
+        'year': startYear
+      },
+      'end': {
+        'week': endClosedWeek,
+        'year': endYear
+      }
+    }
+    return ranges
   },
 
-  getCurrentQuarter() {
-    var quarter = Math.floor((date.getMonth() + 3) / 3);
-    return quarter;
+  getCurrentQuarter () {
+    const quarter = Math.floor((date.getMonth() + 3) / 3)
+    return quarter
   },
 
-  getLastQuarter() {
-    var lastQ = this.getCurrentQuarter() -1;
-    var Qyear = date.getFullYear();
-    if(lastQ == 0 ){
-      lastQ = 1;
-      Qyear = date.getFullYear() - 1;
+  getLastQuarter () {
+    let lastQ = this.getCurrentQuarter() - 1
+    let Qyear = date.getFullYear()
+    if (lastQ === 0) {
+      lastQ = 1
+      Qyear = date.getFullYear() - 1
     }
-     var quarter = { "quarter" : lastQ, "year" : Qyear };
+    let quarter = { 'quarter': lastQ, 'year': Qyear }
   },
 
-  getClosedQuarterRanges( date ) {
-    if (! ( date instanceof Date ) ){
-      date = new Date();
+  getClosedQuarterRanges (date) {
+    if (!(date instanceof Date)) {
+      date = new Date()
     }
-    //TODO startQuarter:: will get this from service soon
-    var startQuarter = { "quarter" : 1, "year" : 2015 };
-    var endQuarter = this.getLastQuarter();
-    var quarterRanges = { "start" : startQuarter, "end" : endQuarter };
+    // TODO startQuarter:: will get this from service soon
+    let startQuarter = { 'quarter': 1, 'year': 2015 }
+    let endQuarter = this.getLastQuarter()
+    let quarterRanges = { 'start': startQuarter, 'end': endQuarter }
   },
 
-  getClosedMonthsRanges( date ) {
-    if (! ( date instanceof Date ) ){
-      date = new Date();
+  getClosedMonthsRanges (date) {
+    if (!(date instanceof Date)) {
+      date = new Date()
     }
-    //TODO startMonth:: will get this from service soon
-    var startMonth = { "month" : 1, "year" : 2015 };
-    var endMonth = date.getMonth() - 1;
-    var Myear = date.getFullYear();
-    if(endMonth == 0 ){
-      endMonth = 12;
-      Myear = date.getFullYear() - 1;
+    // TODO startMonth:: will get this from service soon
+    // let startMonth = { 'month': 1, 'year': 2015 }
+    let endMonth = date.getMonth() - 1
+    let Myear = date.getFullYear()
+    if (endMonth === 0) {
+      endMonth = 12
+      Myear = date.getFullYear() - 1
     }
-    var endMonth = { "month" : endMonth, "year" : Myear };
-    var MonthRanges = { "start" : startMonth, "end" : endMonth };
-
+    endMonth = { 'month': endMonth, 'year': Myear }
+    // let MonthRanges = { 'start': startMonth, 'end': endMonth }
   },
 
-  csv2json( csv ) {
-    var lines=csv.split("\n");
-    var result = [];
-    var headers=lines[0].split(",");
+  csv2json (csv) {
+    const lines = csv.split('\n')
+    const result = []
+    const headers = lines[0].split(',')
 
-    for(var i=1;i<lines.length;i++){
+    for (let i = 1; i < lines.length; i++) {
 
-      var obj = {};
-      var currentline=lines[i].split(",");
+      const obj = {}
+      const currentline = lines[i].split(',')
 
-      for(var j=0;j<headers.length;j++){
-        obj[headers[j]] = currentline[j];
+      for (let j = 0; j < headers.length; j++) {
+        obj[headers[j]] = currentline[j]
       }
 
-      result.push(obj);
+      result.push(obj)
     }
 
-    return result;
+    return result
   }
 }
 
-module.exports = utils;
+module.exports = utils

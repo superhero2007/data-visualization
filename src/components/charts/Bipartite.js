@@ -1,6 +1,4 @@
 import * as d3 from 'd3'
-var vis = require('imports-loader?d3=d3!../../vendor/viz.js')
-
 import services from 'src/modules/services'
 
 export default {
@@ -8,18 +6,16 @@ export default {
   template: require('components/charts/Bipartite.html'),
   data () {
     return {
-      model: nch.model,
+      model: nch.model
     }
   },
-  mounted() {
+  mounted () {
     services.getBipartiteData().then(this.render).catch((message) => { console.log('Bipartite promise catch:' + message) })
   },
 
   methods: {
-
-    render(jsonData) {
-
-      var color = {
+    render (jsonData) {
+      const color = {
         'FSI': '#3366CC',
         'Handout Electronic Checkout': '#DC3912',
         'Military': '#FF9900',
@@ -27,7 +23,7 @@ export default {
         'Unknown': '#990099'
       }
 
-      var svg = d3.select('#bipartiteGraph').attr('width', 1125).attr('height', 900)
+      const svg = d3.select('#bipartiteGraph').attr('width', 1125).attr('height', 900)
 
       svg.append('text').attr('x', 300).attr('y', 70)
         .attr('class', 'header').text('Total redemptions')
@@ -35,28 +31,10 @@ export default {
       svg.append('text').attr('x', 875).attr('y', 70)
         .attr('class', 'header').text('Total')
 
-      var g = [svg.append('g').attr('transform', 'translate(250,100)')
-        , svg.append('g').attr('transform', 'translate(800,100)')]
-
-      var chartHeight = 750;
-
-      var bp = [viz.bP()
-        .data(jsonData)
-        .min(12)
-        .pad(1)
-        .height(chartHeight)
-        .width(200)
-        .barSize(35)
-        .fill(d => color[d.primary])
-        , viz.bP()
-          .data(jsonData)
-          .value(d => d[3])
-          .min(12)
-          .pad(1)
-          .height(chartHeight)
-          .width(200)
-          .barSize(35)
-          .fill(d => color[d.primary])
+      const g = [svg.append('g').attr('transform', 'translate(250,100)'), svg.append('g').attr('transform', 'translate(800,100)')]
+      const chartHeight = 750
+      const bp = [viz.bP().data(jsonData).min(12).pad(1).height(chartHeight).width(200).barSize(35).fill(d => color[d.primary]),
+        viz.bP().data(jsonData).value(d => d[3]).min(12).pad(1).height(chartHeight).width(200).barSize(35).fill(d => color[d.primary])
       ];
 
       [0, 1].forEach(function (i) {
@@ -76,24 +54,22 @@ export default {
           .on('mouseout', mouseout)
 
         g[i].selectAll('.mainBars').append('text').attr('class', 'label')
-          .attr('x', d => (d.part == 'primary' ? -30 : 30))
+          .attr('x', d => (d.part === 'primary' ? -30 : 30))
           .attr('y', d => +6)
           .text(d => d.key)
-          .attr('text-anchor', d => (d.part == 'primary' ? 'end' : 'start'))
+          .attr('text-anchor', d => (d.part === 'primary' ? 'end' : 'start'))
 
         g[i].selectAll('.mainBars').append('text').attr('class', 'perc')
-          .attr('x', d => (d.part == 'primary' ? -200 : 80))
+          .attr('x', d => (d.part === 'primary' ? -200 : 80))
           .attr('y', d => +6)
           .text(function (d) {
-
-            if( i == 1 ) {
-              return  d3.format(",.2f")(d.value)
+            if (i === 1) {
+              return d3.format(',.2f')(d.value)
             } else {
               return d.value
             }
-
           })
-          .attr('text-anchor', d => (d.part == 'primary' ? 'end' : 'start'))
+          .attr('text-anchor', d => (d.part === 'primary' ? 'end' : 'start'))
       })
 
       function mouseover (d) {
@@ -101,21 +77,18 @@ export default {
           bp[i].mouseover(d)
 
           g[i].selectAll('.mainBars').select('.perc')
-            .text(function (d) { return d3.format(",.2f")(d.value)})
+            .text(function (d) { return d3.format(',.2f')(d.value)})
         })
       }
 
       function mouseout (d) {
         [0, 1].forEach(function (i) {
           bp[i].mouseout(d)
-
           g[i].selectAll('.mainBars').select('.perc')
-            .text(function (d) { return d3.format(",.2f")(d.value)})
+            .text(function (d) { return d3.format(',.2f')(d.value) })
         })
       }
-
       d3.select(self.frameElement).style('height', '920px')
-
     }
   }
 }

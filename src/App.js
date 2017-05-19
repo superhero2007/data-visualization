@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-import "./styles/nch.scss";
+import './styles/nch.scss'
 
 export default {
   name: 'app',

@@ -3,7 +3,7 @@ import Sidebar from '../layout/Sidebar'
 import PageFooter from '../layout/PageFooter'
 import ViewHeader from '../layout/ViewHeader'
 
-import services from 'src/modules/services';
+import services from 'src/modules/services'
 
 export default {
   name: 'help',
@@ -20,11 +20,11 @@ export default {
     }
   },
   computed: {},
-  mounted() {
-    console.log( "Help mounted" );
-    services.loadHelpItems().then( (helpItems) => {
-      this.model.helpItems = helpItems;
-    } ).catch( (message) => { console.log('Help, loading helpItems promise catch:' + message) });
+  mounted () {
+    console.log('Help mounted')
+    services.loadHelpItems().then((helpItems) => {
+      this.model.helpItems = helpItems
+    }).catch((message) => { console.log('Help, loading helpItems promise catch:' + message) })
   },
   methods: {}
 }

@@ -33,39 +33,41 @@ export default {
     }
   },
   computed: {
-    categories() {
+    categories () {
       return this.model.categories
     },
-    categorynames() {
+    categorynames () {
       let names = []
-      for(let i = 0; i< this.model.categories.length; i++)
-      {
+      for (let i = 0; i < this.model.categories.length; i++) {
         names.push(this.model.categories[i].categoryname)
       }
       return names
     }
   },
-  mounted() {
-    console.log( 'Dashboard mounted' )
+  mounted () {
+    console.log('Dashboard mounted')
 
     this.consoleCallback()
     // console.log( this.model.categories )
-    services.loadCategories().then( (categories) => {
+    services.loadCategories().then((categories) => {
       this.model.categories = categories
       // console.log( 'cats loaded' )
       // console.log(categories)
-    } ).catch( (message) => { console.log('Dashboard, loading categories promise catch:' + message) })
+    }).catch((message) => { console.log('Dashboard, loading categories promise catch:' + message) })
   },
 
   methods: {
     onCategorySelected: function (event) {
-      console.log( 'category selected: ' + this.selected )
+      console.log('category selected: ' + this.selected)
     },
-    consoleCallback: function(val) {
-      var element = document.getElementsByClassName('close')
-      for (var i = 0; i < element.length; i++) {
-        element[i].innerHTML = "<span class='fa-stack'>  <i class='fa fa-circle fa-stack-2x'></i>    <i class='fa fa-times fa-stack-1x fa-inverse'></i>   </span>"
+    consoleCallback: function (val) {
+      let element = document.getElementsByClassName('close')
+      for (let i = 0; i < element.length; i++) {
+        element[i].innerHTML = "<span class='fa-stack'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-times fa-stack-1x fa-inverse'></i></span>"
       }
+    },
+    updatedCategories: function () {
+      console.log('111')
     }
   }
 }

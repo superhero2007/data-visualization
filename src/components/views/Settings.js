@@ -18,8 +18,8 @@ export default {
     }
   },
   computed: {},
-  mounted() {
-    console.log( "Settings mounted" );
+  mounted () {
+    console.log('Settings mounted')
   },
   methods: {}
 }

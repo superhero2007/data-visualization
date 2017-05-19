@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 import FormLogin from 'components/layout/FormLogin'
 
-import "./styles/home.scss";
+import './styles/home.scss'
 
 export default {
   name: 'home',
@@ -13,16 +13,16 @@ export default {
     }
   },
   mounted () {
-    console.log ('current route: ' + this.$router.currentRoute.name )
+    console.log('current route: ' + this.$router.currentRoute.name)
   },
   components: {
     FormLogin
   },
   methods: {
-    showLoginModal: function() {
+    showLoginModal: function () {
       return this.hasError ? true : false
     },
-    hideLoginModal: function() {
+    hideLoginModal: function () {
       this.hasError = false
     }
   }

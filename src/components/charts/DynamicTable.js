@@ -30,16 +30,17 @@ export default {
   watch: {
     model: {
       handler: function (newValue, oldValue) {
-        this.updateTable();
-      }, deep: true
+        this.updateTable()
+      },
+      deep: true
     }
   },
   mounted () {
     services.loadCombinedData()
-    this.updateTable();
+    this.updateTable()
   },
   methods: {
-    updateTable() {
+    updateTable () {
       services.getTableData(nch.model.selectedCategories).then( this.renderTable ).catch( (message) => { console.log('DynamicTable, update table promise catch:' + message) })
     },
     renderTable (response) {
@@ -50,7 +51,7 @@ export default {
     },
     saveModal: function (lists) {
       nch.model.selectedCategories = lists
-      //services.getTableData(lists).then(this.renderTable).catch((message) => { console.log('DynamicTable promise catch:' + message) })
+      // services.getTableData(lists).then(this.renderTable).catch((message) => { console.log('DynamicTable promise catch:' + message) })
       this.isShow = false
     }
   }

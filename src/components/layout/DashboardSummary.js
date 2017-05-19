@@ -1,4 +1,3 @@
-import * as d3 from 'd3'
 import FilterModal from 'src/components/charts/FilterModal'
 import TimePeriod from '../layout/TimePeriod'
 import services from '../../modules/services'
@@ -9,6 +8,9 @@ export default {
   components: {
     FilterModal,
     TimePeriod
+  },
+  props: {
+    callback: Function
   },
   data () {
     return {
@@ -24,10 +26,10 @@ export default {
     }
   },
   computed: {
-    currentView() {
-      return this.$router.currentRoute.name;
+    currentView () {
+      return this.$router.currentRoute.name
     },
-    segmentName() {
+    segmentName () {
       if (this.segment) {
         return this.segmentNames[0]
       }
@@ -41,18 +43,17 @@ export default {
       immediate: true
     }
   },
-  created: function() {
-    if (this.model.sectors.length > 0){
+  created: function () {
+    if (this.model.sectors.length > 0) {
       this.selectedSector = this.model.sectors[0]
-    }
-    else {
-      services.loadSectors().then( (response) => {
+    } else {
+      services.loadSectors().then((response) => {
         this.selectedSector = response[0]
-      } ).catch( (message) => { console.log('Dashboard, loading sector promise catch:' + message) })
+      }).catch((message) => { console.log('Dashboard, loading sector promise catch:' + message) })
     }
   },
-  mounted() {
-    console.log ('current route: ' + this.$router.currentRoute.name );
+  mounted () {
+    console.log('current route: ' + this.$router.currentRoute.name)
   },
   methods: {
     hideModal: function () {
@@ -64,12 +65,13 @@ export default {
     },
     updateCategories: function () {
       nch.model.selectedSector = this.selectedSector
-       if (nch.model.allSectorCategory) {
-         nch.model.selectedSectorCategory = nch.model.allSectorCategory.filter(function(d) { return d.sectorcode == nch.model.selectedSector.sectorcode })
-       }
-       else {
-         nch.model.selectedSectorCategory = []
-       }
+      nch.model.selectedCategories = []
+      if (nch.model.allSectorCategory && this.selectedSector) {
+        nch.model.selectedSectorCategory = nch.model.allSectorCategory.filter(function(d) { return d.sectorcode === nch.model.selectedSector.sectorcode })
+      } else {
+       nch.model.selectedSectorCategory = []
+      }
+      this.selectedSectorCategory = nch.model.selectedSectorCategory
     }
   }
 }

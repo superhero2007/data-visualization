@@ -1,6 +1,6 @@
 import SidebarItem from '../layout/SidebarItem'
 
-import services from 'src/modules/services';
+import services from 'src/modules/services'
 
 export default {
   name: 'sidebar',
@@ -13,10 +13,10 @@ export default {
       model: nch.model
     }
   },
-  mounted() {
-    console.log ('current route: ' + this.$router.currentRoute.name );
-    services.loadSidebarItems().then( (sidebarItems) => {
-      this.model.sidebarItems = sidebarItems;
-    } ).catch( (message) => { console.log('Sidebar, loading sidebarItems promise catch:' + message) });
+  mounted () {
+    console.log('current route: ' + this.$router.currentRoute.name)
+    services.loadSidebarItems().then((sidebarItems) => {
+      this.model.sidebarItems = sidebarItems
+    }).catch((message) => { console.log('Sidebar, loading sidebarItems promise catch:' + message) })
   }
 }
