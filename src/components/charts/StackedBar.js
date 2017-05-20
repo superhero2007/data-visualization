@@ -17,7 +17,10 @@ export default {
   watch: {
     model: {
       handler: function (val, oldVal) {
-        this.render()
+        if (this.groupByField == 'facevalue') {
+          this.stackedData = this.getFaceData()
+          this.render()
+        }
       },
       deep: true
     },
@@ -305,7 +308,6 @@ export default {
         .selectAll('g')
         .data(d3.stack().keys(keys)(responseData))
         .enter().append('g')
-        .attr('class','oneRect')
         .attr('fill', function (d) {
           return z(d.key)
         })
@@ -314,6 +316,7 @@ export default {
           return d
         })
         .enter().append('rect')
+        .attr('class','oneRect')
         .attr('x', function (d, i) {
           return x(d.data.mfrname) + i * 30 + 90
         })
@@ -387,7 +390,6 @@ export default {
           return d3.stack().keys(keys)(d)
         })
         .enter().append('g')
-        .attr('class','oneRect')
         .attr('fill', function (d) {
           return z(d.key)
         })
@@ -396,6 +398,7 @@ export default {
           return d
         })
         .enter().append('rect')
+        .attr('class','oneRect')
         .attr('x', function (d, i) {
           return x(this.parentNode.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 3) + 90
         })
@@ -463,7 +466,6 @@ export default {
 
     getFaceData () {
       var faceValueData = nch.services.dataService.getFaceValueData()
-      console.log(faceValueData)
       var result = []
       for (var k in faceValueData) {
         var newitem = []

@@ -71,6 +71,10 @@ export default class LocalDataService {
         continue;
       }
 
+      if (nch.model.selectedMedia.value != '' && nch.model.selectedMedia.value != item['medianame']) {
+        continue;
+      }
+
       if( faceValueData[ item['facevaluerangecode'] ] ) {
         currrentFaceValue = faceValueData[ item['facevaluerangecode'] ]
       }
