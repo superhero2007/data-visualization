@@ -209,6 +209,8 @@ export default {
 
     renderLegend (g, keys, z) {
       var length = keys.length
+      var faceLegend = ['< $0.40', '$0.40 - $0.75', '$0.76 - $1.00', '$1.00 +']
+      var groupBy = this.groupByField
 
       g.append('g')
         .append('text')
@@ -240,12 +242,17 @@ export default {
         .attr('stroke', 'white')
         .attr('stroke-width', '3px')
 
+
       legend.append('text')
         .attr('x', 25)
         .attr('y', 20)
         .attr('dy', '0.32em')
         .text(function (d) {
-          return d
+          if (groupBy == 'facevalue') {
+            return faceLegend[d]
+          } else {
+            return d
+          }
         })
 
       legend.append('line')
@@ -456,6 +463,7 @@ export default {
 
     getFaceData () {
       var faceValueData = nch.services.dataService.getFaceValueData()
+      console.log(faceValueData)
       var result = []
       for (var k in faceValueData) {
         var newitem = []
