@@ -23,7 +23,11 @@ var nch = {
       flag: false
     },
     classOfTrades: [],
-    sectors: []
+    sectors: [],
+    timeperiodData: 0,
+    selectedYear: [],
+    selectedQuarter: [],
+    selectedWeek: []
   }
 };
 

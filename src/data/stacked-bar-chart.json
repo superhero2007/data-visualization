@@ -158,6 +158,18 @@
     },
     {
       "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
+      "totalcouponredemeedvalue": 116.5,
+      "categoryname": "Breakfast Foods",
+      "medianame": "Military",
+      "mfrname": "Comparables",
+      "_created": "Thu, 01 Jan 1970 00:00:00 GMT",
+      "storestate": "IL",
+      "_etag": "e4b061498a8c6d5f99bdcda14754bbefdc3612f7",
+      "totalcouponredemption": 233,
+      "price": 0.3
+    },
+    {
+      "_updated": "Thu, 01 Jan 1970 00:00:00 GMT",
       "totalcouponredemeedvalue": 1.0,
       "categoryname": "Heat  and  Eat Prepared Foods",
       "medianame": "Unknown",

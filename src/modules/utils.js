@@ -177,13 +177,16 @@ var utils = {
   },
 
   csv2json( csv ) {
-    var lines=csv.split("\n");
+    var lines=csv.split("\r\n");
     var result = [];
     var headers=lines[0].split(",");
 
     for(var i=1;i<lines.length;i++){
 
       var obj = {};
+      if(lines[i] == "")
+        continue;
+      
       var currentline=lines[i].split(",");
 
       for(var j=0;j<headers.length;j++){
