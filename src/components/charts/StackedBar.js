@@ -140,6 +140,22 @@ export default {
         this.renderFaceValue(g, height, x, y, z, responseData, keys)
       }
 
+      svg.selectAll('.oneRect')
+        .on('mouseover', svgmouseover)
+        .on('mouseout', svgmouseout)
+
+      function svgmouseover (d) {
+        console.log(this.parentNode.__data__.key)
+        nch.model.selectedPrice = {
+          value: this.parentNode.__data__.key,
+          flag: true
+        }
+      }
+
+      function svgmouseout (d) {
+        console.log(d)
+      }
+
       g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
       this.renderLegend(g, keys, z)
     },
@@ -363,7 +379,7 @@ export default {
         .data(responseData)
         .enter().append('text')
         .attr('x', function (d, i) {
-          return x.bandwidth() / 2 + x(d.mfrname) + i * x.bandwidth() / 2 + 90
+          return x.bandwidth() / 2 + x(d.mfrname) + i * 30 + 90
         })
         .attr('font-weight', 'bold')
         .style('text-anchor', 'middle')
@@ -453,7 +469,7 @@ export default {
         .data(responseData)
         .enter().append('text')
         .attr('x', function (d, i) {
-          return x.bandwidth() / 4 + x(d.mfrname) + i * x.bandwidth() / 2 + 90
+          return x.bandwidth() / 2 + x(d.mfrname) + i * 20 + 90
         })
         .attr('font-weight', 'bold')
         .style('text-anchor', 'middle')

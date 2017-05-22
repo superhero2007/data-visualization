@@ -22,6 +22,10 @@ var nch = {
       value: "",
       flag: false
     },
+    selectedPrice: {
+      value: "",
+      flag: false
+    },
     classOfTrades: [],
     sectors: [],
     timeperiodData: 0,
