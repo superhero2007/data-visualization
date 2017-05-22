@@ -201,4 +201,21 @@ export default class LocalDataService {
     return filteredData;
   }
 
+  getPieData() {
+    var combinedData = [];
+    var data = this.period1GmData;
+
+    for( var i = 0; i < data.length; i++ ) {
+      combinedData.push( data[i] )
+    }
+
+    data = this.period2GmData;
+
+    for( i = 0; i < data.length; i++ ) {
+      combinedData.push( data[i] )
+    }
+
+    return combinedData;
+  }
+
 }
