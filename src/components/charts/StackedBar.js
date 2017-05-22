@@ -71,7 +71,8 @@ export default {
 
       for (let i = 0; i < responseData.length; i++) {
         let t = 0
-        for (let j in responseData[i]) {
+        let j
+        for (j in responseData[i]) {
           if (j !== 'mfrname') {
             t += responseData[i][j]
           }
@@ -135,7 +136,8 @@ export default {
     getDataForMediaTypes (items, selectedMedia) {
       const responseData = []
       for (let i = 0; i < items.length; i++) {
-        for (let j = 0; j < responseData.length; j++) {
+        let j
+        for (j = 0; j < responseData.length; j++) {
           if ((responseData[j].mfrname === items[i].mfrname) && (selectedMedia === '' || selectedMedia === items[i].medianame)) {
             if (items[i].price < 0.4) {
               responseData[j]['< $0.40'] += items[i].totalcouponredemption
@@ -176,7 +178,8 @@ export default {
       const responseData = []
 
       for (let i = 0; i < items.length; i++) {
-        for (let j = 0; j < responseData.length; j++) {
+        let j
+        for (j = 0; j < responseData.length; j++) {
           if ((responseData[j].mfrname === items[i].mfrname) && (selectedProductMoved === '' || selectedProductMoved === items[i].productmoved)) {
             if (!(items[i].period in responseData[j])) {
               responseData[j][items[i].period] = 0

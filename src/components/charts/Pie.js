@@ -114,7 +114,8 @@ export default {
       for (let i = 0; i < items.length; i++) {
         for (let j = 0; j < this.model.selectedCategories.length; j++) {
           if ((this.model.selectedCategories[j] === items[i].categoryname) && (this.model.selectedMedia.value === '' || this.model.selectedMedia.value === items[i].medianame)) {
-            for (let k = 0; k < responseData.length; k++) {
+            let k
+            for (k = 0; k < responseData.length; k++) {
               if ((responseData[k].categoryname === items[i].categoryname)) {
                 responseData[k].totalcouponredemption += items[i].totalcouponredemption
                 break
@@ -140,7 +141,8 @@ export default {
       const responseData = []
 
       for (let i = 0; i < items.length; i++) {
-        for (let k = 0; k < responseData.length; k++) {
+        let k
+        for (k = 0; k < responseData.length; k++) {
           if ((responseData[k].medianame === items[i].medianame)) {
             responseData[k].totalcouponredemption += items[i].totalcouponredemption
             break
@@ -163,7 +165,8 @@ export default {
       const responseData = []
 
       for (let i = 0; i < items.length; i++) {
-        for (let k = 0; k < responseData.length; k++) {
+        let k
+        for (k = 0; k < responseData.length; k++) {
           if ((responseData[k].productmoved === items[i].productmoved)) {
             responseData[k].totalcouponredemption += items[i].totalcouponredemption
             break
@@ -279,12 +282,12 @@ export default {
         })
         .attr('font-weight', 'bold')
         .text(function (d) {
-          return ((groupBy === 'productmoved')?(''):(d3.format(',.0f')(d.totalcouponredemption)))
+          return ((groupBy === 'productmoved') ? ('') : (d3.format(',.0f')(d.totalcouponredemption)))
         })
         .attr('text-anchor', 'end')
 
       list.append('text')
-        .attr('x', ((groupBy === 'productmoved')?(210):(380)))
+        .attr('x', ((groupBy === 'productmoved') ? (210) : (380)))
         .attr('y', function (d, i) {
           return 90 + i * lineHeight
         })
