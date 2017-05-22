@@ -184,9 +184,9 @@ var utils = {
     for(var i=1;i<lines.length;i++){
 
       var obj = {};
-      if(lines[i] == "")
-        continue;
-      
+      // if(lines[i] == "")
+      //   continue;
+
       var currentline=lines[i].split(",");
 
       for(var j=0;j<headers.length;j++){

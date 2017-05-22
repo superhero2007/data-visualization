@@ -48,6 +48,10 @@ export default {
       this.stackedData = this.getFaceData()
       this.render()
     }
+
+    var faceValueData = nch.services.dataService.getFaceValueData();
+    console.log("Face value data");
+    console.log(faceValueData);
   },
 
   methods: {
@@ -58,7 +62,7 @@ export default {
       }
 
       var groupBy = this.groupByField
-      
+
       if (groupBy == 'productmoved') {
         responseData = this.getDataForProductMoved(responseData, this.model.selectedProductMoved.value)
       }
@@ -103,8 +107,8 @@ export default {
         keys = [0, 1, 2, 3]
 
         x.domain(responseData.map(function (d) { return d.mfrname }))
-        y.domain([d3.max(responseData, function (d) { 
-          return d3.max(d,function (v){ 
+        y.domain([d3.max(responseData, function (d) {
+          return d3.max(d,function (v){
             return v.total
           })
         }), 0]).nice()
@@ -392,7 +396,7 @@ export default {
     renderFaceValue (g, height, x, y, z, responseData, keys) {
 
       this.renderAxis(g, y)
-      
+
       g.append('g')
         .selectAll('g')
         .data(responseData)
@@ -478,7 +482,7 @@ export default {
           return d.mfrname
         })
     },
-    
+
 
     getFaceData () {
       var faceValueData = nch.services.dataService.getFaceValueData()
@@ -487,7 +491,7 @@ export default {
         var newitem = []
         newitem['mfrname'] = faceValueData[k].label
         if (typeof(faceValueData[k]['period1']['data'][1]) == 'undefined' || typeof(faceValueData[k]['period2']['data'][1]) == 'undefined') {
-          break 
+          break
         }
         newitem[0] = {
           0 : faceValueData[k]['period1']['data'][1]['percentage'] * 100,

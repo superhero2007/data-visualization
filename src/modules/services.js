@@ -51,6 +51,8 @@ var services = {
           if (response.status == 200) {
             var csvData = response.text
             var json = nch.utils.csv2json(csvData)
+            console.log( "period data loaded" );
+            console.log( "total: " + json.length );
             resolve(json)
           }
           else if (response.status == 401) {
