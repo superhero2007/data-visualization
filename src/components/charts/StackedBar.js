@@ -75,7 +75,7 @@ export default {
 
       var x = d3.scaleBand()
         .rangeRound([0, width - 400])
-        .paddingInner(0.05)
+        .paddingInner(0.25)
         .align(0.1)
 
       var y = d3.scaleLinear()
@@ -149,7 +149,7 @@ export default {
         .on('mouseout', svgmouseout)
 
       function svgmouseover (d) {
-        console.log(this.parentNode.__data__.key)
+        //console.log(this.parentNode.__data__.key)
         nch.model.selectedPrice = {
           value: this.parentNode.__data__.key,
           flag: true
@@ -157,7 +157,7 @@ export default {
       }
 
       function svgmouseout (d) {
-        console.log(d)
+        //console.log(d)
       }
 
       g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
@@ -232,7 +232,7 @@ export default {
 
     renderLegend (g, keys, z) {
       var length = keys.length
-      var faceLegend = ['< $0.40', '$0.40 - $0.75', '$0.76 - $1.00', '$1.00 +']
+      var faceLegend = ['$1.00 +', '$0.76 - $1.00', '$0.40 - $0.75', '< $0.40']
       var groupBy = this.groupByField
 
       g.append('g')
@@ -395,7 +395,50 @@ export default {
 
     renderFaceValue (g, height, x, y, z, responseData, keys) {
 
-      this.renderAxis(g, y)
+      // this.renderAxis(g, y)
+      g.append('g')
+        .selectAll('g')
+        .data(responseData)
+        .enter()
+        .append('g')
+        .attr('transform', function (d, i) {
+          return 'translate(' + i * 20 + ',' + 0 + ')'
+        })
+        .selectAll('g')
+        .data(function (d) { return d })
+        .enter().append('rect')
+        .attr('x', function (d, i) {
+          return x(this.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 15) + 90
+        })
+        .attr('y', 0)
+        .attr('height', height - 80)
+        .attr('width', x.bandwidth()/2)
+        .attr('fill', 'transparent')
+        .attr('stroke', 'white')
+        .attr('stroke-width', '5')
+        .style('filter', 'url(#drop-shadow)')
+
+      g.append('g')
+        .selectAll('g')
+        .data(responseData)
+        .enter()
+        .append('g')
+        .attr('transform', function (d, i) {
+          return 'translate(' + i * 20 + ',' + 0 + ')'
+        })
+        .selectAll('g')
+        .data(function (d) {
+          console.log(d)
+          return d })
+        .enter().append('text')
+        .attr('x', function (d, i) {
+          return x(this.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 15) + 90
+        })
+        .attr('y', height - 50)
+        .attr('font-weight', 'bold')
+        .text(function (d) {
+          return d.label
+        })
 
       g.append('g')
         .selectAll('g')
@@ -420,18 +463,18 @@ export default {
         .enter().append('rect')
         .attr('class','oneRect')
         .attr('x', function (d, i) {
-          return x(this.parentNode.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 3) + 90
+          return x(this.parentNode.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 15) + 90
         })
         .attr('y', function (d) {
           return y(d[1])
         })
         .attr('height', function (d) {
-          return (((height - 80 - (y(d[1]- d[0])) > 3)?(height - 83 - (y(d[1]- d[0]))):(0)) )
+          return height - 80 - y(d[1]- d[0])
         })
         .attr('width', x.bandwidth()/2)
-        .attr('stroke', 'white')
-        .attr('stroke-width', '2')
-        .style('filter', 'url(#drop-shadow)')
+        // .attr('stroke', 'white')
+        // .attr('stroke-width', '2')
+        // .style('filter', 'url(#drop-shadow)')
 
       g.append('g')
         .selectAll('g')
@@ -452,7 +495,7 @@ export default {
         })
         .enter().append('text')
         .attr('x', function (d, i) {
-          return x.bandwidth()/4 + x(this.parentNode.parentNode.__data__.mfrname) + i * x.bandwidth()/2 + 90
+          return x.bandwidth()/4 + x(this.parentNode.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 15) + 90
         })
         .style('text-anchor', 'middle')
         .style('font-weight', 'bold')
@@ -473,11 +516,11 @@ export default {
         .data(responseData)
         .enter().append('text')
         .attr('x', function (d, i) {
-          return x.bandwidth() / 2 + x(d.mfrname) + i * 20 + 90
+          return x.bandwidth() / 2 + x(d.mfrname) + i * 20 + 100
         })
         .attr('font-weight', 'bold')
         .style('text-anchor', 'middle')
-        .attr('y', height - 40)
+        .attr('y', height - 20)
         .text(function (d) {
           return d.mfrname
         })
@@ -494,18 +537,20 @@ export default {
           break
         }
         newitem[0] = {
-          0 : faceValueData[k]['period1']['data'][1]['percentage'] * 100,
-          1 : faceValueData[k]['period1']['data'][2]['percentage'] * 100,
-          2 : faceValueData[k]['period1']['data'][3]['percentage'] * 100,
-          3 : faceValueData[k]['period1']['data'][4]['percentage'] * 100,
-          total: 100
+          0 : faceValueData[k]['period1']['data'][4]['percentage'] * 100,
+          1 : faceValueData[k]['period1']['data'][3]['percentage'] * 100,
+          2 : faceValueData[k]['period1']['data'][2]['percentage'] * 100,
+          3 : faceValueData[k]['period1']['data'][1]['percentage'] * 100,
+          total: 100,
+          label: faceValueData[k]['period1']['label']
         }
         newitem[1] = {
-          0 : faceValueData[k]['period2']['data'][1]['percentage'] * 100,
-          1 : faceValueData[k]['period2']['data'][2]['percentage'] * 100,
-          2 : faceValueData[k]['period2']['data'][3]['percentage'] * 100,
-          3 : faceValueData[k]['period2']['data'][4]['percentage'] * 100,
-          total: 100
+          0 : faceValueData[k]['period2']['data'][4]['percentage'] * 100,
+          1 : faceValueData[k]['period2']['data'][3]['percentage'] * 100,
+          2 : faceValueData[k]['period2']['data'][2]['percentage'] * 100,
+          3 : faceValueData[k]['period2']['data'][1]['percentage'] * 100,
+          total: 100,
+          label: faceValueData[k]['period2']['label']
         }
         result.push(newitem)
       }
