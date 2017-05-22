@@ -3,7 +3,7 @@ import services from '../../modules/services';
 export default class LocalDataService {
 
   constructor () {
-    this.model = nch.model;   
+    this.model = nch.model;
     this.period1GmData = null;
     this.period2GmData = null;
     this.period1AllData = null;
