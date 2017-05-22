@@ -3,6 +3,7 @@ import services from '../../modules/services';
 export default class LocalDataService {
 
   constructor () {
+    this.model = nch.model;   
     this.period1GmData = null;
     this.period2GmData = null;
     this.period1AllData = null;
@@ -33,6 +34,60 @@ export default class LocalDataService {
 
   getType() {
     return "local data service"
+  }
+
+  // ***** MEDIA TYPE DATA ****************************************************
+
+  getRedemptionsByMedia() {
+
+  }
+
+  processRedemptionsByMedia( data ) {
+    var items = data;
+    var min = 10000000
+    var max = -1
+    var mediaMap = {}
+    var responseData = { min: 0, max: 0, mediaData: mediaMap }
+
+    for( var i = 0 ; i < items.length ; i++ ) {
+      var item = items[i]
+      var currentData = null
+
+      for( var j = 0 ; j < this.model.selectedCategories.length ; j ++ ) {
+        if( (item['categoryname'] == this.model.selectedCategories[j]) && (this.model.selectedCategory.value == '' || this.model.selectedCategory.value == item['categoryname']))
+        {
+          break
+        }
+      }
+
+      if( j == this.model.selectedCategories.length)
+        continue
+
+      if( mediaMap[ item['medianame'] ] ) {
+        currentData = mediaMap[ item['medianame'] ]
+      }
+      else {
+        currentData = { name: item['medianame'], redempations: 0, redempationValue: 0 }
+        mediaMap[ item['medianame'] ] = currentData
+      }
+
+      //currentData.redempations += item['totalcouponredemption']
+      //currentData.redempationValue += item['totalcouponredemeedvalue']
+      currentData.redempations += item['totalcouponredemeedvalue']
+      currentData.redempationValue += item['totalcouponredemption']
+
+      if( currentData.redempations < min ) {
+        min = currentData.redempations
+      }
+
+      if( currentData.redempations > max ) {
+        max = currentData.redempations
+      }
+    }
+
+    responseData.min = min
+    responseData.max = max
+    return responseData;
   }
 
   // ***** FACE VALUE DATA ****************************************************
