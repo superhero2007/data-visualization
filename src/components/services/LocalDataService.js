@@ -182,4 +182,23 @@ export default class LocalDataService {
     return faceValueData;
   }
 
+  getDataForFaceValue( faceValueCode, periodCode, manufacturerCode ) {
+
+    var filteredData = [];
+    // TODO: update to honor the period code and manufacturer code
+    var data = this.period1GmData;
+
+    for( var i = 0; i < data.length; i++ ) {
+
+      var item = data[i];
+
+      if (item['facevaluerangecode'] == faceValueCode ) {
+        filteredData.push( item )
+        continue;
+      }
+    }
+
+    return filteredData;
+  }
+
 }

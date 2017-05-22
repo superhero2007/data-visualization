@@ -34,6 +34,7 @@ var services = {
     return this.loadPeriodData( dataUrl );
   },
   loadPeriod1Gm: function() {
+    console.log("Loading Period 1 GM data");
     var dataUrl = '/static/api/redemption-data-gm-2016-q1.csv'
     return this.loadPeriodData( dataUrl );
   },
@@ -52,6 +53,7 @@ var services = {
             var csvData = response.text
             var json = nch.utils.csv2json(csvData)
             console.log( "period data loaded" );
+            console.log( json );
             console.log( "total: " + json.length );
             resolve(json)
           }

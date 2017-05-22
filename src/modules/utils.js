@@ -177,7 +177,8 @@ var utils = {
   },
 
   csv2json( csv ) {
-    var lines=csv.split("\r\n");
+    var lines=csv.split("\n");
+    console.log("parse CSV, line count: " + lines.length );
     var result = [];
     var headers=lines[0].split(",");
 
