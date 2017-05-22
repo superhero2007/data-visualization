@@ -201,9 +201,26 @@ export default class LocalDataService {
     return filteredData;
   }
 
-  getPieData() {
+  getCurrentManufacturerData() {
     var combinedData = [];
     var data = this.period1GmData;
+
+    for( var i = 0; i < data.length; i++ ) {
+      combinedData.push( data[i] )
+    }
+
+    data = this.period2GmData;
+
+    for( i = 0; i < data.length; i++ ) {
+      combinedData.push( data[i] )
+    }
+
+    return combinedData;
+  }
+
+  getComparableData() {
+    var combinedData = [];
+    var data = this.period1GmData; // TODO: change this to be ALL data, not GM
 
     for( var i = 0; i < data.length; i++ ) {
       combinedData.push( data[i] )
