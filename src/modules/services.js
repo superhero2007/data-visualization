@@ -26,6 +26,7 @@ require('../data/redemption-data-gm-2016-q2.csv')
 
 require('../data/redemption-all.json')
 require('../data/redemption-manufacturer.json')
+require('../data/period-data.json')
 
 var services = {
 
@@ -388,30 +389,9 @@ var services = {
         .end(function (error, response) {
 
           if (response.status == 200) {
-
             var redemptionData = JSON.parse(response.text)
             var items = redemptionData['_items']
             resolve(items)
-
-            // var responseData = []
-            //
-            // for( var i = 0 ; i < items.length ; i++ ) {
-            //
-            //   for( var j = 0 ; j < responseData.length ; j++ ) {
-            //     if( responseData[j].categoryname == items[i].categoryname ) {
-            //       responseData[j].totalcouponredemption += items[i].totalcouponredemption
-            //       break
-            //     }
-            //   }
-            //
-            //   if( j == responseData.length && items[i].totalcouponredemption != 0 ) {
-            //     var item = { categoryname:items[i].categoryname, totalcouponredemption:items[i].totalcouponredemption }
-            //     responseData.push(item)
-            //   }
-            //
-            // }
-            //
-            // resolve(responseData)
           }
           else if (response.status == 401) {
             console.log('user not authorized')
@@ -476,6 +456,31 @@ var services = {
             var redemptionData = JSON.parse(response.text)
             var items = redemptionData['_items']
             resolve(items)
+          }
+          else if (response.status == 401) {
+            console.log('user not authorized')
+            reject('user not authorized')
+          }
+        });
+    });
+  },
+
+  /**
+   * This is the correct time period data to load.  The function above will go away.
+   *
+   * @returns {Promise}
+   */
+  loadTimePeriodData: function() {
+
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/period-data.json')
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+
+            var timePeriods = JSON.parse(response.text)
+            resolve(timePeriods)
           }
           else if (response.status == 401) {
             console.log('user not authorized')

@@ -21,6 +21,7 @@ nch.utils = utils;
 var serviceFactory = new ServiceFactory();
 nch.services.dataService = serviceFactory.getDataService();
 console.log( "Data service loaded: " + nch.services.dataService.getType() );
+nch.services.periodService = serviceFactory.getPeriodService();
 
 //services.loadCategories();
 services.loadManufacturers();
