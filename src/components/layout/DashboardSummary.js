@@ -23,9 +23,18 @@ export default {
         'Other',
         'Food'
       ],
-      timeperiodData: 0
+      timeperiodData: nch.model.timeperiodData
     }
   },
+
+   watch: {
+    timeperiodData: {
+      handler:function(val, oldVal) {
+        nch.model.timeperiodData = this.timeperiodData
+      },deep: true
+    }
+  },
+
   computed: {
     currentView () {
       return this.$router.currentRoute.name

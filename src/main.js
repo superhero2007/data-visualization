@@ -33,6 +33,8 @@ nch.model.selectedCategories = ['Breakfast Foods', 'Crackers, Cookies & Snack Ba
   'Breakfast Foods - Shelf Stable']
 nch.model.currentManufacturer = 'General Mills, Inc.'
 
+nch.model.timeperiodData = 1
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

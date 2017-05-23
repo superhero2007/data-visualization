@@ -5,6 +5,7 @@ export default class DataService {
   getType () {
     return 'remote data service'
   }
+<<<<<<< HEAD
 
   getManufacturerData (timePeriod) {
 
@@ -13,4 +14,6 @@ export default class DataService {
   getComparableData (timePeriod) {
 
   }
+=======
+>>>>>>> newStackBarCheck
 }

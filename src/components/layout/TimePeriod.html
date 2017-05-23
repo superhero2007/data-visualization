@@ -17,7 +17,7 @@
         Time periods reflect only those that have already closed.
       </div>
 
-      <div v-for="item in timeperiodData[timeperiodValue]['values']" class="timeperiod-button-container-subitem" v-if="timeperiodValue == 0" v-on:click='itemClick(item)' v-bind:class="[item.flag ? '' : 'timeperiod-button-container-subitem-disable']">
+      <div v-for="item in timeperiodData[timeperiodValue]['values']" class="timeperiod-button-container-subitem" v-if="timeperiodValue == 0" v-on:click='itemClick("year", item)' v-bind:class="[item.flag ? '' : 'timeperiod-button-container-subitem-disable']">
           {{ item.year }}
       </div>
 
@@ -25,7 +25,7 @@
         <span class="timeperiod-item"> 
           {{ item.year }}
         </span>
-        <div v-for="subitem in item.item" v-on:click='itemClick(subitem)' class="timeperiod-button-container-subitem" v-bind:class="[subitem.flag ? '' : 'timeperiod-button-container-subitem-disable']" v-bind:style="{ width: '55px', visibility: ((subitem.value == '0')?('hidden'):('visible'))}">
+        <div v-for="subitem in item.item" v-on:click='itemClick("quarter", subitem)' class="timeperiod-button-container-subitem" v-bind:class="[subitem.flag ? '' : 'timeperiod-button-container-subitem-disable']" v-bind:style="{ width: '55px', visibility: ((subitem.value == '0')?('hidden'):('visible'))}">
           Q{{ subitem.value }}
         </div>
       </div>
@@ -34,8 +34,8 @@
         <span class="timeperiod-item"> 
           {{ item.month.substring(0, 3) }}
         </span>
-        <div v-for="subitem in item.item" v-on:click='itemClick(subitem)' class="timeperiod-button-container-subitem" v-bind:class="[subitem.flag ? '' : 'timeperiod-button-container-subitem-disable']" v-bind:style="{ width: '40px', visibility: ((subitem.value == '0')?('hidden'):('visible'))}">
-          wk{{ subitem.value }}
+        <div v-for="subitem in item.item" v-on:click='itemClick("week", subitem)' class="timeperiod-button-container-subitem" v-bind:class="[subitem.flag ? '' : 'timeperiod-button-container-subitem-disable']" v-bind:style="{ width: '40px', visibility: ((subitem.value == '0')?('hidden'):('visible'))}">
+          wk {{ subitem.value }}
         </div>
       </div>
     </div>

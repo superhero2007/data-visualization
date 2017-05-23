@@ -22,8 +22,16 @@ let nch = {
       value: '',
       flag: false
     },
+    selectedPrice: {
+      value: "",
+      flag: false
+    },
     classOfTrades: [],
-    sectors: []
+    sectors: [],
+    timeperiodData: 0,
+    selectedYear: [],
+    selectedQuarter: [],
+    selectedWeek: []
   }
 }
 

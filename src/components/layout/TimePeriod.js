@@ -13,7 +13,10 @@ export default {
       model: nch.model,
       showTimePeriodOptions: false,
       timeperiodData: [],
-      scrollValue: 0
+      scrollValue: 0,
+      selectedYear: nch.model.selectedYear,
+      selectedQuarter: nch.model.selectedQuarter,
+      selectedWeek: nch.model.selectedWeek
     }
   },
   mounted () {
@@ -22,28 +25,80 @@ export default {
       response[1].values.sort(function (a, b) { return b.year - a.year })
       response[2].values.sort(function (a, b) { return new Date(b.year + b.month) - new Date(a.year + a.month) })
 
+<<<<<<< HEAD
       for (let i = 0; i < response[0].values.length; i++) {
         response[0].values[i].flag = 1
       }
 
       for (let i = 0; i < response[1].values.length; i++) {
+=======
+      for(var i = 0; i < response[0].values.length; i++) {
+        response[0].values[i].flag = 0
+      }
+
+      response[0].values[response[0].values.length - 1].flag = 1
+      response[0].values[response[0].values.length - 2].flag = 1
+      this.selectedYear.push(response[0].values[response[0].values.length - 1])
+      this.selectedYear.push(response[0].values[response[0].values.length - 2])
+
+      for(var i = 0; i < response[1].values.length; i++) {
+>>>>>>> newStackBarCheck
         response[1].values[i].item = []
         for (let j = 0; j < response[1].values[i].quarters.length; j++) {
           response[1].values[i].item[j] = {
+            year: response[1].values[i].year,
             value: response[1].values[i].quarters[j],
-            flag: 1
+            flag: 0
           }
         }
       }
 
+<<<<<<< HEAD
       for (let i = 0; i < response[2].values.length; i++) {
+=======
+      var last = response[1].values[0]
+      last.item[last.item.length - 1].flag = 1
+      this.selectedQuarter.push(last.item[last.item.length - 1])
+      if(last.item.length > 1)
+      {
+        last.item[last.item.length - 2].flag = 1
+        this.selectedQuarter.push(last.item[last.item.length - 2])
+      }
+      else
+      {
+        last = response[1].values[1]
+        last.item[last.item.length - 1].flag = 1
+        this.selectedQuarter.push(last.item[last.item.length - 1])
+      }
+
+      
+
+      for(var i = 0; i < response[2].values.length; i++) {
+>>>>>>> newStackBarCheck
         response[2].values[i].item = []
         for (let j = 0; j < response[2].values[i].weeks.length; j++) {
           response[2].values[i].item[j] = {
+            year: response[2].values[i].year,
+            month: response[2].values[i].month,
             value: response[2].values[i].weeks[j],
-            flag: 1
+            flag: 0
           }
         }
+      }
+
+      last = response[2].values[0]
+      last.item[last.item.length - 1].flag = 1
+      this.selectedWeek.push(last.item[last.item.length - 1])
+      if(last.item.length > 1)
+      {
+        last.item[last.item.length - 2].flag = 1
+        this.selectedWeek.push(last.item[last.item.length - 2])
+      }
+      else
+      {
+        last = response[2].values[1]
+        last.item[last.item.length - 1].flag = 1
+        this.selectedWeek.push(last.item[last.item.length - 1])
       }
 
       this.timeperiodData = response
@@ -54,7 +109,29 @@ export default {
       this.showTimePeriodOptions = false
     },
 
+<<<<<<< HEAD
     itemClick: function (item) {
+=======
+    itemClick: function(type, item) {
+      var selectedItem
+      if(type == "year")
+        selectedItem = this.selectedYear
+      else if(type == "quarter")
+        selectedItem = this.selectedQuarter
+      else if(type == "week")
+        selectedItem = this.selectedWeek
+
+      if(selectedItem.length == 2 && !item.flag)
+        return;
+
+      if(!item.flag)
+        selectedItem.push(item)
+      else if(selectedItem[0] === item)
+        selectedItem.splice(0, 1)
+      else
+        selectedItem.splice(1, 1)
+
+>>>>>>> newStackBarCheck
       item.flag = 1 - item.flag
     },
 

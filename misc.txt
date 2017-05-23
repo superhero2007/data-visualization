@@ -1,0 +1,20 @@
+1) Finish adding the grouping to the Facevalue Stacked bar chart
+2) Make the StackedBar chart interactive (mousing over a piece of the StackedBar chart should filter the pie chart with only that piece of data)
+3) Update the Bar chart component to have the same dashed lines and horizontal labels that we currently have on the Product Moved StackedBar chart (see this screenshot: https://www.dropbox.com/s/8ip0k1wlw3ykur7/Screenshot%202017-05-19%2013.00.32.png?dl=0)
+4) Update the Media view to show the Bar/Pie chart combo for both the Manufacturer and the Comparables (see the same screenshot above)
+5) Update the regular bar chart to support multiple periods grouped together (not stacked, but side by side)
+6) update the TimePeriod component to use src/data/period-data.csv
+
+
+
+
+this looks different from what I was expecting...Had been planning on making these vertical grouped bar charts
+
+[4:26]
+Want to confirm that we want separate horizontal bar charts for the two periods instead of one grouped bar chart
+
+[4:27]
+cc @stephen please confirm (want to be very careful to get this right) (edited)
+
+[4:27]
+So we don't have to redo it

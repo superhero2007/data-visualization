@@ -172,15 +172,20 @@ const utils = {
     // let MonthRanges = { 'start': startMonth, 'end': endMonth }
   },
 
-  csv2json (csv) {
-    const lines = csv.split('\n')
-    const result = []
-    const headers = lines[0].split(',')
+
+  csv2json( csv ) {
+    var lines=csv.split("\n");
+    console.log("parse CSV, line count: " + lines.length );
+    var result = [];
+    var headers=lines[0].split(",");
 
     for (let i = 1; i < lines.length; i++) {
 
-      const obj = {}
-      const currentline = lines[i].split(',')
+      var obj = {};
+      // if(lines[i] == "")
+      //   continue;
+
+      var currentline=lines[i].split(",");
 
       for (let j = 0; j < headers.length; j++) {
         obj[headers[j]] = currentline[j]
