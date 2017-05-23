@@ -24,6 +24,7 @@ require('../data/redemption-data-gm-2016-q1.csv')
 require('../data/redemption-data-gm-2016-q2.csv')
 require('../data/redemption-all.json')
 require('../data/redemption-manufacturer.json')
+require('../data/period-data.json')
 
 var services = {
 
@@ -377,6 +378,7 @@ var services = {
       http
         .get('/static/api/pie-chart.json')
         .end(function (error, response) {
+<<<<<<< HEAD
           if (response.status === 200) {
             const redemptionData = JSON.parse(response.text)
             const items = redemptionData['_items']
@@ -402,6 +404,15 @@ var services = {
             //
             // resolve(responseData)
           } else if (response.status === 401) {
+=======
+
+          if (response.status == 200) {
+            var redemptionData = JSON.parse(response.text)
+            var items = redemptionData['_items']
+            resolve(items)
+          }
+          else if (response.status == 401) {
+>>>>>>> newStackBarCheck
             console.log('user not authorized')
             reject('user not authorized')
           }
@@ -456,8 +467,51 @@ var services = {
             console.log('user not authorized')
             reject('user not authorized')
           }
+<<<<<<< HEAD
         })
     })
+=======
+        });
+    });
+  },
+
+  /**
+   * This is the correct time period data to load.  The function above will go away.
+   *
+   * @returns {Promise}
+   */
+  loadTimePeriodData: function() {
+
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/period-data.json')
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+
+            var timePeriods = JSON.parse(response.text)
+            resolve(timePeriods)
+          }
+          else if (response.status == 401) {
+            console.log('user not authorized')
+            reject('user not authorized')
+          }
+        });
+    });
+  },
+
+  // Alphabetically function
+  alphabetical: function (a, b) {
+    var A = a.toLowerCase();
+    var B = b.toLowerCase();
+    if (A < B){
+      return -1;
+    }else if (A > B){
+      return  1;
+    }else{
+      return 0;
+    }
+>>>>>>> newStackBarCheck
   }
 }
 

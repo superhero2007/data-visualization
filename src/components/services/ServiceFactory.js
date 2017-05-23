@@ -1,9 +1,9 @@
-import LocalDataService from './LocalDataService'
-import DataService from './DataService'
+import LocalDataService from './LocalDataService';
+import DataService from './DataService';
+import TimePeriodService from './TimePeriodService';
 
 export default class ServiceFactory {
   constructor () {
-
   }
 
   getDataService () {
@@ -12,5 +12,9 @@ export default class ServiceFactory {
     } else {
       return new DataService()
     }
+  }
+
+  getPeriodService() {
+    return new TimePeriodService();
   }
 }

@@ -17,14 +17,17 @@ window.nch = nch
 const utils = require('./modules/utils')
 nch.utils = utils
 
+
 const serviceFactory = new ServiceFactory()
 nch.services.dataService = serviceFactory.getDataService()
 console.log('Data service loaded: ' + nch.services.dataService.getType())
 // services.loadCategories()
+nch.services.periodService = serviceFactory.getPeriodService();
 services.loadManufacturers()
 services.loadClassOfTrades()
 services.loadSectors()
 services.loadSectorCategories()
+
 
 // ****************************************
 // simple test data, will be removed
