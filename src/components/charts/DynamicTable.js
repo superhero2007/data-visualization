@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     updateTable () {
-      services.getTableData(nch.model.selectedCategories).then( this.renderTable ).catch( (message) => { console.log('DynamicTable, update table promise catch:' + message) })
+      services.getTableData(nch.model.selectedCategories).then(this.renderTable).catch((message) => { console.log('DynamicTable, update table promise catch:' + message) })
     },
     renderTable (response) {
       this.tableData = response
@@ -51,7 +51,6 @@ export default {
     },
     saveModal: function (lists) {
       nch.model.selectedCategories = lists
-      // services.getTableData(lists).then(this.renderTable).catch((message) => { console.log('DynamicTable promise catch:' + message) })
       this.isShow = false
     }
   }

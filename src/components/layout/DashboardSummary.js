@@ -1,6 +1,6 @@
 import FilterModal from 'src/components/charts/FilterModal'
 import TimePeriod from '../layout/TimePeriod'
-import services from '../../modules/services'
+import services from 'src/modules/services'
 
 export default {
   name: 'dashboard-summary',
@@ -17,7 +17,8 @@ export default {
       model: nch.model,
       showCategoriesModal: false,
       segment: false,
-      selectedSector: this.model,
+      sectorCategory: null,
+      selectedSector: null,
       segmentNames: [
         'Other',
         'Food'
@@ -37,23 +38,12 @@ export default {
       return this.segmentNames[1]
     }
   },
-  watch: {
-    selectedSector: {
-      handler: 'updateCategories',
-      immediate: true
-    }
-  },
-  created: function () {
-    if (this.model.sectors.length > 0) {
-      this.selectedSector = this.model.sectors[0]
-    } else {
-      services.loadSectors().then((response) => {
-        this.selectedSector = response[0]
-      }).catch((message) => { console.log('Dashboard, loading sector promise catch:' + message) })
-    }
-  },
   mounted () {
     console.log('current route: ' + this.$router.currentRoute.name)
+    services.loadSectorCategories().then((sectorCategory) => {
+      this.sectorCategory = sectorCategory
+      nch.model.sectorCategory = sectorCategory
+    }).catch((message) => { console.log('Dashboard, loading categories promise catch:' + message) })
   },
   methods: {
     hideModal: function () {
@@ -62,16 +52,6 @@ export default {
     saveModal: function (lists) {
       nch.model.selectedCategories = lists
       this.showCategoriesModal = false
-    },
-    updateCategories: function () {
-      nch.model.selectedSector = this.selectedSector
-      nch.model.selectedCategories = []
-      if (nch.model.allSectorCategory && this.selectedSector) {
-        nch.model.selectedSectorCategory = nch.model.allSectorCategory.filter(function(d) { return d.sectorcode === nch.model.selectedSector.sectorcode })
-      } else {
-       nch.model.selectedSectorCategory = []
-      }
-      this.selectedSectorCategory = nch.model.selectedSectorCategory
     }
   }
 }

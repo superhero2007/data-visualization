@@ -50,8 +50,7 @@ const services = {
             const csvData = response.text
             const json = nch.utils.csv2json(csvData)
             resolve(json)
-          }
-          else if (response.status === 401) {
+          } else if (response.status === 401) {
             console.log('user not authorized')
           }
         })
@@ -64,8 +63,10 @@ const services = {
         .end(function (error, response) {
           if (response.status === 200) {
             const categories = JSON.parse(response.text)
-            // nch.model.categories = categories['_items']
-            resolve(categories['_items'])
+            let category = categories['_items'].map(function (d) {
+              return d.categoryname
+            })
+            resolve(category)
           } else if (response.status === 401) {
             console.log('user not authorized')
           }
@@ -147,16 +148,22 @@ const services = {
   },
 
   loadSectorCategories: function () {
-    http
-      .get('/static/api/sectorCategory.json')
-      .end(function (error, response) {
-        if (response.status === 200) {
-          let sectorCategory = JSON.parse(response.text)
-          nch.model.allSectorCategory = sectorCategory
-        } else if (response.status === 401) {
-          console.log('user not authorized')
-        }
-      })
+    return new Promise((resolve, reject) => {
+      http
+        .get('/static/api/sectorCategory.json')
+        .end(function (error, response) {
+          if (response.status === 200) {
+            let sectorCategory = JSON.parse(response.text)
+            sectorCategory = d3.values(d3.nest()
+              .key(function (d) { return d.sectorname })
+              .entries(sectorCategory))
+            resolve(sectorCategory)
+          } else if (response.status === 401) {
+            console.log('user not authorized')
+            reject('user not authorized')
+          }
+        })
+    })
   },
 
   loadCombinedData: function () {

@@ -5,7 +5,18 @@
     <sidebar></sidebar>
     <div class="main">
       <dashboard-summary></dashboard-summary>
-      <v-select v-model="model.selectedCategories" multiple :options="categorynames" :on-change="consoleCallback"></v-select>
+      <MultiSelect
+        v-model="value"
+        :options="options"
+        :multiple="true"
+        :close-on-select="false"
+        :clear-on-select="false"
+        :hide-selected="true"
+        placeholder="Type to search"
+        label=""
+        track-by="">
+        <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
+      </MultiSelect>
       <div class="page-content">
         <view-header>
           <span>

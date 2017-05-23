@@ -10,6 +10,7 @@ import ViewHeader from '../layout/ViewHeader'
 import services from 'src/modules/services'
 
 import vSelect from 'vue-select'
+import MultiSelect from 'vue-multiselect'
 
 export default {
   name: 'home',
@@ -23,51 +24,48 @@ export default {
     Download,
     ViewHeader,
     PageFooter,
-    vSelect
+    vSelect,
+    MultiSelect
   },
   data () {
     return {
       selected: 'Air Fresheners & Candles',
       model: nch.model,
-      showDownloadOptions: false
+      showDownloadOptions: false,
+      options: [],
+      value: []
+    }
+  },
+  watch: {
+    model: {
+      handler: function () {
+        this.updateMultiSelect()
+      },
+      deep: true
+    },
+    value: function (val) {
+      nch.model.selectedCategories = val
     }
   },
   computed: {
     categories () {
       return this.model.categories
-    },
-    categorynames () {
-      let names = []
-      for (let i = 0; i < this.model.categories.length; i++) {
-        names.push(this.model.categories[i].categoryname)
-      }
-      return names
     }
   },
   mounted () {
     console.log('Dashboard mounted')
-
-    this.consoleCallback()
     // console.log( this.model.categories )
     services.loadCategories().then((categories) => {
       this.model.categories = categories
-      // console.log( 'cats loaded' )
-      // console.log(categories)
+      this.options = categories
+      this.value = nch.model.selectedCategories
     }).catch((message) => { console.log('Dashboard, loading categories promise catch:' + message) })
   },
 
   methods: {
-    onCategorySelected: function (event) {
-      console.log('category selected: ' + this.selected)
-    },
-    consoleCallback: function (val) {
-      let element = document.getElementsByClassName('close')
-      for (let i = 0; i < element.length; i++) {
-        element[i].innerHTML = "<span class='fa-stack'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-times fa-stack-1x fa-inverse'></i></span>"
-      }
-    },
-    updatedCategories: function () {
-      console.log('111')
+    updateMultiSelect: function () {
+      this.value = nch.model.selectedCategories
+      this.selectedCategory = nch.model.selectedCategories
     }
   }
 }

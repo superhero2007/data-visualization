@@ -3,7 +3,7 @@
     <div class="modal-container row" v-on:click.stop>
       <div class="modal-header">
         <slot name="header">
-          <p class="col-lg-12">
+          <div class="col-lg-12">
             <span class="header-icon">
               <i class="fa fa-sliders" aria-hidden="true"></i>
             </span>
@@ -11,17 +11,28 @@
             <span class="close-icon" @click="onClose">
               <i class="fa fa-close"></i>
             </span>
-          </p>
+          </div>
         </slot>
       </div>
 
       <div class="modal-body">
         <slot name="body">
           <div class="row">
-            <div class="col-lg-6" v-for="(category, i) in categories">
-              <input type="checkbox" v-model="comparisonvalue" :id="i" :value="category.categoryname" />
-              <label :for="i">{{category.categoryname}}</label>
+            <div class="col-lg-12 sector" v-for="sector in categories">
+              <p class="sectorname">{{sector.key}}
+                <span class="selectAll" @click="selectAll(sector.values)">Select All</span>
+                |
+                <span class="selectNone" @click="clearAll(sector.values)"> Select None</span>
+              </p>
+              <div class="col-lg-6" v-for="(category, i) in sector.values">
+                <input type="checkbox" v-model="comparisonvalue" :id="category.sectorcode + '_' +  i" :value="category.categoryname" />
+                <label :for="category.sectorcode + '_' +  i">{{category.categoryname}}</label>
+              </div>
             </div>
+            <!--<div class="col-lg-6" v-for="(category, i) in categories">-->
+              <!--<input type="checkbox" v-model="comparisonvalue" :id="i" :value="category.categoryname" />-->
+              <!--<label :for="i">{{category.categoryname}}</label>-->
+            <!--</div>-->
           </div>
         </slot>
       </div>

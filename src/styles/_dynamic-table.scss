@@ -106,6 +106,30 @@ select:focus{
   overflow: auto;
 }
 
+.modal-body .sector{
+  border-bottom: 1px dotted;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.modal-body .sector:last-child{
+  border-bottom: none;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.modal-body .sectorname{
+  font-size: 14px;
+  color: #4d92df;
+}
+
+.modal-body .sectorname span{
+  font-size: 10px;
+  color: #4d92df;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .modal-enter, .modal-leave {
   opacity: 0;
 }
