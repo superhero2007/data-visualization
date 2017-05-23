@@ -25,13 +25,6 @@ export default {
       response[1].values.sort(function (a, b) { return b.year - a.year })
       response[2].values.sort(function (a, b) { return new Date(b.year + b.month) - new Date(a.year + a.month) })
 
-<<<<<<< HEAD
-      for (let i = 0; i < response[0].values.length; i++) {
-        response[0].values[i].flag = 1
-      }
-
-      for (let i = 0; i < response[1].values.length; i++) {
-=======
       for(var i = 0; i < response[0].values.length; i++) {
         response[0].values[i].flag = 0
       }
@@ -42,7 +35,6 @@ export default {
       this.selectedYear.push(response[0].values[response[0].values.length - 2])
 
       for(var i = 0; i < response[1].values.length; i++) {
->>>>>>> newStackBarCheck
         response[1].values[i].item = []
         for (let j = 0; j < response[1].values[i].quarters.length; j++) {
           response[1].values[i].item[j] = {
@@ -53,9 +45,6 @@ export default {
         }
       }
 
-<<<<<<< HEAD
-      for (let i = 0; i < response[2].values.length; i++) {
-=======
       var last = response[1].values[0]
       last.item[last.item.length - 1].flag = 1
       this.selectedQuarter.push(last.item[last.item.length - 1])
@@ -71,10 +60,9 @@ export default {
         this.selectedQuarter.push(last.item[last.item.length - 1])
       }
 
-      
+
 
       for(var i = 0; i < response[2].values.length; i++) {
->>>>>>> newStackBarCheck
         response[2].values[i].item = []
         for (let j = 0; j < response[2].values[i].weeks.length; j++) {
           response[2].values[i].item[j] = {
@@ -109,9 +97,6 @@ export default {
       this.showTimePeriodOptions = false
     },
 
-<<<<<<< HEAD
-    itemClick: function (item) {
-=======
     itemClick: function(type, item) {
       var selectedItem
       if(type == "year")
@@ -131,7 +116,6 @@ export default {
       else
         selectedItem.splice(1, 1)
 
->>>>>>> newStackBarCheck
       item.flag = 1 - item.flag
     },
 

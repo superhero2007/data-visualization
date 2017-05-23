@@ -22,13 +22,6 @@ require('../data/redemption-data-all-2016-q1.csv')
 require('../data/redemption-data-all-2016-q2.csv')
 require('../data/redemption-data-gm-2016-q1.csv')
 require('../data/redemption-data-gm-2016-q2.csv')
-
-<<<<<<< HEAD
-const services = {
-  loadPeriod1All: function () {
-    const dataUrl = '/static/api/redemption-data-all-2016-q1.csv'
-    return this.loadPeriodData(dataUrl)
-=======
 require('../data/redemption-all.json')
 require('../data/redemption-manufacturer.json')
 

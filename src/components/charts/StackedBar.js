@@ -17,9 +17,6 @@ export default {
   watch: {
     model: {
       handler: function (val, oldVal) {
-<<<<<<< HEAD
-        this.render()
-=======
         if (this.groupByField == 'facevalue') {
           this.stackedData = this.getFaceData()
           this.render()
@@ -33,7 +30,6 @@ export default {
           this.stackedData = this.getFaceData()
           this.render()
         }
->>>>>>> newStackBarCheck
       },
       deep: true
     }
@@ -41,18 +37,7 @@ export default {
 
   mounted () {
     console.log('Stacked Bar mounted: ')
-<<<<<<< HEAD
-    if (this.groupByField === 'facevalue') {
-      services.getStackedBarChartData().then((response) => {
-        this.stackedData = response
-        this.render()
-      }).catch((message) => {
-        console.log('Stacked Bar promise catch:' + message)
-      })
-    } else if (this.groupByField === 'productmoved') {
-=======
     if (this.groupByField == 'productmoved') {
->>>>>>> newStackBarCheck
       services.getProductMovedPieData().then((response) => {
         this.stackedData = response
         this.render()
@@ -68,23 +53,6 @@ export default {
     console.log("Face value data");
     console.log(faceValueData);
   },
-<<<<<<< HEAD
-  methods: {
-    render () {
-      const items = this.stackedData
-      if (items.length === 0) {
-        return
-      }
-
-      let responseData = []
-      const groupBy = this.groupByField
-
-      if (groupBy === 'facevalue') {
-        responseData = this.getDataForMediaTypes(items, this.model.selectedMedia.value)
-      } else if (groupBy === 'productmoved') {
-        responseData = this.getDataForProductMoved(items, this.model.selectedProductMoved.value)
-=======
-
   methods: {
     render() {
       var responseData = this.stackedData
@@ -96,7 +64,6 @@ export default {
 
       if (groupBy == 'productmoved') {
         responseData = this.getDataForProductMoved(responseData, this.model.selectedProductMoved.value)
->>>>>>> newStackBarCheck
       }
 
       const svg = d3.select('#stackedBarChart').attr('width', 700).html('')
@@ -105,37 +72,7 @@ export default {
       const height = +svg.attr('height') - margin.top - margin.bottom
       let g = svg.append('g').attr('transform', 'translate(' + 180 + ',' + margin.top + ')')
 
-<<<<<<< HEAD
-      let keys
-      if (groupBy === 'facevalue') {
-        keys = ['$1.00 +', '$0.76 - $1.00', '$0.40 - $0.75', '< $0.40']
-      } else if (groupBy === 'productmoved') {
-        keys = Object.keys(responseData[0]).slice(1)
-      }
-
-      for (let i = 0; i < responseData.length; i++) {
-        let t = 0
-        let j
-        for (j in responseData[i]) {
-          if (j !== 'mfrname') {
-            t += responseData[i][j]
-          }
-        }
-        if (groupBy === 'facevalue') {
-          for (let j in responseData[i]) {
-            if (j !== 'mfrname') {
-              responseData[i][j] = responseData[i][j] / t * 100
-            }
-          }
-          t = 100
-        }
-        responseData[i].total = t
-      }
-
-      const x = d3.scaleBand()
-=======
       var x = d3.scaleBand()
->>>>>>> newStackBarCheck
         .rangeRound([0, width - 400])
         .paddingInner(0.25)
         .align(0.1)
@@ -177,17 +114,10 @@ export default {
         z.domain(keys)
       }
 
-<<<<<<< HEAD
-      const defs = svg.append('defs')
-      const filter = defs.append('filter')
-          .attr('id', 'drop-shadow')
-          .attr('height', '130%')
-=======
       var defs = svg.append('defs')
       var filter = defs.append('filter')
         .attr('id', 'drop-shadow')
         .attr('height', '130%')
->>>>>>> newStackBarCheck
 
       filter.append('feGaussianBlur')
         .attr('in', 'SourceAlpha')
@@ -234,43 +164,6 @@ export default {
     },
 
     getDataForMediaTypes (items, selectedMedia) {
-<<<<<<< HEAD
-      const responseData = []
-      for (let i = 0; i < items.length; i++) {
-        let j
-        for (j = 0; j < responseData.length; j++) {
-          if ((responseData[j].mfrname === items[i].mfrname) && (selectedMedia === '' || selectedMedia === items[i].medianame)) {
-            if (items[i].price < 0.4) {
-              responseData[j]['< $0.40'] += items[i].totalcouponredemption
-            } else if (items[i].price <= 0.75) {
-              responseData[j]['$0.40 - $0.75'] += items[i].totalcouponredemption
-            } else if (items[i].price <= 1) {
-              responseData[j]['$0.76 - $1.00'] += items[i].totalcouponredemption
-            } else {
-              responseData[j]['$1.00 +'] += items[i].totalcouponredemption
-            }
-            break
-          }
-        }
-        if ((j === responseData.length) && (selectedMedia === '' || selectedMedia === items[i].medianame)) {
-          let newItem = {
-            'mfrname' : items[i].mfrname,
-            '< $0.40' : 0,
-            '$0.40 - $0.75' : 0,
-            '$0.76 - $1.00' : 0,
-            '$1.00 +' : 0
-          }
-          if (items[i].price < 0.4) {
-            newItem['< $0.40'] += items[i].totalcouponredemption
-          } else if (items[i].price <= 0.75) {
-            newItem['$0.40 - $0.75'] += items[i].totalcouponredemption
-          } else if (items[i].price <= 1) {
-            newItem['$0.76 - $1.00'] += items[i].totalcouponredemption
-          } else {
-            newItem['$1.00 +'] += items[i].totalcouponredemption
-          }
-          responseData.push(newItem)
-=======
       var responseData = [
         {
           'mfrname' : 'General Mills, Inc.',
@@ -307,27 +200,17 @@ export default {
               responseData[index]['$1.00 +'] += items[i].totalcouponredemption
             }
           }
->>>>>>> newStackBarCheck
         }
       }
       return responseData
     },
 
     getDataForProductMoved (items, selectedProductMoved) {
-<<<<<<< HEAD
-      const responseData = []
-
-      for (let i = 0; i < items.length; i++) {
-        let j
-        for (j = 0; j < responseData.length; j++) {
-          if ((responseData[j].mfrname === items[i].mfrname) && (selectedProductMoved === '' || selectedProductMoved === items[i].productmoved)) {
-=======
       var responseData = []
 
       for (var i = 0; i < items.length; i++) {
         for (var j = 0; j < responseData.length; j++) {
           if ((responseData[j].mfrname == items[i].mfrname) && (selectedProductMoved== '' || selectedProductMoved == items[i].productmoved)) {
->>>>>>> newStackBarCheck
             if (!(items[i].period in responseData[j])) {
               responseData[j][items[i].period] = 0
             }
@@ -347,14 +230,10 @@ export default {
     },
 
     renderLegend (g, keys, z) {
-<<<<<<< HEAD
-      const length = keys.length
-=======
       var length = keys.length
       var faceLegend = ['$1.00 +', '$0.76 - $1.00', '$0.40 - $0.75', '< $0.40']
       var groupBy = this.groupByField
 
->>>>>>> newStackBarCheck
       g.append('g')
         .append('text')
         .attr('x', 10)
@@ -374,11 +253,7 @@ export default {
         .data(keys.slice())
         .enter().append('g')
         .attr('transform', function (d, i) {
-<<<<<<< HEAD
-          return 'translate(20,' + (40 * (length - i) - 20) + ')'
-=======
           return 'translate(20,' + ( 40 * (length - i) - 20) + ')'
->>>>>>> newStackBarCheck
         })
 
       legend.append('circle')
@@ -395,15 +270,11 @@ export default {
         .attr('y', 20)
         .attr('dy', '0.32em')
         .text(function (d) {
-<<<<<<< HEAD
-          return d
-=======
           if (groupBy == 'facevalue') {
             return faceLegend[d]
           } else {
             return d
           }
->>>>>>> newStackBarCheck
         })
 
       legend.append('line')
@@ -415,42 +286,6 @@ export default {
         .style('stroke-dasharray', '5, 5')
     },
 
-<<<<<<< HEAD
-    renderBar (g, height, x, y, z, responseData, keys) {
-      const groupBy = this.groupByField
-      if (groupBy === 'productmoved') {
-        const axisData = y.ticks()
-
-        g.append('g')
-          .selectAll('g')
-          .data(axisData)
-          .enter().append('line')
-          .attr('y1', function (d) {
-            return y(d)
-          })
-          .attr('y2', function (d) {
-            return y(d)
-          })
-          .attr('x1', 60)
-          .attr('x2', 420)
-          .attr('stroke', 'grey')
-          .style('stroke-dasharray', '5, 5')
-
-        g.append('g')
-          .selectAll('g')
-          .data(axisData)
-          .enter().append('text')
-          .attr('y', function (d) {
-            return y(d) + 5
-          })
-          .attr('x', 50)
-          .text(function (d) {
-            return d
-          })
-          .style('text-anchor', 'end')
-          .attr('fill', 'grey')
-      }
-=======
     renderAxis (g, y) {
       var axisData = y.ticks()
 
@@ -487,16 +322,11 @@ export default {
     renderProduct (g, height, x, y, z, responseData, keys) {
 
       this.renderAxis(g, y)
->>>>>>> newStackBarCheck
 
       g.append('g')
         .selectAll('g')
         .data(d3.stack().keys(keys)(responseData))
         .enter().append('g')
-<<<<<<< HEAD
-        .attr('class', 'oneRect')
-=======
->>>>>>> newStackBarCheck
         .attr('fill', function (d) {
           return z(d.key)
         })
@@ -505,10 +335,7 @@ export default {
           return d
         })
         .enter().append('rect')
-<<<<<<< HEAD
-=======
         .attr('class','oneRect')
->>>>>>> newStackBarCheck
         .attr('x', function (d, i) {
           return x(d.data.mfrname) + i * 30 + 90
         })
@@ -516,11 +343,7 @@ export default {
           return y(d[1])
         })
         .attr('height', function (d) {
-<<<<<<< HEAD
-          return (((height - 80 - (y(d[1] - d[0])) > 3) ? (height - 83 - (y(d[1] - d[0]))) : (0)))
-=======
           return  (((height - 80 - (y(d[1]- d[0])) > 3)?(height - 83 - (y(d[1]- d[0]))):(0)) )
->>>>>>> newStackBarCheck
         })
         .attr('width', x.bandwidth())
         .attr('stroke', 'white')
@@ -542,14 +365,6 @@ export default {
         .style('text-anchor', 'middle')
         .style('font-weight', 'bold')
         .attr('y', function (d) {
-<<<<<<< HEAD
-          return y(d[1] / 2 + d[0] / 2)
-        })
-        .text(function (d) {
-          if ((d[1] - d[0]) / d.data.total > 0.005) {
-            return ((groupBy === 'productmoved') ? (d[1] - d[0]) : (d3.format('.0%')((d[1] - d[0]) / d.data.total)))
-          } else {
-=======
           return y(d[1]/2 + d[0]/2)
         })
         .text(function (d) {
@@ -557,7 +372,6 @@ export default {
             return d[1]-d[0]
           }
           else {
->>>>>>> newStackBarCheck
             return ''
           }
         })
