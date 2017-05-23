@@ -378,41 +378,12 @@ var services = {
       http
         .get('/static/api/pie-chart.json')
         .end(function (error, response) {
-<<<<<<< HEAD
-          if (response.status === 200) {
-            const redemptionData = JSON.parse(response.text)
-            const items = redemptionData['_items']
-            resolve(items)
-
-            // const responseData = []
-            //
-            // for (let i = 0  i < items.length  i++) {
-            //
-            //   for (let j = 0  j < responseData.length  j++) {
-            //     if (responseData[j].categoryname === items[i].categoryname) {
-            //       responseData[j].totalcouponredemption += items[i].totalcouponredemption
-            //       break
-            //     }
-            //   }
-            //
-            //   if (j === responseData.length && items[i].totalcouponredemption !== 0) {
-            //     const item = { categoryname:items[i].categoryname, totalcouponredemption:items[i].totalcouponredemption }
-            //     responseData.push(item)
-            //   }
-            //
-            // }
-            //
-            // resolve(responseData)
-          } else if (response.status === 401) {
-=======
-
           if (response.status == 200) {
             var redemptionData = JSON.parse(response.text)
             var items = redemptionData['_items']
             resolve(items)
           }
           else if (response.status == 401) {
->>>>>>> newStackBarCheck
             console.log('user not authorized')
             reject('user not authorized')
           }
@@ -467,10 +438,6 @@ var services = {
             console.log('user not authorized')
             reject('user not authorized')
           }
-<<<<<<< HEAD
-        })
-    })
-=======
         });
     });
   },
@@ -511,7 +478,6 @@ var services = {
     }else{
       return 0;
     }
->>>>>>> newStackBarCheck
   }
 }
 
