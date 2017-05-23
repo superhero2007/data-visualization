@@ -24,7 +24,39 @@ require('../data/redemption-data-all-2016-q2.csv')
 require('../data/redemption-data-gm-2016-q1.csv')
 require('../data/redemption-data-gm-2016-q2.csv')
 
+require('../data/redemption-all.json')
+require('../data/redemption-manufacturer.json')
+
 var services = {
+
+  loadManufacturerData: function() {
+    console.log("Loading Manufacturer data");
+    var dataUrl = '/static/api/redemption-manufacturer.json'
+    return this.loadRedemptionData( dataUrl );
+  },
+  loadComparableData: function() {
+    console.log("Loading Comparable data");
+    var dataUrl = '/static/api/redemption-all.json'
+    return this.loadRedemptionData( dataUrl );
+  },
+
+  loadRedemptionData: function( dataUrl ) {
+    return new Promise((resolve, reject) => {
+      http
+        .get(dataUrl)
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+            var json = JSON.parse(response.text)
+            resolve(json)
+          }
+          else if (response.status == 401) {
+            console.log('user not authorized')
+          }
+        })
+    })
+  },
+
   loadPeriod1All: function() {
     var dataUrl = '/static/api/redemption-data-all-2016-q1.csv'
     return this.loadPeriodData( dataUrl );
@@ -52,9 +84,6 @@ var services = {
           if (response.status == 200) {
             var csvData = response.text
             var json = nch.utils.csv2json(csvData)
-            console.log( "period data loaded" );
-            console.log( json );
-            console.log( "total: " + json.length );
             resolve(json)
           }
           else if (response.status == 401) {

@@ -7,27 +7,40 @@ export default class LocalDataService {
     this.period2GmData = [];
     this.period1AllData = [];
     this.period2AllData = [];
+    //
+    // services.loadPeriod1Gm().then( (response) => {
+    //   this.period1GmData = response
+    //   console.log("Period 1 GM data loaded, total records: " + this.period1GmData.length );
+    //   console.log(this.period1GmData[100])
+    // }).catch( (message) => { console.log('LocalDataService, loadPeriod1Gm promise catch:' + message) })
+    //
+    // services.loadPeriod2Gm().then( (response) => {
+    //   this.period2GmData = response
+    //   console.log("Period 2 GM data loaded, total records: " + this.period2GmData.length )
+    // }).catch( (message) => { console.log('LocalDataService, loadPeriod2Gm promise catch:' + message) })
+    //
+    // services.loadPeriod1All().then( (response) => {
+    //   this.period1AllData = response
+    //   console.log("Period 1 All data loaded, total records: " + this.period1AllData.length )
+    // }).catch( (message) => { console.log('LocalDataService, loadPeriod1All promise catch:' + message) })
+    //
+    // services.loadPeriod2All().then( (response) => {
+    //   this.period2AllData = response
+    //   console.log("Period 2 All data loaded, total records: " + this.period2AllData.length )
+    // }).catch( (message) => { console.log('LocalDataService, loadPeriod2All promise catch:' + message) })
 
-    services.loadPeriod1Gm().then( (response) => {
-      this.period1GmData = response
-      console.log("Period 1 GM data loaded, total records: " + this.period1GmData.length );
-      console.log(this.period1GmData[100])
-    }).catch( (message) => { console.log('LocalDataService, loadPeriod1Gm promise catch:' + message) })
+    this.manufacturerData = [];
+    this.comparableData = [];
 
-    services.loadPeriod2Gm().then( (response) => {
-      this.period2GmData = response
-      console.log("Period 2 GM data loaded, total records: " + this.period2GmData.length )
-    }).catch( (message) => { console.log('LocalDataService, loadPeriod2Gm promise catch:' + message) })
+    services.loadManufacturerData().then( (response) => {
+      this.manufacturerData = response
+      console.log("Manufacturer data loaded, total records: " + this.manufacturerData.length )
+    }).catch( (message) => { console.log('LocalDataService, loadManufacturerData promise catch:' + message) })
 
-    services.loadPeriod1All().then( (response) => {
-      this.period1AllData = response
-      console.log("Period 1 All data loaded, total records: " + this.period1AllData.length )
-    }).catch( (message) => { console.log('LocalDataService, loadPeriod1All promise catch:' + message) })
-
-    services.loadPeriod2All().then( (response) => {
-      this.period2AllData = response
-      console.log("Period 2 All data loaded, total records: " + this.period2AllData.length )
-    }).catch( (message) => { console.log('LocalDataService, loadPeriod2All promise catch:' + message) })
+    services.loadComparableData().then( (response) => {
+      this.comparableData = response
+      console.log("Comparable data loaded, total records: " + this.comparableData.length )
+    }).catch( (message) => { console.log('LocalDataService, loadComparableData promise catch:' + message) })
 
   }
 
@@ -95,35 +108,22 @@ export default class LocalDataService {
 
     console.log("Getting Face Value Data, Period 1 GM data loaded, total records: " + this.period1GmData.length );
 
-    var faceValues1 = this.processFaceValueData(this.period1GmData);
-    var faceValues2 = this.processFaceValueData(this.period2GmData);
+    //var faceValues1 = this.processFaceValueData(this.period1GmData);
+    //var faceValues2 = this.processFaceValueData(this.period2GmData);
+    var manufacturerFaceValues = this.processFaceValueData(this.manufacturerData);
 
     var manufacturer = {
       label: 'General Mills, Inc',
-      period1: {
-        label: 'Q1 2016',
-        data: faceValues1
-      },
-      period2: {
-        label: 'Q2 2016',
-        data: faceValues2
-      }
+      data: manufacturerFaceValues
     }
 
-    // TODO: switch this to ALL data when it is available
-    var faceValues3 = this.processFaceValueData(this.period1GmData);
-    var faceValues4 = this.processFaceValueData(this.period2GmData);
+    // var faceValues3 = this.processFaceValueData(this.period1GmData);
+    // var faceValues4 = this.processFaceValueData(this.period2GmData);
+    var comparableFaceValues = this.processFaceValueData(this.comparableData);
 
     var comparables = {
       label: 'Comparables',
-      period1: {
-        label: 'Q1 2016',
-        data: faceValues3
-      },
-      period2: {
-        label: 'Q2 2016',
-        data: faceValues4
-      }
+      data: comparableFaceValues
     }
 
     return { manufacturer: manufacturer, comparables: comparables };
@@ -131,38 +131,45 @@ export default class LocalDataService {
 
   processFaceValueData( data ) {
     var faceValueData = {}
-    var totalRedemptions = 0;
+    var totalP1Redemptions = 0;
+    var totalP2Redemptions = 0;
 
     for( var i = 0; i < data.length; i++ ) {
 
       var item = data[i];
       var currrentFaceValue = null;
 
-      if( item['facevaluerangecode'] != "1" && item['facevaluerangecode'] != "2" && item['facevaluerangecode'] != "3" && item['facevaluerangecode'] != "4" ) {
+      //var codeField = 'facevaluerangecode';
+      var codeField = 'facevalueperunitrangecode';
+
+      if( item[codeField] != 1 && item[codeField] != 2 && item[codeField] != 3 && item[codeField] != 4 ) {
         continue;
       }
 
-      if( faceValueData[ item['facevaluerangecode'] ] ) {
-        currrentFaceValue = faceValueData[ item['facevaluerangecode'] ]
+      if( faceValueData[ item[codeField] ] ) {
+        currrentFaceValue = faceValueData[ item[codeField] ]
       }
       else {
-        currrentFaceValue = { code: item['facevaluerangecode'], name: item['facevaluerangedescription'], redemptions: 0 }
-        faceValueData[ item['facevaluerangecode'] ] = currrentFaceValue
+        currrentFaceValue = { code: item[codeField], name: item['facevalueperunitrangedescription'], p1Redemptions: 0, p2Redemptions: 0 }
+        faceValueData[ item[codeField] ] = currrentFaceValue
       }
 
-      //var redemptionValue =  Number(item['totalcouponredemption'])
-      var redemptionValue =  Number(item['recordcount']);  // TODO: use the correct field when we get some real data
+      var p1RedemptionValue =  Number(item['totalredemptionsp1']);
+      var p2RedemptionValue =  Number(item['totalredemptionsp2']);
 
-      if( isNaN(redemptionValue) ) {
-        continue;
+      if( !isNaN(p1RedemptionValue) ) {
+        currrentFaceValue.p1Redemptions += p1RedemptionValue;
+        totalP1Redemptions += p1RedemptionValue;
       }
 
-      //console.log( "redemptionValue: " + redemptionValue );
-      currrentFaceValue.redemptions += redemptionValue;
-      totalRedemptions += redemptionValue;
+      if( !isNaN(p2RedemptionValue) ) {
+        currrentFaceValue.p2Redemptions += p2RedemptionValue;
+        totalP2Redemptions += p2RedemptionValue;
+      }
+
     }
 
-    console.log( "totalRedemptions: " + totalRedemptions );
+    console.log( "totalP1Redemptions: " + totalP1Redemptions );
 
     var faceValues = Object.keys( faceValueData );
     console.log( faceValues );
@@ -170,9 +177,13 @@ export default class LocalDataService {
       var faceValuesCode = faceValues[j];
       var faceValueObject = faceValueData[faceValuesCode]
       //console.log( faceValueObject );
-      var faceValuePercentage = faceValueObject.redemptions/totalRedemptions
+      var faceValuePercentage = faceValueObject.p1Redemptions/totalP1Redemptions
       //console.log( "faceValuePercentage for " + faceValuesCode + ": " + faceValuePercentage );
-      faceValueObject['percentage'] = faceValuePercentage;
+      faceValueObject['p1Percentage'] = faceValuePercentage;
+
+      var faceValuePercentage2 = faceValueObject.p2Redemptions/totalP2Redemptions
+      //console.log( "faceValuePercentage for " + faceValuesCode + ": " + faceValuePercentage );
+      faceValueObject['p2Percentage'] = faceValuePercentage2;
     }
 
     //console.log("Face value data");

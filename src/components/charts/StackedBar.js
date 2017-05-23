@@ -530,75 +530,37 @@ export default {
     getFaceData () {
       var faceValueData = nch.services.dataService.getFaceValueData()
       var result = []
-      for (var k in faceValueData) {
-        var newitem = []
-        newitem['mfrname'] = faceValueData[k].label
-        if (typeof(faceValueData[k]['period1']['data'][1]) == 'undefined' || typeof(faceValueData[k]['period2']['data'][1]) == 'undefined') {
-          break
-        }
-        newitem[0] = {
-          0 : faceValueData[k]['period1']['data'][4]['percentage'] * 100,
-          1 : faceValueData[k]['period1']['data'][3]['percentage'] * 100,
-          2 : faceValueData[k]['period1']['data'][2]['percentage'] * 100,
-          3 : faceValueData[k]['period1']['data'][1]['percentage'] * 100,
-          total: 100,
-          label: faceValueData[k]['period1']['label']
-        }
-        newitem[1] = {
-          0 : faceValueData[k]['period2']['data'][4]['percentage'] * 100,
-          1 : faceValueData[k]['period2']['data'][3]['percentage'] * 100,
-          2 : faceValueData[k]['period2']['data'][2]['percentage'] * 100,
-          3 : faceValueData[k]['period2']['data'][1]['percentage'] * 100,
-          total: 100,
-          label: faceValueData[k]['period2']['label']
-        }
-        result.push(newitem)
-      }
+      var manufacturerData = this.formatData( faceValueData.manufacturer );
+      result.push(manufacturerData);
+      var comparableData = this.formatData( faceValueData.comparables );
+      result.push(comparableData);
       return result
+    },
+
+
+    formatData ( manufacturerData ) {
+      var dataList = []
+      dataList['mfrname'] = manufacturerData.label
+
+      dataList[0] = {
+        0 : manufacturerData['data'][4]['p1Percentage'] * 100,
+        1 : manufacturerData['data'][3]['p1Percentage'] * 100,
+        2 : manufacturerData['data'][2]['p1Percentage'] * 100,
+        3 : manufacturerData['data'][1]['p1Percentage'] * 100,
+        total: 100,
+        label: '2016 Q1' // TODO: should come from nch.model.firstPeriod
+      }
+      dataList[1] = {
+        0 : manufacturerData['data'][4]['p2Percentage'] * 100,
+        1 : manufacturerData['data'][3]['p2Percentage'] * 100,
+        2 : manufacturerData['data'][2]['p2Percentage'] * 100,
+        3 : manufacturerData['data'][1]['p2Percentage'] * 100,
+        total: 100,
+        label: '2016 Q2' // TODO: should come from nch.model.firstPeriod
+      }
+
+      return dataList;
     }
 
-    // getFaceData () {
-    //   var manufacturerData = []
-    //   var comparableData = []
-
-    //   if (this.model.timeperiodData == 0) {
-    //     for (var i = 0; i < this.model.selectedYear.length; i++) {
-    //       var timePeriod = {
-    //         type: 'year',
-    //         year: this.model.selectedYear[i].year
-    //       }
-    //       manufacturerData[i] = this.services.dataService.getManufacturerData(timePeriod)
-    //       comparableData[i] = this.services.dataService.getComparableData(timePeriod)
-    //     }
-    //   }
-
-    //   if (this.model.timeperiodData == 1) {
-    //     console.log(this.model.timeperiodData, this.model.selectedQuarter)
-    //     for (var i = 0; i < this.model.selectedQuarter.length; i++) {
-    //       var timePeriod = {
-    //         type: 'quarter',
-    //         year: this.model.selectedQuarter[i].year,
-    //         value: this.model.selectedQuarter[i].value
-    //       }
-    //       manufacturerData[i] = this.services.dataService.getManufacturerData(timePeriod)
-    //       comparableData[i] = this.services.dataService.getComparableData(timePeriod)
-    //     }
-    //   }
-
-    //   if (this.model.timeperiodData == 2) {
-    //     for (var i = 0; i < this.model.selectedWeek.length; i++) {
-    //       var timePeriod = {
-    //         type: 'week',
-    //         year: this.model.selectedWeek[i].year,
-    //         month: this.model.selectedWeek[i].month,
-    //         value: this.model.selectedWeek[i].value
-    //       }
-    //       manufacturerData[i] = this.services.dataService.getManufacturerData(timePeriod)
-    //       comparableData[i] = this.services.dataService.getComparableData(timePeriod)
-    //     }
-    //   }
-    //   console.log(manufacturerData)
-    //   console.log(comparableData)
-    // }
   }
 }
