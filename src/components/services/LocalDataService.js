@@ -4,32 +4,6 @@ export default class LocalDataService {
 
   constructor () {
 
-    this.period1GmData = [];
-    this.period2GmData = [];
-    this.period1AllData = [];
-    this.period2AllData = [];
-    //
-    // services.loadPeriod1Gm().then( (response) => {
-    //   this.period1GmData = response
-    //   console.log("Period 1 GM data loaded, total records: " + this.period1GmData.length );
-    //   console.log(this.period1GmData[100])
-    // }).catch( (message) => { console.log('LocalDataService, loadPeriod1Gm promise catch:' + message) })
-    //
-    // services.loadPeriod2Gm().then( (response) => {
-    //   this.period2GmData = response
-    //   console.log("Period 2 GM data loaded, total records: " + this.period2GmData.length )
-    // }).catch( (message) => { console.log('LocalDataService, loadPeriod2Gm promise catch:' + message) })
-    //
-    // services.loadPeriod1All().then( (response) => {
-    //   this.period1AllData = response
-    //   console.log("Period 1 All data loaded, total records: " + this.period1AllData.length )
-    // }).catch( (message) => { console.log('LocalDataService, loadPeriod1All promise catch:' + message) })
-    //
-    // services.loadPeriod2All().then( (response) => {
-    //   this.period2AllData = response
-    //   console.log("Period 2 All data loaded, total records: " + this.period2AllData.length )
-    // }).catch( (message) => { console.log('LocalDataService, loadPeriod2All promise catch:' + message) })
-
     this.manufacturerData = [];
     this.comparableData = [];
 
@@ -108,20 +82,13 @@ export default class LocalDataService {
 
   getFaceValueData() {
 
-    console.log("Getting Face Value Data, Period 1 GM data loaded, total records: " + this.period1GmData.length );
-
-    //var faceValues1 = this.processFaceValueData(this.period1GmData);
-    //var faceValues2 = this.processFaceValueData(this.period2GmData);
     var manufacturerFaceValues = this.processFaceValueData(this.manufacturerData);
+    var comparableFaceValues = this.processFaceValueData(this.comparableData);
 
     var manufacturer = {
       label: 'General Mills, Inc',
       data: manufacturerFaceValues
     }
-
-    // var faceValues3 = this.processFaceValueData(this.period1GmData);
-    // var faceValues4 = this.processFaceValueData(this.period2GmData);
-    var comparableFaceValues = this.processFaceValueData(this.comparableData);
 
     var comparables = {
       label: 'Comparables',
@@ -171,27 +138,18 @@ export default class LocalDataService {
 
     }
 
-    console.log( "totalP1Redemptions: " + totalP1Redemptions );
-
     var faceValues = Object.keys( faceValueData );
-    console.log( faceValues );
+
     for( var j = 0; j < faceValues.length; j++ ) {
       var faceValuesCode = faceValues[j];
       var faceValueObject = faceValueData[faceValuesCode]
-      //console.log( faceValueObject );
       var faceValuePercentage = faceValueObject.p1Redemptions/totalP1Redemptions
-      //console.log( "faceValuePercentage for " + faceValuesCode + ": " + faceValuePercentage );
       faceValueObject['p1Percentage'] = faceValuePercentage;
 
       var faceValuePercentage2 = faceValueObject.p2Redemptions/totalP2Redemptions
-      //console.log( "faceValuePercentage for " + faceValuesCode + ": " + faceValuePercentage );
       faceValueObject['p2Percentage'] = faceValuePercentage2;
     }
 
-    //console.log("Face value data");
-    //console.log( faceValueData );
-    //console.log( nch.model.selectedCategories );
-    //console.log( nch.model.categories );
     return faceValueData;
   }
 
@@ -215,37 +173,11 @@ export default class LocalDataService {
   }
 
   getCurrentManufacturerData() {
-    var combinedData = [];
-    var data = this.period1GmData;
-
-    for( var i = 0; i < data.length; i++ ) {
-      combinedData.push( data[i] )
-    }
-
-    data = this.period2GmData;
-
-    for( i = 0; i < data.length; i++ ) {
-      combinedData.push( data[i] )
-    }
-
-    return combinedData;
+    return this.manufacturerData;
   }
 
   getComparableData() {
-    var combinedData = [];
-    var data = this.period1GmData; // TODO: change this to be ALL data, not GM
-
-    for( var i = 0; i < data.length; i++ ) {
-      combinedData.push( data[i] )
-    }
-
-    data = this.period2GmData;
-
-    for( i = 0; i < data.length; i++ ) {
-      combinedData.push( data[i] )
-    }
-
-    return combinedData;
+    return this.comparableData;
   }
 
 }
