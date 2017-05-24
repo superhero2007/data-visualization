@@ -26,14 +26,26 @@ export default class LocalDataService {
   // ***** MEDIA TYPE DATA ****************************************************
 
   getRedemptionsByMedia() {
+
+    var manufacturerFaceValues = this.processRedemptionsByMedia(this.manufacturerData)
+    var comparableFaceValues = this.processRedemptionsByMedia(this.comparableData)
+
+    var manufacturer = {
+      label: 'General Mills, Inc',
+      data: manufacturerFaceValues
+    }
+
+    var comparables = {
+      label: 'Comparables',
+      data: comparableFaceValues
+    }
+
+    return { manufacturer: manufacturer, comparables: comparables }
   }
 
   processRedemptionsByMedia( data ) {
     var items = data;
-    var min = 10000000
-    var max = -1
-    var mediaMap = {}
-    var responseData = { min: 0, max: 0, mediaData: mediaMap }
+    var responseData = {}
 
     for( var i = 0 ; i < items.length ; i++ ) {
       var item = items[i]
@@ -49,31 +61,20 @@ export default class LocalDataService {
       if( j == nch.model.selectedCategories.length)
         continue
 
-      if( mediaMap[ item['mediacodename'] ] ) {
-        currentData = mediaMap[ item['mediacodename'] ]
+      if( responseData[ item['mediacodename'] ] ) {
+        currentData = responseData[ item['mediacodename'] ]
       }
       else {
-        currentData = { name: item['mediacodename'], redempations: 0, redempationValue: 0 }
-        mediaMap[ item['mediacodename'] ] = currentData
+        currentData = { name: item['mediacodename'], totalredemptionsp1: 0, totalredemptionsp2: 0 }
+        responseData[ item['mediacodename'] ] = currentData
       }
 
-      //currentData.redempations += item['totalcouponredemption']
-      //currentData.redempationValue += item['totalcouponredemeedvalue']
-      currentData.redempations += item['totalcouponredemeedvalue']
-      currentData.redempationValue += item['totalcouponredemption']
-
-      if( currentData.redempations < min ) {
-        min = currentData.redempations
-      }
-
-      if( currentData.redempations > max ) {
-        max = currentData.redempations
-      }
+      //currentData.totalredemptionsp1 += item['totalredemptionsp1']
+      //currentData.totalredemptionsp2 += item['totalredemptionsp2']
+      currentData.totalredemptionsp1 += item['totalredemptionsp1']
+      currentData.totalredemptionsp2 += item['totalredemptionsp2']
     }
 
-
-    responseData.min = min
-    responseData.max = max
     return responseData;
   }
 
@@ -81,8 +82,8 @@ export default class LocalDataService {
 
   getFaceValueData() {
 
-    var manufacturerFaceValues = this.processFaceValueData(this.manufacturerData);
-    var comparableFaceValues = this.processFaceValueData(this.comparableData);
+    var manufacturerFaceValues = this.processFaceValueData(this.manufacturerData)
+    var comparableFaceValues = this.processFaceValueData(this.comparableData)
 
     var manufacturer = {
       label: 'General Mills, Inc',
@@ -94,7 +95,7 @@ export default class LocalDataService {
       data: comparableFaceValues
     }
 
-    return { manufacturer: manufacturer, comparables: comparables };
+    return { manufacturer: manufacturer, comparables: comparables }
   }
 
   processFaceValueData( data ) {

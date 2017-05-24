@@ -107,7 +107,7 @@ export default {
 
         x.domain(responseData.map(function (d) { return d.mfrname }))
         y.domain([d3.max(responseData, function (d) {
-          return d3.max(d,function (v){
+          return d3.max(d, function (v){
             return v.total
           })
         }), 0]).nice()

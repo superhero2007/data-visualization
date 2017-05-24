@@ -14,7 +14,7 @@ export default {
   watch: {
     model: {
       handler: function (newValue, oldValue) {
-        if (this.groupByField == 'medianame') {
+        if (this.groupByField !== 'productmoved') {
           this.pieData = this.getFaceData()
         }
         this.render()
@@ -23,7 +23,7 @@ export default {
     },
     services: {
       handler: function (newValue, oldValue) {
-        if (this.groupByField == 'medianame') {
+        if (this.groupByField !== 'productmoved') {
           this.pieData = this.getFaceData()
         }
         this.render()
@@ -41,12 +41,8 @@ export default {
         console.log('Pie promise catch:' + message)
       })
     } else if (this.groupByField === 'categoryname') {
-      services.getPieData().then((response) => {
-        this.pieData = response
-        this.render()
-      }).catch((message) => {
-        console.log('Pie promise catch:' + message)
-      })
+      this.pieData = this.getFaceData()
+      this.render()
     } else if (this.groupByField === 'medianame') {
       this.pieData = this.getFaceData()
       this.render()
@@ -368,6 +364,7 @@ export default {
         .on('mouseout', listmouseout)
 
       function listmouseover (d) {
+        console.log(d,nch.model.selectedCategory.value)
         if (typeof (d.productmoved) !== 'undefined') {
           if (nch.model.selectedProductMoved.value !== d.productmoved) {
             nch.model.selectedProductMoved = {
@@ -398,6 +395,7 @@ export default {
             }
           }
         }
+        console.log(nch.model.selectedCategory.value)
       }
 
       function listmouseout (d) {
