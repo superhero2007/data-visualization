@@ -16,20 +16,20 @@ export default {
 
   watch: {
     model: {
-      handler: function (val, oldVal) {
+      handler: function (newValue, oldValue) {
         if (this.groupByField == 'facevalue') {
           this.stackedData = this.getFaceData()
-          this.render()
         }
+        this.render()
       },
       deep: true
     },
     services: {
-      handler: function (val, oldVal) {
+      handler: function (newValue, oldValue) {
         if (this.groupByField == 'facevalue') {
           this.stackedData = this.getFaceData()
-          this.render()
         }
+        this.render()
       },
       deep: true
     }
@@ -49,9 +49,9 @@ export default {
       this.render()
     }
 
-    var faceValueData = nch.services.dataService.getFaceValueData();
-    console.log("Face value data");
-    console.log(faceValueData);
+    //var faceValueData = nch.services.dataService.getFaceValueData();
+    //console.log("Face value data");
+    ///console.log(faceValueData);
   },
   methods: {
     render() {
@@ -148,15 +148,16 @@ export default {
         .on('mouseout', svgmouseout)
 
       function svgmouseover (d) {
-        //console.log(this.parentNode.__data__.key)
-        nch.model.selectedPrice = {
-          value: this.parentNode.__data__.key,
-          flag: true
+        if (nch.model.selectedPrice.value != this.parentNode.__data__.key) {
+          nch.model.selectedPrice = {
+            value: this.parentNode.__data__.key,
+            flag: true
+          }
         }
       }
 
       function svgmouseout (d) {
-        //console.log(d)
+        nch.model.selectedPrice.value = ''
       }
 
       g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
@@ -427,8 +428,8 @@ export default {
         })
         .selectAll('g')
         .data(function (d) {
-          console.log(d)
-          return d })
+          return d
+        })
         .enter().append('text')
         .attr('x', function (d, i) {
           return x(this.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 15) + 90
@@ -460,7 +461,6 @@ export default {
           return d
         })
         .enter().append('rect')
-        .attr('class','oneRect')
         .attr('x', function (d, i) {
           return x(this.parentNode.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 15) + 90
         })
@@ -509,6 +509,37 @@ export default {
           }
         })
         .attr('fill', 'black')
+
+      g.append('g')
+        .selectAll('g')
+        .data(responseData)
+        .enter()
+        .append('g')
+        .attr('transform', function (d, i) {
+          return 'translate(' + i * 20 + ',' + 0 + ')'
+        })
+        .selectAll('g')
+        .data(function (d) {
+          return d3.stack().keys(keys)(d)
+        })
+        .enter().append('g')
+        .attr('fill', 'transparent')
+        .selectAll('rect')
+        .data(function (d) {
+          return d
+        })
+        .enter().append('rect')
+        .attr('class','oneRect')
+        .attr('x', function (d, i) {
+          return x(this.parentNode.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 15) + 90
+        })
+        .attr('y', function (d) {
+          return y(d[1])
+        })
+        .attr('height', function (d) {
+          return height - 80 - y(d[1]- d[0])
+        })
+        .attr('width', x.bandwidth()/2)
 
       g.append('g')
         .selectAll('text')

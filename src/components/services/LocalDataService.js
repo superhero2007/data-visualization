@@ -26,7 +26,6 @@ export default class LocalDataService {
   // ***** MEDIA TYPE DATA ****************************************************
 
   getRedemptionsByMedia() {
-
   }
 
   processRedemptionsByMedia( data ) {
@@ -40,22 +39,22 @@ export default class LocalDataService {
       var item = items[i]
       var currentData = null
 
-      for( var j = 0 ; j < this.model.selectedCategories.length ; j ++ ) {
-        if( (item['categoryname'] == this.model.selectedCategories[j]) && (this.model.selectedCategory.value == '' || this.model.selectedCategory.value == item['categoryname']))
+      for( var j = 0 ; j < nch.model.selectedCategories.length ; j ++ ) {
+        if( (item['categoryname'] == nch.model.selectedCategories[j]) && (nch.model.selectedCategory.value == '' || nch.model.selectedCategory.value == item['categoryname']))
         {
           break
         }
       }
 
-      if( j == this.model.selectedCategories.length)
+      if( j == nch.model.selectedCategories.length)
         continue
 
-      if( mediaMap[ item['medianame'] ] ) {
-        currentData = mediaMap[ item['medianame'] ]
+      if( mediaMap[ item['mediacodename'] ] ) {
+        currentData = mediaMap[ item['mediacodename'] ]
       }
       else {
-        currentData = { name: item['medianame'], redempations: 0, redempationValue: 0 }
-        mediaMap[ item['medianame'] ] = currentData
+        currentData = { name: item['mediacodename'], redempations: 0, redempationValue: 0 }
+        mediaMap[ item['mediacodename'] ] = currentData
       }
 
       //currentData.redempations += item['totalcouponredemption']

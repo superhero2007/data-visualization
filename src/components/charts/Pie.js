@@ -14,6 +14,18 @@ export default {
   watch: {
     model: {
       handler: function (newValue, oldValue) {
+        if (this.groupByField == 'medianame') {
+          this.pieData = this.getFaceData()
+        }
+        this.render()
+      },
+      deep: true
+    },
+    services: {
+      handler: function (newValue, oldValue) {
+        if (this.groupByField == 'medianame') {
+          this.pieData = this.getFaceData()
+        }
         this.render()
       },
       deep: true
@@ -21,25 +33,31 @@ export default {
   },
   mounted () {
     console.log('Pie mounted: ' + this.groupByField)
-    if (this.groupByField !== 'productmoved') {
-      services.getPieData().then((response) => {
-        this.pieData = response
-        this.render()
-      }).catch((message) => {
-        console.log('Pie promise catch:' + message)
-      })
-    } else {
+    if (this.groupByField === 'productmoved') {
       services.getProductMovedPieData().then((response) => {
         this.pieData = response
         this.render()
       }).catch((message) => {
         console.log('Pie promise catch:' + message)
       })
+    } else if (this.groupByField === 'categoryname') {
+      services.getPieData().then((response) => {
+        this.pieData = response
+        this.render()
+      }).catch((message) => {
+        console.log('Pie promise catch:' + message)
+      })
+    } else if (this.groupByField === 'medianame') {
+      this.pieData = this.getFaceData()
+      this.render()
     }
   },
   methods: {
     render () {
       const items = this.pieData
+      if (items.length == 0) {
+        return
+      }
       let responseData = []
 
       if (this.groupByField === 'categoryname') {
@@ -141,20 +159,23 @@ export default {
       const responseData = []
 
       for (let i = 0; i < items.length; i++) {
-        let k
-        for (k = 0; k < responseData.length; k++) {
-          if ((responseData[k].medianame === items[i].medianame)) {
-            responseData[k].totalcouponredemption += items[i].totalcouponredemption
-            break
+        if(this.model.selectedPrice.value === '' || this.model.selectedPrice.value === items[i].selectedPrice)
+        {
+          let k
+          for (k = 0; k < responseData.length; k++) {
+            if ((responseData[k].medianame === items[i].medianame)) {
+              responseData[k].totalcouponredemption += items[i].totalcouponredemption
+              break
+            }
           }
-        }
 
-        if (k === responseData.length && items[i].totalcouponredemption !== 0) {
-          const item = {
-            medianame: items[i].medianame,
-            totalcouponredemption: items[i].totalcouponredemption
+          if (k === responseData.length && items[i].totalcouponredemption !== 0) {
+            const item = {
+              medianame: items[i].medianame,
+              totalcouponredemption: items[i].totalcouponredemption
+            }
+            responseData.push(item)
           }
-          responseData.push(item)
         }
       }
 
@@ -453,6 +474,20 @@ export default {
           flag: false
         }
       }
+    },
+
+    getFaceData () {
+      var faceValueData = nch.services.dataService.getCurrentManufacturerData()
+      var responseData = []
+      for (var i = 0; i < faceValueData.length; i++) {
+        var newItem = {}
+        newItem.medianame = faceValueData[i].mediacodename
+        newItem.categoryname = faceValueData[i].categoryname
+        newItem.totalcouponredemption = faceValueData[i].totalredemptionsp1 + faceValueData[i].totalredemptionsp2
+        newItem.selectedPrice = faceValueData[i].facevalueperunitrangecode
+        responseData.push(newItem)
+      }
+      return responseData
     }
   }
 }
