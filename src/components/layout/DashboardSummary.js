@@ -63,6 +63,7 @@ export default {
   mounted () {
     console.log('current route: ' + this.$router.currentRoute.name)
     this.sectors = this.services.sectorCategoryService.sectors
+    this.selectedSector = this.model.selectedSector
     this.updateSectorCategory()
   },
   methods: {
