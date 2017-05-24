@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import router from './modules/router'
-
 import ServiceFactory from './components/services/ServiceFactory'
 
 require('imports-loader?d3=d3!./vendor/viz.js')
@@ -21,7 +20,7 @@ nch.utils = utils
 const serviceFactory = new ServiceFactory()
 nch.services.dataService = serviceFactory.getDataService()
 console.log('Data service loaded: ' + nch.services.dataService.getType())
-// services.loadCategories()
+
 nch.services.periodService = serviceFactory.getPeriodService();
 services.loadManufacturers()
 services.loadClassOfTrades()

@@ -42,6 +42,8 @@ export default {
         return d.categoryname
       })
       this.comparisonvalue = d3.merge([selectedItems, this.comparisonvalue])
+      console.log( 'Selected Categories' );
+      console.log( this.comparisonvalue )
     },
     clearAll (items) {
       let temp = []

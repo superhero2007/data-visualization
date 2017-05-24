@@ -23,7 +23,7 @@ let nch = {
       flag: false
     },
     selectedPrice: {
-      value: "",
+      value: '',
       flag: false
     },
     classOfTrades: [],

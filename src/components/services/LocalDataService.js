@@ -65,7 +65,8 @@ export default class LocalDataService {
         currentData = responseData[ item['mediacodename'] ]
       }
       else {
-        currentData = { name: item['mediacodename'], totalredemptionsp1: 0, totalredemptionsp2: 0 }
+        var mediaLabel = nch.utils.getMediaAbbreviation(item['mediacodename'])
+        currentData = { name: mediaLabel, totalredemptionsp1: 0, totalredemptionsp2: 0 }
         responseData[ item['mediacodename'] ] = currentData
       }
 
