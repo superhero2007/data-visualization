@@ -37,10 +37,9 @@ export default {
   methods: {
     render() {
       var responseData = this.barData
-      console.log(responseData)
 
       var svg = d3.select('#barChart').attr('width', 600).attr('height', 800).html(''),
-        margin = {top: 20, right: 40, bottom: 30, left: 40},
+        margin = {top: 0, right: 40, bottom: 30, left: 40},
         width = +svg.attr('width') - margin.left - margin.right,
         height = +svg.attr('height') / 2 - margin.top - margin.bottom
 

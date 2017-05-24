@@ -14,8 +14,13 @@ export default {
   watch: {
     model: {
       handler: function (newValue, oldValue) {
-        if (this.groupByField !== 'productmoved') {
-          this.pieData = this.getFaceData()
+        if (this.groupByField === 'categoryname') {
+          var manufacturerData = nch.services.dataService.getCurrentManufacturerData()
+          var comparableData = nch.services.dataService.getComparableData()
+          this.pieData = [this.getFaceData(manufacturerData), this.getFaceData(comparableData)]
+        } else if (this.groupByField === 'medianame') {
+          var faceValueData = nch.services.dataService.getCurrentManufacturerData()
+          this.pieData = [this.getFaceData(faceValueData)]
         }
         this.render()
       },
@@ -23,8 +28,13 @@ export default {
     },
     services: {
       handler: function (newValue, oldValue) {
-        if (this.groupByField !== 'productmoved') {
-          this.pieData = this.getFaceData()
+        if (this.groupByField === 'categoryname') {
+          var manufacturerData = nch.services.dataService.getCurrentManufacturerData()
+          var comparableData = nch.services.dataService.getComparableData()
+          this.pieData = [this.getFaceData(manufacturerData), this.getFaceData(comparableData)]
+        } else if (this.groupByField === 'medianame') {
+          var faceValueData = nch.services.dataService.getCurrentManufacturerData()
+          this.pieData = [this.getFaceData(faceValueData)]
         }
         this.render()
       },
@@ -35,92 +45,97 @@ export default {
     console.log('Pie mounted: ' + this.groupByField)
     if (this.groupByField === 'productmoved') {
       services.getProductMovedPieData().then((response) => {
-        this.pieData = response
+        this.pieData = [response]
         this.render()
       }).catch((message) => {
         console.log('Pie promise catch:' + message)
       })
     } else if (this.groupByField === 'categoryname') {
-      this.pieData = this.getFaceData()
+      var manufacturerData = nch.services.dataService.getCurrentManufacturerData()
+      var comparableData = nch.services.dataService.getComparableData()
+      this.pieData = [this.getFaceData(manufacturerData), this.getFaceData(comparableData)]
       this.render()
     } else if (this.groupByField === 'medianame') {
-      this.pieData = this.getFaceData()
+      var faceValueData = nch.services.dataService.getCurrentManufacturerData()
+      this.pieData = [this.getFaceData(faceValueData)]
       this.render()
     }
   },
   methods: {
     render () {
-      const items = this.pieData
-      if (items.length == 0) {
-        return
-      }
-      let responseData = []
-
-      if (this.groupByField === 'categoryname') {
-        responseData = this.getDataForCategories(items)
-      } else if (this.groupByField === 'medianame') {
-        responseData = this.getDataForMediaTypes(items)
-      } else if (this.groupByField === 'productmoved') {
-        responseData = this.getDataForProductMoved(items)
-      }
-
-      const svg = d3.select('#pieChart').attr('width', 800).html('')
+      const svg = d3.select('#pieChart').attr('width', 800).attr('height', 800).html('')
       const width = +svg.attr('width')
-      const height = +svg.attr('height')
-      const radius = Math.min(width / 2, height) / 2.5
-      let g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + (height / 2 - 30) + ')')
-      const color = d3.scaleOrdinal([
-        '#d62024',
-        '#70ccdd',
-        '#f07a20',
-        '#2bb34b',
-        '#cc449a',
-        '#2a3088',
-        '#3366CC',
-        '#DC3912',
-        '#109618',
-        '#990099',
-        '#ab98c5',
-        '#898aa6',
-        '#687b88',
-        '#486b6b',
-        '#5da056',
-        '#74d03c',
-        '#8cff00',
-        '#6633CC',
-        '#39DC12',
-        '#961018',
-        '#009999',
-        '#999900',
-        '#7b6888'
-      ])
+      const height = +svg.attr('height') / 2
+      const radius = Math.min(width , height) / 2.5
+      for (var i = 0; i < this.pieData.length; i++) {
+        const items = this.pieData[i]
+        if (items.length == 0) {
+          return
+        }
+        let responseData = []
 
-      let total = 0
-      for (let i = 0; i < responseData.length; i++) {
-        total += responseData[i].totalcouponredemption
+        if (this.groupByField === 'categoryname') {
+          responseData = this.getDataForCategories(items)
+        } else if (this.groupByField === 'medianame') {
+          responseData = this.getDataForMediaTypes(items)
+        } else if (this.groupByField === 'productmoved') {
+          responseData = this.getDataForProductMoved(items)
+        }
+        
+        let g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + (height / 2 - 30 + i * height) + ')')
+        const color = d3.scaleOrdinal([
+          '#d62024',
+          '#70ccdd',
+          '#f07a20',
+          '#2bb34b',
+          '#cc449a',
+          '#2a3088',
+          '#3366CC',
+          '#DC3912',
+          '#109618',
+          '#990099',
+          '#ab98c5',
+          '#898aa6',
+          '#687b88',
+          '#486b6b',
+          '#5da056',
+          '#74d03c',
+          '#8cff00',
+          '#6633CC',
+          '#39DC12',
+          '#961018',
+          '#009999',
+          '#999900',
+          '#7b6888'
+        ])
+
+        let total = 0
+        for (let i = 0; i < responseData.length; i++) {
+          total += responseData[i].totalcouponredemption
+        }
+
+        const pie = d3.pie()
+          .sort(null)
+          .value(function (d) {
+            return d.totalcouponredemption
+          })
+
+        const arc = g.selectAll('.arc')
+          .data(pie(responseData))
+          .enter().append('g')
+          .attr('class', 'arc')
+
+        const groupBy = this.groupByField
+
+        if ((groupBy === 'medianame' && this.model.selectedMedia.value !== '') || (groupBy === 'productmoved' && this.model.selectedProductMoved.value !== '')) {
+          this.renderSelectedMedia(arc, radius, color)
+        } else {
+          this.renderMediaTypes(arc, radius, color, total)
+        }
+
+        g = svg.append('g').attr('transform', 'translate(' + (width / 2 ) + ',' + (i * height) + ')')
+        this.renderLegend(g, responseData, total, color)
       }
-
-      const pie = d3.pie()
-        .sort(null)
-        .value(function (d) {
-          return d.totalcouponredemption
-        })
-
-      const arc = g.selectAll('.arc')
-        .data(pie(responseData))
-        .enter().append('g')
-        .attr('class', 'arc')
-
-      const groupBy = this.groupByField
-
-      if ((groupBy === 'medianame' && this.model.selectedMedia.value !== '') || (groupBy === 'productmoved' && this.model.selectedProductMoved.value !== '')) {
-        this.renderSelectedMedia(arc, radius, color)
-      } else {
-        this.renderMediaTypes(arc, radius, color, total)
-      }
-
-      g = svg.append('g').attr('transform', 'translate(' + (width / 2 ) + ',' + 0 + ')')
-      this.renderLegend(g, responseData, total, color)
     },
 
     getDataForCategories (items) {
@@ -364,7 +379,6 @@ export default {
         .on('mouseout', listmouseout)
 
       function listmouseover (d) {
-        console.log(d,nch.model.selectedCategory.value)
         if (typeof (d.productmoved) !== 'undefined') {
           if (nch.model.selectedProductMoved.value !== d.productmoved) {
             nch.model.selectedProductMoved = {
@@ -395,7 +409,6 @@ export default {
             }
           }
         }
-        console.log(nch.model.selectedCategory.value)
       }
 
       function listmouseout (d) {
@@ -474,8 +487,7 @@ export default {
       }
     },
 
-    getFaceData () {
-      var faceValueData = nch.services.dataService.getCurrentManufacturerData()
+    getFaceData (faceValueData) {
       var responseData = []
       for (var i = 0; i < faceValueData.length; i++) {
         var newItem = {}
