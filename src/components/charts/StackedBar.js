@@ -63,7 +63,7 @@ export default {
       var groupBy = this.groupByField
 
       if (groupBy == 'productmoved') {
-        responseData = this.getDataForProductMoved(responseData, this.model.selectedProductMoved.value)
+        responseData = this.getDataForProductMoved(responseData)
       }
 
       const svg = d3.select('#stackedBarChart').attr('width', 700).html('')
@@ -147,17 +147,33 @@ export default {
         .on('mouseover', svgmouseover)
         .on('mouseout', svgmouseout)
 
+      this.groupByField
+
       function svgmouseover (d) {
-        if (nch.model.selectedPrice.value != this.parentNode.__data__.key) {
-          nch.model.selectedPrice = {
-            value: this.parentNode.__data__.key,
-            flag: true
-          }
+        if(groupBy === 'facevalue') {
+          nch.model.selectedItem.selectedMfrname = this.parentNode.parentNode.__data__.mfrname
+          nch.model.selectedItem.selectedProductMoved = ''
+          nch.model.selectedItem.selectedCategory = ''
+          nch.model.selectedItem.selectedMedia = ''
+          //nch.model.selectedItem.selectedPeriod = ((d.data.label === '2016 Q1')?(1):(2))
+          nch.model.selectedItem.selectedPeriod = d.data.label
+          nch.model.selectedItem.selectedPrice = this.parentNode.__data__.key
+          nch.model.selectedItem.flag = 1
+        } else if(groupBy === 'productmoved') {
+          nch.model.selectedItem.selectedMfrname = d.data.mfrname
+          nch.model.selectedItem.selectedProductMoved = ''
+          nch.model.selectedItem.selectedCategory = ''
+          nch.model.selectedItem.selectedMedia = ''
+          //nch.model.selectedItem.selectedPeriod = ((d.data.label === 'Period1')?(1):(2))
+          nch.model.selectedItem.selectedPeriod = this.parentNode.__data__.key
+          nch.model.selectedItem.selectedPrice = ''
+          nch.model.selectedItem.flag = 1
         }
       }
 
       function svgmouseout (d) {
-        nch.model.selectedPrice.value = ''
+        nch.model.selectedItem.selectedMfrname = ''
+        nch.model.selectedItem.selectedPrice = ''
       }
 
       g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
@@ -206,12 +222,12 @@ export default {
       return responseData
     },
 
-    getDataForProductMoved (items, selectedProductMoved) {
+    getDataForProductMoved (items) {
       var responseData = []
 
       for (var i = 0; i < items.length; i++) {
         for (var j = 0; j < responseData.length; j++) {
-          if ((responseData[j].mfrname == items[i].mfrname) && (selectedProductMoved== '' || selectedProductMoved == items[i].productmoved)) {
+          if ((responseData[j].mfrname == items[i].mfrname) && (nch.model.selectedItem.selectedProductMoved== '' || nch.model.selectedItem.selectedProductMoved == items[i].productmoved)) {
             if (!(items[i].period in responseData[j])) {
               responseData[j][items[i].period] = 0
             }
@@ -220,7 +236,7 @@ export default {
           }
         }
 
-        if ((j === responseData.length) && (items[i].totalcouponredemption !== 0) && (selectedProductMoved === '' || selectedProductMoved === items[i].productmoved)) {
+        if ((j === responseData.length) && (items[i].totalcouponredemption !== 0) && (nch.model.selectedItem.selectedProductMoved === '' || nch.model.selectedItem.selectedProductMoved === items[i].productmoved)) {
           const item = {}
           item['mfrname'] = items[i].mfrname
           item[items[i].period] = items[i].totalcouponredemption

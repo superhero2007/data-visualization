@@ -27,8 +27,8 @@ export default class LocalDataService {
 
   getRedemptionsByMedia() {
 
-    var manufacturerFaceValues = this.processRedemptionsByMedia(this.manufacturerData)
-    var comparableFaceValues = this.processRedemptionsByMedia(this.comparableData)
+    var manufacturerFaceValues = this.processRedemptionsByMedia(this.manufacturerData, 0)
+    var comparableFaceValues = this.processRedemptionsByMedia(this.comparableData, 1)
 
     var manufacturer = {
       label: 'General Mills, Inc',
@@ -43,7 +43,7 @@ export default class LocalDataService {
     return { manufacturer: manufacturer, comparables: comparables }
   }
 
-  processRedemptionsByMedia( data ) {
+  processRedemptionsByMedia( data, mfrName ) {
     var items = data;
     var responseData = {}
 
@@ -52,7 +52,7 @@ export default class LocalDataService {
       var currentData = null
 
       for( var j = 0 ; j < nch.model.selectedCategories.length ; j ++ ) {
-        if( (item['categoryname'] == nch.model.selectedCategories[j]) && (nch.model.selectedCategory.value == '' || nch.model.selectedCategory.value == item['categoryname']))
+        if( (item['categoryname'] == nch.model.selectedCategories[j]) && (nch.model.selectedItem.selectedCategory == '' || nch.model.selectedItem.selectedCategory == item['categoryname'] || !(nch.model.selectedItem.selectedMfrname === mfrName)))
         {
           break
         }

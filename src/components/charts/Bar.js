@@ -140,7 +140,7 @@ export default {
           .selectAll('g')
           .data(data)
           .enter().append('rect')
-          .attr('class', 'bar bar1')
+          .attr('class', 'bar bar1' + i)
           .attr('x', function (d, i) {
             return x(d.name)
           })
@@ -159,7 +159,7 @@ export default {
           .selectAll('g')
           .data(data)
           .enter().append('rect')
-          .attr('class', 'bar bar2')
+          .attr('class', 'bar bar2' + i)
           .attr('x', function (d, i) {
             return x(d.name) + x.bandwidth()/2
           })
@@ -189,9 +189,8 @@ export default {
         //   .text(function (d) {
         //     return d3.format(',.0f')(d.totalredemptionsp1)
         //   })
-
-        if (this.model.selectedCategory.flag) {
-          g.selectAll('.bar1')
+        if (this.model.selectedItem.flag == 2 && this.model.selectedItem.selectedMfrname === i) {
+          g.selectAll('.bar1' + i)
             .attr('y', height)
             .attr('height', 1)
             .transition()
@@ -203,7 +202,7 @@ export default {
               return y(d.totalredemptionsp1)
             })
 
-          g.selectAll('.bar2')
+          g.selectAll('.bar2' + i)
             .attr('y', height)
             .attr('height', 1)
             .transition()
@@ -225,32 +224,74 @@ export default {
         }
       }
 
-      svg.selectAll('rect')
-        .on('mouseover', barmouseover)
+      svg.selectAll('.bar10')
+        .on('mouseover', bar10mouseover)
         .on('mouseout', barmouseout)
-      // })
-      function barmouseover (d) {
-        if (nch.model.selectedMedia.value != d.name) {
-          nch.model.selectedMedia = {
-            value: d.name,
-            flag: true
-          }
-          nch.model.selectedCategory = {
-            value: '',
-            flag: false
-          }
+
+      function bar10mouseover (d) {
+        if (nch.model.selectedItem.selectedMedia != d.name) {
+          nch.model.selectedItem.selectedMfrname = 0
+          nch.model.selectedItem.selectedPeriod = 1
+          nch.model.selectedItem.selectedMedia = d.name
+          nch.model.selectedItem.selectedCategory = ''
+          nch.model.selectedItem.selectedProductMoved = ''
+          nch.model.selectedItem.selectedPrice = ''
+          nch.model.selectedItem.flag = 1
         }
       }
 
+      svg.selectAll('.bar20')
+        .on('mouseover', bar20mouseover)
+        .on('mouseout', barmouseout)
+
+      function bar20mouseover (d) {
+        if (nch.model.selectedItem.selectedMedia != d.name) {
+          nch.model.selectedItem.selectedMfrname = 0
+          nch.model.selectedItem.selectedPeriod = 2
+          nch.model.selectedItem.selectedMedia = d.name
+          nch.model.selectedItem.selectedCategory = ''
+          nch.model.selectedItem.selectedProductMoved = ''
+          nch.model.selectedItem.selectedPrice = ''
+          nch.model.selectedItem.flag = 1
+        }
+      }
+
+      svg.selectAll('.bar11')
+        .on('mouseover', bar11mouseover)
+        .on('mouseout', barmouseout)
+
+      function bar11mouseover (d) {
+        if (nch.model.selectedItem.selectedMedia != d.name) {
+          nch.model.selectedItem.selectedMfrname = 1
+          nch.model.selectedItem.selectedPeriod = 1
+          nch.model.selectedItem.selectedMedia = d.name
+          nch.model.selectedItem.selectedCategory = ''
+          nch.model.selectedItem.selectedProductMoved = ''
+          nch.model.selectedItem.selectedPrice = ''
+          nch.model.selectedItem.flag = 1
+        }
+      }
+
+      svg.selectAll('.bar21')
+        .on('mouseover', bar21mouseover)
+        .on('mouseout', barmouseout)
+      // })
+      function bar21mouseover (d) {
+        if (nch.model.selectedItem.selectedMedia != d.name) {
+          nch.model.selectedItem.selectedMfrname = 1
+          nch.model.selectedItem.selectedPeriod = 2
+          nch.model.selectedItem.selectedMedia = d.name
+          nch.model.selectedItem.selectedCategory = ''
+          nch.model.selectedItem.selectedProductMoved = ''
+          nch.model.selectedItem.selectedPrice = ''
+          nch.model.selectedItem.flag = 1
+        }
+      }
+
+
       function barmouseout (d) {
-        nch.model.selectedMedia = {
-          value: '',
-          flag: true
-        }
-        nch.model.selectedCategory = {
-          value: '',
-          flag: false
-        }
+        nch.model.selectedItem.selectedMedia = ''
+        nch.model.selectedItem.selectedPeriod = ''
       }
     },
 

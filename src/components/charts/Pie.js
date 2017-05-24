@@ -15,11 +15,13 @@ export default {
     model: {
       handler: function (newValue, oldValue) {
         if (this.groupByField === 'categoryname') {
-          var manufacturerData = nch.services.dataService.getCurrentManufacturerData()
-          var comparableData = nch.services.dataService.getComparableData()
-          this.pieData = [this.getFaceData(manufacturerData), this.getFaceData(comparableData)]
+          this.pieData = this.getMediaData()
         } else if (this.groupByField === 'medianame') {
-          var faceValueData = nch.services.dataService.getCurrentManufacturerData()
+          var faceValueData
+          if(this.model.selectedItem.selectedMfrname == 'General Mills, Inc')
+            faceValueData = nch.services.dataService.getCurrentManufacturerData()
+          else
+            faceValueData = nch.services.dataService.getComparableData()
           this.pieData = [this.getFaceData(faceValueData)]
         }
         this.render()
@@ -29,11 +31,13 @@ export default {
     services: {
       handler: function (newValue, oldValue) {
         if (this.groupByField === 'categoryname') {
-          var manufacturerData = nch.services.dataService.getCurrentManufacturerData()
-          var comparableData = nch.services.dataService.getComparableData()
-          this.pieData = [this.getFaceData(manufacturerData), this.getFaceData(comparableData)]
+          this.pieData = this.getMediaData()
         } else if (this.groupByField === 'medianame') {
-          var faceValueData = nch.services.dataService.getCurrentManufacturerData()
+          var faceValueData
+          if(this.model.selectedItem.selectedMfrname == 'General Mills, Inc')
+            faceValueData = nch.services.dataService.getCurrentManufacturerData()
+          else
+            faceValueData = nch.services.dataService.getComparableData()
           this.pieData = [this.getFaceData(faceValueData)]
         }
         this.render()
@@ -51,12 +55,14 @@ export default {
         console.log('Pie promise catch:' + message)
       })
     } else if (this.groupByField === 'categoryname') {
-      var manufacturerData = nch.services.dataService.getCurrentManufacturerData()
-      var comparableData = nch.services.dataService.getComparableData()
-      this.pieData = [this.getFaceData(manufacturerData), this.getFaceData(comparableData)]
+      this.pieData = this.getMediaData()
       this.render()
     } else if (this.groupByField === 'medianame') {
-      var faceValueData = nch.services.dataService.getCurrentManufacturerData()
+      var faceValueData
+      if(this.model.selectedItem.selectedMfrname == 'General Mills, Inc')
+        faceValueData = nch.services.dataService.getCurrentManufacturerData()
+      else
+        faceValueData = nch.services.dataService.getComparableData()
       this.pieData = [this.getFaceData(faceValueData)]
       this.render()
     }
@@ -67,22 +73,22 @@ export default {
       const width = +svg.attr('width')
       const height = +svg.attr('height') / 2
       const radius = Math.min(width , height) / 2.5
-      for (var i = 0; i < this.pieData.length; i++) {
-        const items = this.pieData[i]
+      for (var j = 0; j < this.pieData.length; j++) {
+        const items = this.pieData[j]
         if (items.length == 0) {
           return
         }
         let responseData = []
 
         if (this.groupByField === 'categoryname') {
-          responseData = this.getDataForCategories(items)
+          responseData = this.getDataForCategories(items, (this.model.selectedItem.selectedMfrname === j))
         } else if (this.groupByField === 'medianame') {
           responseData = this.getDataForMediaTypes(items)
         } else if (this.groupByField === 'productmoved') {
           responseData = this.getDataForProductMoved(items)
         }
         
-        let g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + (height / 2 - 30 + i * height) + ')')
+        let g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + (height / 2 - 30 + j * height) + ')')
         const color = d3.scaleOrdinal([
           '#d62024',
           '#70ccdd',
@@ -127,22 +133,22 @@ export default {
 
         const groupBy = this.groupByField
 
-        if ((groupBy === 'medianame' && this.model.selectedMedia.value !== '') || (groupBy === 'productmoved' && this.model.selectedProductMoved.value !== '')) {
+        if ((groupBy === 'medianame' && this.model.selectedItem.selectedMedia !== '') || (groupBy === 'productmoved' && this.model.selectedItem.selectedProductMoved !== '')) {
           this.renderSelectedMedia(arc, radius, color)
         } else {
-          this.renderMediaTypes(arc, radius, color, total)
+          this.renderMediaTypes(arc, radius, color, total, j)
         }
 
-        g = svg.append('g').attr('transform', 'translate(' + (width / 2 ) + ',' + (i * height) + ')')
-        this.renderLegend(g, responseData, total, color)
+        g = svg.append('g').attr('transform', 'translate(' + (width / 2 ) + ',' + (j * height) + ')')
+        this.renderLegend(g, responseData, total, color, j)
       }
     },
 
-    getDataForCategories (items) {
+    getDataForCategories (items, filterFlag) {
       const responseData = []
       for (let i = 0; i < items.length; i++) {
         for (let j = 0; j < this.model.selectedCategories.length; j++) {
-          if ((this.model.selectedCategories[j] === items[i].categoryname) && (this.model.selectedMedia.value === '' || this.model.selectedMedia.value === items[i].medianame)) {
+          if ((this.model.selectedCategories[j] === items[i].categoryname) && (this.model.selectedItem.selectedMedia === '' || this.model.selectedItem.selectedMedia === items[i].medianame || !filterFlag)) {
             let k
             for (k = 0; k < responseData.length; k++) {
               if ((responseData[k].categoryname === items[i].categoryname)) {
@@ -170,7 +176,7 @@ export default {
       const responseData = []
 
       for (let i = 0; i < items.length; i++) {
-        if(this.model.selectedPrice.value === '' || this.model.selectedPrice.value === items[i].selectedPrice)
+        if(this.model.selectedItem.selectedPrice === '' || this.model.selectedItem.selectedPrice === items[i].selectedPrice)
         {
           let k
           for (k = 0; k < responseData.length; k++) {
@@ -222,7 +228,7 @@ export default {
       arc.append('circle')
         .attr('r', function (d) {
           return (
-            (((groupBy === 'medianame') && (d.data.medianame === nch.model.selectedMedia.value)) || ((groupBy === 'productmoved') && (d.data.productmoved === nch.model.selectedProductMoved.value)))
+            (((groupBy === 'medianame') && (d.data.medianame === nch.model.selectedItem.selectedMedia)) || ((groupBy === 'productmoved') && (d.data.productmoved === nch.model.selectedItem.selectedProductMoved)))
               ? (radius - 10)
               : (0)
           )
@@ -234,8 +240,8 @@ export default {
         .attr('font-size', '20')
         .attr('transform', 'translate(0, -20)')
         .text(((groupBy === 'medianame')
-            ? (this.model.selectedMedia.value)
-            : (this.model.selectedProductMoved.value))
+            ? (this.model.selectedItem.selectedMedia)
+            : (this.model.selectedItem.selectedProductMoved))
           )
         .attr('fill', 'white')
         .attr('text-anchor', 'middle')
@@ -248,7 +254,7 @@ export default {
         .attr('text-anchor', 'middle')
     },
 
-    renderLegend (g, responseData, total, color) {
+    renderLegend (g, responseData, total, color, mfrname) {
       const lineHeight = 40
       const groupBy = this.groupByField
       const list = g.selectAll('.list')
@@ -355,7 +361,7 @@ export default {
         })
         .attr('fill-opacity', function (d) {
           return (
-              ((groupBy === 'medianame' && nch.model.selectedMedia.value === d.medianame) || (groupBy === 'productmoved' && nch.model.selectedProductMoved.value === d.productmoved))
+              ((groupBy === 'medianame' && nch.model.selectedItem.selectedMedia === d.medianame) || (groupBy === 'productmoved' && nch.model.selectedItem.selectedProductMoved === d.productmoved))
                 ? (0.2)
                 : (0)
           )
@@ -379,50 +385,44 @@ export default {
         .on('mouseout', listmouseout)
 
       function listmouseover (d) {
-        if (typeof (d.productmoved) !== 'undefined') {
-          if (nch.model.selectedProductMoved.value !== d.productmoved) {
-            nch.model.selectedProductMoved = {
-              value: d.productmoved,
-              flag: true
-            }
-          }
-        } else if (typeof (d.categoryname) === 'undefined') {
-          if (nch.model.selectedMedia.value !== d.medianame) {
-            nch.model.selectedMedia = {
-              value: d.medianame,
-              flag: true
-            }
-            nch.model.selectedCategory = {
-              value: '',
-              flag: false
-            }
-          }
-        } else {
-          if (nch.model.selectedCategory.value !== d.categoryname) {
-            nch.model.selectedCategory = {
-              value: d.categoryname,
-              flag: true
-            }
-            nch.model.selectedMedia = {
-              value: '',
-              flag: false
-            }
-          }
+        if (groupBy === 'productmoved') {
+          nch.model.selectedItem.selectedMfrname = ''
+          nch.model.selectedItem.selectedProductMoved = d.productmoved
+          nch.model.selectedItem.selectedCategory = ''
+          nch.model.selectedItem.selectedMedia = ''
+          nch.model.selectedItem.selectedPeriod = ''
+          nch.model.selectedItem.selectedPrice = ''
+          nch.model.selectedItem.flag = 2
+        } else if (groupBy === 'medianame') {
+          nch.model.selectedItem.selectedMfrname = ''
+          nch.model.selectedItem.selectedProductMoved = ''
+          nch.model.selectedItem.selectedCategory = ''
+          nch.model.selectedItem.selectedMedia = d.medianame
+          nch.model.selectedItem.selectedPeriod = ''
+          nch.model.selectedItem.selectedPrice = ''
+          nch.model.selectedItem.flag = 2
+        } else if (groupBy === 'categoryname') {
+          nch.model.selectedItem.selectedMfrname = mfrname
+          nch.model.selectedItem.selectedProductMoved = ''
+          nch.model.selectedItem.selectedCategory = d.categoryname
+          nch.model.selectedItem.selectedMedia = ''
+          nch.model.selectedItem.selectedPeriod = ''
+          nch.model.selectedItem.selectedPrice = ''
+          nch.model.selectedItem.flag = 2
         }
       }
 
       function listmouseout (d) {
-        if (typeof (d.productmoved) !== 'undefined') {
-          nch.model.selectedProductMoved.value = ''
-        } else if (typeof (d.categoryname) === 'undefined') {
-          nch.model.selectedMedia.value = ''
-        } else {
-          nch.model.selectedCategory.value = ''
-        }
+        nch.model.selectedItem.selectedMfrname = ''
+        nch.model.selectedItem.selectedProductMoved = ''
+        nch.model.selectedItem.selectedCategory = ''
+        nch.model.selectedItem.selectedMedia = ''
+        nch.model.selectedItem.selectedPeriod = ''
+        nch.model.selectedItem.selectedPrice = ''
       }
     },
 
-    renderMediaTypes (arc, radius, color, total) {
+    renderMediaTypes (arc, radius, color, total, mfrname) {
       const groupBy = this.groupByField
       const path = d3.arc()
         .outerRadius(radius - 10)
@@ -463,27 +463,24 @@ export default {
         .on('mouseout', piemouseout)
 
       function piemouseover (d) {
-        if (nch.model.selectedCategory.value !== d.data.categoryname) {
-          nch.model.selectedCategory = {
-            value: d.data.categoryname,
-            flag: true
-          }
-          nch.model.selectedMedia = {
-            value: '',
-            flag: false
-          }
+        if (groupBy === 'categoryname') {
+          nch.model.selectedItem.selectedMfrname = mfrname
+          nch.model.selectedItem.selectedProductMoved = ''
+          nch.model.selectedItem.selectedCategory = d.data.categoryname
+          nch.model.selectedItem.selectedMedia = ''
+          nch.model.selectedItem.selectedPeriod = ''
+          nch.model.selectedItem.selectedPrice = ''
+          nch.model.selectedItem.flag = 2
         }
       }
 
       function piemouseout(d) {
-        nch.model.selectedCategory = {
-          value: '',
-          flag: true
-        }
-        nch.model.selectedMedia = {
-          value: '',
-          flag: false
-        }
+        nch.model.selectedItem.selectedMfrname = ''
+        nch.model.selectedItem.selectedProductMoved = ''
+        nch.model.selectedItem.selectedCategory = ''
+        nch.model.selectedItem.selectedMedia = ''
+        nch.model.selectedItem.selectedPeriod = ''
+        nch.model.selectedItem.selectedPrice = ''
       }
     },
 
@@ -493,11 +490,52 @@ export default {
         var newItem = {}
         newItem.medianame = faceValueData[i].mediacodename
         newItem.categoryname = faceValueData[i].categoryname
-        newItem.totalcouponredemption = faceValueData[i].totalredemptionsp1 + faceValueData[i].totalredemptionsp2
+        if (nch.model.selectedItem.selectedPeriod === '2016 Q2' || nch.model.selectedItem.selectedPeriod === 'Period2' || nch.model.selectedItem.selectedPeriod === 2) {
+          newItem.totalcouponredemption = faceValueData[i].totalredemptionsp2
+        } else {
+          newItem.totalcouponredemption = faceValueData[i].totalredemptionsp1
+        }
         newItem.selectedPrice = faceValueData[i].facevalueperunitrangecode
         responseData.push(newItem)
       }
       return responseData
+    },
+
+    getMediaData () {
+      var manufacturerData = nch.services.dataService.getCurrentManufacturerData()
+      var comparableData = nch.services.dataService.getComparableData()
+      var resultData = []
+
+      var responseData1 = []
+      for (var i = 0; i < manufacturerData.length; i++) {
+        var newItem = {}
+        newItem.medianame = manufacturerData[i].mediacodename
+        newItem.categoryname = manufacturerData[i].categoryname
+        if (nch.model.selectedItem.selectedMfrname === 0 && nch.model.selectedItem.selectedPeriod === 2) {
+          newItem.totalcouponredemption = manufacturerData[i].totalredemptionsp2
+        } else {
+          newItem.totalcouponredemption = manufacturerData[i].totalredemptionsp1
+        }
+        newItem.selectedPrice = manufacturerData[i].facevalueperunitrangecode
+        responseData1.push(newItem)
+      }
+      resultData.push(responseData1)
+
+      var responseData2 = []
+      for (var i = 0; i < comparableData.length; i++) {
+        var newItem = {}
+        newItem.medianame = comparableData[i].mediacodename
+        newItem.categoryname = comparableData[i].categoryname
+        if (nch.model.selectedItem.selectedMfrname === 1 && nch.model.selectedItem.selectedPeriod === 2) {
+          newItem.totalcouponredemption = comparableData[i].totalredemptionsp2
+        } else {
+          newItem.totalcouponredemption = comparableData[i].totalredemptionsp1
+        }
+        newItem.selectedPrice = comparableData[i].facevalueperunitrangecode
+        responseData2.push(newItem)
+      }
+      resultData.push(responseData2)
+      return resultData
     }
   }
 }
