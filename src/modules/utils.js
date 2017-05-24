@@ -143,7 +143,7 @@ const utils = {
       lastQ = 1
       Qyear = date.getFullYear() - 1
     }
-    let quarter = { 'quarter': lastQ, 'year': Qyear }
+    let quarter = {'quarter': lastQ, 'year': Qyear}
   },
 
   getClosedQuarterRanges (date) {
@@ -151,9 +151,9 @@ const utils = {
       date = new Date()
     }
     // TODO startQuarter:: will get this from service soon
-    let startQuarter = { 'quarter': 1, 'year': 2015 }
+    let startQuarter = {'quarter': 1, 'year': 2015}
     let endQuarter = this.getLastQuarter()
-    let quarterRanges = { 'start': startQuarter, 'end': endQuarter }
+    let quarterRanges = {'start': startQuarter, 'end': endQuarter}
   },
 
   getClosedMonthsRanges (date) {
@@ -168,24 +168,31 @@ const utils = {
       endMonth = 12
       Myear = date.getFullYear() - 1
     }
-    endMonth = { 'month': endMonth, 'year': Myear }
+    endMonth = {'month': endMonth, 'year': Myear}
     // let MonthRanges = { 'start': startMonth, 'end': endMonth }
   },
 
+  getMediaAbbreviation(mediaType) {
+    if (mediaType == 'Handout Electronic Checkout') {
+      return 'HEC'
+    }
+    else {
+      return mediaType
+    }
+  },
 
-  csv2json( csv ) {
-    var lines=csv.split("\n");
-    console.log("parse CSV, line count: " + lines.length );
-    var result = [];
-    var headers=lines[0].split(",");
+  csv2json(csv) {
+    var lines = csv.split('\n')
+    var result = []
+    var headers = lines[0].split(',')
 
     for (let i = 1; i < lines.length; i++) {
 
-      var obj = {};
+      var obj = {}
       // if(lines[i] == "")
       //   continue;
 
-      var currentline=lines[i].split(",");
+      var currentline = lines[i].split(',')
 
       for (let j = 0; j < headers.length; j++) {
         obj[headers[j]] = currentline[j]
