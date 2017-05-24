@@ -1,6 +1,5 @@
 import FilterModal from 'src/components/charts/FilterModal'
 import TimePeriod from '../layout/TimePeriod'
-import services from 'src/modules/services'
 
 export default {
   name: 'dashboard-summary',
@@ -15,9 +14,11 @@ export default {
   data () {
     return {
       model: nch.model,
+      services: nch.services,
       showCategoriesModal: false,
       segment: false,
-      sectorCategory: null,
+      sectors: null,
+      categories: null,
       selectedSector: null,
       segmentNames: [
         'Other',
@@ -31,10 +32,22 @@ export default {
     timeperiodData: {
       handler:function(val, oldVal) {
         nch.model.timeperiodData = this.timeperiodData
-      },deep: true
-    }
+      },
+      deep: true
+    },
+     services: {
+      handler: function () {
+        this.initSectorCategory()
+      },
+      deep: true
+    },
+     selectedSector: {
+       handler: function () {
+         this.updateSectorCategory()
+       },
+       deep: true
+     }
   },
-
   computed: {
     currentView () {
       return this.$router.currentRoute.name
@@ -49,17 +62,29 @@ export default {
   },
   mounted () {
     console.log('current route: ' + this.$router.currentRoute.name)
-    services.loadSectorCategories().then((sectorCategory) => {
-      this.sectorCategory = sectorCategory
-      nch.model.sectorCategory = sectorCategory
-    }).catch((message) => { console.log('Dashboard, loading categories promise catch:' + message) })
+    this.sectors = this.services.sectorCategoryService.sectors
+    this.updateSectorCategory()
   },
   methods: {
+    initSectorCategory: function () {
+      this.sectors = nch.services.sectorCategoryService.sectors
+      if (this.sectors && this.sectors.length > 0 && !this.selectedSector) {
+        this.selectedSector = this.sectors[0]
+      }
+
+      this.updateSectorCategory()
+    },
+    updateSectorCategory: function () {
+      this.categories = nch.services.sectorCategoryService.getCategories(this.selectedSector)
+      this.model.selectedSector = this.selectedSector
+      this.model.categories = this.categories
+      this.model.selectedCategories = this.categories
+    },
     hideModal: function () {
       this.showCategoriesModal = false
     },
     saveModal: function (lists) {
-      nch.model.selectedCategories = lists
+      this.model.selectedCategories = lists
       this.showCategoriesModal = false
     }
   }

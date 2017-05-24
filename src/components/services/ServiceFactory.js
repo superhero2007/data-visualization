@@ -1,6 +1,7 @@
 import LocalDataService from './LocalDataService';
 import DataService from './DataService';
 import TimePeriodService from './TimePeriodService';
+import SectorCategoryService from './SectorCategoryService';
 
 export default class ServiceFactory {
   constructor () {
@@ -16,5 +17,9 @@ export default class ServiceFactory {
 
   getPeriodService() {
     return new TimePeriodService();
+  }
+
+  getSectorCategoryService() {
+    return new SectorCategoryService();
   }
 }

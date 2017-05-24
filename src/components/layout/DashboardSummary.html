@@ -18,7 +18,7 @@
   <div class="summary__block">
     <p class="summary__title">Sector</p>
     <select v-model="selectedSector" class="summary__select" id="sector">
-      <option v-for="sector in model.sectors" :value="sector.sectorcode">{{sector.sectorname}}</option>
+      <option v-for="sector in sectors" :value="sector">{{sector.sectorname}}</option>
     </select>
   </div>
   <div class="summary__block" v-if="currentView == 'ClassOfTrade'">
@@ -31,5 +31,5 @@
     <p class="summary__title">Category</p>
     <button class="summary__button" @click="showCategoriesModal = true"><i class="fa fa-sliders" aria-hidden="true"></i> Category Filter</button>
   </div>
-  <filter-modal :show="showCategoriesModal" :on-close="hideModal" :categories="sectorCategory" :on-save="saveModal"></filter-modal>
+  <filter-modal :show="showCategoriesModal" :on-close="hideModal" :categories="categories" :on-save="saveModal"></filter-modal>
 </div>

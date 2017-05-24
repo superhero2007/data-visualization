@@ -38,6 +38,16 @@ var services = {
     var dataUrl = '/static/api/redemption-all.json'
     return this.loadRedemptionData( dataUrl );
   },
+  loadSectorsData: function() {
+    console.log("Loading Sector data");
+    const dataUrl = '/static/api/sectors.json'
+    return this.loadArrayRedemptionData( dataUrl );
+  },
+  loadSectorCategoriesData: function() {
+    console.log("Loading Sector Category data");
+    const dataUrl = '/static/api/sectorCategory.json'
+    return this.loadRedemptionData( dataUrl );
+  },
 
   loadRedemptionData: function( dataUrl ) {
     return new Promise((resolve, reject) => {
@@ -56,6 +66,22 @@ var services = {
     })
   },
 
+  loadArrayRedemptionData: function( dataUrl ) {
+    return new Promise((resolve, reject) => {
+      http
+        .get(dataUrl)
+        .end(function (error, response) {
+
+          if (response.status == 200) {
+            var json = JSON.parse(response.text)
+            resolve(json['_items'])
+          }
+          else if (response.status == 401) {
+            console.log('user not authorized')
+          }
+        })
+    })
+  },
   loadPeriod1All: function() {
     var dataUrl = '/static/api/redemption-data-all-2016-q1.csv'
     return this.loadPeriodData( dataUrl );
@@ -162,42 +188,6 @@ var services = {
           console.log('user not authorized')
         }
       })
-  },
-
-  loadSectors: function () {
-    return new Promise((resolve, reject) => {
-      http
-        .get('/static/api/sectors.json')
-        .end(function (error, response) {
-          if (response.status === 200) {
-            const sectors = JSON.parse(response.text)
-            nch.model.sectors = sectors['_items']
-            resolve(sectors['_items'])
-          } else if (response.status === 401) {
-            console.log('user not authorized')
-            reject('user not authorized')
-          }
-        })
-    })
-  },
-
-  loadSectorCategories: function () {
-    return new Promise((resolve, reject) => {
-      http
-        .get('/static/api/sectorCategory.json')
-        .end(function (error, response) {
-          if (response.status === 200) {
-            let sectorCategory = JSON.parse(response.text)
-            sectorCategory = d3.values(d3.nest()
-              .key(function (d) { return d.sectorname })
-              .entries(sectorCategory))
-            resolve(sectorCategory)
-          } else if (response.status === 401) {
-            console.log('user not authorized')
-            reject('user not authorized')
-          }
-        })
-    })
   },
 
   loadCombinedData: function () {
@@ -466,19 +456,6 @@ var services = {
         });
     });
   },
-
-  // Alphabetically function
-  alphabetical: function (a, b) {
-    var A = a.toLowerCase();
-    var B = b.toLowerCase();
-    if (A < B){
-      return -1;
-    }else if (A > B){
-      return  1;
-    }else{
-      return 0;
-    }
-  }
 }
 
 module.exports = services

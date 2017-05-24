@@ -10,11 +10,10 @@
         :options="options"
         :multiple="true"
         :close-on-select="false"
-        :clear-on-select="false"
-        :hide-selected="true"
+        :hide-selected="false"
         placeholder="Type to search"
-        label=""
-        track-by="">
+        label="categoryname"
+        track-by="categoryname">
         <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
       </MultiSelect>
       <div class="page-content">
@@ -24,8 +23,6 @@
           </span>
           <download pdf-enabled="true" png-enabled="true"></download>
         </view-header>
-
-
 
         <div class="row" style="margin-left: 0; margin-right: 0">
           <div class="col-md-6">
@@ -37,10 +34,10 @@
         </div>
       </div>
 
-      <div class="page-content" v-if="categories">
+      <div class="page-content">
         <div class="row" style="margin-left: 0; margin-right: 0">
           <div class="col-md-12">
-            <dynamic-table :categories="categories"></dynamic-table>
+            <dynamic-table></dynamic-table>
           </div>
         </div>
       </div>

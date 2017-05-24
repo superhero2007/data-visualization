@@ -6,9 +6,6 @@ import DynamicTable from '../charts/DynamicTable'
 import PageFooter from '../layout/PageFooter'
 import Download from '../layout/Download'
 import ViewHeader from '../layout/ViewHeader'
-
-import services from 'src/modules/services'
-
 import vSelect from 'vue-select'
 import MultiSelect from 'vue-multiselect'
 
@@ -29,7 +26,6 @@ export default {
   },
   data () {
     return {
-      selected: 'Air Fresheners & Candles',
       model: nch.model,
       showDownloadOptions: false,
       options: [],
@@ -44,28 +40,24 @@ export default {
       deep: true
     },
     value: function (val) {
-      nch.model.selectedCategories = val
+      this.model.selectedCategories = val
     }
   },
   computed: {
-    categories () {
-      return this.model.categories
-    }
   },
   mounted () {
     console.log('Dashboard mounted')
-    // console.log( this.model.categories )
-    services.loadCategories().then((categories) => {
-      this.model.categories = categories
-      this.options = categories
-      this.value = nch.model.selectedCategories
-    }).catch((message) => { console.log('Dashboard, loading categories promise catch:' + message) })
+    this.updateMultiSelect()
   },
 
   methods: {
     updateMultiSelect: function () {
-      this.value = nch.model.selectedCategories
-      this.selectedCategory = nch.model.selectedCategories
+      if (this.model.categories) {
+        this.options = this.model.categories
+      } else {
+        this.options = []
+      }
+      this.value = this.model.selectedCategories
     }
   }
 }

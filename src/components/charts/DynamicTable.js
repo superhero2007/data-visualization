@@ -1,23 +1,12 @@
-import * as d3 from 'd3'
-
-import FilterModal from 'src/components/charts/FilterModal'
-import TableContent from 'src/components/charts/TableContent'
-import services from '../../modules/services';
+// import TableContent from 'src/components/charts/TableContent'
 import Download from '../layout/Download'
 
 export default {
   name: 'dynamic-table',
   template: require('components/charts/DynamicTable.html'),
   components: {
-    FilterModal,
-    TableContent,
+    // TableContent,
     Download
-  },
-  props: {
-    categories: {
-      type: Array,
-      default: []
-    }
   },
   data () {
     return {
@@ -30,28 +19,21 @@ export default {
   watch: {
     model: {
       handler: function (newValue, oldValue) {
-        this.updateTable()
+        // this.updateTable()
       },
       deep: true
     }
   },
   mounted () {
-    services.loadCombinedData()
-    this.updateTable()
+    // services.loadCombinedData()
+    // this.updateTable()
   },
   methods: {
     updateTable () {
-      services.getTableData(nch.model.selectedCategories).then(this.renderTable).catch((message) => { console.log('DynamicTable, update table promise catch:' + message) })
+      // services.getTableData(nch.model.selectedCategories).then(this.renderTable).catch((message) => { console.log('DynamicTable, update table promise catch:' + message) })
     },
     renderTable (response) {
-      this.tableData = response
-    },
-    hideModal: function () {
-      this.isShow = false
-    },
-    saveModal: function (lists) {
-      nch.model.selectedCategories = lists
-      this.isShow = false
+      // this.tableData = response
     }
   }
 }

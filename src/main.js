@@ -23,19 +23,15 @@ nch.services.dataService = serviceFactory.getDataService()
 console.log('Data service loaded: ' + nch.services.dataService.getType())
 // services.loadCategories()
 nch.services.periodService = serviceFactory.getPeriodService();
+nch.services.sectorCategoryService = serviceFactory.getSectorCategoryService();
 services.loadManufacturers()
 services.loadClassOfTrades()
-services.loadSectors()
-services.loadSectorCategories()
 
 
 // ****************************************
 // simple test data, will be removed
 // ****************************************
-nch.model.selectedCategories = ['Breakfast Foods', 'Crackers, Cookies & Snack Bars', 'Yogurt',
-  'Breakfast Foods - Shelf Stable']
 nch.model.currentManufacturer = 'General Mills, Inc.'
-
 nch.model.timeperiodData = 1
 
 /* eslint-disable no-new */
