@@ -16,20 +16,20 @@ export default {
 
   watch: {
     model: {
-      handler: function (val, oldVal) {
+      handler: function (newValue, oldValue) {
         if (this.groupByField == 'facevalue') {
           this.stackedData = this.getFaceData()
-          this.render()
         }
+        this.render()
       },
       deep: true
     },
     services: {
-      handler: function (val, oldVal) {
+      handler: function (newValue, oldValue) {
         if (this.groupByField == 'facevalue') {
           this.stackedData = this.getFaceData()
-          this.render()
         }
+        this.render()
       },
       deep: true
     }
@@ -49,9 +49,9 @@ export default {
       this.render()
     }
 
-    var faceValueData = nch.services.dataService.getFaceValueData();
-    console.log("Face value data");
-    console.log(faceValueData);
+    //var faceValueData = nch.services.dataService.getFaceValueData();
+    //console.log("Face value data");
+    ///console.log(faceValueData);
   },
   methods: {
     render() {
@@ -63,7 +63,7 @@ export default {
       var groupBy = this.groupByField
 
       if (groupBy == 'productmoved') {
-        responseData = this.getDataForProductMoved(responseData, this.model.selectedProductMoved.value)
+        responseData = this.getDataForProductMoved(responseData)
       }
 
       const svg = d3.select('#stackedBarChart').attr('width', 700).html('')
@@ -107,7 +107,7 @@ export default {
 
         x.domain(responseData.map(function (d) { return d.mfrname }))
         y.domain([d3.max(responseData, function (d) {
-          return d3.max(d,function (v){
+          return d3.max(d, function (v){
             return v.total
           })
         }), 0]).nice()
@@ -147,16 +147,33 @@ export default {
         .on('mouseover', svgmouseover)
         .on('mouseout', svgmouseout)
 
+      this.groupByField
+
       function svgmouseover (d) {
-        //console.log(this.parentNode.__data__.key)
-        nch.model.selectedPrice = {
-          value: this.parentNode.__data__.key,
-          flag: true
+        if(groupBy === 'facevalue') {
+          nch.model.selectedItem.selectedMfrname = this.parentNode.parentNode.__data__.mfrname
+          nch.model.selectedItem.selectedProductMoved = ''
+          nch.model.selectedItem.selectedCategory = ''
+          nch.model.selectedItem.selectedMedia = ''
+          //nch.model.selectedItem.selectedPeriod = ((d.data.label === '2016 Q1')?(1):(2))
+          nch.model.selectedItem.selectedPeriod = d.data.label
+          nch.model.selectedItem.selectedPrice = this.parentNode.__data__.key
+          nch.model.selectedItem.flag = 1
+        } else if(groupBy === 'productmoved') {
+          nch.model.selectedItem.selectedMfrname = d.data.mfrname
+          nch.model.selectedItem.selectedProductMoved = ''
+          nch.model.selectedItem.selectedCategory = ''
+          nch.model.selectedItem.selectedMedia = ''
+          //nch.model.selectedItem.selectedPeriod = ((d.data.label === 'Period1')?(1):(2))
+          nch.model.selectedItem.selectedPeriod = this.parentNode.__data__.key
+          nch.model.selectedItem.selectedPrice = ''
+          nch.model.selectedItem.flag = 1
         }
       }
 
       function svgmouseout (d) {
-        //console.log(d)
+        nch.model.selectedItem.selectedMfrname = ''
+        nch.model.selectedItem.selectedPrice = ''
       }
 
       g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
@@ -205,12 +222,12 @@ export default {
       return responseData
     },
 
-    getDataForProductMoved (items, selectedProductMoved) {
+    getDataForProductMoved (items) {
       var responseData = []
 
       for (var i = 0; i < items.length; i++) {
         for (var j = 0; j < responseData.length; j++) {
-          if ((responseData[j].mfrname == items[i].mfrname) && (selectedProductMoved== '' || selectedProductMoved == items[i].productmoved)) {
+          if ((responseData[j].mfrname == items[i].mfrname) && (nch.model.selectedItem.selectedProductMoved== '' || nch.model.selectedItem.selectedProductMoved == items[i].productmoved)) {
             if (!(items[i].period in responseData[j])) {
               responseData[j][items[i].period] = 0
             }
@@ -219,7 +236,7 @@ export default {
           }
         }
 
-        if ((j === responseData.length) && (items[i].totalcouponredemption !== 0) && (selectedProductMoved === '' || selectedProductMoved === items[i].productmoved)) {
+        if ((j === responseData.length) && (items[i].totalcouponredemption !== 0) && (nch.model.selectedItem.selectedProductMoved === '' || nch.model.selectedItem.selectedProductMoved === items[i].productmoved)) {
           const item = {}
           item['mfrname'] = items[i].mfrname
           item[items[i].period] = items[i].totalcouponredemption
@@ -427,8 +444,8 @@ export default {
         })
         .selectAll('g')
         .data(function (d) {
-          console.log(d)
-          return d })
+          return d
+        })
         .enter().append('text')
         .attr('x', function (d, i) {
           return x(this.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 15) + 90
@@ -460,7 +477,6 @@ export default {
           return d
         })
         .enter().append('rect')
-        .attr('class','oneRect')
         .attr('x', function (d, i) {
           return x(this.parentNode.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 15) + 90
         })
@@ -509,6 +525,37 @@ export default {
           }
         })
         .attr('fill', 'black')
+
+      g.append('g')
+        .selectAll('g')
+        .data(responseData)
+        .enter()
+        .append('g')
+        .attr('transform', function (d, i) {
+          return 'translate(' + i * 20 + ',' + 0 + ')'
+        })
+        .selectAll('g')
+        .data(function (d) {
+          return d3.stack().keys(keys)(d)
+        })
+        .enter().append('g')
+        .attr('fill', 'transparent')
+        .selectAll('rect')
+        .data(function (d) {
+          return d
+        })
+        .enter().append('rect')
+        .attr('class','oneRect')
+        .attr('x', function (d, i) {
+          return x(this.parentNode.parentNode.__data__.mfrname) + i * (x.bandwidth()/2 + 15) + 90
+        })
+        .attr('y', function (d) {
+          return y(d[1])
+        })
+        .attr('height', function (d) {
+          return height - 80 - y(d[1]- d[0])
+        })
+        .attr('width', x.bandwidth()/2)
 
       g.append('g')
         .selectAll('text')

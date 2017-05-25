@@ -27,63 +27,8 @@ export default class LocalDataService {
 
   getRedemptionsByMedia() {
 
-  }
-
-  processRedemptionsByMedia( data ) {
-    var items = data;
-    var min = 10000000
-    var max = -1
-    var mediaMap = {}
-    var responseData = { min: 0, max: 0, mediaData: mediaMap }
-
-    for( var i = 0 ; i < items.length ; i++ ) {
-      var item = items[i]
-      var currentData = null
-
-      for( var j = 0 ; j < this.model.selectedCategories.length ; j ++ ) {
-        if( (item['categoryname'] == this.model.selectedCategories[j]) && (this.model.selectedCategory.value == '' || this.model.selectedCategory.value == item['categoryname']))
-        {
-          break
-        }
-      }
-
-      if( j == this.model.selectedCategories.length)
-        continue
-
-      if( mediaMap[ item['medianame'] ] ) {
-        currentData = mediaMap[ item['medianame'] ]
-      }
-      else {
-        currentData = { name: item['medianame'], redempations: 0, redempationValue: 0 }
-        mediaMap[ item['medianame'] ] = currentData
-      }
-
-      //currentData.redempations += item['totalcouponredemption']
-      //currentData.redempationValue += item['totalcouponredemeedvalue']
-      currentData.redempations += item['totalcouponredemeedvalue']
-      currentData.redempationValue += item['totalcouponredemption']
-
-      if( currentData.redempations < min ) {
-        min = currentData.redempations
-      }
-
-      if( currentData.redempations > max ) {
-        max = currentData.redempations
-      }
-    }
-
-
-    responseData.min = min
-    responseData.max = max
-    return responseData;
-  }
-
-  // ***** FACE VALUE DATA ****************************************************
-
-  getFaceValueData() {
-
-    var manufacturerFaceValues = this.processFaceValueData(this.manufacturerData);
-    var comparableFaceValues = this.processFaceValueData(this.comparableData);
+    var manufacturerFaceValues = this.processRedemptionsByMedia(this.manufacturerData, 0)
+    var comparableFaceValues = this.processRedemptionsByMedia(this.comparableData, 1)
 
     var manufacturer = {
       label: 'General Mills, Inc',
@@ -95,7 +40,63 @@ export default class LocalDataService {
       data: comparableFaceValues
     }
 
-    return { manufacturer: manufacturer, comparables: comparables };
+    return { manufacturer: manufacturer, comparables: comparables }
+  }
+
+  processRedemptionsByMedia( data, mfrName ) {
+    var items = data;
+    var responseData = {}
+
+    for( var i = 0 ; i < items.length ; i++ ) {
+      var item = items[i]
+      var currentData = null
+
+      for( var j = 0 ; j < nch.model.selectedCategories.length ; j ++ ) {
+        if( (item['categoryname'] == nch.model.selectedCategories[j]) && (nch.model.selectedItem.selectedCategory == '' || nch.model.selectedItem.selectedCategory == item['categoryname'] || !(nch.model.selectedItem.selectedMfrname === mfrName)))
+        {
+          break
+        }
+      }
+
+      if( j == nch.model.selectedCategories.length)
+        continue
+
+      if( responseData[ item['mediacodename'] ] ) {
+        currentData = responseData[ item['mediacodename'] ]
+      }
+      else {
+        var mediaLabel = nch.utils.getMediaAbbreviation(item['mediacodename'])
+        currentData = { name: mediaLabel, totalredemptionsp1: 0, totalredemptionsp2: 0 }
+        responseData[ item['mediacodename'] ] = currentData
+      }
+
+      //currentData.totalredemptionsp1 += item['totalredemptionsp1']
+      //currentData.totalredemptionsp2 += item['totalredemptionsp2']
+      currentData.totalredemptionsp1 += item['totalredemptionsp1']
+      currentData.totalredemptionsp2 += item['totalredemptionsp2']
+    }
+
+    return responseData;
+  }
+
+  // ***** FACE VALUE DATA ****************************************************
+
+  getFaceValueData() {
+
+    var manufacturerFaceValues = this.processFaceValueData(this.manufacturerData)
+    var comparableFaceValues = this.processFaceValueData(this.comparableData)
+
+    var manufacturer = {
+      label: 'General Mills, Inc',
+      data: manufacturerFaceValues
+    }
+
+    var comparables = {
+      label: 'Comparables',
+      data: comparableFaceValues
+    }
+
+    return { manufacturer: manufacturer, comparables: comparables }
   }
 
   processFaceValueData( data ) {
