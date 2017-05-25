@@ -27,6 +27,9 @@ export default class LocalDataService {
 
   getRedemptionsByMedia() {
 
+    console.log("getting redemption media")
+    console.log( nch.model.selectedCategories )
+
     var manufacturerFaceValues = this.processRedemptionsByMedia(this.manufacturerData, 0)
     var comparableFaceValues = this.processRedemptionsByMedia(this.comparableData, 1)
 
@@ -51,15 +54,9 @@ export default class LocalDataService {
       var item = items[i]
       var currentData = null
 
-      for( var j = 0 ; j < nch.model.selectedCategories.length ; j ++ ) {
-        if( (item['categoryname'] == nch.model.selectedCategories[j]) && (nch.model.selectedItem.selectedCategory == '' || nch.model.selectedItem.selectedCategory == item['categoryname'] || !(nch.model.selectedItem.selectedMfrname === mfrName)))
-        {
-          break
-        }
-      }
-
-      if( j == nch.model.selectedCategories.length)
+      if( !nch.utils.inSelectedCategory(item) ) {
         continue
+      }
 
       if( responseData[ item['mediacodename'] ] ) {
         currentData = responseData[ item['mediacodename'] ]
@@ -238,5 +235,13 @@ export default class LocalDataService {
       return d.key
     })
     return allMediaData
+  }
+
+  getCurrentManufacturerData() {
+    return this.manufacturerData;
+  }
+
+  getComparableData() {
+    return this.comparableData;
   }
 }

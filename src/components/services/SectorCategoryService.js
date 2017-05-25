@@ -18,6 +18,8 @@ export default class SectorCategoryService {
   }
 
   getCategories (sector) {
+    //console.log("this.sectorCategories")
+    //console.log(this.sectorCategories);
     let  selectedCategories = [];
     for (let i = 0; i < this.sectorCategories.length; i++ ) {
       if (this.sectorCategories[i].sectorname === sector.sectorname && this.sectorCategories[i].sectorcode === sector.sectorcode) {

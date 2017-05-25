@@ -181,6 +181,17 @@ const utils = {
     }
   },
 
+  inSelectedCategory( item ) {
+    for( var j = 0 ; j < nch.model.selectedCategories.length ; j ++ ) {
+
+      if( item.categorycode == nch.model.selectedCategories[j].categorycode ) {
+        return true;
+      }
+    }
+
+    return false;
+  },
+
   csv2json(csv) {
     var lines = csv.split('\n')
     var result = []
