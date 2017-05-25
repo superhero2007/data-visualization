@@ -24,7 +24,15 @@ export default class SectorCategoryService {
         selectedCategories.push(this.sectorCategories[i]);
       }
     }
-
+    this.sortObject(selectedCategories, 'categoryname')
     return selectedCategories;
+  }
+
+  sortObject (list, keyword) {
+    list.sort(function(a, b){
+      if(a[keyword] < b[keyword]) return -1;
+      if(a[keyword] > b[keyword]) return 1;
+      return 0;
+    })
   }
 }

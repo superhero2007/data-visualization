@@ -1,4 +1,5 @@
 import services from '../../modules/services'
+import * as d3 from 'd3'
 
 export default class LocalDataService {
 
@@ -16,7 +17,6 @@ export default class LocalDataService {
       this.comparableData = response
       console.log("Comparable data loaded, total records: " + this.comparableData.length )
     }).catch( (message) => { console.log('LocalDataService, loadComparableData promise catch:' + message) })
-
   }
 
   getType () {
@@ -172,12 +172,70 @@ export default class LocalDataService {
     return filteredData;
   }
 
-  getCurrentManufacturerData() {
-    return this.manufacturerData;
+  getCurrentManufacturerData (categories) {
+    let that = this
+    const tempFullManufacturerData = []
+
+    categories.forEach(function (node) {
+      that.manufacturerData.forEach(function (manufacturer) {
+        if (manufacturer.categorycode === node.categorycode &&
+          manufacturer.categoryname === node.categoryname) {
+          tempFullManufacturerData.push(manufacturer)
+        }
+      })
+    })
+
+    let tempManufacturerData = d3.nest()
+      .key(function (d) { return d.categoryname })
+      .key(function (d) { return d.mediacodename })
+      .rollup(function (v) {
+        return {
+          period1: d3.mean(v, function(d) { return d.totalredemptionsp1 }),
+          period2: d3.mean(v, function(d) { return d.totalredemptionsp2 })
+        }
+      }).entries(tempFullManufacturerData)
+
+    let currentManufacturerData = {}
+    tempManufacturerData.forEach(function (d) {
+      currentManufacturerData[d.key] = {}
+      d.values.map(function (v) {
+        currentManufacturerData[d.key][v.key] = {}
+        currentManufacturerData[d.key][v.key]['period1'] = d3.format('(.2f')(v.value.period1)
+        currentManufacturerData[d.key][v.key]['period2'] = d3.format('(.2f')(v.value.period2)
+      })
+    })
+
+    return currentManufacturerData
   }
 
-  getComparableData() {
-    return this.comparableData;
+  getCurrentComparableData() {
+    let that = this
+    let tempComparableData = d3.nest()
+      .key(function (d) { return d.mediacodename })
+      .rollup(function (v) {
+        return {
+          period1: d3.mean(v, function(d) { return d.totalredemptionsp1 }),
+          period2: d3.mean(v, function(d) { return d.totalredemptionsp2 })
+        }
+      }).entries(that.comparableData)
+
+    let currentComparableData = {}
+    tempComparableData.forEach(function (d) {
+      currentComparableData[d.key] = {}
+      currentComparableData[d.key]['period1'] = d3.format('(.2f')(d.value.period1)
+      currentComparableData[d.key]['period2']= d3.format('(.2f')(d.value.period2)
+    })
+
+    return currentComparableData
   }
 
+  getAllMediaData() {
+    let that = this
+    let allMediaData = d3.values((d3.nest()
+      .key(function (d) { return d.mediacodename })
+      .entries(that.comparableData))).map(function (d) {
+      return d.key
+    })
+    return allMediaData
+  }
 }

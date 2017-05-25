@@ -214,6 +214,18 @@ table .t-head td{
   width: 20px;
   background: #4d92df;
 }
+table .t-period-row td:first-child{
+  border: 0 !important;
+}
+table .t-period{
+  color: #95a3a6;
+  text-align: center;
+  padding: 15px;
+  width: 20px;
+  border: 1px solid;
+  background: #f6f6f6;
+}
+
 table tr {
   text-align: center;
   padding-left:20px;

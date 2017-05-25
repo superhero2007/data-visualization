@@ -70,7 +70,7 @@ export default {
     initSectorCategory: function () {
       this.sectors = nch.services.sectorCategoryService.sectors
       if (this.sectors && this.sectors.length > 0 && !this.selectedSector) {
-        this.selectedSector = this.sectors[0]
+        this.selectedSector = this.sectors[1]
       }
 
       this.updateSectorCategory()

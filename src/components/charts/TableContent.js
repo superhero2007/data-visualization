@@ -4,17 +4,31 @@ export default {
   name: 'table-content',
   template: require('components/charts/TableContent.html'),
   props: {
-    datas: {
+    category: {
       type: Array,
       default: []
     }
   },
   data () {
     return {
-      media: nch.model.allMedaiNames,
+      model: nch.model,
+      datas: [],
+      media: [],
       currentManufacturer: nch.model.currentManufacturer,
       compareManufacturer: 'Comparables'
     }
+  },
+  watch: {
+    category: function () {
+      this.datas = this.model.tableData
+      this.media = this.model.allMediaData
+      this.comparableData = this.model.currentComparableData
+    },
+  },
+  mounted () {
+    this.datas = this.model.tableData
+    this.media = this.model.allMediaData
+    this.comparableData = this.model.currentComparableData
   },
   methods: {
     formattedValue (value) {
@@ -31,6 +45,14 @@ export default {
         return 'fa-star'
       } else {
         return 'fa-question-circle'
+      }
+    },
+    getData (string) {
+      console.log(string)
+      if (this.datas[string]) {
+        return true
+      } else {
+        return false
       }
     }
   }

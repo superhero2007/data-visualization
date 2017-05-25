@@ -13,8 +13,8 @@
     <download csv-enabled="true"></download>
   </div>
 
-  <div class="table-content" v-if="Object.keys(tableData).length > 0">
-    <table-content :datas="tableData"></table-content>
+  <div class="table-content" v-if="Object.keys(selectedCategories).length > 0">
+    <table-content :category="selectedCategories"></table-content>
   </div>
   <div class="table-content" v-else="">
     <p>No Filter</p>

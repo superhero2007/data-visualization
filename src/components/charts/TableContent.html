@@ -1,9 +1,17 @@
 <div>
   <p>General Mills vs Comparables</p>
   <table class="col-lg-12 table-responsive">
-    <template v-for="data in datas">
+    <tr class="t-period-row">
+      <td colspan=""></td>
+      <td class="empty"></td>
+      <td class="t-period" colspan="5">2015</td>
+      <td class="empty"></td>
+      <td class="t-period" colspan="5">2016</td>
+    </tr>
+    <tr><td colspan="13" class="emptyRow"></td></tr>
+    <template v-for="category in category">
       <tr class="t-head">
-        <td>{{data.category}}</td>
+        <td>{{category.categoryname}}</td>
         <td class="empty"></td>
         <td v-for="node in media">
           <i class="fa fa-2x" v-bind:class="getIcon(node)" aria-hidden="true"></i>
@@ -17,28 +25,32 @@
       <tr class="t-body">
         <td class="text-left categoryName">{{currentManufacturer}}</td>
         <td class="empty"></td>
-        <template v-for="(node, i) in media" v-if="data.manufacturer">
-          <td v-if="data.manufacturer[node]" v-bind:class="{border_left: i==0, border_right: i==4}">{{data.manufacturer[node]}}</td>
-          <td v-bind:class="{border_left: i==0, border_right: i==4}" v-else>-</td>
+        <template v-if="datas[category.categoryname]">
+          <template v-for="(node, i) in media">
+            <td v-if="datas[category.categoryname][node]" v-bind:class="{border_left: i==0, border_right: i==4}">{{datas[category.categoryname][node]['period1']}}</td>
+            <td v-bind:class="{border_left: i==0, border_right: i==4}" v-else>-</td>
+          </template>
         </template>
-        <template v-if="data.manufacturer == null">
+        <template v-else>
           <td class="border_left border_right" :colspan="media.length">No Data</td>
         </template>
         <td class="empty"></td>
-        <template v-for="(node, i) in media" v-if="data.manufacturer">
-          <td v-if="data.manufacturer[node]" v-bind:class="{border_left: i==0, border_right: i==4}">{{data.manufacturer[node]}}</td>
-          <td v-bind:class="{border_left: i==0, border_right: i==4}" v-else>-</td>
+        <template v-if="datas[category.categoryname]">
+          <template v-for="(node, i) in media">
+            <td v-if="datas[category.categoryname][node]" v-bind:class="{border_left: i==0, border_right: i==4}">{{datas[category.categoryname][node]['period2']}}</td>
+            <td v-bind:class="{border_left: i==0, border_right: i==4}" v-else>-</td>
+          </template>
         </template>
-        <template v-if="data.manufacturer == null">
+        <template v-else>
           <td class="border_left border_right" :colspan="media.length">No Data</td>
         </template>
       </tr>
       <tr class="even">
         <td class="text-left categoryName">{{compareManufacturer}}</td>
         <td class="empty"></td>
-        <td v-for="(node, i) in media" v-bind:class="{border_left: i==0, border_right: i==4}">{{data.comparables[node]}}</td>
+        <td v-for="(node, i) in media" v-bind:class="{border_left: i==0, border_right: i==4}">{{comparableData[node].period1}}</td>
         <td class="empty"></td>
-        <td v-for="(node, i) in media" v-bind:class="{border_left: i==0, border_right: i==4}">{{data.comparables[node]}}</td>
+        <td v-for="(node, i) in media" v-bind:class="{border_left: i==0, border_right: i==4}">{{comparableData[node].period1}}</td>
       </tr>
       <tr><td  colspan="13" class="emptyRow"></td></tr>
     </template>

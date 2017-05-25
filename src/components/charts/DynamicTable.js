@@ -1,39 +1,42 @@
-// import TableContent from 'src/components/charts/TableContent'
+import TableContent from 'src/components/charts/TableContent'
 import Download from '../layout/Download'
 
 export default {
   name: 'dynamic-table',
   template: require('components/charts/DynamicTable.html'),
   components: {
-    // TableContent,
+    TableContent,
     Download
+  },
+  props: {
+    category: {
+      type: Array,
+      default: []
+    }
   },
   data () {
     return {
-      isShow: false,
-      tableData: {},
       model: nch.model,
+      services: nch.services,
+      selectedCategories: {},
+      isShow: false,
       showDownloadOptions: false
     }
   },
   watch: {
-    model: {
-      handler: function (newValue, oldValue) {
-        // this.updateTable()
-      },
-      deep: true
-    }
+    category: function (val) {
+      this.selectedCategories = val
+      this.updateTableData(val)
+    },
   },
   mounted () {
-    // services.loadCombinedData()
-    // this.updateTable()
+    this.updateTableData(this.model.selectedCategories)
   },
   methods: {
-    updateTable () {
-      // services.getTableData(nch.model.selectedCategories).then(this.renderTable).catch((message) => { console.log('DynamicTable, update table promise catch:' + message) })
+    updateTableData (categories) {
+      this.model.currentComparableData = this.services.dataService.getCurrentComparableData()
+      this.model.allMediaData = this.services.dataService.getAllMediaData()
+      this.model.tableData = this.services.dataService.getCurrentManufacturerData(categories)
     },
-    renderTable (response) {
-      // this.tableData = response
-    }
   }
 }
