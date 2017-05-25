@@ -18,3 +18,13 @@ cc @stephen please confirm (want to be very careful to get this right) (edited)
 
 [4:27]
 So we don't have to redo it
+
+
+        // item not in a selected category
+        // if( !nch.utils.inSelectedCategory(item) ) {
+        //   continue
+        // }
+        //
+        // if( !nch.utils.inSelectedCategory(item) ) {
+        //   continue
+        // }

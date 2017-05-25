@@ -148,15 +148,6 @@ export default {
       const responseData = []
       for (let i = 0; i < items.length; i++) {
 
-        // item not in a selected category
-        // if( !nch.utils.inSelectedCategory(item) ) {
-        //   continue
-        // }
-        //
-        // if( !nch.utils.inSelectedCategory(item) ) {
-        //   continue
-        // }
-
         for (let j = 0; j < this.model.selectedCategories.length; j++) {
           if ((this.model.selectedCategories[j].categoryname === items[i].categoryname) && (this.model.selectedItem.selectedMedia === '' || this.model.selectedItem.selectedMedia === items[i].medianame || !filterFlag)) {
             let k

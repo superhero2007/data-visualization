@@ -40,6 +40,8 @@ export default {
       deep: true
     },
     value: function (val) {
+      console.log("Dashboard.value")
+      console.log( val )
       this.model.selectedCategories = val
     }
   },

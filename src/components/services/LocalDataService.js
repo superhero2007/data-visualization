@@ -30,6 +30,8 @@ export default class LocalDataService {
     console.log("getting redemption media")
     console.log( nch.model.selectedCategories )
 
+
+
     var manufacturerFaceValues = this.processRedemptionsByMedia(this.manufacturerData, 0)
     var comparableFaceValues = this.processRedemptionsByMedia(this.comparableData, 1)
 
@@ -54,9 +56,17 @@ export default class LocalDataService {
       var item = items[i]
       var currentData = null
 
-      if( !nch.utils.inSelectedCategory(item) ) {
-        continue
+      for( var j = 0 ; j < nch.model.selectedCategories.length ; j ++ ) {
+
+        if( (item['categoryname'] == nch.model.selectedCategories[j].categoryname)
+          && (nch.model.selectedItem.selectedCategory == '' || nch.model.selectedItem.selectedCategory == item['categoryname']
+          || !(nch.model.selectedItem.selectedMfrname === mfrName))) {
+          break
+        }
       }
+
+      if( j == nch.model.selectedCategories.length)
+        continue
 
       if( responseData[ item['mediacodename'] ] ) {
         currentData = responseData[ item['mediacodename'] ]

@@ -25,6 +25,8 @@ export default {
   },
   watch: {
     category: function (val) {
+      console.log("DynamicTable.category")
+      console.log( val )
       this.selectedCategories = val
       this.updateTableData(val)
     },
