@@ -46,14 +46,6 @@ export default {
       } else {
         return 'fa-question-circle'
       }
-    },
-    getData (string) {
-      console.log(string)
-      if (this.datas[string]) {
-        return true
-      } else {
-        return false
-      }
     }
   }
 }

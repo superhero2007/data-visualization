@@ -180,7 +180,7 @@ export default class LocalDataService {
     return filteredData;
   }
 
-  getCurrentManufacturerData (categories) {
+  getCurrentManufacturerTableData (categories) {
     let that = this
     const tempFullManufacturerData = []
 

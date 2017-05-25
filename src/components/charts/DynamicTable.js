@@ -36,7 +36,7 @@ export default {
     updateTableData (categories) {
       this.model.currentComparableData = this.services.dataService.getCurrentComparableData()
       this.model.allMediaData = this.services.dataService.getAllMediaData()
-      this.model.tableData = this.services.dataService.getCurrentManufacturerData(categories)
+      this.model.tableData = this.services.dataService.getCurrentManufacturerTableData(categories)
     },
   }
 }
