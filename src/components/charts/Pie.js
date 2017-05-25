@@ -87,7 +87,7 @@ export default {
         } else if (this.groupByField === 'productmoved') {
           responseData = this.getDataForProductMoved(items)
         }
-        
+
         let g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + (height / 2 - 30 + j * height) + ')')
         const color = d3.scaleOrdinal([
           '#d62024',
@@ -147,8 +147,18 @@ export default {
     getDataForCategories (items, filterFlag) {
       const responseData = []
       for (let i = 0; i < items.length; i++) {
+
+        // item not in a selected category
+        // if( !nch.utils.inSelectedCategory(item) ) {
+        //   continue
+        // }
+        //
+        // if( !nch.utils.inSelectedCategory(item) ) {
+        //   continue
+        // }
+
         for (let j = 0; j < this.model.selectedCategories.length; j++) {
-          if ((this.model.selectedCategories[j] === items[i].categoryname) && (this.model.selectedItem.selectedMedia === '' || this.model.selectedItem.selectedMedia === items[i].medianame || !filterFlag)) {
+          if ((this.model.selectedCategories[j].categoryname === items[i].categoryname) && (this.model.selectedItem.selectedMedia === '' || this.model.selectedItem.selectedMedia === items[i].medianame || !filterFlag)) {
             let k
             for (k = 0; k < responseData.length; k++) {
               if ((responseData[k].categoryname === items[i].categoryname)) {
