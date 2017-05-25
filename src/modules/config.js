@@ -8,6 +8,10 @@ let nch = {
     title: 'NCH',
     categories: [],
     selectedCategories: [],
+    manufacturer: {
+      code: -1,
+      name: ''
+    },
     currentManufacturer: null,
     selectedItem: {
       selectedMfrname: '',

@@ -14,12 +14,24 @@
           <download pdf-enabled="true" csv-enabled="true" png-enabled="true"></download>
         </view-header>
 
-        <div class="col-md-5">
-          <bar></bar>
+        <div class="row">
+          <div class="col-md-5">
+            <bar chart-id="media-manufacturer-bar" :manufacturer-code="model.manufacturer.code"></bar>
+          </div>
+          <div class="col-md-7">
+            <pie chart-id="media-manufacturer-pie" group-by-field="categoryname" label-field="Category Type" :manufacturer-code="model.manufacturer.code"></pie>
+          </div>
         </div>
-        <div class="col-md-7">
-          <pie group-by-field="categoryname" label-field="Category Type"></pie>
+
+        <div class="row">
+          <div class="col-md-5">
+            <bar chart-id="media-all-bar" manufacturer-code="ALL"></bar>
+          </div>
+          <div class="col-md-7">
+            <pie chart-id="media-all-pie" group-by-field="categoryname" label-field="Category Type" manufacturer-code="ALL"></pie>
+          </div>
         </div>
+
       </div>
       <page-footer></page-footer>
     </div>

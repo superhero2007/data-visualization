@@ -192,6 +192,11 @@ const utils = {
     return false;
   },
 
+  /**
+   * TODO: remove this method; we shouldn't use any CSV even for local data
+   * @param csv
+   * @returns {Array}
+   */
   csv2json(csv) {
     var lines = csv.split('\n')
     var result = []
@@ -213,7 +218,36 @@ const utils = {
     }
 
     return result
+  },
+
+  pieColors() {
+    return [
+      '#d62024',
+      '#70ccdd',
+      '#f07a20',
+      '#2bb34b',
+      '#cc449a',
+      '#2a3088',
+      '#3366CC',
+      '#DC3912',
+      '#109618',
+      '#990099',
+      '#ab98c5',
+      '#898aa6',
+      '#687b88',
+      '#486b6b',
+      '#5da056',
+      '#74d03c',
+      '#8cff00',
+      '#6633CC',
+      '#39DC12',
+      '#961018',
+      '#009999',
+      '#999900',
+      '#7b6888'
+    ]
   }
+
 }
 
 module.exports = utils

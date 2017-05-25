@@ -31,6 +31,9 @@ services.loadClassOfTrades()
 // simple test data, will be removed
 // ****************************************
 nch.model.currentManufacturer = 'General Mills, Inc.'
+nch.model.manufacturer.code = 704;
+nch.model.manufacturer.name = 'General Mills, Inc.';
+
 nch.model.timeperiodData = 1
 
 /* eslint-disable no-new */

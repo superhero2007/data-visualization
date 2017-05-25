@@ -27,11 +27,6 @@ export default class LocalDataService {
 
   getRedemptionsByMedia() {
 
-    console.log("getting redemption media")
-    console.log( nch.model.selectedCategories )
-
-
-
     var manufacturerFaceValues = this.processRedemptionsByMedia(this.manufacturerData, 0)
     var comparableFaceValues = this.processRedemptionsByMedia(this.comparableData, 1)
 

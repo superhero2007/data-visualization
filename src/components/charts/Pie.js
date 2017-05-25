@@ -3,7 +3,7 @@ import services from 'src/modules/services'
 
 export default {
   name: 'pie',
-  props: ['groupByField', 'labelField'],
+  props: ['groupByField', 'labelField', 'manufacturerCode', 'chartId'],
   template: require('components/charts/Pie.html'),
   data () {
     return {
@@ -46,10 +46,10 @@ export default {
     }
   },
   mounted () {
-    console.log('Pie mounted: ' + this.groupByField)
+    console.log('Pie mounted: ' + this.groupByField + ", manufacturer code: " + this.manufacturerCode );
     if (this.groupByField === 'productmoved') {
       services.getProductMovedPieData().then((response) => {
-        this.pieData = [response]
+        this.pieData = response
         this.render()
       }).catch((message) => {
         console.log('Pie promise catch:' + message)
@@ -63,18 +63,22 @@ export default {
         faceValueData = nch.services.dataService.getCurrentManufacturerData()
       else
         faceValueData = nch.services.dataService.getComparableData()
-      this.pieData = [this.getFaceData(faceValueData)]
+      this.pieData = this.getFaceData(faceValueData)
       this.render()
     }
   },
   methods: {
     render () {
-      const svg = d3.select('#pieChart').attr('width', 800).attr('height', 800).html('')
+      const svg = d3.select('#' + this.chartId);
       const width = +svg.attr('width')
-      const height = +svg.attr('height') / 2
-      const radius = Math.min(width , height) / 2.5
-      for (var j = 0; j < this.pieData.length; j++) {
-        const items = this.pieData[j]
+      const height = +svg.attr('height')
+      const radius = Math.min(width , height) / 2
+
+      var j = 0; // HACK: remove
+      //for (var j = 0; j < this.pieData.length; j++) {
+        //const items = this.pieData[j]
+      const items = this.pieData
+
         if (items.length == 0) {
           return
         }
@@ -88,32 +92,9 @@ export default {
           responseData = this.getDataForProductMoved(items)
         }
 
-        let g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + (height / 2 - 30 + j * height) + ')')
-        const color = d3.scaleOrdinal([
-          '#d62024',
-          '#70ccdd',
-          '#f07a20',
-          '#2bb34b',
-          '#cc449a',
-          '#2a3088',
-          '#3366CC',
-          '#DC3912',
-          '#109618',
-          '#990099',
-          '#ab98c5',
-          '#898aa6',
-          '#687b88',
-          '#486b6b',
-          '#5da056',
-          '#74d03c',
-          '#8cff00',
-          '#6633CC',
-          '#39DC12',
-          '#961018',
-          '#009999',
-          '#999900',
-          '#7b6888'
-        ])
+        //let g = svg.append('g').attr('transform', 'translate(' + width / 4 + ',' + (height / 2 - 30 + j * height) + ')')
+      let g = svg.append("g").attr("transform", "translate( 300," + height / 2 + ")");
+        const color = d3.scaleOrdinal( nch.utils.pieColors() );
 
         let total = 0
         for (let i = 0; i < responseData.length; i++) {
@@ -139,9 +120,9 @@ export default {
           this.renderMediaTypes(arc, radius, color, total, j)
         }
 
-        g = svg.append('g').attr('transform', 'translate(' + (width / 2 ) + ',' + (j * height) + ')')
+        g = svg.append('g').attr('transform', 'translate(550,-50)')
         this.renderLegend(g, responseData, total, color, j)
-      }
+      //}
     },
 
     getDataForCategories (items, filterFlag) {
@@ -149,7 +130,10 @@ export default {
       for (let i = 0; i < items.length; i++) {
 
         for (let j = 0; j < this.model.selectedCategories.length; j++) {
-          if ((this.model.selectedCategories[j].categoryname === items[i].categoryname) && (this.model.selectedItem.selectedMedia === '' || this.model.selectedItem.selectedMedia === items[i].medianame || !filterFlag)) {
+
+          if ((this.model.selectedCategories[j].categoryname === items[i].categoryname) &&
+            (this.model.selectedItem.selectedMedia === '' || this.model.selectedItem.selectedMedia === items[i].medianame || !filterFlag)) {
+
             let k
             for (k = 0; k < responseData.length; k++) {
               if ((responseData[k].categoryname === items[i].categoryname)) {
@@ -265,7 +249,7 @@ export default {
 
       g.append('g')
         .append('text')
-        .attr('x', ((groupBy === 'productmoved') ? (100) : (200)))
+        .attr('x', ((groupBy === 'productmoved') ? (100) : (400)))
         .attr('y', ((groupBy === 'productmoved') ? (20) : (40)))
         .attr('dy', '0.32em')
         .attr('fill', '#000')
@@ -520,6 +504,11 @@ export default {
         newItem.selectedPrice = manufacturerData[i].facevalueperunitrangecode
         responseData1.push(newItem)
       }
+
+      if( this.manufacturerCode != 'ALL' ) {
+        return responseData1
+      }
+
       resultData.push(responseData1)
 
       var responseData2 = []
@@ -536,7 +525,9 @@ export default {
         responseData2.push(newItem)
       }
       resultData.push(responseData2)
-      return resultData
+
+      return responseData2;
+      //return resultData
     }
   }
 }

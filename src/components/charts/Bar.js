@@ -4,6 +4,7 @@ import services from 'src/modules/services'
 
 export default {
   name: 'bar',
+  props: ['manufacturerCode','chartId'],
   template: require('components/charts/Bar.html'),
   data () {
     return {
@@ -38,10 +39,10 @@ export default {
     render() {
       var responseData = this.barData
 
-      var svg = d3.select('#barChart').attr('width', 600).attr('height', 800).html(''),
+      var svg = d3.select('#' + this.chartId),
         margin = {top: 0, right: 40, bottom: 30, left: 40},
         width = +svg.attr('width') - margin.left - margin.right,
-        height = +svg.attr('height') / 2 - margin.top - margin.bottom
+        height = +svg.attr('height') - margin.top - margin.bottom
 
       var x = d3.scaleBand().rangeRound([20, width - 40]).padding(0.2),
         y = d3.scaleLinear().rangeRound([height, 50])
@@ -69,12 +70,13 @@ export default {
         feMerge.append('feMergeNode')
           .attr('in', 'SourceGraphic')
 
-      for (var i = 0; i < responseData.length; i++) {
+      var i = 0; // massive HACK, remove!
+      //for (var i = 0; i < responseData.length; i++) {
 
         const g = svg.append('g')
           .attr('transform', 'translate(' + margin.left + ',' + ( margin.top + i * 400 ) + ')')
 
-        var data = Object.keys(responseData[i].data).map(function (d) { return responseData[i].data[d] } )
+        var data = Object.keys(responseData.data).map(function (d) { return responseData.data[d] } )
         x.domain(data.map(function (d) {
           return d.name
         }))
@@ -87,7 +89,7 @@ export default {
           .attr('font-weight', 'bold')
           .style('text-anchor', 'middle')
           .attr('y', 20)
-          .text(responseData[i].label)
+          .text(responseData.label)
           .attr('font-size', '20')
           .attr('fill', '#498fe1')
 
@@ -222,7 +224,7 @@ export default {
           //     return y(d.totalredemptionsp1) - 5
           //   })
         }
-      }
+      //}
 
       svg.selectAll('.bar10')
         .on('mouseover', bar10mouseover)
@@ -300,7 +302,15 @@ export default {
       var result = []
       result.push(mediaData.manufacturer)
       result.push(mediaData.comparables)
-      return result
+
+      if( this.manufacturerCode === 'ALL' ) {
+        return mediaData.comparables
+      }
+      else {
+        return mediaData.manufacturer
+      }
+
+      //return result
     }
   }
 }
