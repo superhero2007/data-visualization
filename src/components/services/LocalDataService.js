@@ -54,9 +54,19 @@ export default class LocalDataService {
       var item = items[i]
       var currentData = null
 
-      if( !nch.utils.inSelectedCategory(item) ) {
-        continue
+      // if( !nch.utils.inSelectedCategory(item) ) {
+      //   continue
+      // }
+
+      for( var j = 0 ; j < nch.model.selectedCategories.length ; j ++ ) {
+        if( (item.categorycode == nch.model.selectedCategories[j].categorycode) && (nch.model.selectedItem.selectedCategory == '' || nch.model.selectedItem.selectedCategory == item['categoryname'] || !(nch.model.selectedItem.selectedMfrname === mfrName)))
+        {
+          break
+        }
       }
+
+      if( j == nch.model.selectedCategories.length)
+        continue
 
       if( responseData[ item['mediacodename'] ] ) {
         currentData = responseData[ item['mediacodename'] ]
