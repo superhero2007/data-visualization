@@ -16,19 +16,23 @@
 
         <div class="row">
           <div class="col-md-5">
-            <bar chart-id="media-manufacturer-bar" :manufacturer-code="model.manufacturer.code"></bar>
+            <bar chart-id="media-manufacturer-bar" :manufacturer-code="model.manufacturer.code"
+                 :media-type-filter="manufacturerBarFilter" :category-filter="manufacturerPieFilter"></bar>
           </div>
           <div class="col-md-7">
-            <pie chart-id="media-manufacturer-pie" group-by-field="categoryname" label-field="Category Type" :manufacturer-code="model.manufacturer.code"></pie>
+            <pie chart-id="media-manufacturer-pie" group-by-field="categoryname" label-field="Category Type"
+                 :manufacturer-code="model.manufacturer.code" :media-type-filter="manufacturerBarFilter"
+                 :category-filter="manufacturerPieFilter"></pie>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-5">
-            <bar chart-id="media-all-bar" manufacturer-code="ALL"></bar>
+            <bar chart-id="media-all-bar" manufacturer-code="ALL" :media-type-filter="comparableBarFilter" :category-filter="comparablePieFilter"></bar>
           </div>
           <div class="col-md-7">
-            <pie chart-id="media-all-pie" group-by-field="categoryname" label-field="Category Type" manufacturer-code="ALL"></pie>
+            <pie chart-id="media-all-pie" group-by-field="categoryname" label-field="Category Type"
+                 manufacturer-code="ALL" :media-type-filter="comparableBarFilter" :category-filter="comparablePieFilter"></pie>
           </div>
         </div>
 

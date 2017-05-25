@@ -25,7 +25,21 @@ export default {
   data () {
     return {
       model: nch.model,
-      isLoading: false
+      isLoading: false,
+      comparablePieFilter: {
+        category: null
+      },
+      comparableBarFilter: {
+        mediaType: null,
+        period: null
+      },
+      manufacturerPieFilter: {
+        category: null
+      },
+      manufacturerBarFilter: {
+        mediaType: null,
+        period: null
+      }
     }
   }
 }

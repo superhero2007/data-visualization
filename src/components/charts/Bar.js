@@ -4,7 +4,7 @@ import services from 'src/modules/services'
 
 export default {
   name: 'bar',
-  props: ['manufacturerCode','chartId'],
+  props: ['manufacturerCode','chartId', 'mediaTypeFilter', 'categoryFilter'],
   template: require('components/charts/Bar.html'),
   data () {
     return {
@@ -20,26 +20,28 @@ export default {
         this.render()
       },
       deep: true
-    },
-    services: {
-      handler: function (newValue, oldValue) {
-        this.barData = this.getMediaData()
-        this.render()
-      },
-      deep: true
     }
+    // services: {
+    //   handler: function (newValue, oldValue) {
+    //     this.barData = this.getMediaData()
+    //     this.render()
+    //   },
+    //   deep: true
+    // }
   },
 
   mounted () {
+    console.log("Bar mounted");
     this.barData = this.getMediaData()
     this.render()
   },
 
   methods: {
     render() {
+      console.log("Rendering Bar, ID: " + this.chartId );
       var responseData = this.barData
 
-      var svg = d3.select('#' + this.chartId),
+      var svg = d3.select('#' + this.chartId).html(''),
         margin = {top: 0, right: 40, bottom: 30, left: 40},
         width = +svg.attr('width') - margin.left - margin.right,
         height = +svg.attr('height') - margin.top - margin.bottom
@@ -70,11 +72,11 @@ export default {
         feMerge.append('feMergeNode')
           .attr('in', 'SourceGraphic')
 
-      var i = 0; // massive HACK, remove!
+      //var i = 0; // massive HACK, remove!
       //for (var i = 0; i < responseData.length; i++) {
 
         const g = svg.append('g')
-          .attr('transform', 'translate(' + margin.left + ',' + ( margin.top + i * 400 ) + ')')
+          .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
         var data = Object.keys(responseData.data).map(function (d) { return responseData.data[d] } )
         x.domain(data.map(function (d) {
@@ -97,7 +99,7 @@ export default {
           .selectAll('g')
           .data(data)
           .enter().append('text')
-          .attr('x', function (d, i) {
+          .attr('x', function (d) {
             return x.bandwidth() / 2 + x(d.name)
           })
           .attr('font-weight', 'bold')
@@ -142,8 +144,8 @@ export default {
           .selectAll('g')
           .data(data)
           .enter().append('rect')
-          .attr('class', 'bar bar1' + i)
-          .attr('x', function (d, i) {
+          .attr('class', 'bar bar1')
+          .attr('x', function (d) {
             return x(d.name)
           })
           .attr('y', function (d) {
@@ -161,8 +163,8 @@ export default {
           .selectAll('g')
           .data(data)
           .enter().append('rect')
-          .attr('class', 'bar bar2' + i)
-          .attr('x', function (d, i) {
+          .attr('class', 'bar bar2')
+          .attr('x', function (d) {
             return x(d.name) + x.bandwidth()/2
           })
           .attr('y', function (d) {
@@ -177,60 +179,50 @@ export default {
           .style('filter', 'url(#drop-shadow)')
 
 
-        // g.selectAll('.barValue')
-        //   .data(data)
-        //   .enter().append('text')
-        //   .attr('class', 'barValue')
-        //   .attr('x', function (d) {
-        //     return x(d.name) + x.bandwidth() / 2
-        //   })
-        //   .attr('y', function (d) {
-        //     return y(d.totalredemptionsp1) - 5
-        //   })
-        //   .style('text-anchor', 'middle')
-        //   .text(function (d) {
-        //     return d3.format(',.0f')(d.totalredemptionsp1)
-        //   })
-        if (this.model.selectedItem.flag == 2 && this.model.selectedItem.selectedMfrname === i) {
-          g.selectAll('.bar1' + i)
-            .attr('y', height)
-            .attr('height', 1)
-            .transition()
-            .duration(1000)
-            .attr('height', function (d) {
-              return height - y(d.totalredemptionsp1) + 2
-            })
-            .attr('y', function (d) {
-              return y(d.totalredemptionsp1)
-            })
 
-          g.selectAll('.bar2' + i)
-            .attr('y', height)
-            .attr('height', 1)
-            .transition()
-            .duration(1000)
-            .attr('height', function (d) {
-              return height - y(d.totalredemptionsp2) + 2
-            })
-            .attr('y', function (d) {
-              return y(d.totalredemptionsp2)
-            })
+        // if (this.model.selectedItem.flag == 2 && this.model.selectedItem.selectedMfrname === i) {
+        //   g.selectAll('.bar1' + i)
+        //     .attr('y', height)
+        //     .attr('height', 1)
+        //     .transition()
+        //     .duration(1000)
+        //     .attr('height', function (d) {
+        //       return height - y(d.totalredemptionsp1) + 2
+        //     })
+        //     .attr('y', function (d) {
+        //       return y(d.totalredemptionsp1)
+        //     })
+        //
+        //   g.selectAll('.bar2' + i)
+        //     .attr('y', height)
+        //     .attr('height', 1)
+        //     .transition()
+        //     .duration(1000)
+        //     .attr('height', function (d) {
+        //       return height - y(d.totalredemptionsp2) + 2
+        //     })
+        //     .attr('y', function (d) {
+        //       return y(d.totalredemptionsp2)
+        //     })
+        //
+        // }
 
-          // g.selectAll('.barValue')
-          //   .attr('y', height)
-          //   .transition()
-          //   .duration(1000)
-          //   .attr('y', function (d) {
-          //     return y(d.totalredemptionsp1) - 5
-          //   })
-        }
-      //}
-
-      svg.selectAll('.bar10')
-        .on('mouseover', bar10mouseover)
+      svg.selectAll('.bar1')
+        .on('mouseover', bar1mouseover)
         .on('mouseout', barmouseout)
 
-      function bar10mouseover (d) {
+      console.log( "setting mouse overs" );
+      console.log( this.mediaTypeFilter );
+      var localFilter = this.mediaTypeFilter;
+
+      function bar1mouseover (d) {
+
+        console.log("bar1mouseover");
+        console.log(d.name);
+
+        localFilter.mediaType = d.name;
+        localFilter.period = 1;
+
         if (nch.model.selectedItem.selectedMedia != d.name) {
           nch.model.selectedItem.selectedMfrname = 0
           nch.model.selectedItem.selectedPeriod = 1
@@ -242,11 +234,18 @@ export default {
         }
       }
 
-      svg.selectAll('.bar20')
-        .on('mouseover', bar20mouseover)
+      svg.selectAll('.bar2')
+        .on('mouseover', bar2mouseover)
         .on('mouseout', barmouseout)
 
-      function bar20mouseover (d) {
+      function bar2mouseover (d) {
+
+        console.log("bar2mouseover");
+        console.log(d.name);
+
+        component.mediaTypeFilter.mediaType = d.name;
+        component.mediaTypeFilter.period = 2;
+
         if (nch.model.selectedItem.selectedMedia != d.name) {
           nch.model.selectedItem.selectedMfrname = 0
           nch.model.selectedItem.selectedPeriod = 2
@@ -258,40 +257,41 @@ export default {
         }
       }
 
-      svg.selectAll('.bar11')
-        .on('mouseover', bar11mouseover)
-        .on('mouseout', barmouseout)
-
-      function bar11mouseover (d) {
-        if (nch.model.selectedItem.selectedMedia != d.name) {
-          nch.model.selectedItem.selectedMfrname = 1
-          nch.model.selectedItem.selectedPeriod = 1
-          nch.model.selectedItem.selectedMedia = d.name
-          nch.model.selectedItem.selectedCategory = ''
-          nch.model.selectedItem.selectedProductMoved = ''
-          nch.model.selectedItem.selectedPrice = ''
-          nch.model.selectedItem.flag = 1
-        }
-      }
-
-      svg.selectAll('.bar21')
-        .on('mouseover', bar21mouseover)
-        .on('mouseout', barmouseout)
-      // })
-      function bar21mouseover (d) {
-        if (nch.model.selectedItem.selectedMedia != d.name) {
-          nch.model.selectedItem.selectedMfrname = 1
-          nch.model.selectedItem.selectedPeriod = 2
-          nch.model.selectedItem.selectedMedia = d.name
-          nch.model.selectedItem.selectedCategory = ''
-          nch.model.selectedItem.selectedProductMoved = ''
-          nch.model.selectedItem.selectedPrice = ''
-          nch.model.selectedItem.flag = 1
-        }
-      }
+      // svg.selectAll('.bar11')
+      //   .on('mouseover', bar11mouseover)
+      //   .on('mouseout', barmouseout)
+      //
+      // function bar11mouseover (d) {
+      //   if (nch.model.selectedItem.selectedMedia != d.name) {
+      //     nch.model.selectedItem.selectedMfrname = 1
+      //     nch.model.selectedItem.selectedPeriod = 1
+      //     nch.model.selectedItem.selectedMedia = d.name
+      //     nch.model.selectedItem.selectedCategory = ''
+      //     nch.model.selectedItem.selectedProductMoved = ''
+      //     nch.model.selectedItem.selectedPrice = ''
+      //     nch.model.selectedItem.flag = 1
+      //   }
+      // }
+      //
+      // svg.selectAll('.bar21')
+      //   .on('mouseover', bar21mouseover)
+      //   .on('mouseout', barmouseout)
+      // // })
+      // function bar21mouseover (d) {
+      //   if (nch.model.selectedItem.selectedMedia != d.name) {
+      //     nch.model.selectedItem.selectedMfrname = 1
+      //     nch.model.selectedItem.selectedPeriod = 2
+      //     nch.model.selectedItem.selectedMedia = d.name
+      //     nch.model.selectedItem.selectedCategory = ''
+      //     nch.model.selectedItem.selectedProductMoved = ''
+      //     nch.model.selectedItem.selectedPrice = ''
+      //     nch.model.selectedItem.flag = 1
+      //   }
+      // }
 
 
       function barmouseout (d) {
+        localFilter.mediaType = null;
         nch.model.selectedItem.selectedMedia = ''
         nch.model.selectedItem.selectedPeriod = ''
       }
@@ -299,9 +299,6 @@ export default {
 
     getMediaData () {
       var mediaData = nch.services.dataService.getRedemptionsByMedia()
-      var result = []
-      result.push(mediaData.manufacturer)
-      result.push(mediaData.comparables)
 
       if( this.manufacturerCode === 'ALL' ) {
         return mediaData.comparables
@@ -309,8 +306,6 @@ export default {
       else {
         return mediaData.manufacturer
       }
-
-      //return result
     }
   }
 }

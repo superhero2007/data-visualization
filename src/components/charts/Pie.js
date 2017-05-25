@@ -3,7 +3,7 @@ import services from 'src/modules/services'
 
 export default {
   name: 'pie',
-  props: ['groupByField', 'labelField', 'manufacturerCode', 'chartId'],
+  props: ['groupByField', 'labelField', 'manufacturerCode', 'chartId', 'mediaTypeFilter', 'categoryFilter'],
   template: require('components/charts/Pie.html'),
   data () {
     return {
@@ -28,22 +28,31 @@ export default {
       },
       deep: true
     },
-    services: {
-      handler: function (newValue, oldValue) {
-        if (this.groupByField === 'categoryname') {
-          this.pieData = this.getMediaData()
-        } else if (this.groupByField === 'medianame') {
-          var faceValueData
-          if(this.model.selectedItem.selectedMfrname == 'General Mills, Inc')
-            faceValueData = nch.services.dataService.getCurrentManufacturerData()
-          else
-            faceValueData = nch.services.dataService.getComparableData()
-          this.pieData = [this.getFaceData(faceValueData)]
-        }
-        this.render()
+
+    mediaTypeFilter: {
+      handler: function (newValue) {
+        console.log( "******* updated filter ********" );
+        console.log( newValue.mediaType );
       },
       deep: true
     }
+
+    // services: {
+    //   handler: function (newValue, oldValue) {
+    //     if (this.groupByField === 'categoryname') {
+    //       this.pieData = this.getMediaData()
+    //     } else if (this.groupByField === 'medianame') {
+    //       var faceValueData
+    //       if(this.model.selectedItem.selectedMfrname == 'General Mills, Inc')
+    //         faceValueData = nch.services.dataService.getCurrentManufacturerData()
+    //       else
+    //         faceValueData = nch.services.dataService.getComparableData()
+    //       this.pieData = [this.getFaceData(faceValueData)]
+    //     }
+    //     this.render()
+    //   },
+    //   deep: true
+    // }
   },
   mounted () {
     console.log('Pie mounted: ' + this.groupByField + ", manufacturer code: " + this.manufacturerCode );
@@ -69,7 +78,7 @@ export default {
   },
   methods: {
     render () {
-      const svg = d3.select('#' + this.chartId);
+      var svg = d3.select('#' + this.chartId).html('');
       const width = +svg.attr('width')
       const height = +svg.attr('height')
       const radius = Math.min(width , height) / 2
@@ -85,7 +94,8 @@ export default {
         let responseData = []
 
         if (this.groupByField === 'categoryname') {
-          responseData = this.getDataForCategories(items, (this.model.selectedItem.selectedMfrname === j))
+          //responseData = this.getDataForCategories(items, (this.model.selectedItem.selectedMfrname === j))
+          responseData = this.getDataForCategories(items)
         } else if (this.groupByField === 'medianame') {
           responseData = this.getDataForMediaTypes(items)
         } else if (this.groupByField === 'productmoved') {
@@ -125,6 +135,7 @@ export default {
       //}
     },
 
+    //getDataForCategories (items, filterFlag) {
     getDataForCategories (items, filterFlag) {
       const responseData = []
       for (let i = 0; i < items.length; i++) {
@@ -132,7 +143,8 @@ export default {
         for (let j = 0; j < this.model.selectedCategories.length; j++) {
 
           if ((this.model.selectedCategories[j].categoryname === items[i].categoryname) &&
-            (this.model.selectedItem.selectedMedia === '' || this.model.selectedItem.selectedMedia === items[i].medianame || !filterFlag)) {
+            //(this.model.selectedItem.selectedMedia === '' || this.model.selectedItem.selectedMedia === items[i].medianame || !filterFlag)) {
+            (this.model.selectedItem.selectedMedia === '' || this.model.selectedItem.selectedMedia === items[i].medianame)) {
 
             let k
             for (k = 0; k < responseData.length; k++) {
