@@ -61,6 +61,7 @@ export default class LocalDataService {
         if( (item['categoryname'] == nch.model.selectedCategories[j].categoryname)
           && (nch.model.selectedItem.selectedCategory == '' || nch.model.selectedItem.selectedCategory == item['categoryname']
           || !(nch.model.selectedItem.selectedMfrname === mfrName))) {
+
           break
         }
       }
@@ -180,7 +181,7 @@ export default class LocalDataService {
     return filteredData;
   }
 
-  getCurrentManufacturerData (categories) {
+  getCurrentManufacturerTableData (categories) {
     let that = this
     const tempFullManufacturerData = []
 
